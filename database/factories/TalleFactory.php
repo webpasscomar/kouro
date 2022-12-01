@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductFactory extends Factory
+class TalleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,7 +14,8 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'talle' => $this->faker->word(),
+            'estado' => '1',
         ];
     }
 }
