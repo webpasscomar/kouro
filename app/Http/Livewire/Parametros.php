@@ -4,16 +4,27 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Parametro;
+// use Livewire\WithPagination;
 
 class Parametros extends Component
 {
-    public $parametros, $parametro, $descripcion, $default, $valor, $detalle, $relacionados, $id_parametro;
+    public $parametro, $descripcion, $default, $valor, $detalle, $relacionados, $id_parametro;
 
     public $modal = false;
+    public $search;
+    public $sort = 'id';
+    public $order = 'desc';
+
+    // use WithPagination;
 
     public function render()
     {
-        $this->parametros = Parametro::all();
+        $this->parametros = Parametro::where('descripcion', 'like', '%' . $this->search . '%')
+            ->orWhere('detalle', 'like', '%' . $this->search . '%')
+            ->orderBy($this->sort, $this->order)
+            ->get();
+
+        //$this->parametros = Parametro::all();
         return view('livewire.parametros');
     }
 
@@ -81,5 +92,20 @@ class Parametros extends Component
 
         $this->cerrarModal();
         $this->limpiarCampos();
+    }
+
+    public function order($sort)
+    {
+        if ($this->sort == $sort) {
+
+            if ($this->order == 'desc') {
+                $this->order = 'asc';
+            } else {
+                $this->order = 'desc';
+            }
+        } else {
+            $this->sort = $sort;
+            $this->order = 'asc';
+        }
     }
 }

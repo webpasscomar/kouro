@@ -23,16 +23,20 @@
 			@endif
 
 			{{-- The best athlete wants his opponent at his best. --}}
+			<div class="py-5">
+				<!-- <input type="text" wire:model="search"> -->
+				<x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
+			</div>
 
 			<table class="table-fixed w-full">
 				<thead>
 					<tr class="bg-indigo-600 text-white">
-						<th class="px-4 py-2">ID</th>
-						<th class="px-4 py-2">Descripcion</th>
-						<th class="px-4 py-2">Default</th>
-						<th class="px-4 py-2">Valor</th>
-						<th class="px-4 py-2">Detalle</th>
-						<th class="px-4 py-2">Relacionados</th>
+						<th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>
+						<th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripcion</th>
+						<th class="cursor-pointer px-4 py-2" wire:click="order('default')">Default</th>
+						<th class="cursor-pointer px-4 py-2" wire:click="order('valor')">Valor</th>
+						<th class="cursor-pointer px-4 py-2" wire:click="order('detalle')">Detalle</th>
+						<th class="cursor-pointer px-4 py-2" wire:click="order('relacionados')">Relacionados</th>
 						<th class="px-4 py-2">Acciones</th>
 					</tr>
 				</thead>
@@ -54,6 +58,7 @@
 					@endforeach
 				</tbody>
 			</table>
+
 
 		</div>
 	</div>
