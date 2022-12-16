@@ -8,23 +8,26 @@
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
     <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+
       <form>
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 
 
           <div class="mb-4 w-50">
             <label for="categoriaPadre_id" class="block text-gray-700 text-sm font-bold mb-2">Categoria padre:</label>
-            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categoriaPadre_id" wire:model="categoriaPadre_id">
+            <input type="text" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categoriaPadre_id" wire:model="categoriaPadre_id">
           </div>
 
           <div class="mb-4 w-50">
             <label for="idioma_id" class="block text-gray-700 text-sm font-bold mb-2">idioma_id:</label>
-            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="idioma_id" wire:model="idioma_id">
+            <input type="text" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="idioma_id" wire:model="idioma_id">
           </div>
 
           <div class="mb-4">
             <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">categoria:</label>
             <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="categoria" wire:model="categoria">
+
+            <x-jet-input-error for="categoria" />
           </div>
 
           <div class="mb-4">
@@ -48,8 +51,18 @@
           </div>
 
           <div class="mb-4">
-            <label for="modulo_id" class="block text-gray-700 text-sm font-bold mb-2">modulo_id:</label>
-            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="modulo_id" wire:model="modulo_id">
+            <label for="modulo_id" class="block text-gray-700 text-sm font-bold mb-2">Pertenece al Módulo:</label>
+            <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="modulo_id" wire:model="modulo_id"> -->
+
+            <select id="modulo_id" name="modulo_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" wire:model="modulo_id">
+              <option value="0">-- Seleccione un módulo --</option>
+              <option value="1">Blog</option>
+              <option value="2">Contacto</option>
+              <option value="3">Productos</option>
+              <option value="4">Publicaciones</option>
+            </select>
+
+            <x-jet-input-error for="categoria" />
           </div>
 
           <div class="mb-4">
@@ -70,6 +83,8 @@
 
         </div>
       </form>
+
+
     </div>
 
 

@@ -15,6 +15,11 @@ class Categorias extends Component
     public $sort = 'id';
     public $order = 'desc';
 
+    protected $rules = [
+        'categoria' => 'required|max:20',
+        'modulo_id' => 'required'
+    ];
+
     use WithPagination;
 
     public function render()
@@ -81,6 +86,9 @@ class Categorias extends Component
 
     public function guardar()
     {
+
+        $this->validate();
+
         Categoria::updateOrCreate(
             ['id' => $this->id_categoria],
             [
