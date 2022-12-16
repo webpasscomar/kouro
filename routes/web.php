@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\ProductController;
 
 use App\Http\Livewire\Parametros;
+use App\Http\Livewire\Categorias;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/mipanel/parametros', Parametros::class)->name('parametros');
-    // Route::get('/mipanel/categorias', Categorias::class)->name('categorias');
+    Route::get('/mipanel/categorias', Categorias::class)->name('categorias');
     // Route::get('/mipanel/productos', Productos::class)->name('productos');
 
     // Route::get('/mipanel/presentaciones', Presentaciones::class)->name('presentaciones');

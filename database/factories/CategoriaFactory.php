@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CategoriaFactory extends Factory
 {
@@ -13,12 +14,15 @@ class CategoriaFactory extends Factory
      */
     public function definition()
     {
+
+        $nombre = $this->faker->unique->word(20);
+
         return [
             'categoriaPadre_id' => '0',
             'idioma_id' => '0',
-            'categoria' => $this->faker->word(),
+            'categoria' => $nombre,
+            'slug' => Str::slug($name),
             'descripcion' => $this->faker->paragraph(),
-            'slug' => $this->faker->paragraph(),
             'imagen' => $this->faker->sentence(),
             'menu' => '1',
             'orden' => '1',
