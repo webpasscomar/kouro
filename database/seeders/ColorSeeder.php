@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Color;
 use Illuminate\Database\Seeder;
 
-class ProductSeeder extends Seeder
+class ColorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,10 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $color = new Color();
+
+        $color->color = 'Blanco';
+
+        $color->save();
     }
 }

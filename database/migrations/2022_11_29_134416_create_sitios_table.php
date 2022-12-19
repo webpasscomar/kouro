@@ -20,22 +20,20 @@ class CreateSitiosTable extends Migration
             $table->string('url');
             $table->string('correo');
             $table->string('razonSocial');
-            $table->string('direccion');
-            $table->string('codigoPostal');
+            $table->string('direccion')->nullable();
+            $table->string('codigoPostal')->nullable();
 
-            $table->string('googleMap');
-            $table->string('googleAnalytics');
+            $table->string('googleMap')->nullable();
+            $table->string('googleAnalytics')->nullable();
 
-            $table->string('icon');
-            $table->string('qr');
+            $table->string('icon')->nullable();
+            $table->string('qr')->nullable();
 
-            $table->string('instagram');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('linkedin');
-            $table->string('youtube');
-
-            $table->tinyInteger('estado');
+            $table->string('instagram')->default('');
+            $table->string('facebook')->default('');
+            $table->string('twitter')->default('');
+            $table->string('linkedin')->default('');
+            $table->string('youtube')->default('');
 
             $table->timestamps();
         });

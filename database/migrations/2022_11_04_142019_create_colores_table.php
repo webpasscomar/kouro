@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePresentacionsTable extends Migration
+class CreateColoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreatePresentacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('presentacions', function (Blueprint $table) {
+        Schema::create('colores', function (Blueprint $table) {
             $table->id();
-
-            $table->string('presentacion');
-            $table->string('sigla');
-            $table->tinyInteger('estado');
-
+            $table->string('color');
+            $table->tinyInteger('estado')->default(1);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatePresentacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('presentacions');
+        Schema::dropIfExists('colores');
     }
 }

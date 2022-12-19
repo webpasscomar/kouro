@@ -21,14 +21,23 @@ class CreateProductosTable extends Migration
 			$table->string('descLarga');
 			$table->string('codigo');
 
-			$table->string('presentacion_id');
-			$table->string('impuesto_id');
+			$table->foreignId('presentacion_id')
+				->nullable()
+				->constrained('presentaciones')
+				->cascadeOnUpdate()
+				->nullOnDelete();
+
+			$table->foreignId('impuesto_id')
+				->nullable()
+				->constrained('impuestos')
+				->cascadeOnUpdate()
+				->nullOnDelete();
 
 			$table->string('precioLista');
 
-			$table->string('precioOferta');
-			$table->string('ofertaDesde');
-			$table->string('ofertaHasta');
+			$table->string('precioOferta')->nullable();
+			$table->string('ofertaDesde')->nullable();
+			$table->string('ofertaHasta')->nullable();
 
 			$table->string('peso');
 			$table->string('tamano');
@@ -37,7 +46,7 @@ class CreateProductosTable extends Migration
 
 			$table->string('orden');
 			$table->string('unidadVenta');
-			$table->tinyInteger('estado');
+			$table->tinyInteger('estado')->default(1);
 
 
 			$table->timestamps();

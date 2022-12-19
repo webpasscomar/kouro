@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Backend;
 
 use Livewire\Component;
 use App\Models\Parametro;
@@ -25,7 +25,7 @@ class Parametros extends Component
             ->get();
 
         //$this->parametros = Parametro::all();
-        return view('livewire.parametros');
+        return view('livewire.backend.parametros');
     }
 
     public function crear()

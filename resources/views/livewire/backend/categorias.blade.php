@@ -15,16 +15,18 @@
 
             <button wire:click="crear()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Nuevo</button>
             @if($modal)
-            @include('livewire.categorias-form')
+            @include('livewire.backend.categorias-form')
             @endif
 
             {{-- The best athlete wants his opponent at his best. --}}
             <div class="py-5">
                 <!-- <input type="text" wire:model="search"> -->
                 <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
+
+                <span>{{ $search }}</span>
             </div>
 
-            <table class="table-fixed w-full">
+            <table class="table-auto w-full">
                 <thead>
                     <tr class="bg-indigo-600 text-white">
                         <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>
@@ -55,6 +57,9 @@
                 </tbody>
             </table>
 
+            
+                {{ $categorias->links() }}
+            
 
         </div>
     </div>

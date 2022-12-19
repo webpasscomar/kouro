@@ -15,17 +15,14 @@ class CreateCategoriasTable extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->integer('categoriaPadre_id');
-            $table->integer('idioma_id');
+            $table->integer('categoriaPadre_id')->default(0);
             $table->string('categoria');
-            $table->string('descripcion');
-            $table->string('slug');
-            $table->string('imagen');
-            $table->integer('menu');
-            $table->integer('orden');
-            $table->integer('modulo_id');
-            $table->tinyInteger('estado');
-
+            $table->string('slug')->unique();
+            $table->string('descripcion')->nullable();
+            $table->string('imagen')->nullable();
+            $table->integer('menu')->default(0);
+            $table->integer('orden')->default(0);
+            $table->tinyInteger('estado')->default(1);
             $table->timestamps();
         });
     }

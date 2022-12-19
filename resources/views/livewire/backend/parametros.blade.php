@@ -19,7 +19,7 @@
 
 			<button wire:click="crear()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Nuevo</button>
 			@if($modal)
-			@include('livewire.parametrosCrear')
+			@include('livewire.backend.parametrosCrear')
 			@endif
 
 			{{-- The best athlete wants his opponent at his best. --}}
@@ -28,7 +28,7 @@
 				<x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
 			</div>
 
-			<table class="table-fixed w-full">
+			<table class="table-auto w-full">
 				<thead>
 					<tr class="bg-indigo-600 text-white">
 						<th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>

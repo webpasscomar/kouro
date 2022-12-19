@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-// use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoriaController;
 
-use App\Http\Livewire\Parametros;
-use App\Http\Livewire\Categorias;
+use App\Http\Livewire\Backend\Parametros;
+use App\Http\Livewire\Backend\Categorias;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +18,24 @@ use App\Http\Livewire\Categorias;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     // return view('welcome');
+
+// });
+
+Route::get('/', [CategoriaController::class, 'index'])->name('shop.index');
+
+Route::get('/shop', function () {
+    return 'Bienvenido a la home de la tienda';
 });
+
+Route::get('/shop/{categoria}', function ($categoria) {
+    return 'Bienvenido a la categoria:' . $categoria;
+});
+
+
+
+
 
 Route::middleware([
     'auth:sanctum',

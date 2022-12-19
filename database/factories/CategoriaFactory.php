@@ -19,14 +19,12 @@ class CategoriaFactory extends Factory
 
         return [
             'categoriaPadre_id' => '0',
-            'idioma_id' => '0',
             'categoria' => $nombre,
-            'slug' => Str::slug($name),
+            'slug' => Str::slug($nombre),
             'descripcion' => $this->faker->paragraph(),
             'imagen' => $this->faker->sentence(),
             'menu' => '1',
             'orden' => '1',
-            'modulo_id' => '1',
             'estado' => '1',
 
         ];

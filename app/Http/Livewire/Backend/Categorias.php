@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Backend;
 
 use Livewire\Component;
 use App\Models\Categoria;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class Categorias extends Component
 {
-    public $categorias, $categoriaPadre_id, $idioma_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $modulo_id, $estado;
+    public $categoriaPadre_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $estado;
 
     public $modal = false;
     public $search;
     public $sort = 'id';
     public $order = 'desc';
 
+    protected $categorias;
+
     protected $rules = [
         'categoria' => 'required|max:20',
-        'modulo_id' => 'required'
     ];
 
     use WithPagination;
@@ -27,8 +29,9 @@ class Categorias extends Component
         $this->categorias = Categoria::where('descripcion', 'like', '%' . $this->search . '%')
             ->orWhere('categoria', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->get();
-        return view('livewire.categorias');
+            ->paginate(5);
+
+        return view('livewire.backend.categorias', ['categorias' => $this->categorias]);
     }
 
     public function crear()
@@ -50,7 +53,6 @@ class Categorias extends Component
     public function limpiarCampos()
     {
         $this->categoriaPadre_id = '';
-        $this->idioma_id = '';
         $this->categoria = '';
         $this->descripcion = '';
         $this->slug = '';
@@ -58,7 +60,6 @@ class Categorias extends Component
 
         $this->menu = '';
         $this->orden = '';
-        $this->modulo_id = '';
         $this->estado = '';
         $this->id_categoria = '';
     }
@@ -68,13 +69,11 @@ class Categorias extends Component
         $categoria = Categoria::findOrFail($id);
         $this->id_categoria = $id;
         $this->categoriaPadre_id = $categoria->categoriaPadre_id;
-        $this->idioma_id = $categoria->idioma_id;
         $this->categoria = $categoria->categoria;
-        $this->slug = $categoria->slug;
+        $this->slug = Str::slug($categoria->categoria);
         $this->descripcion = $categoria->descripcion;
         $this->menu = $categoria->menu;
         $this->orden = $categoria->orden;
-        $this->modulo_id = $categoria->modulo_id;
         $this->abrirModal();
     }
 
@@ -93,15 +92,13 @@ class Categorias extends Component
             ['id' => $this->id_categoria],
             [
                 'categoriaPadre_id' => $this->categoriaPadre_id,
-                'idioma_id' => $this->idioma_id,
                 'categoria' => $this->categoria,
                 'descripcion' => $this->descripcion,
 
-                'slug' => $this->slug,
+                'slug' => Str::slug($this->categoria),
                 'imagen' => 'foto.jpg',
                 'menu' => $this->menu,
                 'orden' => $this->orden,
-                'modulo_id' => $this->modulo_id,
                 'estado' => 1
             ]
         );
