@@ -8,6 +8,6 @@ class Categorias extends Component
 {
     public function render()
     {
-        return view('livewire.categorias');
+        return view('livewire.categorias')->layout('layouts.layout');
     }
 }

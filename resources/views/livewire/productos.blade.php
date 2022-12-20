@@ -1,8 +1,10 @@
-<x-guest-layout>
 <div>
-    <h1>Productos</h1>
-        <p>Mostrar: {{$mostrar}}</p>
-        <p>Categoria a listar: {{$slugCategoria}}</p>
+
+    <x-header>
+        Productos por categoría: {{$slugCategoria}}
+    </x-header>
+
+
 
 
     <div class="container text-center">
@@ -19,4 +21,3 @@
     </div>
         
 </div>
-</x-guest-layout>

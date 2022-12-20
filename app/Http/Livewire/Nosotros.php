@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class Carrito extends Component
+class Nosotros extends Component
 {
     public function render()
     {
-        return view('livewire.carrito')->layout('layouts.layout');
+        return view('livewire.nosotros')->layout('layouts.layout');
     }
 }

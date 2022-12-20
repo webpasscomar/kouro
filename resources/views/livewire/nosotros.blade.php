@@ -1,7 +1,7 @@
 <div>
 
     <x-header>
-        Detalle del producto
+        Nosotros
     </x-header>
 
 </div>

@@ -41,7 +41,7 @@ class Shop extends Component
                 break;
         }
 
-        return view($view);
+        return view($view)->layout('layouts.layout');
     }
 
     public function mostrar($mostrar)
