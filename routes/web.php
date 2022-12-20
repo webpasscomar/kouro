@@ -2,39 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\CategoriaController;
 
 use App\Http\Livewire\Backend\Parametros;
 use App\Http\Livewire\Backend\Categorias;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Livewire\Shop;
+use App\Http\Livewire\Contacto;
+use App\Http\Livewire\Productos;
+use App\Http\Livewire\Carrito;
 
-// Route::get('/', function () {
-//     // return view('welcome');
 
+
+Route::get('/', Shop::class)->name('shop.index');
+Route::get('/contacto', Contacto::class)->name('contacto.index');
+Route::get('/carrito', Carrito::class)->name('carrito.index');
+
+// Route::get('/shop', function () {
+//     return 'Bienvenido a la home de la tienda';
 // });
 
-Route::get('/', [CategoriaController::class, 'index'])->name('shop.index');
+// Route::get('/shop/{categoria}', function ($categoria) {
+//     return 'Bienvenido a la categoria:' . $categoria;
+// });
 
-Route::get('/shop', function () {
-    return 'Bienvenido a la home de la tienda';
-});
-
-Route::get('/shop/{categoria}', function ($categoria) {
-    return 'Bienvenido a la categoria:' . $categoria;
-});
-
-
-
+//Route::get('/shop/{categoria}/{producto}', Producto::class)->name('shop.index');
 
 
 Route::middleware([
