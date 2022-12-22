@@ -10,7 +10,6 @@ class Producto extends Component
 
     public function render()
     {
-        $this->producto = Producto::where('slug', 1)->get();
-        return view('livewire.producto');
+       return view('livewire.producto');
     }
 }
