@@ -8,14 +8,20 @@ use App\Http\Livewire\Backend\Categorias;
 
 use App\Http\Livewire\Shop;
 use App\Http\Livewire\Contacto;
+use App\Http\Livewire\Producto;
 use App\Http\Livewire\Productos;
 use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
 
-Route::get('/', Shop::class)->name('shop.index');
-Route::get('/contacto', Contacto::class)->name('contacto.index');
-Route::get('/carrito', Carrito::class)->name('carrito.index');
-Route::get('/nosotros', Nosotros::class)->name('nosotros.index');
+
+
+Route::get('/shop/{categoria}/{producto}', Producto::class)->name('producto');
+Route::get('/shop/{categoria}', Productos::class)->name('productos');
+Route::get('/', Shop::class)->name('shop');
+
+Route::get('/contacto', Contacto::class)->name('contacto');
+Route::get('/carrito', Carrito::class)->name('carrito');
+Route::get('/nosotros', Nosotros::class)->name('nosotros');
 
 Route::middleware([
     'auth:sanctum',

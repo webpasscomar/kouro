@@ -1,7 +1,4 @@
-<div>
-
-    <x-header>
+<x-header>
         Contactarnos
     </x-header>
 
-</div>

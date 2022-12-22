@@ -8,6 +8,6 @@ class Carrito extends Component
 {
     public function render()
     {
-        return view('livewire.carrito')->layout('layouts.layout');
+        return view('livewire.carrito');
     }
 }

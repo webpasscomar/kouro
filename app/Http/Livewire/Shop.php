@@ -11,7 +11,6 @@ class Shop extends Component
     public $categoria, $slugCategoria, $slugProducto;
 
     public $mostrar = 'categorias'; // categorias, productos, producto, 
-    public $load;
 
     public function render()
     {
@@ -30,7 +29,7 @@ class Shop extends Component
 
             case 'producto':
                 # code...
-                $this->producto = Producto::find(1);
+                $this->producto = Producto::all();
                 $view = 'livewire.producto';
                 break;
 
@@ -41,12 +40,7 @@ class Shop extends Component
                 break;
         }
 
-        return view($view)->layout('layouts.layout');
-    }
-
-    public function mostrar($mostrar)
-    {
-        $this->mostrar = $mostrar;
+        return view($view);
     }
 
     public function listarProductos($slug)
