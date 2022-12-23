@@ -13,7 +13,7 @@ class CreateFormasdeentregaTable extends Migration
      */
     public function up()
     {
-        Schema::create('formasDeEntrega', function (Blueprint $table) {
+        Schema::create('formasdeentregas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFormasdeentregaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formasDeEntrega');
+        Schema::dropIfExists('formasdeentregas');
     }
 }

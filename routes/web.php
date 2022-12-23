@@ -6,18 +6,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Backend\Parametros;
 use App\Http\Livewire\Backend\Categorias;
 
-use App\Http\Livewire\Shop;
 use App\Http\Livewire\Contacto;
-use App\Http\Livewire\Producto;
-use App\Http\Livewire\Productos;
 use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
 
+use App\Http\Controllers\ProductoController;
 
-
-Route::get('/shop/{categoria}/{producto}', Producto::class)->name('producto');
-Route::get('/shop/{categoria}', Productos::class)->name('productos');
-Route::get('/', Shop::class)->name('shop');
+Route::get('/shop/{categoria}/{producto}', ProductoController::class, 'show')->name('productos.show');
+Route::get('/shop/{categoria}', ProductoController::class, 'categoria')->name('productos.categoria');
+Route::get('/', ProductoController::class, 'index')->name('productos.index');
 
 Route::get('/contacto', Contacto::class)->name('contacto');
 Route::get('/carrito', Carrito::class)->name('carrito');

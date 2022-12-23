@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePedidoItemTable extends Migration
+class CreateMovimientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,28 @@ class CreatePedidoItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('pedido_item', function (Blueprint $table) {
+        Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('pedido_id')
+            $table->foreignId('tipoMovimiento_id')
                 ->nullable()
-                ->constrained('pedidos')
+                ->constrained('tipomovimientos')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
 
-            $table->foreignId('producto_id')
+            $table->foreignId('sku_id')
                 ->nullable()
-                ->constrained('productos')
+                ->constrained('sku')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
 
-            $table->decimal('cantidad', $precision = 6, $scale = 2);
-            $table->decimal('precioUnitario', $precision = 6, $scale = 2);
-            $table->decimal('precioItem', $precision = 6, $scale = 2);
+            $table->integer('cantidad');
+            $table->timestamp('fecha');
 
-            $table->boolean('vacio');
+            $table->integer('pedido_id');
+            $table->integer('user_id');
+
+            $table->tinyInteger('estado');
 
             $table->timestamps();
         });
@@ -45,6 +47,6 @@ class CreatePedidoItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pedido_item');
+        Schema::dropIfExists('movimientos');
     }
 }

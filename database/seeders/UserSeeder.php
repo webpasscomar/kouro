@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
 
         $user->name = 'Admin';
         $user->email = 'info@webpass.com.ar';
-        $user->password = '$2y$10$DcYmWrG1JuKixJ67ofMS2epi2gVBM3ngt5Lg0e3E9jNjWYJo1fj8u';
+        $user->password = '$2y$10$j/R3aMZe5I3ReVzecEol4.xVW0xMfFWU/VR0CqFEW48lGuGFKrVTO';
         $user->current_team_id = 1;
 
         $user->save();

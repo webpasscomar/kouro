@@ -13,7 +13,7 @@ class CreateFormasdepagoTable extends Migration
      */
     public function up()
     {
-        Schema::create('formasDePago', function (Blueprint $table) {
+        Schema::create('formasDePagos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('logo');
@@ -28,6 +28,6 @@ class CreateFormasdepagoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formasDePago');
+        Schema::dropIfExists('formasDePagos');
     }
 }

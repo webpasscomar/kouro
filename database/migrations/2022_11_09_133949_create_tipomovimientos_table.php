@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImpuestosTable extends Migration
+class CreateTipomovimientosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,9 @@ class CreateImpuestosTable extends Migration
      */
     public function up()
     {
-        Schema::create('impuestos', function (Blueprint $table) {
+        Schema::create('tipomovimientos', function (Blueprint $table) {
             $table->id();
-
-            $table->string('impuesto');
-            $table->decimal('porcentaje', $precision = 6, $scale = 2);
-
-
-            $table->integer('pais_id');
-
-            $table->tinyInteger('estado');
-
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
@@ -35,6 +27,6 @@ class CreateImpuestosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('impuestos');
+        Schema::dropIfExists('tipomovimientos');
     }
 }

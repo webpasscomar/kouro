@@ -11,15 +11,20 @@ class Categoria extends Model
     use HasFactory;
 
     protected $fillable = [
-        'categoriaPadre_id',
-        'idioma_id',
-        'categoria',
-        'descripcion',
+        'nombre',
         'slug',
-        'imagen',
-        'menu',
-        'orden',
-        'modulo_id',
+        'desCorta',
+        'descLarga',
+        'codigo',
+        'presentacion_id',
+        'impuesto_id',
+        'peso',
+        'tamano',
         'estado'
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'producto:categoria');
+    }
 }

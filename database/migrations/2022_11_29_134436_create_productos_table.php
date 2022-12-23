@@ -27,12 +27,6 @@ class CreateProductosTable extends Migration
 				->cascadeOnUpdate()
 				->nullOnDelete();
 
-			$table->foreignId('impuesto_id')
-				->nullable()
-				->constrained('impuestos')
-				->cascadeOnUpdate()
-				->nullOnDelete();
-
 			$table->string('precioLista');
 
 			$table->string('precioOferta')->nullable();
@@ -42,10 +36,11 @@ class CreateProductosTable extends Migration
 			$table->string('peso');
 			$table->string('tamano');
 			$table->string('link');
-			$table->string('etiquetas');
 
 			$table->string('orden');
 			$table->string('unidadVenta');
+
+			$table->tinyInteger('destacar')->default(0);
 			$table->tinyInteger('estado')->default(1);
 
 
