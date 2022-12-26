@@ -8,27 +8,23 @@ use App\Models\Categoria;
 
 class ProductoController extends Controller
 {
-    public function __invoke()
-    {
-        # code...
-    }
+
 
     public function index()
     {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
+        $categorias = Categoria::all();
+        return view('productos.index', compact('categorias'));
     }
 
-    public function category(Categoria $categoria)
+    public function categoria(Categoria $categoria)
     {
-        $productos = Producto::all();
+        $productos = $categoria->productos()->get();
         return view('productos.categoria', compact('productos'));
     }
 
     public function show(Producto $producto)
     {
-        $categorias = Categoria::where('estado', 1)
-            ->get();
+        $categorias = Categoria::where('estado', 1)->get();
         return view('productos.show', compact('producto', 'categorias'));
     }
 }

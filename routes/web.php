@@ -12,9 +12,9 @@ use App\Http\Livewire\Nosotros;
 
 use App\Http\Controllers\ProductoController;
 
-Route::get('/shop/{categoria}/{producto}', ProductoController::class, 'show')->name('productos.show');
-Route::get('/shop/{categoria}', ProductoController::class, 'categoria')->name('productos.categoria');
-Route::get('/', ProductoController::class, 'index')->name('productos.index');
+Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
+Route::get('shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
+Route::get('/', [ProductoController::class, 'index'])->name('productos.index');
 
 Route::get('/contacto', Contacto::class)->name('contacto');
 Route::get('/carrito', Carrito::class)->name('carrito');

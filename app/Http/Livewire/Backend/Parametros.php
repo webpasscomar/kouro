@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Backend;
 
 use Livewire\Component;
 use App\Models\Parametro;
-// use Livewire\WithPagination;
+use Livewire\WithPagination;
 
 class Parametros extends Component
 {
@@ -15,17 +15,19 @@ class Parametros extends Component
     public $sort = 'id';
     public $order = 'desc';
 
-    // use WithPagination;
+    protected $parametros;
+
+    use WithPagination;
 
     public function render()
     {
         $this->parametros = Parametro::where('descripcion', 'like', '%' . $this->search . '%')
             ->orWhere('detalle', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->get();
+            ->paginate(5);
 
         //$this->parametros = Parametro::all();
-        return view('livewire.backend.parametros');
+        return view('livewire.backend.parametros', ['parametros' => $this->parametros]);
     }
 
     public function crear()
