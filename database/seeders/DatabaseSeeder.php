@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TalleSeeder::class);
         $this->call(TeamSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CategoriaSeeder::class);
+        $this->call(ProductoSeeder::class);
+        $this->call(Producto_categoriaSeeder::class);
         // \App\Models\Categoria::factory(15)->create();
     }
 }
