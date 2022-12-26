@@ -19,12 +19,16 @@ class ProductoController extends Controller
     public function categoria(Categoria $categoria)
     {
         $productos = $categoria->productos()->get();
-        return view('productos.categoria', compact('productos'));
+        $categorias = Categoria::all();
+        $categoria = $categoria;
+        return view('productos.categoria', compact('productos', 'categorias', 'categoria'));
     }
 
-    public function show(Producto $producto)
+    public function show(Categoria $categoria, Producto $producto)
     {
+        $producto = $producto;
+        $categoria = $categoria;
         $categorias = Categoria::where('estado', 1)->get();
-        return view('productos.show', compact('producto', 'categorias'));
+        return view('productos.show', compact('producto', 'categorias', 'categoria'));
     }
 }

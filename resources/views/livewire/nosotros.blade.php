@@ -1,6 +1,3 @@
-
-
-    <x-header>
-        Nosotros
-    </x-header>
-
+<x-header>
+    Nosotros
+</x-header>

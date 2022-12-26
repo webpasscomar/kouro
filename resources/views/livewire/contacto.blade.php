@@ -1,4 +1,3 @@
 <x-header>
-        Contactarnos
-    </x-header>
-
+    Contactarnos
+</x-header>
