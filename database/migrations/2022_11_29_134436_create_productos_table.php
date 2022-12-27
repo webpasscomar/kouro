@@ -18,7 +18,7 @@ class CreateProductosTable extends Migration
 
 			$table->string('nombre');
 			$table->string('desCorta');
-			$table->string('descLarga');
+			$table->text('descLarga');
 			$table->string('codigo');
 
 			$table->foreignId('presentacion_id')

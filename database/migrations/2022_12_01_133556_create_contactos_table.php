@@ -19,7 +19,8 @@ class CreateContactosTable extends Migration
             $table->string('mensaje');
             $table->string('nombre');
             $table->string('correo');
-            $table->string('respuesta');
+            $table->string('telefono');
+            $table->string('respuesta')->default('');;
             $table->timestamps();
         });
     }

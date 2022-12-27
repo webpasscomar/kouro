@@ -11,12 +11,15 @@ use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
 
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 Route::get('shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
 Route::get('/', [ProductoController::class, 'index'])->name('productos.index');
 
-Route::get('/contacto', Contacto::class)->name('contacto');
+Route::get('contacto', [ContactController::class, 'index'])->name('contacto');
+Route::post('contacto', [ContactController::class, 'store'])->name('contacto.store');
+
 Route::get('/carrito', Carrito::class)->name('carrito');
 Route::get('/nosotros', Nosotros::class)->name('nosotros');
 

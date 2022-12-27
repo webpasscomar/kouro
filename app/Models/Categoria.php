@@ -11,8 +11,8 @@ class Categoria extends Model
     use HasFactory;
     protected $table = 'categorias';
 
-    /* protected $fillable = [
-         'nombre',
+    protected $fillable = [
+        'nombre',
         'slug',
         'desCorta',
         'descLarga',
@@ -21,9 +21,9 @@ class Categoria extends Model
         'impuesto_id',
         'peso',
         'tamano',
-        'estado' 
-    ]; */
-    
+        'estado'
+    ];
+
     public function productos()
     {
         return $this->belongsToMany(Producto::class, 'producto_categoria');

@@ -68,5 +68,55 @@ class Producto_categoriaSeeder extends Seeder
         $producto_categoria10->producto_id = 8;
         $producto_categoria10->categoria_id = 3;
         $producto_categoria10->save();
+
+        $producto_categoria11 = new Producto_categoria();
+        $producto_categoria11->producto_id = 9;
+        $producto_categoria11->categoria_id = 3;
+        $producto_categoria11->save();
+
+        $producto_categoria12 = new Producto_categoria();
+        $producto_categoria12->producto_id = 10;
+        $producto_categoria12->categoria_id = 3;
+        $producto_categoria12->save();
+
+        $producto_categoria13 = new Producto_categoria();
+        $producto_categoria13->producto_id = 11;
+        $producto_categoria13->categoria_id = 3;
+        $producto_categoria13->save();
+
+        $producto_categoria14 = new Producto_categoria();
+        $producto_categoria14->producto_id = 11;
+        $producto_categoria14->categoria_id = 5;
+        $producto_categoria14->save();
+
+        $producto_categoria15 = new Producto_categoria();
+        $producto_categoria15->producto_id = 11;
+        $producto_categoria15->categoria_id = 1;
+        $producto_categoria15->save();
+
+        $producto_categoria16 = new Producto_categoria();
+        $producto_categoria16->producto_id = 10;
+        $producto_categoria16->categoria_id = 1;
+        $producto_categoria16->save();
+
+        $producto_categoria17 = new Producto_categoria();
+        $producto_categoria17->producto_id = 7;
+        $producto_categoria17->categoria_id = 1;
+        $producto_categoria17->save();
+
+        $producto_categoria18 = new Producto_categoria();
+        $producto_categoria18->producto_id = 10;
+        $producto_categoria18->categoria_id = 2;
+        $producto_categoria18->save();
+
+        $producto_categoria19 = new Producto_categoria();
+        $producto_categoria19->producto_id = 3;
+        $producto_categoria19->categoria_id = 3;
+        $producto_categoria19->save();
+
+        $producto_categoria20 = new Producto_categoria();
+        $producto_categoria20->producto_id = 4;
+        $producto_categoria20->categoria_id = 4;
+        $producto_categoria20->save();
     }
 }

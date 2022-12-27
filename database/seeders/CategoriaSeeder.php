@@ -19,7 +19,7 @@ class CategoriaSeeder extends Seeder
         $categoria->categoria = 'Categoria 1';
         $categoria->slug = '/categoria1';
         $categoria->descripcion = 'Esta es la descrición larga de la Categoria 1';
-        $categoria->imagen = 'cat01.jpg';
+        $categoria->imagen = 'cat01';
         $categoria->menu = 0;
         $categoria->orden = 6;
         $categoria->estado = 1;
@@ -30,7 +30,7 @@ class CategoriaSeeder extends Seeder
         $categoria1->categoria = 'Categoria 2';
         $categoria1->slug = '/categoria2';
         $categoria1->descripcion = 'Esta es la descrición larga de la Categoria 2';
-        $categoria1->imagen = 'cat02.jpg';
+        $categoria1->imagen = 'cat02';
         $categoria1->menu = 0;
         $categoria1->orden = 5;
         $categoria1->estado = 1;
@@ -41,7 +41,7 @@ class CategoriaSeeder extends Seeder
         $categoria2->categoria = 'Categoria 3';
         $categoria2->slug = '/categoria3';
         $categoria2->descripcion = 'Esta es la descrición larga de la Categoria 3';
-        $categoria2->imagen = 'cat03.jpg';
+        $categoria2->imagen = 'cat03';
         $categoria2->menu = 0;
         $categoria2->orden = 4;
         $categoria2->estado = 1;
@@ -52,7 +52,7 @@ class CategoriaSeeder extends Seeder
         $categoria3->categoria = 'Categoria 4';
         $categoria3->slug = '/categoria4';
         $categoria3->descripcion = 'Esta es la descrición larga de la Categoria 4';
-        $categoria3->imagen = 'cat04.jpg';
+        $categoria3->imagen = 'cat04';
         $categoria3->menu = 0;
         $categoria3->orden = 3;
         $categoria3->estado = 1;
@@ -63,7 +63,7 @@ class CategoriaSeeder extends Seeder
         $categoria4->categoria = 'Categoria 5';
         $categoria4->slug = '/categoria5';
         $categoria4->descripcion = 'Esta es la descrición larga de la Categoria 5';
-        $categoria4->imagen = 'cat05.jpg';
+        $categoria4->imagen = 'cat05';
         $categoria4->menu = 0;
         $categoria4->orden = 2;
         $categoria4->estado = 1;
@@ -74,7 +74,7 @@ class CategoriaSeeder extends Seeder
         $categoria5->categoria = 'Categoria 6';
         $categoria5->slug = '/categoria6';
         $categoria5->descripcion = 'Esta es la descrición larga de la Categoria 6';
-        $categoria5->imagen = 'cat06.jpg';
+        $categoria5->imagen = 'cat06';
         $categoria5->menu = 0;
         $categoria5->orden = 1;
         $categoria5->estado = 1;
