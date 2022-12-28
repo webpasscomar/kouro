@@ -33,4 +33,14 @@ class Producto extends Model
     {
         return $this->belongsToMany(Categoria::class, 'producto_categoria');
     }
+
+    public function talles()
+    {
+        return $this->belongsToMany(Talle::class, 'sku');
+    }
+
+    public function colores()
+    {
+        return $this->belongsToMany(Color::class, 'sku');
+    }
 }

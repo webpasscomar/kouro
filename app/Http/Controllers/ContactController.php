@@ -15,6 +15,7 @@ class ContactController extends Controller
 
     public function index()
     {
+        //session(['idCarrito' => '123456']);
         return view('contact.contactForm');
     }
 

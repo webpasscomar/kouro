@@ -34,7 +34,8 @@ class CreateSkuTable extends Migration
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
 
-            $table->integer('stock');
+            $table->integer('stock')->default(1);
+            $table->tinyInteger('estado')->default(1);
 
             $table->timestamps();
         });

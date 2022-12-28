@@ -87,6 +87,8 @@ class Parametros extends Component
             ]
         );
 
+        session(['idCarrito' => $this->id_parametro]);
+
         session()->flash(
             'message',
             $this->id_parametro ? '¡Actualización exitosa!' : '¡Alta Exitosa!'

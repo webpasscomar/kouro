@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Contáctenos
+            Contáctenos {{ session('idCarrito') }}
         </h2>
     </x-slot>
 
@@ -108,8 +108,8 @@
                             <div class="md:col-span-1">
                                 <div class="px-4 sm:px-0">
                                     <h3 class="text-lg font-medium leading-6 text-gray-900">Información de contacto</h3>
-                                    <p class="mt-1 text-sm text-gray-600">Use a permanent address where you can receive
-                                        mail.</p>
+                                    <p class="mt-1 text-sm text-gray-600">Use una dirección permanente donde pueda
+                                        recibir correo.</p>
                                 </div>
                             </div>
 
