@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,7 +16,7 @@ use App\Http\Controllers\ContactController;
 
 // Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
-
+Route::get('categorias', [CategoriaController::class, 'index']);
 
 Route::get('/shop/{categoria}/{producto}', Product::class)->name('productos.show');
 

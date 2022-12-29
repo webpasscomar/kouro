@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\Sku;
 use Livewire\Component;
 
 class Product extends Component
@@ -13,6 +14,7 @@ class Product extends Component
 
     public $categorias, $talles, $colores;
     public $cantColores, $cantTalles;
+    public $talle, $color, $sku;
 
     public function mount(Categoria $categoria, Producto $producto)
     {
@@ -24,13 +26,24 @@ class Product extends Component
     {
         $producto = $this->producto;
 
-        $categorias = Categoria::all();
+        $this->categorias = Categoria::all();
+        $this->talles = $producto->talles()->distinct()->get();
+        $this->colores = $producto->colores()->distinct()->get();
 
-        $talles = $producto->talles()->distinct()->get();
-        $cantTalles = $talles->count();
-        $colores = $producto->colores()->distinct()->get();
-        $cantColores = $colores->count();
-        //dd($this->producto, $categorias, $talles, $colores, $cantColores, $cantTalles);
         return view('livewire.product');
+    }
+
+    public function agregarAlCarrito()
+    {
+        // Obtener el id del SKU
+        $this->sku = SKU::where('producto_id', $this->producto->id)
+            ->where('talle_id', $this->talle)
+            ->where('color_id', $this->color)
+            ->first();
+
+        // Agregarlo al carrito
+
+        dd($this->talle, $this->color, $this->producto->id, $this->sku);
+        //session(['idCarrito' => $this->id_parametro]);
     }
 }
