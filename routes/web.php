@@ -10,6 +10,9 @@ use App\Http\Livewire\Backend\Categorias;
 use App\Http\Livewire\Product;
 use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
+use App\Http\Livewire\Backend\Talles;
+use App\Http\Livewire\Backend\Colores;
+use App\Http\Livewire\Backend\Presentaciones;
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
@@ -41,12 +44,12 @@ Route::middleware([
     Route::get('/mipanel/parametros', Parametros::class)->name('parametros');
     Route::get('/mipanel/categorias', Categorias::class)->name('categorias');
     // Route::get('/mipanel/productos', Productos::class)->name('productos');
-    // Route::get('/mipanel/presentaciones', Presentaciones::class)->name('presentaciones');
+    Route::get('/mipanel/presentaciones', Presentaciones::class)->name('presentaciones');
     // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
     // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
     // Route::get('/mipanel/formasdeentrega', Formasdeentrega::class)->name('formasdeentrega');
-    // Route::get('/mipanel/colores', Colores::class)->name('colores');
-    // Route::get('/mipanel/talles', Talles::class)->name('talles');
+    Route::get('/mipanel/colores', Colores::class)->name('colores');
+    Route::get('/mipanel/talles', Talles::class)->name('talles');
     // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');
     // Route::get('/mipanel/sitios', Sitios::class)->name('sitios');
 

@@ -16,20 +16,21 @@
                 </div>
             @endif
 
+            <div class="grid grid-cols-1 sm:grid-cols-3">
+                <div>
+                    <button wire:click="crear()"
+                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
+                        Nueva categoria</button>
+                </div>
+                <div class="py-3">
+                    <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
+                </div>
+            </div>
 
-            <button wire:click="crear()"
-                class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Nuevo</button>
             @if ($modal)
                 @include('livewire.backend.categorias-form')
             @endif
 
-            {{-- The best athlete wants his opponent at his best. --}}
-            <div class="py-5">
-                <!-- <input type="text" wire:model="search"> -->
-                <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
-
-                <span>{{ $search }}</span>
-            </div>
 
             <table class="table-auto w-full">
                 <thead>

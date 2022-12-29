@@ -152,9 +152,27 @@
                                 Parametros
                             </x-jet-dropdown-link>
 
+
+                            <x-jet-dropdown-link href="{{ route('talles') }}">
+                                Talles
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('colores') }}">
+                                Colores
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('presentaciones') }}">
+                                Presentaciones
+                            </x-jet-dropdown-link>
+
+
+
                             <x-jet-dropdown-link href="{{ route('categorias') }}">
                                 Categorias
                             </x-jet-dropdown-link>
+
+
+
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}

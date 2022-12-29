@@ -18,7 +18,7 @@ class CreatePresentacionesTable extends Migration
 
             $table->string('presentacion');
             $table->string('sigla');
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado')->default(1);
 
             $table->timestamps();
         });
