@@ -12,15 +12,13 @@ class Categoria extends Model
     protected $table = 'categorias';
 
     protected $fillable = [
-        'nombre',
+        'categoriaPadre_id',
+        'categoria',
         'slug',
-        'desCorta',
-        'descLarga',
-        'codigo',
-        'presentacion_id',
-        'impuesto_id',
-        'peso',
-        'tamano',
+        'descripcion',
+        'imagen',
+        'menu',
+        'orden',
         'estado'
     ];
 

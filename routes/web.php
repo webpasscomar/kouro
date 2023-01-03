@@ -13,6 +13,7 @@ use App\Http\Livewire\Nosotros;
 use App\Http\Livewire\Backend\Talles;
 use App\Http\Livewire\Backend\Colores;
 use App\Http\Livewire\Backend\Presentaciones;
+use App\Http\Livewire\Backend\Productos;
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
@@ -43,7 +44,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/mipanel/parametros', Parametros::class)->name('parametros');
     Route::get('/mipanel/categorias', Categorias::class)->name('categorias');
-    // Route::get('/mipanel/productos', Productos::class)->name('productos');
+    Route::get('/mipanel/productos', Productos::class)->name('productos');
     Route::get('/mipanel/presentaciones', Presentaciones::class)->name('presentaciones');
     // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
     // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');

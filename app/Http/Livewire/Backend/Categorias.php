@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Backend;
 
-use Livewire\Component;
 use App\Models\Categoria;
+
+use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 
 class Categorias extends Component
@@ -20,9 +22,11 @@ class Categorias extends Component
 
     protected $rules = [
         'categoria' => 'required|max:20',
+        'imagen' => 'required|mimes:jpg,png|max:1024',
     ];
 
     use WithPagination;
+    use WithFileUploads;
 
     public function render()
     {
@@ -73,6 +77,7 @@ class Categorias extends Component
         $this->slug = Str::slug($categoria->categoria);
         $this->descripcion = $categoria->descripcion;
         $this->menu = $categoria->menu;
+        $this->imagen = $categoria->imagen;
         $this->orden = $categoria->orden;
         $this->abrirModal();
     }
@@ -88,6 +93,9 @@ class Categorias extends Component
 
         $this->validate();
 
+        $imagen_name = 'CV_' . $this->imagen->getClientOriginalName();
+        $upload_imagen = $this->imagen->storeAs('categorias', $imagen_name);
+
         Categoria::updateOrCreate(
             ['id' => $this->id_categoria],
             [
@@ -96,7 +104,7 @@ class Categorias extends Component
                 'descripcion' => $this->descripcion,
 
                 'slug' => Str::slug($this->categoria),
-                'imagen' => 'foto.jpg',
+                'imagen' => $imagen_name,
                 'menu' => $this->menu,
                 'orden' => $this->orden,
                 'estado' => 1
