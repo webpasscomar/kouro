@@ -17,7 +17,7 @@ class CreateestadosdelenvioTable extends Migration
             $table->id();
 
             $table->string('nombre');
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado')->default(1);;
 
             $table->timestamps();
         });
