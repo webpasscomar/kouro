@@ -20,7 +20,7 @@
                 <div>
                     <button wire:click="crear()"
                         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                        Nueva categoria</button>
+                        Nueva categoría</button>
                 </div>
                 <div class="py-3">
                     <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
@@ -39,8 +39,8 @@
                         <th class="cursor-pointer px-4 py-2" wire:click="order('categoriaPadre_id')">Padre</th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('categoria')">Nombre</th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('slug')">Slug</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripcion</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('orden')">Nro. Orden</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripción</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('orden')">Orden</th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>

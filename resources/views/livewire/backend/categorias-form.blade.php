@@ -15,20 +15,12 @@
 
 
                     <div class="mb-3 col-span-2">
-                        <label for="categoriaPadre_id" class="block text-gray-700 text-sm font-bold mb-2">Categoria
+                        <label for="categoriaPadre_id" class="block text-gray-700 text-sm font-bold mb-2">Categoría
                             padre:</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="categoriaPadre_id" wire:model="categoriaPadre_id">
                     </div>
-
-                    <div class="mb-3 col-span-2">
-                        <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripcion:</label>
-                        <textarea rows="2"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="descripcion" wire:model="descripcion"></textarea>
-                    </div>
-
                     <div class="mb-3">
                         <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
                         <input type="text"
@@ -44,14 +36,18 @@
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="slug" wire:model="slug">
                     </div>
-
-
+                    <div class="mb-3 col-span-2">
+                        <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción:</label>
+                        <textarea rows="2"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="descripcion" wire:model="descripcion"></textarea>
+                    </div>
 
                     <div class="mb-3">
                         <span class="block">.</span>
                         {{-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="menu" wire:model="menu"> --}}
                         <input type="checkbox" class="default:ring-2 p-4" id="menu" wire:model="menu" />
-                        <label for="menu" class=" text-gray-700 text-sm font-bold mb-2">Va en menu
+                        <label for="menu" class=" text-gray-700 text-sm font-bold mb-2">Va en menú
                             principal:</label>
                     </div>
 

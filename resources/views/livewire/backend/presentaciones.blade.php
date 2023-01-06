@@ -25,7 +25,7 @@
                 <div>
                     <button wire:click="crear()"
                         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                        Nuevo presentacion</button>
+                        Nueva presentación</button>
                 </div>
                 <div class="py-3">
                     <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
@@ -44,7 +44,7 @@
                     <tr class="bg-indigo-600 text-white">
                         <th class="cursor-pointer px-4 py-2" wire:click="order('id')">COD</th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('sigla')">Sigla</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('presentacion')">Presentacion</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('presentacion')">Presentacióln</th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado</th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
