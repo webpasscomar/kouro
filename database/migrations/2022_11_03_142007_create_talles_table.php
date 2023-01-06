@@ -16,7 +16,7 @@ class CreateTallesTable extends Migration
         Schema::create('talles', function (Blueprint $table) {
             $table->id();
             $table->string('talle');
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado')->default(1);
             $table->timestamps();
         });
     }
