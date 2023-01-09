@@ -12,6 +12,24 @@
 
                 <h1>Dashboard</h1>
 
+                <ul>
+                    <li><a href="{{ route('parametros') }}">Parametros</a></li>
+                    <li><a href="{{ route('presentaciones') }}">presentaciones</a></li>
+                    <li><a href="{{ route('dashboard') }}">Algo...</a></li>
+                    <li><a href="{{ route('dashboard') }}">Algo...</a></li>
+                    <li><a href="{{ route('colores') }}">Colores</a></li>
+                    <li><a href="{{ route('talles') }}">Talles</a></li>
+                    <li><a href="{{ route('categorias') }}">Categorias</a></li>
+                    <li><a href="{{ route('productos') }}">Productos</a></li>
+                    <li><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></li>
+                    <li><a href="{{ route('dashboard') }}">Stock (Falta)</a></li>
+                    <li><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></li>
+                    <li><a href="{{ route('dashboard') }}">Algo...</a></li>
+                    <li><a href="{{ route('talles') }}">Mensajes de contacto</a></li>
+                    <li><a href="{{ route('faqs') }}">Preguntas frecuentes</a></li>
+                    <li><a href="{{ route('testimonios') }}">Testimonios</a></li>
+                </ul>
+                {{-- 
                 <div class="grid col-grid-1 sm:grid-cols-3 gap-4">
                     <div>
                         <div class="flex justify-center">
@@ -73,7 +91,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> 
+                --}}
+
+
             </div>
         </div>
     </div>

@@ -47,6 +47,7 @@ class Talles extends Component
     public function limpiarCampos()
     {
         $this->talle = '';
+        $this->id_talle = '';
     }
 
     public function editar($id)

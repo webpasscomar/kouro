@@ -10,14 +10,18 @@ use App\Http\Livewire\Backend\Categorias;
 use App\Http\Livewire\Product;
 use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
+
 use App\Http\Livewire\Backend\Talles;
 use App\Http\Livewire\Backend\Colores;
 use App\Http\Livewire\Backend\Presentaciones;
 use App\Http\Livewire\Backend\Productos;
+use App\Http\Livewire\Backend\Faqs;
+
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
+use App\Http\Livewire\Backend\Testimonios;
 
 // Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
@@ -56,6 +60,8 @@ Route::middleware([
     Route::get('/mipanel/categorias', Categorias::class)->name('categorias');
     Route::get('/mipanel/productos', Productos::class)->name('productos');
     Route::get('/mipanel/presentaciones', Presentaciones::class)->name('presentaciones');
+    Route::get('/mipanel/faqs', Faqs::class)->name('faqs');
+    Route::get('/mipanel/testimonios', Testimonios::class)->name('testimonios');
     // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
     // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
     // Route::get('/mipanel/formasdeentrega', Formasdeentrega::class)->name('formasdeentrega');

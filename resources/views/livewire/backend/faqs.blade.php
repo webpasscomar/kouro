@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Categorías</h1>
+    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Parámetros</h1>
 </x-slot>
 
 <div class="py-12">
@@ -20,7 +20,7 @@
                 <div>
                     <button wire:click="crear()"
                         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                        Nueva categoría</button>
+                        Nueva Pregunta frecuente</button>
                 </div>
                 <div class="py-3">
                     <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
@@ -28,36 +28,41 @@
             </div>
 
             @if ($modal)
-                @include('livewire.backend.categorias-form')
+                @include('livewire.backend.faqs-form')
             @endif
-
 
             <table class="table-auto w-full">
                 <thead>
                     <tr class="bg-indigo-600 text-white">
                         <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('categoriaPadre_id')">Padre</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('categoria')">Nombre</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('slug')">Slug</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripción</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('orden')">Orden</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('pregunta')">Pregunta</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('respuesta')">Respuesta</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado</th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categorias as $categoria)
+                    @foreach ($faqs as $item)
                         <tr>
-                            <td class="border px-4 py-2">{{ $categoria->id }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->categoriaPadre_id }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->categoria }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->slug }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->descripcion }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->orden }}</td>
+                            <td class="border px-4 py-2">{{ $item->id }}</td>
+                            <td class="border px-4 py-2">{{ $item->pregunta }}</td>
+                            <td class="border px-4 py-2">{{ $item->respuesta }}</td>
+                            <td class="border px-4 py-2">
+                                @if ($item->estado === 1)
+                                    <span class="text-green-500">Activo</span>
+                                @else
+                                    <span class="text-red-500">Inactivo</span>
+                                @endif
+                                {{-- @livewire('toggle-button', [
+                                    'model' => $item,
+                                    'field' => 'estado',
+                                ]) --}}
+                            </td>
 
                             <td class="border px-4 py-2 text-center">
-                                <button wire:click="editar({{ $categoria->id }})"
+                                <button wire:click="editar({{ $item->id }})"
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
-                                <button wire:click="borrar({{ $categoria->id }})"
+                                <button wire:click="borrar({{ $item->id }})"
                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
                             </td>
                         </tr>
@@ -65,9 +70,7 @@
                 </tbody>
             </table>
 
-
-            {{ $categorias->links() }}
-
+            {{ $faqs->links() }}
 
         </div>
     </div>

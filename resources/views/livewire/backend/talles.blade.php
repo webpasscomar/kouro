@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900">Gestión de Talles</h1>
+    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Talles</h1>
 </x-slot>
 
 <div class="py-12">
@@ -53,7 +53,12 @@
                         <tr>
                             <td class="border px-4 py-2">{{ $talle->id }}</td>
                             <td class="border px-4 py-2">{{ $talle->talle }}</td>
-                            <td class="border px-4 py-2">{{ $talle->estado }}</td>
+                            <td class="border px-4 py-2">
+                                @livewire('toggle-button', [
+                                    'model' => $talle,
+                                    'field' => 'estado',
+                                ])
+                            </td>
                             <td class="border px-4 py-2 text-center">
                                 <button wire:click="editar({{ $talle->id }})"
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>

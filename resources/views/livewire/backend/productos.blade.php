@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900">Gestión de Productos</h1>
+    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Productos</h1>
 </x-slot>
 
 

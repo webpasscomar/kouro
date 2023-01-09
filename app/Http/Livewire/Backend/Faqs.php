@@ -3,12 +3,13 @@
 namespace App\Http\Livewire\Backend;
 
 use Livewire\Component;
-use App\Models\Color;
+use App\Models\Faq;
 use Livewire\WithPagination;
 
-class Colores extends Component
+class Faqs extends Component
 {
-    public $color, $id_color;
+
+    public $pregunta, $respuesta, $id_faq, $estado;
 
     public $modal = false;
     public $search;
@@ -17,15 +18,15 @@ class Colores extends Component
 
     use WithPagination;
 
-    protected $colores;
+    protected $faqs;
 
     public function render()
     {
-        $this->colores = Color::where('color', 'like', '%' . $this->search . '%')
+        $this->faqs = Faq::where('pregunta', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
 
-        return view('livewire.backend.colores', ['colores' => $this->colores]);
+        return view('livewire.backend.faqs', ['faqs' => $this->faqs]);
     }
 
     public function crear()
@@ -46,30 +47,33 @@ class Colores extends Component
 
     public function limpiarCampos()
     {
-        $this->color = '';
-        $this->id_color = '';
+        $this->pregunta = '';
+        $this->respuesta = '';
+        $this->id_faq = '';
     }
 
     public function editar($id)
     {
-        $color = Color::findOrFail($id);
-        $this->id_color = $id;
-        $this->color = $color->color;
+        $faq = Faq::findOrFail($id);
+        $this->id_faq = $id;
+        $this->pregunta = $faq->pregunta;
+        $this->respuesta = $faq->respuesta;
         $this->abrirModal();
     }
 
     public function borrar($id)
     {
-        Color::find($id)->delete();
+        Faq::find($id)->delete();
         session()->flash('message', 'Registro eliminado correctamente');
     }
 
     public function guardar()
     {
-        Color::updateOrCreate(
-            ['id' => $this->id_color],
+        Faq::updateOrCreate(
+            ['id' => $this->id_faq],
             [
-                'color' => $this->color,
+                'pregunta' => $this->pregunta,
+                'respuesta' => $this->respuesta,
             ]
         );
 
@@ -77,7 +81,7 @@ class Colores extends Component
 
         session()->flash(
             'message',
-            $this->id_color ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
+            $this->id_faq ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
         );
 
         $this->cerrarModal();
