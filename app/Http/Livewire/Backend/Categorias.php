@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class Categorias extends Component
 {
-    public $categoriaPadre_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $estado, $id_categoria;
+    public $categoriaPadre_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $estado, $id_categoria, $categoriasAnt;
 
     public $modal = false;
     public $search;
@@ -30,8 +30,14 @@ class Categorias extends Component
 
     public function render()
     {
-        $this->categorias = Categoria::where('descripcion', 'like', '%' . $this->search . '%')
-            ->orWhere('categoria', 'like', '%' . $this->search . '%')
+        $this->categoriasAnt = Categoria::where('estado', 1)->get();
+        $this->categorias = Categoria::where('id', '>', 1)
+            ->where(
+                function ($q) {
+                    $q->where('descripcion', 'like', '%' . $this->search . '%')
+                        ->orWhere('categoria', 'like', '%' . $this->search . '%');
+                }
+            )
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
 

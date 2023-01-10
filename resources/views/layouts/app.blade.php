@@ -14,6 +14,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
 
     @livewireStyles
 
@@ -71,7 +72,7 @@
 
                 if (result.isConfirmed) {
 
-                    Livewire.emit('deleteTestimonio', id);
+                    Livewire.emitTo('deleteTestimonio', id);
 
                     Swal.fire(
                         'Borrado!',

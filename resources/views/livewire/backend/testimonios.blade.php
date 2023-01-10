@@ -34,12 +34,57 @@
 
             <table class="table-auto w-full">
                 <thead>
-                    <tr class="bg-indigo-600 text-white">
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>
+                    <tr class="bg-gray-200 text-gray-700">
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID
+                            {{-- -- Ordenar -- --}}
+                            @if ($sort == 'id')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+                        </th>
                         <th class="px-4 py-2">Imagen</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('cliente')">Cliente</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('testimonio')">Testimonio</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado</th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('cliente')">Cliente
+                            {{-- -- Ordenar -- --}}
+                            @if ($sort == 'cliente')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+
+                        </th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('testimonio')">Testimonio
+                            {{-- -- Ordenar -- --}}
+                            @if ($sort == 'testimonio')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+                        </th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado
+                            {{-- -- Ordenar -- --}}
+                            @if ($sort == 'estado')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+                        </th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>

@@ -17,9 +17,16 @@
                     <div class="mb-3 col-span-2">
                         <label for="categoriaPadre_id" class="block text-gray-700 text-sm font-bold mb-2">Categoría
                             padre:</label>
-                        <input type="text"
+                        <select
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="categoriaPadre_id" wire:model="categoriaPadre_id">
+                            wire:model="categoriaPadre_id">
+                            {{-- <option value="1">Sin categoría padre</option> --}}
+                            @forelse ($categoriasAnt as $item)
+                                <option value="{{ $item->id }}">{{ $item->categoria }}</option>
+                            @empty
+                                <option value="1">Sin categoría padre</option>
+                            @endforelse
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="categoria" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
