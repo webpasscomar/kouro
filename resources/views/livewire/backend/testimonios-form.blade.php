@@ -16,11 +16,17 @@
 
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
 
+                    <div class="mb-4 col-span-3" wire:loading wire:target=""imagen>
+                        <x-alert type='warning' title='Imagen subiendo'></x-alert>
+                    </div>
+
+
                     <div class="mb-4 col-span-3">
                         <label for="cliente" class="block text-gray-700 text-sm font-bold mb-2">Cliente:</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="cliente" wire:model="cliente">
+                        <x-jet-input-error for="cliente" />
                     </div>
 
                     <div class="mb-4 col-span-3">
@@ -28,11 +34,22 @@
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="testimonio" wire:model="testimonio">
+                        <x-jet-input-error for="testimonio" />
                     </div>
 
+                    <div class="mb-3">
+                        @if ($accion == 'editar')
+                            <img class="h-20 w-20" src="{{ asset('storage/testimonio/' . $imagen) }}" alt="">
+                        @elseif($imagen)
+                            <img src="{{ $imagen->temporaryUrl() }}">
+                        @endif
+                    </div>
 
-
-
+                    <div class="mb-3 col-span-2">
+                        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
+                        <input type="file" id="imagen" wire:model="imagen">
+                        <x-jet-input-error for="imagen" />
+                    </div>
 
 
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3">
@@ -43,7 +60,7 @@
                         </span>
 
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                            <button wire:click="cerrarModal()" type="button"
+                            <button wire:click="cerrarModal()" wire:target="save, imagen" type="button"
                                 class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gray-200 text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">Cancelar</button>
                         </span>
 

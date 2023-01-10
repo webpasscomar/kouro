@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class Categorias extends Component
 {
-    public $categoriaPadre_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $estado;
+    public $categoriaPadre_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $estado, $id_categoria;
 
     public $modal = false;
     public $search;

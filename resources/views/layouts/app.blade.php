@@ -20,6 +20,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="font-sans antialiased">
@@ -46,6 +47,41 @@
     @stack('modals')
 
     @livewireScripts
+
+    <script>
+        Livewire.on('alertSave', function() {
+            Swal.fire(
+                'Excelente!',
+                'Ha sido guardado correctamente!',
+                'success'
+            )
+        });
+
+        Livewire.on('alertDelete', id => {
+            Swal.fire({
+                title: '¿Está seguro /a?',
+                text: "La acción no podrá ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, borrar!'
+            }).then((result) => {
+
+
+                if (result.isConfirmed) {
+
+                    Livewire.emit('deleteTestimonio', id);
+
+                    Swal.fire(
+                        'Borrado!',
+                        'Ha sido eliminado con éxito.',
+                        'success'
+                    )
+                }
+            })
+        })
+    </script>
 
 </body>
 
