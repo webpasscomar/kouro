@@ -19,6 +19,10 @@ class Talles extends Component
 
     protected $talles;
 
+    protected $rules = [
+        'talle' => 'required|max:30',
+    ];
+
     public function render()
     {
         $this->talles = Talle::where('talle', 'like', '%' . $this->search . '%')
@@ -66,6 +70,7 @@ class Talles extends Component
 
     public function guardar()
     {
+        $this->validate();
         Talle::updateOrCreate(
             ['id' => $this->id_talle],
             [
@@ -79,7 +84,7 @@ class Talles extends Component
             'message',
             $this->id_talle ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
         );
-
+        $this->emit('alertSave');
         $this->cerrarModal();
         $this->limpiarCampos();
     }
