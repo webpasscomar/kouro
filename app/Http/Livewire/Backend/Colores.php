@@ -19,6 +19,10 @@ class Colores extends Component
 
     protected $colores;
 
+     protected $rules = [
+        'color' => 'required|max:30',
+    ];
+
     public function render()
     {
         $this->colores = Color::where('color', 'like', '%' . $this->search . '%')
@@ -66,6 +70,7 @@ class Colores extends Component
 
     public function guardar()
     {
+        $this->validate();
         Color::updateOrCreate(
             ['id' => $this->id_color],
             [
@@ -79,7 +84,7 @@ class Colores extends Component
             'message',
             $this->id_color ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
         );
-
+        $this->emit('alertSave');
         $this->cerrarModal();
         $this->limpiarCampos();
     }
