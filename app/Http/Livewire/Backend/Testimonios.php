@@ -24,7 +24,7 @@ class Testimonios extends Component
 
   protected $testimonios;
 
-  protected $listeners = ['deleteTestimonio', 'render'];
+  protected $listeners = ['delete'];
 
   protected $rules = [
     'cliente' => 'required|max:30',
@@ -81,7 +81,7 @@ class Testimonios extends Component
     $this->abrirModal();
   }
 
-  public function deleteTestimonio($id)
+  public function delete($id)
   {
     Testimonio::find($id)->delete();
   }
@@ -90,7 +90,7 @@ class Testimonios extends Component
   {
     $this->validate();
 
-    $imagen_name = 'Cliente_' . $this->imagen->getClientOriginalName();
+    $imagen_name = 'test_' . $this->imagen->getClientOriginalName();
     $upload_imagen = $this->imagen->storeAs('testimonio', $imagen_name);
 
     Testimonio::updateOrCreate(

@@ -20,6 +20,8 @@ class Categorias extends Component
 
     protected $categorias;
 
+    protected $listeners = ['delete'];
+
     protected $rules = [
         'categoria' => 'required|max:20',
         'imagen' => 'required|mimes:jpg,png|max:1024',
@@ -27,6 +29,7 @@ class Categorias extends Component
 
     use WithPagination;
     use WithFileUploads;
+
 
     public function render()
     {
@@ -94,12 +97,17 @@ class Categorias extends Component
         session()->flash('message', 'Registro eliminado correctamente');
     }
 
+    public function delete($id)
+    {
+        Categoria::find($id)->delete();
+    }
+
     public function guardar()
     {
 
         $this->validate();
 
-        $imagen_name = 'CV_' . $this->imagen->getClientOriginalName();
+        $imagen_name = $this->imagen->getClientOriginalName();
         $upload_imagen = $this->imagen->storeAs('categorias', $imagen_name);
 
         Categoria::updateOrCreate(
@@ -117,10 +125,7 @@ class Categorias extends Component
             ]
         );
 
-        session()->flash(
-            'message',
-            $this->id_categoria ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
-        );
+        $this->emit('alertSave');
 
         $this->cerrarModal();
         $this->limpiarCampos();

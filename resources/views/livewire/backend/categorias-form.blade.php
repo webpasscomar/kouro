@@ -20,7 +20,7 @@
                         <select
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             wire:model="categoriaPadre_id">
-                            {{-- <option value="1">Sin categoría padre</option> --}}
+
                             @forelse ($categoriasAnt as $item)
                                 <option value="{{ $item->id }}">{{ $item->categoria }}</option>
                             @empty
@@ -52,7 +52,6 @@
 
                     <div class="mb-3">
                         <span class="block">.</span>
-                        {{-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="menu" wire:model="menu"> --}}
                         <input type="checkbox" class="default:ring-2 p-4" id="menu" wire:model="menu" />
                         <label for="menu" class=" text-gray-700 text-sm font-bold mb-2">Va en menú
                             principal:</label>
@@ -69,7 +68,6 @@
                     <div class="mb-3 col-span-2">
                         <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
                         <input type="file" id="imagen" wire:model="imagen">
-                        <!-- <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="imagen" wire:model="imagen"> -->
                         <x-jet-input-error for="imagen" />
                     </div>
 

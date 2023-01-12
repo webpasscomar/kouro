@@ -71,8 +71,8 @@
 
 
                 if (result.isConfirmed) {
-
-                    Livewire.emitTo('deleteTestimonio', id);
+                    alert('Borrar el id: ' + id);
+                    Livewire.emit('delete', id);
 
                     Swal.fire(
                         'Borrado!',

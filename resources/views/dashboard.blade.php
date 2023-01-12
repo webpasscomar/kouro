@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Dashboard') }} | {{ date('d-m-Y', time()) }}
         </h2>
     </x-slot>
 
@@ -10,25 +10,219 @@
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
-                <h1>Dashboard</h1>
+                <table class="w-full border">
+                    <thead>
+                        <tr>
+                            <th class="px-2 py-2 border bg-green-300">9/1 al 13/1</th>
+                            <th class="px-2 py-2 border">16/1 al 20/1</th>
+                            <th class="px-2 py-2 border">23/1 al 27/1</th>
+                            <th class="px-2 py-2 border">30/1 al 3/2</th>
+                            <th class="px-2 py-2 border">6/2 al 10/2</th>
+                            <th class="px-2 py-2 border">13/2 al 17/2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-2 py-2 border bg-green-500">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
+                                        alt="Edu">
+                                    <span class="py-2"><a href="{{ route('testimonios') }}"> Bk-
+                                            Testimonios</a></span>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
+                                        alt="Kari">
+                                    <span class="py-2"><a href="{{ route('faqs') }}"> Bk- FAQs</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
 
-                <ul>
-                    <li><a href="{{ route('parametros') }}">Parametros</a></li>
-                    <li><a href="{{ route('presentaciones') }}">presentaciones</a></li>
-                    <li><a href="{{ route('dashboard') }}">Algo...</a></li>
-                    <li><a href="{{ route('dashboard') }}">Algo...</a></li>
-                    <li><a href="{{ route('colores') }}">Colores</a></li>
-                    <li><a href="{{ route('talles') }}">Talles</a></li>
-                    <li><a href="{{ route('categorias') }}">Categorias</a></li>
-                    <li><a href="{{ route('productos') }}">Productos</a></li>
-                    <li><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></li>
-                    <li><a href="{{ route('dashboard') }}">Stock (Falta)</a></li>
-                    <li><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></li>
-                    <li><a href="{{ route('dashboard') }}">Algo...</a></li>
-                    <li><a href="{{ route('talles') }}">Mensajes de contacto</a></li>
-                    <li><a href="{{ route('faqs') }}">Preguntas frecuentes</a></li>
-                    <li><a href="{{ route('testimonios') }}">Testimonios</a></li>
-                </ul>
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
+                                        alt="Kari">
+                                    <span class="py-2"><a href="{{ route('colores') }}"> Bk- Colores</a></span>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
+                                        alt="Edu">
+                                    <span class="py-2"><a href="{{ route('productos') }}"> Bk-
+                                            productos</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
+                                        alt="Edu">
+                                    <span class="py-2"><a href="{{ route('categorias') }}"> Bk-
+                                            Categorias</a></span>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="{{ route('productos.index') }}"> Ft-
+                                            Categorias</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
+                                        alt="Kari">
+                                    <span class="py-2"><a href="{{ route('talles') }}"> Bk- talles</a></span>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
+                                        alt="Edu">
+                                    <span class="py-2"><a href="{{ route('productos') }}"> Bk-
+                                            Prod. Img-Color</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
+                                        alt="Edu">
+                                    <span class="py-2"><a href="{{ route('dashboard') }}"> Bk-
+                                            sitio</a></span>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="shop/1"> Ft-
+                                            Productos</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
+                                        alt="Kari">
+                                    <span class="py-2"><a href="{{ route('presentaciones') }}"> Bk-
+                                            presentaciones</a></span>
+                                </div>
+                            </td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="shop/1/1"> Ft-
+                                            Detalle Prod</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
+                                        alt="Edu">
+                                    <span class="py-2"><a href="{{ route('parametros') }}"> Bk-
+                                            parametros</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
+                                        alt="Kari">
+                                    <span class="py-2"><a href="{{ route('dashboard') }}"> Bk- formas de
+                                            entrega</a></span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <ul>
+
+                                    <li><a href="{{ route('talles') }}">Contacto</a> - </li>
+
+                                    <li><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></li>
+
+                                    <li><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></li>
+
+                                    <li><a href="{{ route('dashboard') }}">Stock (Falta)</a></li>
+
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
                 {{-- 
                 <div class="grid col-grid-1 sm:grid-cols-3 gap-4">
                     <div>
