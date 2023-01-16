@@ -16,6 +16,7 @@ use App\Http\Livewire\Backend\Colores;
 use App\Http\Livewire\Backend\Presentaciones;
 use App\Http\Livewire\Backend\Productos;
 use App\Http\Livewire\Backend\Faqs;
+use App\Http\Livewire\Backend\Formasdeentregas;
 
 
 use App\Http\Controllers\ProductoController;
@@ -64,7 +65,7 @@ Route::middleware([
     Route::get('/mipanel/testimonios', Testimonios::class)->name('testimonios');
     // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
     // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
-    // Route::get('/mipanel/formasdeentrega', Formasdeentrega::class)->name('formasdeentrega');
+    Route::get('/mipanel/formasdeentrega', Formasdeentregas::class)->name('formasdeentrega');
     Route::get('/mipanel/colores', Colores::class)->name('colores');
     Route::get('/mipanel/talles', Talles::class)->name('talles');
     // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');

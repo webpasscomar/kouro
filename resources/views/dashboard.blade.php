@@ -178,7 +178,7 @@
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
                                         alt="Kari">
-                                    <span class="py-2"><a href="{{ route('dashboard') }}"> Bk- formas de
+                                    <span class="py-2"><a href="{{ route('formasdeentrega') }}"> Bk- formas de
                                             entrega</a></span>
                                 </div>
                             </td>
