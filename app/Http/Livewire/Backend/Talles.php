@@ -18,6 +18,7 @@ class Talles extends Component
     use WithPagination;
 
     protected $talles;
+    protected $listeners = ['delete'];
 
     protected $rules = [
         'talle' => 'required|max:30',
@@ -62,10 +63,9 @@ class Talles extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function delete($id)
     {
         Talle::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
     }
 
     public function guardar()

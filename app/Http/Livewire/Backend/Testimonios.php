@@ -88,6 +88,10 @@ class Testimonios extends Component
 
   public function guardar()
   {
+    if (($this->accion == 'editar') and ($this->imagen !== '')) {
+      dd('No tengo que validar la imagen ', $this->imagen);
+    }
+    
     $this->validate();
 
     $imagen_name = 'test_' . $this->imagen->getClientOriginalName();

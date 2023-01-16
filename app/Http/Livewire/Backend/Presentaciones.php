@@ -18,6 +18,12 @@ class Presentaciones extends Component
     use WithPagination;
 
     protected $presentaciones;
+    protected $listeners = ['delete'];
+
+    protected $rules = [
+        'sigla' => 'required|max:30',
+        'presentacion' => 'required|max:255',
+    ];
 
     public function render()
     {
@@ -49,6 +55,7 @@ class Presentaciones extends Component
     {
         $this->sigla = '';
         $this->presentacion = '';
+        $this->id_presentacion = '';
     }
 
     public function editar($id)
@@ -60,14 +67,14 @@ class Presentaciones extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function delete($id)
     {
         Presentacion::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
     }
 
     public function guardar()
     {
+        $this->validate();
         Presentacion::updateOrCreate(
             ['id' => $this->id_presentacion],
             [
@@ -76,13 +83,7 @@ class Presentaciones extends Component
             ]
         );
 
-        //session(['idCarrito' => $this->id_parametro]);
-
-        session()->flash(
-            'message',
-            $this->id_presentacion ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
-        );
-
+        $this->emit('alertSave');
         $this->cerrarModal();
         $this->limpiarCampos();
     }

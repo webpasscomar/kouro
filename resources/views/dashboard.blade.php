@@ -13,7 +13,7 @@
                 <table class="w-full border">
                     <thead>
                         <tr>
-                            <th class="px-2 py-2 border bg-green-300">9/1 al 13/1</th>
+                            <th class="px-2 py-2 border bg-gray-300">9/1 al 13/1</th>
                             <th class="px-2 py-2 border">16/1 al 20/1</th>
                             <th class="px-2 py-2 border">23/1 al 27/1</th>
                             <th class="px-2 py-2 border">30/1 al 3/2</th>
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="px-2 py-2 border bg-green-500">
+                            <td class="px-2 py-2 border bg-green-300">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
@@ -45,7 +45,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
                                         alt="Kari">
@@ -67,7 +67,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-300">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
@@ -90,7 +90,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
                                         alt="Kari">
@@ -116,7 +116,7 @@
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
-                                    <span class="py-2"><a href="{{ route('dashboard') }}"> Bk-
+                                    <span class="py-2"><a href="{{ route('sitio') }}"> Bk-
                                             sitio</a></span>
                                 </div>
                             </td>
@@ -135,7 +135,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
                                         alt="Kari">
@@ -158,7 +158,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
@@ -201,21 +201,11 @@
                         <tr>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></td>
+                            <td><a href="{{ route('dashboard') }}">Stock (Falta)</a></td>
+                            <td><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></td>
                             <td>
-                                <ul>
-
-                                    <li><a href="{{ route('talles') }}">Contacto</a> - </li>
-
-                                    <li><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></li>
-
-                                    <li><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></li>
-
-                                    <li><a href="{{ route('dashboard') }}">Stock (Falta)</a></li>
-
-                                </ul>
+                                <a href="{{ route('talles') }}">Contacto</a>
                             </td>
                         </tr>
                     </tbody>

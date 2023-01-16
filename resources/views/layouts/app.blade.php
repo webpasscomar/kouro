@@ -71,7 +71,7 @@
 
 
                 if (result.isConfirmed) {
-                    alert('Borrar el id: ' + id);
+                    // alert('Borrar el id: ' + id);
                     Livewire.emit('delete', id);
 
                     Swal.fire(

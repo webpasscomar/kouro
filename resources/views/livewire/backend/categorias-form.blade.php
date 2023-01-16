@@ -71,6 +71,14 @@
                         <x-jet-input-error for="imagen" />
                     </div>
 
+                    <div class="mb-3">
+                        @if ($accion === 'editar')
+                            <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}" alt="">
+                        @elseif($imagen)
+                            <img src="{{ $imagen->temporaryUrl() }}">
+                        @endif
+                    </div>
+
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                             <button wire:click.prevent="guardar()" type="button"
