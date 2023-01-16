@@ -17,20 +17,37 @@ class Testimonios extends Component
   public $search;
   public $sort = 'id';
   public $order = 'desc';
+  public $cambioImg = false;
 
   use WithPagination;
   use WithFileUploads;
+
   public $accion;
 
   protected $testimonios;
 
   protected $listeners = ['delete'];
 
-  protected $rules = [
-    'cliente' => 'required|max:30',
-    'testimonio' => 'required|max:255',
-    'imagen' => 'required|mimes:jpg,png|max:1024',
-  ];
+  protected function rules() {
+    if (($this->cambioImg===true && $this->accion==='editar') ||
+         $this->accion==='crear'){
+        return [
+            'cliente' => 'required|max:30',
+            'testimonio' => 'required|max:255',
+            'imagen' => 'required|mimes:jpg,png|max:1024',
+        ];
+    }else{
+        return [
+            'cliente' => 'required|max:30',
+            'testimonio' => 'required|max:255',
+            //'imagen' => 'required|mimes:jpg,png|max:1024',
+        ];
+
+    }
+  }
+
+
+
 
   public function render()
   {
@@ -86,28 +103,39 @@ class Testimonios extends Component
     Testimonio::find($id)->delete();
   }
 
+
+  public function cambioImagen() {
+    $this->cambioImg=true;
+  }
+
+
+
   public function guardar()
   {
-    if (($this->accion == 'editar') and ($this->imagen !== '')) {
-      dd('No tengo que validar la imagen ', $this->imagen);
-    }
-    
+
+
     $this->validate();
 
-    $imagen_name = 'test_' . $this->imagen->getClientOriginalName();
-    $upload_imagen = $this->imagen->storeAs('testimonio', $imagen_name);
+     if ($this->cambioImg) {
+            ////
+            //// borrar imagen anterior storage
+            ////
+            $imagen_name =  $this->imagen->getClientOriginalName();
+            $upload_imagen = $this->imagen->storeAs('testimonio', $imagen_name);
+            $this->cambioImg=false;
+     }else{
+        $imagen_name = $this->imagen;
+     }
 
-    Testimonio::updateOrCreate(
-      ['id' => $this->id_testimonio],
-      [
-        'testimonio' => $this->testimonio,
-        'cliente' => $this->cliente,
-        'imagen' => $imagen_name,
-        'estado' => 1
-      ]
-    );
-
-    //session(['idCarrito' => $this->id_parametro]);
+            Testimonio::updateOrCreate(
+                ['id' => $this->id_testimonio],
+                [
+                'testimonio' => $this->testimonio,
+                'cliente' => $this->cliente,
+                'imagen' => $imagen_name,
+                'estado' => 1
+                ]
+            );
 
     $this->emit('alertSave');
 
