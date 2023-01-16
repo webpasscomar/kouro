@@ -19,6 +19,16 @@ class Parametros extends Component
 
     use WithPagination;
 
+    protected $listeners = ['delete'];
+
+    protected $rules = [
+        'detalle' => 'required|max:255',
+        'descripcion' => 'required|max:255',
+        'default' => 'required',
+        'valor' => 'required',
+        'relacionados' => 'required',
+    ];
+
     public function render()
     {
         $this->parametros = Parametro::where('descripcion', 'like', '%' . $this->search . '%')
@@ -68,14 +78,15 @@ class Parametros extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function delete($id)
     {
         Parametro::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
     }
 
     public function guardar()
     {
+        $this->validate();
+
         Parametro::updateOrCreate(
             ['id' => $this->id_parametro],
             [
@@ -87,12 +98,10 @@ class Parametros extends Component
             ]
         );
 
-        session(['idCarrito' => $this->id_parametro]);
+        // session(['idCarrito' => $this->id_parametro]);
 
-        session()->flash(
-            'message',
-            $this->id_parametro ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
-        );
+
+        $this->emit('alertSave');
 
         $this->cerrarModal();
         $this->limpiarCampos();

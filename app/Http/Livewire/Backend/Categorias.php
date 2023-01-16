@@ -17,6 +17,7 @@ class Categorias extends Component
     public $search;
     public $sort = 'id';
     public $order = 'desc';
+    public $accion;
 
     protected $categorias;
 
@@ -49,6 +50,7 @@ class Categorias extends Component
 
     public function crear()
     {
+        $this->accion = 'crear';
         $this->limpiarCampos();
         $this->abrirModal();
     }
@@ -79,6 +81,8 @@ class Categorias extends Component
 
     public function editar($id)
     {
+        $this->accion = 'editar';
+
         $categoria = Categoria::findOrFail($id);
         $this->id_categoria = $id;
         $this->categoriaPadre_id = $categoria->categoriaPadre_id;

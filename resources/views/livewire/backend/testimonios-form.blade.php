@@ -47,7 +47,7 @@
 
                     <div class="mb-3 col-span-2">
                         <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
-                        <input type="file" id="imagen" wire:model="imagen">
+                        <input type="file" id="imagen" wire:change="cambioImagen" wire:model="imagen">
                         <x-jet-input-error for="imagen" />
                     </div>
 
