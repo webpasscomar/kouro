@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Formasdeentrega;
+use App\Models\Formadeentrega;
 use Illuminate\Database\Seeder;
 
 class FormasdeentregaSeeder extends Seeder
@@ -14,16 +14,19 @@ class FormasdeentregaSeeder extends Seeder
      */
     public function run()
     {
-        $entrega = new Formasdeentrega();
+        $entrega = new Formadeentrega();
         $entrega->nombre = 'Delivery';
+        $entrega->estado = 1;
         $entrega->save();
 
-        $entrega1 = new Formasdeentrega();
+        $entrega1 = new Formadeentrega();
         $entrega1->nombre = 'Retira-Pickup';
+        $entrega1->estado = 1;
         $entrega1->save();
 
-        $entrega2 = new Formasdeentrega();
+        $entrega2 = new Formadeentrega();
         $entrega2->nombre = 'Correo';
+        $entrega2->estado = 1;
         $entrega2->save();
     }
 }

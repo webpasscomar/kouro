@@ -16,6 +16,7 @@ class CreateFormasdeentregaTable extends Migration
         Schema::create('formasdeentregas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->tinyInteger('estado')->default(1);
             $table->timestamps();
         });
     }
