@@ -19,6 +19,7 @@ class Testimonios extends Component
   public $order = 'desc';
   public $cambioImg = false;
 
+
   use WithPagination;
   use WithFileUploads;
 
@@ -74,6 +75,7 @@ class Testimonios extends Component
   public function cerrarModal()
   {
     $this->modal = false;
+    $this->cambioImg=false;
   }
 
   public function limpiarCampos()
@@ -106,6 +108,7 @@ class Testimonios extends Component
 
   public function cambioImagen() {
     $this->cambioImg=true;
+
   }
 
 

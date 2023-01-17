@@ -38,10 +38,15 @@
                     </div>
 
                     <div class="mb-3">
-                        @if ($accion === 'editar')
-                            <img class="h-20 w-20" src="{{ asset('storage/testimonio/' . $imagen) }}" alt="">
-                        @elseif($imagen)
-                            <img src="{{ $imagen->temporaryUrl() }}">
+                        @if ($cambioImg)
+                            @if (gettype($imagen) === 'object')
+                                <img src="{{ $imagen->temporaryUrl() }}">
+                            @endif
+                        @else
+                            @if ($accion === 'editar')
+                                <img class="h-20 w-20" src="{{ asset('storage/testimonio/' . $imagen) }}"
+                                    alt="">
+                            @endif
                         @endif
                     </div>
 
