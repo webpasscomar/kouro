@@ -67,17 +67,24 @@
 
                     <div class="mb-3 col-span-2">
                         <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
-                        <input type="file" id="imagen" wire:model="imagen">
+                        <input type="file" id="imagen" wire:model="imagen" wire:change="cambioImagen">
                         <x-jet-input-error for="imagen" />
                     </div>
 
+
                     <div class="mb-3">
-                        @if ($accion === 'editar')
-                            <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}" alt="">
-                        @elseif($imagen)
-                            <img src="{{ $imagen->temporaryUrl() }}">
+                        @if ($cambioImg)
+                            @if (gettype($imagen) === 'object')
+                                <img class="h-20 w-20" src="{{ $imagen->temporaryUrl() }}">
+                            @endif
+                        @else
+                            @if ($accion === 'editar')
+                                <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}"
+                                    alt="">
+                            @endif
                         @endif
                     </div>
+
 
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">

@@ -18,19 +18,30 @@ class Categorias extends Component
     public $sort = 'id';
     public $order = 'desc';
     public $accion;
+    public $cambioImg = false;
 
     protected $categorias;
 
     protected $listeners = ['delete'];
 
-    protected $rules = [
-        'categoria' => 'required|max:20',
-        'imagen' => 'required|mimes:jpg,png|max:1024',
-    ];
-
     use WithPagination;
     use WithFileUploads;
 
+    protected function rules()
+    {
+        if (($this->cambioImg === true && $this->accion === 'editar') ||
+            $this->accion === 'crear'
+        ) {
+            return [
+                'categoria' => 'required|max:20',
+                'imagen' => 'required|mimes:jpg,png|max:1024',
+            ];
+        } else {
+            return [
+                'categoria' => 'required|max:20',
+            ];
+        }
+    }
 
     public function render()
     {
@@ -44,7 +55,6 @@ class Categorias extends Component
             )
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
-
         return view('livewire.backend.categorias', ['categorias' => $this->categorias]);
     }
 
@@ -63,6 +73,7 @@ class Categorias extends Component
     public function cerrarModal()
     {
         $this->modal = false;
+        $this->cambioImg = false;
     }
 
     public function limpiarCampos()
@@ -108,11 +119,19 @@ class Categorias extends Component
 
     public function guardar()
     {
-
         $this->validate();
 
-        $imagen_name = $this->imagen->getClientOriginalName();
-        $upload_imagen = $this->imagen->storeAs('categorias', $imagen_name);
+        if ($this->cambioImg) {
+            ////
+            //// borrar imagen anterior storage
+            ////
+            $imagen_name = $this->imagen->getClientOriginalName();
+            $upload_imagen = $this->imagen->storeAs('categorias', $imagen_name);
+
+            $this->cambioImg = false;
+        } else {
+            $imagen_name = $this->imagen;
+        }
 
         Categoria::updateOrCreate(
             ['id' => $this->id_categoria],
@@ -148,5 +167,10 @@ class Categorias extends Component
             $this->sort = $sort;
             $this->order = 'asc';
         }
+    }
+
+    public function cambioImagen()
+    {
+        $this->cambioImg = true;
     }
 }
