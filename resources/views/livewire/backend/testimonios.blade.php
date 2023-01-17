@@ -91,14 +91,11 @@
                             <td class="border px-4 py-2">{{ $item->cliente }}</td>
                             <td class="border px-4 py-2">{{ $item->testimonio }}</td>
                             <td class="border px-4 py-2">
-                                @livewire(
-                                    'toggle-button',
-                                    [
-                                        'model' => $item,
-                                        'field' => 'estado',
-                                    ],
-                                    key($item->id)
-                                )
+                                <livewire:toggle-button
+                                        :model="$item"
+                                        field="estado"
+                                        key="{{ $item->id }}" />
+
                             </td>
 
                             <td class="border px-4 py-2 text-center">
