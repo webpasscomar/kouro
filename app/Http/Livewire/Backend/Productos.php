@@ -2,14 +2,13 @@
 
 namespace App\Http\Livewire\Backend;
 
-use Livewire\Component;
+use App\Models\Presentacion;
 use App\Models\Producto;
+use Livewire\Component;
 use Livewire\WithPagination;
 
 class Productos extends Component
 {
-
-
     // Atributos
     public $nombre;
     public $desCorta;
@@ -44,11 +43,18 @@ class Productos extends Component
 
     use WithPagination;
 
-    protected $productos;
+    protected $productos, $presentaciones;
 
     // Parametros para el multistep
     public $totalSteps = 4;
     public $currentStep = 1;
+
+    protected $rules = [
+        'nombre' => 'required|max:100',
+        'desCorta' => 'required|max:255',
+        'descLarga' => 'required|',
+        'precioLista' => 'required',
+    ];
 
 
     public function mount()
@@ -57,16 +63,13 @@ class Productos extends Component
         // $this->currentStep = 1;
     }
 
-
-
-
-
     public function render()
     {
+        $this->presentaciones = Presentacion::all();
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
-        return view('livewire.backend.productos', ['productos' => $this->productos]);
+        return view('livewire.backend.productos', ['productos' => $this->productos, 'presentaciones' => $this->presentaciones]);
     }
 
     public function crear()
@@ -87,7 +90,7 @@ class Productos extends Component
 
     public function limpiarCampos()
     {
-        $this->color = '';
+        $this->reset('nombre', 'desCorta', 'descLarga', 'codigo', 'precioLista', 'ofertaDesde', 'ofertaHasta', 'precioOferta', 'peso', 'tamano', 'link', 'orden', 'unidadVenta');
     }
 
     public function order($sort)
@@ -110,6 +113,24 @@ class Productos extends Component
         $producto = Producto::findOrFail($id);
         $this->id_producto = $id;
         $this->nombre = $producto->nombre;
+        $this->desCorta = $producto->desCorta;
+        $this->descLarga = $producto->descLarga;
+
+        $this->codigo = $producto->codigo;
+        $this->presentacion_id = $producto->presentacion_id;
+        $this->precioLista = $producto->precioLista;
+        $this->precioOferta = $producto->precioOferta;
+        $this->ofertaDesde = $producto->ofertaDesde;
+        $this->ofertaHasta = $producto->ofertaHasta;
+        $this->peso = $producto->peso;
+        $this->tamano = $producto->tamano;
+
+        $this->link = $producto->link;
+        $this->orden = $producto->orden;
+        $this->unidadVenta = $producto->unidadVenta;
+        $this->destacar = $producto->destacar;
+
+
         $this->abrirModal();
     }
 
@@ -121,19 +142,29 @@ class Productos extends Component
 
     public function guardar()
     {
+        $this->validate();
         Producto::updateOrCreate(
-            ['id' => $this->id_color],
+            ['id' => $this->id_producto],
             [
-                'color' => $this->color,
+                'nombre' => $this->nombre,
+                'desCorta' => $this->desCorta,
+                'descLarga' => $this->descLarga,
+                'codigo' => $this->codigo,
+                'presentacion_id' => $this->presentacion_id,
+                'precioLista' => $this->precioLista,
+                'precioOferta' => $this->precioOferta,
+                'ofertaDesde'  => $this->ofertaDesde,
+                'ofertaHasta'  => $this->ofertaHasta,
+                'peso' => $this->peso,
+                'tamano' => $this->tamano,
+                'link' => $this->link,
+                'orden' => $this->orden,
+                'unidadVenta' => $this->unidadVenta,
+                'destacar' => $this->destacar
             ]
         );
 
-        //session(['idCarrito' => $this->id_parametro]);
-
-        session()->flash(
-            'message',
-            $this->id_color ? '¡Actualización exitosa!' : '¡Alta Exitosa!'
-        );
+        $this->emit('alertSave');
 
         $this->cerrarModal();
         $this->limpiarCampos();
