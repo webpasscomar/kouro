@@ -24,11 +24,11 @@
                             @foreach ($categorias as $categoria)
                                 <a href="{{ route('productos.categoria', $categoria) }}" class="group">
                                     <picture>
-                                        <source
+                                        {{-- <source
                                             srcset="{{ asset('storage/categorias/' . $categoria->imagen . '.webp') }}"
-                                            type="image/webp">
+                                            type="image/webp"> --}}
                                         <img alt="{{ $categoria->categoria }}"
-                                            src="{{ asset('storage/categorias/' . $categoria->imagen . '.jpg') }}"
+                                            src="{{ asset('storage/categorias/' . $categoria->imagen) }}"
                                             class="object-cover object-center group-hover:opacity-75">
                                     </picture>
 

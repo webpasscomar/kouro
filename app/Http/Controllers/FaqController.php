@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -9,10 +10,8 @@ class FaqController extends Controller
     public function index()
     {
         // dd('Hola');
-        // $categorias = Categoria::find(1);
-        // $productos = $categorias->productos()->get();
-        // dd($categorias, $productos);
-        // return view('shop.index', compact('categorias'));
-        return view('faqs.faqs');
+        $faqs = Faq::where('estado', 1)->get();
+
+        return view('faqs.faqs', compact('faqs'));
     }
 }

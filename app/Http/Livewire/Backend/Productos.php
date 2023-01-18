@@ -9,41 +9,52 @@ use Livewire\WithPagination;
 class Productos extends Component
 {
 
-    public $producto, $id_producto;
 
+    // Atributos
+    public $nombre;
+    public $desCorta;
+    public $descLarga;
+
+    public $codigo;
+    public $presentacion_id;
+    public $precioLista;
+
+    public $precioOferta;
+    public $ofertaDesde;
+    public $ofertaHasta;
+
+    public $peso;
+    public $tamano;
+    public $link;
+
+    public $orden;
+    public $unidadVenta;
+    public $destacar;
+
+    public $estado;
+
+    // Parametros generales
     public $modal = false;
     public $search;
     public $sort = 'id';
     public $order = 'desc';
 
+
+    public $producto, $id_producto;
+
     use WithPagination;
 
     protected $productos;
 
-
-    // Parametros importdos
-
-    public $nombre;
-    public $desCorta;
-    public $descLarga;
-    public $codigo;
-    public $presentacion_id;
-
-    public $email;
-    public $phone;
-    public $country;
-    public $city;
-    public $frameworks = [];
-    public $cv;
-    public $terms;
-
+    // Parametros para el multistep
     public $totalSteps = 4;
     public $currentStep = 1;
 
 
     public function mount()
     {
-        $this->currentStep = 1;
+        // Defino en 1 el paso si es multistep
+        // $this->currentStep = 1;
     }
 
 

@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="px-2 py-2 border bg-green-300">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
@@ -67,7 +67,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border bg-green-300">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
@@ -75,7 +75,7 @@
                                             Categorias</a></span>
                                 </div>
                             </td>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
                                         alt="Quien?">
@@ -120,7 +120,7 @@
                                             sitio</a></span>
                                 </div>
                             </td>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
                                         alt="Quien?">
@@ -166,7 +166,14 @@
                                             parametros</a></span>
                                 </div>
                             </td>
-                            <td></td>
+                            <td class="px-2 py-2 border bg-green-500">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="shop/1/1"> Ft-
+                                            Faqs</a></span>
+                                </div>
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -174,7 +181,7 @@
                         </tr>
 
                         <tr>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
                                         alt="Kari">
@@ -182,7 +189,14 @@
                                             entrega</a></span>
                                 </div>
                             </td>
-                            <td></td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="shop/1/1"> Ft-
+                                            Testimonios</a></span>
+                                </div>
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -191,7 +205,14 @@
 
                         <tr>
                             <td></td>
-                            <td></td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="shop/1/1">Bk-
+                                            Stock, ing y egr</a></span>
+                                </div>
+                            </td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -200,7 +221,14 @@
 
                         <tr>
                             <td></td>
-                            <td></td>
+                            <td class="px-2 py-2 border">
+                                <div class="inline-flex">
+                                    <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
+                                        alt="Quien?">
+                                    <span class="py-2"><a href="shop/1/1"> Bk-
+                                            Stock vista</a></span>
+                                </div>
+                            </td>
                             <td><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></td>
                             <td><a href="{{ route('dashboard') }}">Stock (Falta)</a></td>
                             <td><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></td>

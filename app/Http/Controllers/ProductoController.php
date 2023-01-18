@@ -12,7 +12,11 @@ class ProductoController extends Controller
 
     public function index()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('estado', 1)
+            ->where('id', '>', 1)
+            ->orderBy('categoria', 'asc')
+            ->get();
+
         return view('productos.index', compact('categorias'));
     }
 

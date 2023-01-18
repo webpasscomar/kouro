@@ -1,8 +1,6 @@
 <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
     <div class="flex justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
-
-
         <div class="fixed inset-0 transition-opacity">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
@@ -12,259 +10,223 @@
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
-            <form wire:submit.prevent="register">
+            <form>
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
 
-                {{-- STEP 1 --}}
 
-                @if ($currentStep == 1)
-                    <div class="step-one">
-                        <div class="card">
-                            <div class="card-header bg-secondary text-white">STEP 1/4 - Personal Details</div>
-                            <div class="card-body">
-                                <div class="row">
+                    <div class="mb-3 col-span-3">
+                        <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="nombre" wire:model="nombre">
 
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Nombre</label>
-                                            <input type="text" class="form-control" placeholder="Nombre"
-                                                wire:model="nombre">
-                                            <span class="text-danger">
-                                                @error('nombre')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="">Descripción corta</label>
-                                        <input type="text" class="form-control" placeholder="Descripción corta"
-                                            wire:model="desCorta">
-                                        <span class="text-danger">
-                                            @error('desCorta')
-                                                {{ $message }}
-                                            @enderror
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Descripcion larga</label>
-                                    <textarea class="form-control" cols="2" rows="2" wire:model="descLarga"></textarea>
-                                    <span class="text-danger">
-                                        @error('descLarga')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Presentación</label>
-                                            <select class="form-control" wire:model="presentacion_id">
-                                                <option value="" selected>Elija la presentación</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                            </select>
-                                            <span class="text-danger">
-                                                @error('presentacion_id')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Código de producto</label>
-                                            <input type="text" class="form-control" placeholder="Código interno"
-                                                wire:model="codigo">
-                                            <span class="text-danger">
-                                                @error('codigo')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <x-jet-input-error for="nombre" />
                     </div>
-                @endif
 
-                {{-- STEP 2 --}}
 
-                @if ($currentStep == 2)
-                    <div class="step-two">
-                        <div class="card">
-                            <div class="card-header bg-secondary text-white">STEP 2/4 - Address & Contacts</div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Email Address</label>
-                                            <input type="text" class="form-control" placeholder="Enter email address"
-                                                wire:model="email">
-                                            <span class="text-danger">
-                                                @error('email')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Phone</label>
-                                            <input type="text" class="form-control" placeholder="Enter phone number"
-                                                wire:model="phone">
-                                            <span class="text-danger">
-                                                @error('phone')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">Country of residence</label>
-                                            <select class="form-control" wire:model="country">
-                                                <option value="" selected>Select country</option>
-                                                <option value="United States">United States</option>
-                                                <option value="India">India</option>
-                                                <option value="Rwanda">Rwanda</option>
-                                                <option value="Nigeria">Nigeria</option>
-                                                <option value="Phillipines">Phillipines</option>
-                                                <option value="Canada">Canada</option>
-                                                <option value="Bangladesh">Bangladesh</option>
-                                            </select>
-                                            <span class="text-danger">
-                                                @error('country')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">City</label>
-                                            <input type="text" class="form-control" placeholder="Enter city"
-                                                wire:model="city">
-                                            <span class="text-danger">
-                                                @error('city')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mb-3 col-span-3">
+                        <label for="desCorta" class="block text-gray-700 text-sm font-bold mb-2">Descripción
+                            Corta:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="desCorta" wire:model="desCorta">
+
+                        <x-jet-input-error for="desCorta" />
                     </div>
-                @endif
-                {{-- STEP 3 --}}
 
-                @if ($currentStep == 3)
-                    <div class="step-three">
-                        <div class="card">
-                            <div class="card-header bg-secondary text-white">STEP 3/4 - Frameworks experience</div>
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur explicabo, impedit
-                                maxime
-                                possimus excepturi veniam ut error sit, molestias aliquam repellat eos porro? Sit ex
-                                voluptates
-                                nemo veritatis delectus quia?
-                                <div class="frameworks d-flex flex-column align-items-left mt-2">
-                                    <label for="laravel">
-                                        <input type="checkbox" id="laravel" value="laravel"
-                                            wire:model="frameworks"> Laravel
-                                    </label>
-                                    <label for="codeigniter">
-                                        <input type="checkbox" id="codeigniter" value="codeigniter"
-                                            wire:model="frameworks">
-                                        Codeigniter
-                                    </label>
-                                    <label for="vuejs">
-                                        <input type="checkbox" id="vuejs" value="vuejs"
-                                            wire:model="frameworks"> Vue Js
-                                    </label>
-                                    <label for="cakePHP">
-                                        <input type="checkbox" id="cakePHP" value="cakePHP"
-                                            wire:model="frameworks">
-                                        CakePHP
-                                    </label>
-                                </div>
-                                <span class="text-danger">
-                                    @error('frameworks')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                        </div>
+
+
+                    <div class="mb-3 col-span-3">
+                        <label for="descLarga" class="block text-gray-700 text-sm font-bold mb-2">Descripción
+                            larga:</label>
+                        <textarea rows="2"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="descLarga" wire:model="descLarga"></textarea>
                     </div>
-                @endif
 
-                {{-- STEP 4 --}}
-                @if ($currentStep == 4)
-                    <div class="step-four">
-                        <div class="card">
-                            <div class="card-header bg-secondary text-white">STEP 4/4 - Attachments</div>
-                            <div class="card-body">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque delectus officia
-                                inventore id
-                                facere at aspernatur ad corrupti asperiores placeat, fugiat tempora soluta optio
-                                recusandae
-                                eligendi impedit ipsam ullam amet!
-                                <div class="form-group">
-                                    <label for="cv">CV</label>
-                                    <input type="file" class="form-control" wire:model="cv">
-                                    <span class="text-danger">
-                                        @error('cv')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="terms" class="d-block">
-                                        <input type="checkbox" id="terms" wire:model="terms"> You must agree with
-                                        our <a href="#">Terms and Conditions</a>
-                                    </label>
-                                    <span class="text-danger">
-                                        @error('terms')
-                                            {{ $message }}
-                                        @enderror
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+
+                    {{-- Segunda linea --}}
+
+
+                    <div class="mb-3">
+                        <label for="codigo" class="block text-gray-700 text-sm font-bold mb-2">Código:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="codigo" wire:model="codigo">
+
+                        <x-jet-input-error for="codigo" />
                     </div>
-                @endif
 
-                <div class="action-buttons d-flex justify-content-between bg-white pt-2 pb-2">
 
-                    @if ($currentStep == 1)
-                        <div></div>
-                    @endif
 
-                    @if ($currentStep == 2 || $currentStep == 3 || $currentStep == 4)
-                        <button type="button" class="btn btn-md btn-secondary"
-                            wire:click="decreaseStep()">Back</button>
-                    @endif
+                    <div class="mb-3">
+                        <label for="presentacion_id"
+                            class="block text-gray-700 text-sm font-bold mb-2">Presentacion:</label>
+                        <select
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            wire:model="presentacion_id">
 
-                    @if ($currentStep == 1 || $currentStep == 2 || $currentStep == 3)
-                        <button type="button" class="btn btn-md btn-success"
-                            wire:click="increaseStep()">Next</button>
-                    @endif
+                            {{-- @forelse ($categoriasAnt as $item)
+                                <option value="{{ $item->id }}">{{ $item->categoria }}</option>
+                            @empty
+                                <option value="1">Sin categoría padre</option>
+                            @endforelse --}}
+                        </select>
+                    </div>
 
-                    @if ($currentStep == 4)
-                        <button type="submit" class="btn btn-md btn-primary">Submit</button>
-                    @endif
 
+                    <div class="mb-3">
+                        <label for="precioLista" class="block text-gray-700 text-sm font-bold mb-2">Precio
+                            Lista:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="precioLista" wire:model="precioLista">
+
+                        <x-jet-input-error for="precioLista" />
+                    </div>
+
+
+                    {{-- Tercera linea --}}
+
+
+                    <div class="mb-3">
+                        <label for="ofertaDesde" class="block text-gray-700 text-sm font-bold mb-2">En oferta
+                            desde:</label>
+                        <input type="date"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="ofertaDesde" wire:model="ofertaDesde">
+
+                        <x-jet-input-error for="ofertaDesde" />
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="precioOferta" class="block text-gray-700 text-sm font-bold mb-2">Precio
+                            oferta:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="precioOferta" wire:model="precioOferta">
+
+                        <x-jet-input-error for="precioOferta" />
+                    </div>
+
+
+
+
+
+                    <div class="mb-3">
+                        <label for="ofertaHasta" class="block text-gray-700 text-sm font-bold mb-2">Oferta
+                            hasta:</label>
+                        <input type="date"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="ofertaHasta" wire:model="ofertaHasta">
+
+                        <x-jet-input-error for="ofertaHasta" />
+                    </div>
+
+
+                    {{-- Cuarta linea --}}
+
+
+                    <div class="mb-3">
+                        <label for="peso" class="block text-gray-700 text-sm font-bold mb-2">Peso:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="peso" wire:model="peso">
+
+                        <x-jet-input-error for="peso" />
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="tamano" class="block text-gray-700 text-sm font-bold mb-2">Tamaño:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="tamano" wire:model="tamano">
+
+                        <x-jet-input-error for="tamano" />
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="link" class="block text-gray-700 text-sm font-bold mb-2">Link:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="link" wire:model="link">
+
+                        <x-jet-input-error for="link" />
+                    </div>
+
+
+                    {{-- Quinta linea --}}
+
+
+
+                    <div class="mb-3">
+                        <label for="orden" class="block text-gray-700 text-sm font-bold mb-2">Orden
+                            interno:</label>
+                        <input type="number"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="orden" wire:model="orden">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="unidadVenta" class="block text-gray-700 text-sm font-bold mb-2">Unidad de
+                            venta:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="unidadVenta" wire:model="unidadVenta">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="destacar" class="block text-gray-700 text-sm font-bold mb-2">Destacado:</label>
+                        <select
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            wire:model="destacar">
+
+                            <option value="0">No</option>
+                            <option value="1">Si</option>
+
+                        </select>
+                    </div>
+
+
+
+                    {{-- <div class="mb-3 col-span-2">
+                        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
+                        <input type="file" id="imagen" wire:model="imagen" wire:change="cambioImagen">
+                        <x-jet-input-error for="imagen" />
+                    </div> --}}
+
+
+                    {{-- <div class="mb-3">
+                        @if ($cambioImg)
+                            @if (gettype($imagen) === 'object')
+                                <img class="h-20 w-20" src="{{ $imagen->temporaryUrl() }}">
+                            @endif
+                        @else
+                            @if ($accion === 'editar')
+                                <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}"
+                                    alt="">
+                            @endif
+                        @endif
+                    </div> --}}
+
+
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
+                        <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                            <button wire:click.prevent="guardar()" type="button"
+                                class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-purple-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">Guardar</button>
+                        </span>
+
+                        <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                            <button wire:click="cerrarModal()" type="button"
+                                class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gray-200 text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">Cancelar</button>
+                        </span>
+                    </div>
 
                 </div>
-
             </form>
 
 
