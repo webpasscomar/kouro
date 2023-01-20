@@ -123,7 +123,7 @@ class Movimientos extends Component
             );
             //// grabamos en historia en movimiento
             //obtengo el id del sku
-            $sku_id = $canti_ori = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
+            $sku_id = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
             ->where('talle_id',$this->movimientos[$i]['talle_id'])
             ->where('color_id',$this->movimientos[$i]['color_id'])
             ->value('id');
