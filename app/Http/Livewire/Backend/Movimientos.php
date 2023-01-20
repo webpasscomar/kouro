@@ -80,10 +80,13 @@ class Movimientos extends Component
             ];
    }
 
+   //guarda item
    public function guardar()
    {
-       //dd($this->producto_id);
-       $this->validate();
+
+
+    $this->validate();
+
 
        $this->indice_productos = count($this->movimientos);
 
@@ -102,11 +105,19 @@ class Movimientos extends Component
                         'talle' =>  $this->talle_nombre,
                         'cantidad' => $this->cantidad];
 
-
-
        $this->emit('alertSave');
        $this->limpiarCampos();
    }
+
+    public function finalizar()
+    {
+      $this->indice_productos = count($this->movimientos);
+      if ($this->indice_productos > 0)
+      {
+
+      }
+     //for($i=0;$i<count($movimientos);$i++)
+    }
 
    public function limpiarCampos()
    {
@@ -116,58 +127,15 @@ class Movimientos extends Component
         $this->cantidad = '';
    }
 
-
-
-
-
-
-
-
-   public function crear()
-    {
-        $this->limpiarCampos();
-        $this->abrirModal();
-    }
-
-    public function abrirModal()
-    {
-        $this->modal = true;
-    }
-
-    public function cerrarModal()
-    {
-        $this->modal = false;
-    }
-
-
-
-    public function editar($id)
-    {
-        // $color = Color::findOrFail($id);
-        // $this->id_color = $id;
-        // $this->color = $color->color;
-        // $this->abrirModal();
-    }
-
     public function delete($id)
     {
+        //elimina por indice
         unset($this->movimientos[$id]);
+        //re acomoda el vector para que noque posiciones null
         $this->movimientos = array_values($this->movimientos);
     }
 
 
-    public function order($sort)
-    {
-        // if ($this->sort == $sort) {
 
-        //     if ($this->order == 'desc') {
-        //         $this->order = 'asc';
-        //     } else {
-        //         $this->order = 'desc';
-        //     }
-        // } else {
-        //     $this->sort = $sort;
-        //     $this->order = 'asc';
-        // }
-    }
+
 }

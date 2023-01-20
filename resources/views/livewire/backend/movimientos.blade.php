@@ -7,23 +7,24 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
         {{-- <form> --}}
             <div class="mb-5 w-full">
-                <select
-                    class="shadow appearance-none border rounded w-60 py-2 px-0 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    wire:model="producto_id">
-                    <option value="0">Selecciona un Producto</option>
-                    @foreach ($productos as $p)
-                        <option value="{{ $p->id }}">{{ $p->nombre }}</option>
-                    @endforeach
-                </select>
-                <x-jet-input-error for="producto_id" />
-                <select
-                    class="shadow appearance-none border rounded w-60  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    wire:model="color_id">
-                    <option value="0">Selecciona un Color</option>
-                    @foreach ($colores as $c)
-                        <option value="{{ $c->id }}">{{ $c->color }}</option>
-                    @endforeach
-                </select>
+                    <select
+                        class="shadow appearance-none border rounded w-60 py-2 px-0 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        wire:model="producto_id">
+                        <option value="0">Selecciona un Producto</option>
+                        @foreach ($productos as $p)
+                            <option value="{{ $p->id }}">{{ $p->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="producto_id" />
+                    <select
+                        class="shadow appearance-none border rounded w-60  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        wire:model="color_id">
+                        <option value="0">Selecciona un Color</option>
+                        @foreach ($colores as $c)
+                            <option value="{{ $c->id }}">{{ $c->color }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="color_id" />
                 <select
                     class="shadow appearance-none border rounded w-60  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     wire:model="talle_id">
@@ -32,7 +33,8 @@
                         <option value="{{ $c->id }}">{{ $c->talle }}</option>
                     @endforeach
                 </select>
-                    <input type="text"
+                <x-jet-input-error for="talle_id" />
+                <input type="text"
                         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="cantidad" wire:model="cantidad" placeholder="Cantidad">
                     <x-jet-input-error for="cantidad" />
@@ -77,7 +79,11 @@
                 </tbody>
             </table>
 
-            <div class="py-3">
+            <button wire:click="finalizar()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 my-3">
+               Grabar {{ count($movimientos) }} Movimientos</button>
+
+
+                   <div class="py-3">
 
                 {{-- {{ $movimientos->links() }} --}}
 
