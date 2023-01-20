@@ -7,6 +7,17 @@
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
         {{-- <form> --}}
             <div class="mb-5 w-full">
+              <div>
+                    <select
+                        class="shadow appearance-none border rounded w-70 py-2 px-0 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        wire:model="tipomove_id">
+                        <option value="0">Selecciona un Tipo de Movimiento</option>
+                        @foreach ($tipomove as $t)
+                            <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="tipomove_id" />
+                </div>
                     <select
                         class="shadow appearance-none border rounded w-60 py-2 px-0 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         wire:model="producto_id">

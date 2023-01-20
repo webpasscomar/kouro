@@ -10,11 +10,8 @@ use App\Models\Producto;
 use App\Models\Color;
 use App\Models\Talle;
 use App\Models\Sku;
-
-
-
-
 use App\Models\Movimiento;
+
 
 class Movimientos extends Component
 {
@@ -29,7 +26,7 @@ class Movimientos extends Component
 
 
     public $movimientos = array();
-    public $producto_id,$color_id,$talle_id,$cantidad;
+    public $producto_id,$color_id,$talle_id,$cantidad,$tipomove_id;
     public $producto_nombre,$color_nombre,$talle_nombre;
 
 
@@ -50,26 +47,13 @@ class Movimientos extends Component
         $this->talles  = Talle::all();
 
 
-
-        // $this-> movimientos[0] = ['producto_id' => 1,
-        //                           'producto_descripcion' => 'descripcion del producto 1' ,
-        //                           'color_id' => 4,
-        //                           'color' => 'Rojo',
-        //                           'talle_id' => 2,
-        //                           'talle' => 'XL',
-        //                            'cantidad' => 10];
-
-        //$this->movimientos=array();
-
-        // dd($this->productos);
-
-
         return view('livewire.backend.movimientos',
                     [
                          'movimientos' => $this->movimientos,
                          'productos' => $this->productos,
                          'colores' => $this->colores,
                          'talles' => $this->talles,
+                         'tipomove' => $this->tipomovimientos,
                         ]);
     }
 
@@ -125,18 +109,42 @@ class Movimientos extends Component
             if($canti_ori===null) {
                 $canti_ori=0;
             }
-            //// actualizamos stock
+            //// actualizamos stock sku
+            $cantidad = $this->movimientos[$i]['cantidad']+$canti_ori;
             Sku::updateOrCreate(
                 ['producto_id' => $this->movimientos[$i]['producto_id'],
                  'talle_id'    => $this->movimientos[$i]['talle_id'],
                  'color_id'    => $this->movimientos[$i]['color_id'],
                 ],
                 [
-                    'stock' => $this->movimientos[$i]['cantidad']+$canti_ori,
+                    'stock' =>$cantidad,
                     'estado' => 1
                 ]
             );
-            //// grabamos en historia
+            //// grabamos en historia en movimiento
+            //obtengo el id del sku
+            $sku_id = $canti_ori = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
+            ->where('talle_id',$this->movimientos[$i]['talle_id'])
+            ->where('color_id',$this->movimientos[$i]['color_id'])
+            ->value('id');
+            Movimiento::Create([
+                'tipoMovimiento_id' => $this->tipomove_id,
+                'sku_id' => $sku_id,
+                'cantidad' => $cantidad,
+                'pedido_id' => 0,
+                'estado' => 0,   //no se que es
+                'user_id' => auth()->user()->id,
+            ]
+            );
+
+            //    auth()->user() Obtenemos la instancia del usuario logueado
+            //    auth()->user()->name
+            //    auth()->user()->email
+            //    auth()->user()->id
+
+
+
+
         }
         session()->flash('message','¡Actualización exitosa!');
         $this->emit('alertSave');
