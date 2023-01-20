@@ -9,6 +9,8 @@ use App\Models\Tipomovimiento;
 use App\Models\Producto;
 use App\Models\Color;
 use App\Models\Talle;
+use App\Models\Sku;
+
 
 
 
@@ -114,9 +116,34 @@ class Movimientos extends Component
       $this->indice_productos = count($this->movimientos);
       if ($this->indice_productos > 0)
       {
-
+        for($i=0;$i<count($this->movimientos);$i++) {
+            ////obtenemos la cantidad original de stock
+            $canti_ori = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
+            ->where('talle_id',$this->movimientos[$i]['talle_id'])
+            ->where('color_id',$this->movimientos[$i]['color_id'])
+            ->value('stock');
+            if($canti_ori===null) {
+                $canti_ori=0;
+            }
+            //// actualizamos stock
+            Sku::updateOrCreate(
+                ['producto_id' => $this->movimientos[$i]['producto_id'],
+                 'talle_id'    => $this->movimientos[$i]['talle_id'],
+                 'color_id'    => $this->movimientos[$i]['color_id'],
+                ],
+                [
+                    'stock' => $this->movimientos[$i]['cantidad']+$canti_ori,
+                    'estado' => 1
+                ]
+            );
+            //// grabamos en historia
+        }
+        session()->flash('message','¡Actualización exitosa!');
+        $this->emit('alertSave');
+        $this->limpiarCampos();
+        $this->movimientos=[];
       }
-     //for($i=0;$i<count($movimientos);$i++)
+
     }
 
    public function limpiarCampos()
@@ -125,6 +152,8 @@ class Movimientos extends Component
         $this->talle_id  = 0;
         $this->color_id = 0;
         $this->cantidad = '';
+        $this->cantidad = '';
+
    }
 
     public function delete($id)
