@@ -42,7 +42,7 @@ class Movimientos extends Component
     public function render()
     {
 
-        dd(auth()->user());
+        //dd(auth()->user());
 
         $this->tipomovimientos = Tipomovimiento::all();
         $this->productos  = Producto::all();
