@@ -50,7 +50,9 @@ class Historias extends Component
 
 
       return view('livewire.backend.historias',
-                ['sku' => $this->sku]);
+                ['sku' => $this->sku,
+                 'detalle' => $this->detalle,
+            ]);
   }
 
 
