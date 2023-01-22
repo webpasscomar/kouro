@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tipomovimiento;
 use Illuminate\Database\Seeder;
+use App\Models\Tipomovimiento;
 
 class TipomovimientoSeeder extends Seeder
 {
@@ -38,8 +38,5 @@ class TipomovimientoSeeder extends Seeder
         $tipomovimiento = new Tipomovimiento();
         $tipomovimiento->descripcion = 'Egreso por retiro de venta';
         $tipomovimiento->save();
-
     }
-
-
 }
