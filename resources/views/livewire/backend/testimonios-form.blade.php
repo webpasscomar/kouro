@@ -57,7 +57,7 @@
                     </div>
 
 
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3">
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3 w-full">
 
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                             <button wire:click.prevent="guardar()" wire:target="save, imagen" type="button"
