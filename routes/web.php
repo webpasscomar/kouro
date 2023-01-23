@@ -18,12 +18,16 @@ use App\Http\Livewire\Backend\Productos;
 use App\Http\Livewire\Backend\Faqs;
 use App\Http\Livewire\Backend\Formasdeentregas;
 use App\Http\Livewire\Backend\Sitios;
+use App\Http\Livewire\Backend\Movimientos;
+
 
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Livewire\Backend\Testimonios;
+use App\Http\Livewire\Backend\Historias;
+
 
 // Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
@@ -71,6 +75,9 @@ Route::middleware([
     Route::get('/mipanel/talles', Talles::class)->name('talles');
     // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');
     Route::get('/mipanel/sitio', Sitios::class)->name('sitio');
+    Route::get('/mipanel/movimientos', Movimientos::class)->name('movimientos');
+    Route::get('/mipanel/historias', Historias::class)->name('historias');
+
 
 
     Route::get('/dashboard', function () {

@@ -10,4 +10,8 @@ class Sku extends Model
     use HasFactory;
 
     protected $table = 'sku';
+
+    protected $fillable = [
+        'producto_id','talle_id','color_id','stock','estado'
+    ];
 }
