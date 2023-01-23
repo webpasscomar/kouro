@@ -32,12 +32,21 @@ class Productos extends Component
 
     public $estado;
 
+
+    // Imagenes
+    protected $imagenes;
+    public $imagen;
+    public $talle;
+    public $color;
+
     // Parametros generales
     public $modal = false;
     public $search;
     public $sort = 'id';
     public $order = 'desc';
-
+    public $modal1 = false;
+    public $modal2 = false;
+    public $modal3 = false;
 
     public $producto, $id_producto;
 
@@ -69,7 +78,11 @@ class Productos extends Component
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
-        return view('livewire.backend.productos', ['productos' => $this->productos, 'presentaciones' => $this->presentaciones]);
+        return view('livewire.backend.productos', [
+            'productos' => $this->productos,
+            'presentaciones' => $this->presentaciones,
+            'imagenes' => $this->imagenes
+        ]);
     }
 
     public function crear()
@@ -78,14 +91,44 @@ class Productos extends Component
         $this->abrirModal();
     }
 
-    public function abrirModal()
+    public function abrirModal($id = null)
     {
-        $this->modal = true;
+
+        switch ($id) {
+            case 1:
+                $this->modal1 = true;
+                break;
+            case 2:
+                $this->modal2 = true;
+                break;
+            case 3:
+                $this->modal3 = true;
+                break;
+            default:
+            case 1:
+                $this->modal = true;
+                break;
+        }
     }
 
-    public function cerrarModal()
+    public function cerrarModal($id = null)
     {
-        $this->modal = false;
+        switch ($id) {
+            case 1:
+                $this->modal1 = false;
+                break;
+            case 2:
+                $this->modal2 = false;
+                break;
+            case 3:
+                $this->modal3 = false;
+                $this->modal2 = true;
+                break;
+            default:
+            case 1:
+                $this->modal = false;
+                break;
+        }
     }
 
     public function limpiarCampos()
@@ -173,9 +216,30 @@ class Productos extends Component
 
 
 
+    public function imagenes($id)
+    {
+        $this->imagenes = Producto::all();
+        // $this->imagenes = Producto::where('estado', 1)->paginate(5);
+        // $this->id_producto = $id;
+        // $this->nombre = $producto->nombre;
+        // $this->desCorta = $producto->desCorta;
+        // $this->descLarga = $producto->descLarga;
 
+        $this->abrirModal(2);
+    }
 
+    public function addImagen($id)
+    {
+        $id_producto = $id;
+        //$imagenes = Producto::all();
+        // $this->id_producto = $id;
+        // $this->nombre = $producto->nombre;
+        // $this->desCorta = $producto->desCorta;
+        // $this->descLarga = $producto->descLarga;
 
+        $this->cerrarModal(2);
+        $this->abrirModal(3);
+    }
 
 
 

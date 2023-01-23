@@ -35,6 +35,14 @@
                 @include('livewire.backend.productos-form')
             @endif
 
+            @if ($modal2)
+                @include('livewire.backend.productos-imagenes')
+                {{-- @include('livewire.backend.modal-large') --}}
+            @endif
+
+            @if ($modal3)
+                @include('livewire.backend.productos-imagenes-form')
+            @endif
             {{-- The best athlete wants his opponent at his best. --}}
 
 
@@ -106,6 +114,8 @@
                             <td class="border px-4 py-2 text-center">
                                 <button wire:click="editar({{ $item->id }})"
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
+                                <button wire:click="imagenes({{ $item->id }})"
+                                    class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4">Imagenes</button>
                                 <button wire:click="borrar({{ $item->id }})"
                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
                             </td>
