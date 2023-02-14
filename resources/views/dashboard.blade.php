@@ -52,7 +52,7 @@
                                     <span class="py-2"><a href="{{ route('colores') }}"> Bk- Colores</a></span>
                                 </div>
                             </td>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
                                         alt="Edu">
@@ -205,11 +205,11 @@
 
                         <tr>
                             <td></td>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
                                         alt="Quien?">
-                                    <span class="py-2"><a href="shop/1/1">Bk-
+                                    <span class="py-2"><a href="{{ route('movimientos') }}">Bk-
                                             Stock, ing y egr</a></span>
                                 </div>
                             </td>
@@ -221,11 +221,11 @@
 
                         <tr>
                             <td></td>
-                            <td class="px-2 py-2 border">
+                            <td class="px-2 py-2 border bg-green-500">
                                 <div class="inline-flex">
                                     <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
                                         alt="Quien?">
-                                    <span class="py-2"><a href="shop/1/1"> Bk-
+                                    <span class="py-2"><a href="{{ route('historias') }}"> Bk-
                                             Stock vista</a></span>
                                 </div>
                             </td>
