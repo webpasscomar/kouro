@@ -23,7 +23,7 @@ class Pedidos extends Component
     public $search;
     public $sort = 'id';
     public $order = 'desc';
-    
+
     //campos vista
     public $nombre,$apellido,$fecha,$entrega_id;
 
@@ -39,7 +39,7 @@ class Pedidos extends Component
     public function render()
     {
 
-       
+
 
         $this->pedidos = Pedido::where('apellido', 'like', '%' . $this->search . '%')
         ->orderBy($this->sort, $this->order)
@@ -48,8 +48,8 @@ class Pedidos extends Component
         $this->productos  = Producto::all();
         $this->colores  = Color::all();
         $this->talles  = Talle::all();
-        $this->entregas  = Formadeentrega::all();
-
+       // $this->entregas  = Formadeentrega::all();
+        $this->entregas  = Formadeentrega::where('estado','=',1)->get();
         //dd(auth()->user());
 
         return view('livewire.backend.pedidos',
@@ -66,7 +66,7 @@ class Pedidos extends Component
 
     public function detalle($id)
     {
-  
+
          $this->detalle = Pedido::select([
               'movimientos.tipomovimiento_id',
               'movimientos.cantidad',
@@ -78,10 +78,10 @@ class Pedidos extends Component
               ->join('users', 'movimientos.user_id', '=', 'users.id')
               ->where('movimientos.sku_id', '=', $id)
               ->paginate(5);
-  
+
               $this->abrirModal();
     }
-  
+
 
 
 
@@ -188,7 +188,7 @@ public function crear()
     //     $this->limpiarCampos();
     //     $this->movimientos=[];
     //   }
-    
+
    }
 
 

@@ -19,3 +19,4 @@ class Movimiento extends Model
     ];
 
 }
+
