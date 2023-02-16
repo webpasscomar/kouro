@@ -2,6 +2,7 @@
     <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Pedidos</h1>
 </x-slot>
 
+
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -139,7 +140,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+            </table>
 
                     {{ $pedidos->links() }}
             @endif

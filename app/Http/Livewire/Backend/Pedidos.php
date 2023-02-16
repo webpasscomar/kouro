@@ -12,6 +12,9 @@ use App\Models\Color;
 use App\Models\Talle;
 use App\Models\Sku;
 use App\Models\Formadeentrega;
+use App\Models\Provincia;
+use App\Models\Localidad;
+
 
 
 
@@ -20,15 +23,21 @@ class Pedidos extends Component
 {
 
     public $modal = false;
+    public $modalitem = false;
     public $search;
     public $sort = 'id';
     public $order = 'desc';
-
+    
     //campos vista
-    public $nombre,$apellido,$fecha,$entrega_id;
-
+    public $nombre,$apellido,$fecha,$entrega_id,$telefono,$correo,$transac_mp;
+    public $producto_id,$talle_id,$color_id,$cantidad,$precio,$total; 
+    public $provincia_id = 0;
+    public $localidad_id = 0;
+    public $movimientos = array();
+    
+    
     //tablas usadas
-    protected $productos,$colores,$talles,$pedidos,$entregas;
+    protected $productos,$colores,$talles,$pedidos,$entregas,$provincias,$localidades;
 
     protected $listeners = ['delete'];
 
@@ -39,7 +48,34 @@ class Pedidos extends Component
     public function render()
     {
 
+        if ($this->producto_id != 0) {
+              
+            //    $precio = Producto::where('id',$this->producto_id)
+            //     ->value('preciolista');
+                $precio = Producto::where('id',$this->producto_id)
+                   ->first();
+                
+                $ldate = date('Y-m-d H:i:s');
+                if(is_null($precio->ofertaDesde) or is_null($precio->ofertaHasta)) {
+                    //no se cargaron datos de las fechas de las ofertas
+                    $this->precio =  $precio->precioLista; 
+                }else{
+                    if ($precio->ofertaDesde <= $ldate and $precio->ofertaHasta >= $ldate) {          
+                        $this->precio =  $precio->precioOferta; 
+                    }else{
+                        $this->precio =  $precio->precioLista; 
+                    } 
+                }
 
+               if (is_numeric($this->cantidad)) {
+                   $this->total  =  $this->precio*$this->cantidad;
+              }else{
+                $this->total  =  0;
+              }
+
+        }
+
+      
 
         $this->pedidos = Pedido::where('apellido', 'like', '%' . $this->search . '%')
         ->orderBy($this->sort, $this->order)
@@ -48,8 +84,14 @@ class Pedidos extends Component
         $this->productos  = Producto::all();
         $this->colores  = Color::all();
         $this->talles  = Talle::all();
-       // $this->entregas  = Formadeentrega::all();
         $this->entregas  = Formadeentrega::where('estado','=',1)->get();
+        $this->provincias  = Provincia::where('estado','=',1)->get();
+
+        $this->localidades  = Localidad::where('estado','=',1)
+                            ->where('provincia_id','=', $this->provincia_id)
+                            ->orderby('nombre')
+                            ->get();
+
         //dd(auth()->user());
 
         return view('livewire.backend.pedidos',
@@ -59,42 +101,24 @@ class Pedidos extends Component
                          'colores' => $this->colores,
                          'talles' => $this->talles,
                          'entregas' => $this->entregas,
+                         'provincias' => $this->provincias,
+                         'localidades' => $this->localidades,
                         ]);
     }
 
 
-
-    public function detalle($id)
-    {
-
-         $this->detalle = Pedido::select([
-              'movimientos.tipomovimiento_id',
-              'movimientos.cantidad',
-              'movimientos.fecha',
-              'movimientos.pedido_id',
-              'tipomovimientos.descripcion',
-              'users.name'])
-              ->join('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
-              ->join('users', 'movimientos.user_id', '=', 'users.id')
-              ->where('movimientos.sku_id', '=', $id)
-              ->paginate(5);
-
-              $this->abrirModal();
+    protected function rules() {
+        if ($this->modalitem==1) {
+                return [
+                    'producto_id' => 'required|not_in:0',
+                    'color_id' => 'required|not_in:0',
+                    'talle_id' => 'required|not_in:0',
+                    'cantidad' => 'required|not_in:0',
+                ];
+        }else{
+                return [];
+        }            
     }
-
-
-
-
-
-//     protected function rules() {
-//             return [
-//                 'producto_id' => 'required|not_in:0',
-//                 'color_id' => 'required|not_in:0',
-//                 'talle_id' => 'required|not_in:0',
-//                 'cantidad' => 'required|not_in:0',
-//             ];
-//    }
-
 
 
 public function crear()
@@ -103,36 +127,6 @@ public function crear()
     $this->abrirModal();
 }
 
-
-
-   //guarda item
-   public function guardar()
-   {
-
-
-    // $this->validate();
-
-
-    //    $this->indice_productos = count($this->movimientos);
-
-    //    $this->producto_nombre  = Producto::where('id',$this->producto_id)->value('nombre');
-    //    $this->color_nombre  = Color::where('id',$this->color_id)->value('color');
-    //    $this->talle_nombre  = Talle::where('id',$this->talle_id)->value('talle');
-
-
-
-    //   $this-> movimientos[ $this->indice_productos] = [
-    //                     'producto_id' => $this->producto_id,
-    //                     'producto_descripcion' => $this->producto_nombre,
-    //                     'color_id' => $this->color_id,
-    //                     'color' => $this->color_nombre,
-    //                     'talle_id' => $this->talle_id,
-    //                     'talle' =>  $this->talle_nombre,
-    //                     'cantidad' => $this->cantidad];
-
-    //    $this->emit('alertSave');
-    //    $this->limpiarCampos();
-   }
 
    public function finalizar()
    {
@@ -192,15 +186,6 @@ public function crear()
    }
 
 
-    public function delete($id)
-    {
-        // //elimina por indice
-        // unset($this->movimientos[$id]);
-        // //re acomoda el vector para que noque posiciones null
-        // $this->movimientos = array_values($this->movimientos);
-    }
-
-
     public function order($sort)
     {
         if ($this->sort == $sort) {
@@ -225,13 +210,87 @@ public function crear()
     public function cerrarModal()
     {
         $this->modal = false;
+
     }
+
+    
+    //nuevo item del pedido
+    public function nuevo() {
+        $this->limpiarCamposItem();
+        $this->abrirModalItem();
+    }
+
+    //elimina item
+    public function delete($id)
+    {
+        unset($this->movimientos[$id]);
+        //re acomoda el vector para que noque posiciones null
+        $this->movimientos = array_values($this->movimientos);
+    }
+
+    //abre modal item 
+    public function abrirModalItem()
+    {
+        $this->modalitem = true;
+    }
+   
+    //cierra modal item sin grabar
+    public function cerrarModalItem()
+    {
+        $this->limpiarCamposItem();
+        $this->modalitem = false;
+    }
+
+   //guarda item
+   public function guardar()
+   {
+
+
+    $this->validate();
+
+         
+    
+       $this->indice_productos = count($this->movimientos);
+
+       $this->producto_nombre  = Producto::where('id',$this->producto_id)->value('nombre');
+       $this->color_nombre  = Color::where('id',$this->color_id)->value('color');
+       $this->talle_nombre  = Talle::where('id',$this->talle_id)->value('talle');
+
+
+
+      $this-> movimientos[ $this->indice_productos] = [
+                        'producto_id' => $this->producto_id,
+                        'producto_descripcion' => $this->producto_nombre,
+                        'color_id' => $this->color_id,
+                        'color' => $this->color_nombre,
+                        'talle_id' => $this->talle_id,
+                        'talle' =>  $this->talle_nombre,
+                        'cantidad' => $this->cantidad,
+                        'precio' =>  $this->precio];
+
+       $this->emit('alertSave');
+       $this->limpiarCamposItem();
+       $this->modalitem=false;
+   }
+
+
+
 
     public function limpiarCampos()
     {
-        $this->talle = '';
-        $this->id_talle = '';
     }
+
+    public function limpiarCamposItem()
+    {
+            $this->producto_id=0;
+            $this->talle_id=0;
+            $this->color_id=0;
+            $this->cantidad=0;
+            $this->precio=0;
+            $this->total=0;
+
+    }
+
 
 
 }
