@@ -81,7 +81,7 @@ class Pedidos extends Component
         ->orderBy($this->sort, $this->order)
         ->paginate(5);
 
-        $this->productos  = Producto::all();
+        $this->productos  = Producto::where('estado','=',1)->get();
         $this->colores  = Color::all();
         $this->talles  = Talle::all();
         $this->entregas  = Formadeentrega::where('estado','=',1)->get();
