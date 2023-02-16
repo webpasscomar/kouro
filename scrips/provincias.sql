@@ -36,7 +36,8 @@ CREATE TABLE `provincias` (
   `iso_id` varchar(255) DEFAULT NULL,
   `iso_nombre` varchar(255) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
-  `nombre_completo` varchar(255) DEFAULT NULL
+  `nombre_completo` varchar(255) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

@@ -27,15 +27,15 @@ class Pedidos extends Component
     public $search;
     public $sort = 'id';
     public $order = 'desc';
-    
+
     //campos vista
     public $nombre,$apellido,$fecha,$entrega_id,$telefono,$correo,$transac_mp;
-    public $producto_id,$talle_id,$color_id,$cantidad,$precio,$total; 
+    public $producto_id,$talle_id,$color_id,$cantidad,$precio,$total;
     public $provincia_id = 0;
     public $localidad_id = 0;
     public $movimientos = array();
-    
-    
+
+
     //tablas usadas
     protected $productos,$colores,$talles,$pedidos,$entregas,$provincias,$localidades;
 
@@ -49,33 +49,33 @@ class Pedidos extends Component
     {
 
         if ($this->producto_id != 0) {
-              
+
             //    $precio = Producto::where('id',$this->producto_id)
             //     ->value('preciolista');
                 $precio = Producto::where('id',$this->producto_id)
                    ->first();
-                
+
                 $ldate = date('Y-m-d H:i:s');
                 if(is_null($precio->ofertaDesde) or is_null($precio->ofertaHasta)) {
                     //no se cargaron datos de las fechas de las ofertas
-                    $this->precio =  $precio->precioLista; 
+                    $this->precio =  $precio->precioLista;
                 }else{
-                    if ($precio->ofertaDesde <= $ldate and $precio->ofertaHasta >= $ldate) {          
-                        $this->precio =  $precio->precioOferta; 
+                    if ($precio->ofertaDesde <= $ldate and $precio->ofertaHasta >= $ldate) {
+                        $this->precio =  $precio->precioOferta;
                     }else{
-                        $this->precio =  $precio->precioLista; 
-                    } 
+                        $this->precio =  $precio->precioLista;
+                    }
                 }
 
                if (is_numeric($this->cantidad)) {
                    $this->total  =  $this->precio*$this->cantidad;
               }else{
-                $this->total  =  0;
+                    $this->total  =  0;
               }
 
         }
 
-      
+
 
         $this->pedidos = Pedido::where('apellido', 'like', '%' . $this->search . '%')
         ->orderBy($this->sort, $this->order)
@@ -117,7 +117,7 @@ class Pedidos extends Component
                 ];
         }else{
                 return [];
-        }            
+        }
     }
 
 
@@ -213,7 +213,7 @@ public function crear()
 
     }
 
-    
+
     //nuevo item del pedido
     public function nuevo() {
         $this->limpiarCamposItem();
@@ -228,12 +228,12 @@ public function crear()
         $this->movimientos = array_values($this->movimientos);
     }
 
-    //abre modal item 
+    //abre modal item
     public function abrirModalItem()
     {
         $this->modalitem = true;
     }
-   
+
     //cierra modal item sin grabar
     public function cerrarModalItem()
     {
@@ -248,8 +248,8 @@ public function crear()
 
     $this->validate();
 
-         
-    
+
+
        $this->indice_productos = count($this->movimientos);
 
        $this->producto_nombre  = Producto::where('id',$this->producto_id)->value('nombre');

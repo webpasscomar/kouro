@@ -42,7 +42,8 @@ CREATE TABLE `localidades` (
   `localidad_censal_id` float DEFAULT NULL,
   `localidad_censal_nombre` varchar(255) DEFAULT NULL,
   `municipio_id` float DEFAULT NULL,
-  `municipio_nombre` varchar(255) DEFAULT NULL
+  `municipio_nombre` varchar(255) DEFAULT NULL,
+  `estado` tinyint(4) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
