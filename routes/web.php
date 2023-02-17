@@ -31,7 +31,7 @@ use App\Http\Livewire\Backend\Historias;
 
 // Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
 
-Route::get('categorias', [CategoriaController::class, 'index']);
+Route::get('/categorias', [CategoriaController::class, 'index']);
 
 Route::get('/shop/{categoria}/{producto}', Product::class)->name('productos.show');
 
@@ -41,12 +41,12 @@ Route::get('/mipanel', function () {
 })->name('dashboard');
 
 
-Route::get('shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
+Route::get('/shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
 Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
 // Route::get('/', [ProductoController::class, 'index'])->name('productos.index');
 
-Route::get('contacto', [ContactController::class, 'index'])->name('contacto');
-Route::post('contacto', [ContactController::class, 'store'])->name('contacto.store');
+Route::get('/contacto', [ContactController::class, 'index'])->name('contacto');
+Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.store');
 
 Route::get('/carrito', Carrito::class)->name('carrito');
 Route::get('/nosotros', Nosotros::class)->name('nosotros');
