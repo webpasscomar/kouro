@@ -17,16 +17,22 @@ class FormasdeentregaSeeder extends Seeder
         $entrega = new Formadeentrega();
         $entrega->nombre = 'Delivery';
         $entrega->estado = 1;
+        $entrega->costo = 100;
+        $entrega->pidedirec = 1;
         $entrega->save();
 
         $entrega1 = new Formadeentrega();
         $entrega1->nombre = 'Retira-Pickup';
         $entrega1->estado = 1;
+        $entrega->costo = 0;
+        $entrega->pidedirec = 0;
         $entrega1->save();
 
         $entrega2 = new Formadeentrega();
         $entrega2->nombre = 'Correo';
         $entrega2->estado = 1;
+        $entrega->costo = 50;
+        $entrega->pidedirec = 1;
         $entrega2->save();
     }
 }

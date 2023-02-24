@@ -6,8 +6,9 @@
 
         
             @if ($modalitem == 1)  
-            <h1>Alta Item</h1>
+            <h1>Alta de Item</h1>
 
+                    <label for="producto_id" class="block text-gray-700 text-sm font-bold mb-2">Producto</label>
                     <select
                         class="shadow appearance-none border rounded w-60 py-2 px-0 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         wire:model="producto_id">
@@ -17,6 +18,8 @@
                         @endforeach
                     </select>
                     <x-jet-input-error for="producto_id" />
+
+                    <label for="color_id" class="block text-gray-700 text-sm font-bold mb-2">Color</label>
                     <select
                         class="shadow appearance-none border rounded w-60  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         wire:model="color_id">
@@ -26,6 +29,8 @@
                         @endforeach
                     </select>
                     <x-jet-input-error for="color_id" />
+
+                    <label for="talle_id" class="block text-gray-700 text-sm font-bold mb-2">Talle</label>
                     <select
                         class="shadow appearance-none border rounded w-60  text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         wire:model="talle_id">
@@ -36,16 +41,19 @@
                     </select>
                     <x-jet-input-error for="talle_id" />
 
+                    <label for="cantidad" class="block text-gray-700 text-sm font-bold mb-2">Cantidad</label>
                     <input type="text"
                         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="cantidad" wire:model="cantidad" placeholder="Cantidad">
                     <x-jet-input-error for="cantidad" />            
                     
+                    <label for="precio" class="block text-gray-700 text-sm font-bold mb-2">Precio</label>
                     <input type="text"
                         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="precio" wire:model="precio" placeholder="Precio" disabled>
                     <x-jet-input-error for="precio" />  
                     
+                    <label for="total" class="block text-gray-700 text-sm font-bold mb-2">Total</label>
                     <input type="text"
                         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="total" wire:model="total" placeholder="Total Item" disabled>
@@ -56,7 +64,7 @@
 
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3">
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                                <button wire:click.prevent="guardar()" type="button"
+                                <button wire:click.prevent="guardaritem()" type="button"
                                     class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-purple-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">Guardar</button>
                             </span>
 
@@ -77,14 +85,14 @@
                             <label for="id" class="block text-gray-700 text-sm font-bold mb-2">ID</label>
                             <input type="text"
                                 class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="id" wire:model="id">
+                                id="id" wire:model="id" disabled="disabled">
                                 <x-jet-input-error for="id" />
                 
                 
                             <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Fecha</label>
                             <input type="text"
                                 class="shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="fecha" wire:model="fecha">
+                                id="fecha" wire:model="fecha" disabled="disabled">
                                 <x-jet-input-error for="fecha" />
                 
                             <label for="entrega_id" class="block text-gray-700 text-sm font-bold mb-2">Forma de entrega</label>
@@ -97,7 +105,7 @@
                                 @endforeach
                             </select>
                             <x-jet-input-error for="entrega_id" />
-
+                         
 
                             <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido</label>
                             <input type="text"
@@ -111,8 +119,9 @@
                                 id="nombre" wire:model="nombre">
                                 <x-jet-input-error for="nombre" />
 
+                        @if ($pidedirec == 1 )        
                             <label for="del_calle" class="block text-gray-700 text-sm font-bold mb-2">Calle</label>
-                            <input type="text"
+                            <input type="text"  
                                 class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="del_calle" wire:model="del_calle">
                                 <x-jet-input-error for="del_calle" />
@@ -159,7 +168,7 @@
                                 @endif
                             </select>
                             <x-jet-input-error for="localidad_id" />     
-                            
+                        @endif    
                             <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono</label>
                             <input type="text"
                                 class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -172,11 +181,11 @@
                                 id="correo" wire:model="correo">
                                 <x-jet-input-error for="correo" />
 
-                            <label for="transac" class="block text-gray-700 text-sm font-bold mb-2">Transaccion Mercado Pago</label>
+                            <label for="transac_mp" class="block text-gray-700 text-sm font-bold mb-2">Transaccion Mercado Pago</label>
                             <input type="text"
                                 class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="transac" wire:model="transac">
-                                <x-jet-input-error for="transac" />                                
+                                id="transac_mp" wire:model="transac_mp">
+                                <x-jet-input-error for="transac_mp" />                                
 
                             <div class="grid grid-cols-1 sm:grid-cols-3">
                                 <div>
@@ -226,9 +235,13 @@
 
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3">
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                                <button wire:click.prevent="guardar()" type="button"
-                                    class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-purple-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">Guardar</button>
-                            </span>
+                               
+                                   <button wire:click.prevent="finalizar()" type="button"
+                                    class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-purple-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" 
+                                    {{ $cantitems > 0 ? '' : 'disabled' }}
+                                    >Guardar</button>
+                            
+                                </span>
 
                             <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                                 <button wire:click.prevent="cerrarModal()" type="button"

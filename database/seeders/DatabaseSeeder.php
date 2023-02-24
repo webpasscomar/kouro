@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FaqSeeder::class);
         $this->call(SitioSeeder::class);
         $this->call(TipomovimientoSeeder::class);
+        $this->call(EstadospedidoSeeder::class);
         // \App\Models\Categoria::factory(15)->create();
     }
 }
