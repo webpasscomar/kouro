@@ -71,7 +71,7 @@
                                         <i class="fas fa-sort float-right mt-1"></i>
                                     @endif
                                 </th>
-                                <th class="cursor-pointer px-4 py-2" wire:click="order('status_mp')">Status Pago
+                                <!-- <th class="cursor-pointer px-4 py-2" wire:click="order('status_mp')">Status Pago
                                     {{-- -- Ordenar -- --}}
                                     @if ($sort == 'status_mp')
                                         @if ($order == 'asc')
@@ -106,7 +106,7 @@
                                     @else
                                         <i class="fas fa-sort float-right mt-1"></i>
                                     @endif
-                                </th>
+                                </th> -->
                                 <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado
                                     {{-- -- Ordenar -- --}}
                                     @if ($sort == 'estado')
@@ -129,15 +129,22 @@
                                     <td class="border px-4 py-2">{{ $item->fecha }}</td>
                                     <td class="border px-4 py-2">{{ $item->apellido }}</td>
                                     <td class="border px-4 py-2">{{ $item->nombre }}</td>
-                                    <td class="border px-4 py-2">{{ $item->status_mp }}</td>
+                                    <!-- <td class="border px-4 py-2">{{ $item->status_mp }}</td>
                                     <td class="border px-4 py-2">{{ $item->detail_mp }}</td>
-                                    <td class="border px-4 py-2">{{ $item->transac_mp }}</td>
-                                    <td class="border px-4 py-2">{{ $item->estado }}</td>
+                                    <td class="border px-4 py-2">{{ $item->transac_mp }}</td> -->
+                                    <!-- <td class="border px-4 py-2">{{ $item->estado }}</td> -->
+                                    <td class="border px-4 py-2">{{ $item->estado->nombre }}</td>
                                     <td class="border px-4 py-2 text-center">
                                         <button wire:click="detalle({{ $item->id }})"
                                             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Detalle</button>
                                     </td>
                                 </tr>
+                                 
+                                @if ($muestra_detalle[$item->id]['ver'] == 1) 
+                                    <tr class="bg-gray-200 text-gray-700">
+                                            <td colspan=6>Detalle</td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
             </table>

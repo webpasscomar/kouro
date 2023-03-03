@@ -44,7 +44,7 @@ class CreatePedidosTable extends Migration
             $table->integer('formaPago_id');
             $table->integer('entrega_id');
 
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado_id');
 
 
             $table->string('status_mp');

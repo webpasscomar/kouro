@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 
 
 use App\Models\Pedido;
+use App\Models\Estadospedido;
 use App\Models\Producto;
 use App\Models\Color;
 use App\Models\Talle;
@@ -32,18 +33,22 @@ class Pedidos extends Component
 
     //campos vista
     public $nombre,$apellido,$entrega_id,$fecha,$telefono,$correo,$transac_mp;
-    public $del_calle,$del_nro,$del_piso,$del_dpto,$del_costo,$status_mp;
+    public $del_calle,$del_piso,$del_dpto,$del_costo,$status_mp;
     public $producto_id,$talle_id,$color_id,$cantidad,$precio,$total;
     public $formapago_id,$observaciones,$detail_mp;
 
     public $provincia_id = 0;
     public $localidad_id = 0;
     public $movimientos = array();
+    public $del_nro = 0;
     // este campo activo o desactiva los imput de direccion
     // configurador en las formasdeentrega
     public $pidedirec = 0;
     public $cantitems = 0;
     public $edicion = false;
+
+    public $muestra_detalle = array();
+
 
 
     //tablas usadas
@@ -56,6 +61,7 @@ class Pedidos extends Component
 
     public function render()
     {
+       
 
         if ($this->fecha == null) {
             $this->fecha = date('Y-m-d H:i:s');
@@ -67,9 +73,8 @@ class Pedidos extends Component
                  ->value('pidedirec');
             $this->delcosto = Formadeentrega::where('id',$this->entrega_id)
                  ->value('costo');
-
-
         }            
+
         if ($this->producto_id != 0) {
 
             //    $precio = Producto::where('id',$this->producto_id)
@@ -103,6 +108,17 @@ class Pedidos extends Component
         ->orderBy($this->sort, $this->order)
         ->paginate(5);
 
+        //inicializo el array 
+        if (count($this->muestra_detalle) == 0 ) {
+                foreach ($this->pedidos as $p) {
+                    $this->muestra_detalle[$p->id]['id'] = $p->id;
+                    $this->muestra_detalle[$p->id]['ver'] = 0;
+                }
+        }
+
+
+
+        $this->estados_pedidos  = Estadospedido::all();
         $this->productos  = Producto::where('estado','=',1)->get();
         $this->colores  = Color::all();
         $this->talles  = Talle::all();
@@ -115,6 +131,7 @@ class Pedidos extends Component
                             ->get();
 
         //dd(auth()->user());
+      
 
         return view('livewire.backend.pedidos',
                         [
@@ -125,11 +142,14 @@ class Pedidos extends Component
                          'entregas' => $this->entregas,
                          'provincias' => $this->provincias,
                          'localidades' => $this->localidades,
+                         'estados_pedidos' => $this->estados_pedidos,
+                         'muestra_detalle' => $this->muestra_detalle
                         ]);
     }
 
 
     protected function rules() {
+        
         if ($this->modalitem==1) {  //valida el item
                 return [
                     'producto_id' => 'required|not_in:0',
@@ -153,7 +173,7 @@ class Pedidos extends Component
                 ]; 
             }else{  //valida pedido sin direccion requerida
                 return [
-                    'entrega_id' => 'required|not_in:0',
+                    'entrega_id' => 'not_in:0|required',
                     'apellido' => 'required|string',
                     'nombre' => 'required|string',
                     'entrega_id' => 'required|not_in:0',
@@ -171,17 +191,27 @@ public function crear()
     $this->abrirModal();
 }
 
-
+//graba el pedido
 public function finalizar()
 {
-    
+ 
+    $this->validate();
+
     $this->indice_productos = count($this->movimientos);
     $costototal = 0;
     for($i=0;$i<count($this->movimientos);$i++) {
         $costototal = $costototal + ($this->movimientos[$i]['cantidad']*$this->movimientos[$i]['precio']);
     }
 
-
+    if ($this->pidedirec == 0) {
+        $this->del_calle = "";
+        $this->del_nro = 0;
+        $this->del_piso = "";
+        $this->del_dpto = "";
+        $this->del_costo = 0;
+    }
+        
+    //$lastid =
     Pedido::updateOrCreate(
         ['id' => $this->id,
         ],
@@ -197,7 +227,7 @@ public function finalizar()
             'del_dpto'      => $this->del_dpto,
             'del_costo'     => $this->del_costo,
             'entrega_id'    => $this->entrega_id,
-            'estado'        =>  1,
+            'estado_id'        =>  1,
             'fecha'         => $this->fecha,
             'formaPago_id'  => $this->formapago_id,
             'provincia_id'  => $this->provincia_id,
@@ -211,6 +241,11 @@ public function finalizar()
             'transac_mp'    => $this->transac_mp,
             'detail_mp'    => $this->detail_mp
         ]);
+
+        //genera el id en muestra detalle
+        // $this->muestra_detalle[$lastid['id']]['id'] = $lastid['id'];
+        // $this->muestra_detalle[$lastid['id']]['ver'] = 0;
+      
 
    
         for($i=0;$i<count($this->movimientos);$i++) {
@@ -253,8 +288,63 @@ public function finalizar()
         $this->emit('alertSave');
         $this->limpiarCampos();
         $this->movimientos=[];
+        $this->modal=false;
+
     
 }
+
+
+public function detalle($id)
+{
+    
+    // //cuenta cuantos items se debe mostrar el detalle
+    // $cantidad_detalle = count($this->muestra_detalle);
+    // $encontro = 0;
+    // //verifica si esta ya en detalle para apagarlo o encenderlo
+    // if ($cantidad_detalle != 0){
+    //         for($i=0;$i<count($this->muestra_detalle);$i++) {
+    //             if($this->muestra_detalle[$i]['id']== $id) {
+    //                 if ($this->muestra_detalle[$i]['ver']== 0) {
+    //                     $this->muestra_detalle[$i]['ver'] = 1;
+    //                 }else{ 
+    //                     $this->muestra_detalle[$i]['ver'] = 0;
+    //                 }
+    //                 $encontro=1;
+    //                 break;
+    //             }
+    //         }
+    // }
+    // //lo agrega a muestra detalle
+    // if ($encontro == 0 ){
+    //     $indice = count($this->muestra_detalle);
+    //     $this->muestra_detalle[$indice] = ['id' => $id, 'ver' => 1];
+    // }    
+            
+    if ($this->muestra_detalle[$id]['ver'] == 0) {
+        $this->muestra_detalle[$id]['ver'] = 1;
+    }else{
+        $this->muestra_detalle[$id]['ver'] = 0;
+    }
+}
+
+public function muestrad($id) {
+
+    $cantidad_detalle = count($this->muestra_detalle);
+    $encontro = 0;
+    if ($cantidad_detalle != 0){
+            for($i=0;$i<count($this->muestra_detalle);$i++) {
+                if($this->muestra_detalle[$i]['id']== $id) {
+                    $encontro=1;
+                    break;
+                }
+            }
+    }
+    return $encontro;            
+
+   
+
+  
+} 
 
 
     public function order($sort)
@@ -282,7 +372,7 @@ public function finalizar()
     {
         $this->modal = false;
         $this->movimientos=[];
-
+        $this->muestra_detalle=[];
     }
 
 
@@ -318,7 +408,7 @@ public function finalizar()
    {
 
 
-    $this->validate();
+       $this->validate();
 
 
 
@@ -374,6 +464,7 @@ public function finalizar()
          $this->total=0;
          $this->transac_mp=0;
          $this->detail_mp='';
+         $this->muestra_detalle=[];
         
     }
 

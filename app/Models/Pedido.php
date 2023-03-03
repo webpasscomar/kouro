@@ -36,7 +36,15 @@ protected  $fillable = [
     'telefono',
     'total',
     'transac_mp',
-    'detail_mp'
+    'detail_mp',
+    'estado_id'
 ];
+
+
+public function estado()
+{
+    return $this->belongsTo(Estadospedido::class);
+}
+
 
 }
