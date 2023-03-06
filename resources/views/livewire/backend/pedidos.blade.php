@@ -148,7 +148,7 @@
                                                             <th>Codigo</th>
                                                             <th>Cantidad</th>
                                                             <th>Precio</th>
-                                                            <th>Total</th>
+                                                            <th>Sub-Total</th>
                                                             <th>Talle</th>
                                                             <th>Color</th>
                                                             <th>Producto</th>
@@ -157,8 +157,8 @@
                                                                     <tr>
                                                                         <td class="border" >{{$items->sku->producto_id}}</td>
                                                                         <td class="border" >{{$items->cantidad}}</td>
-                                                                        <td class="border" >{{$items->precioItem}}</td>
                                                                         <td class="border">{{$items->precioUnitario}}</td>
+                                                                        <td class="border" >{{$items->precioItem}}</td>
                                                                         <td class="border">{{$items->sku->talle->talle}}</td>
                                                                         <td class="border">{{$items->sku->color->color}}</td>
                                                                         <td class="border">{{$items->sku->producto->nombre}}</td>

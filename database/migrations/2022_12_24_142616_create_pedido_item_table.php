@@ -28,9 +28,9 @@ class CreatePedidoItemTable extends Migration
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
 
-            $table->decimal('cantidad', $precision = 6, $scale = 2);
-            $table->decimal('precioUnitario', $precision = 6, $scale = 2);
-            $table->decimal('precioItem', $precision = 6, $scale = 2);
+            $table->decimal('cantidad', $precision = 12, $scale = 2);
+            $table->decimal('precioUnitario', $precision = 12, $scale = 2);
+            $table->decimal('precioItem', $precision = 12, $scale = 2);
 
             $table->boolean('vacio');
 
