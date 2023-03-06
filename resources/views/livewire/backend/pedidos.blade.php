@@ -123,27 +123,51 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pedidos as $item)
+                            @foreach ($pedidos as $pedido)
                                 <tr>
-                                    <td class="border px-4 py-2">{{ $item->id }}</td>
-                                    <td class="border px-4 py-2">{{ $item->fecha }}</td>
-                                    <td class="border px-4 py-2">{{ $item->apellido }}</td>
-                                    <td class="border px-4 py-2">{{ $item->nombre }}</td>
-                                    <!-- <td class="border px-4 py-2">{{ $item->status_mp }}</td>
-                                    <td class="border px-4 py-2">{{ $item->detail_mp }}</td>
-                                    <td class="border px-4 py-2">{{ $item->transac_mp }}</td> -->
-                                    <!-- <td class="border px-4 py-2">{{ $item->estado }}</td> -->
-                                    <td class="border px-4 py-2">{{ $item->estado->nombre }}</td>
+                                    <td class="border px-4 py-2">{{ $pedido->id }}</td>
+                                    <td class="border px-4 py-2">{{ $pedido->fecha }}</td>
+                                    <td class="border px-4 py-2">{{ $pedido->apellido }}</td>
+                                    <td class="border px-4 py-2">{{ $pedido->nombre }}</td>
+                                    <!-- <td class="border px-4 py-2">{{ $pedido->status_mp }}</td>
+                                    <td class="border px-4 py-2">{{ $pedido->detail_mp }}</td>
+                                    <td class="border px-4 py-2">{{ $pedido->transac_mp }}</td> -->
+                                    <!-- <td class="border px-4 py-2">{{ $pedido->estado }}</td> -->
+                                    <td class="border px-4 py-2">{{ $pedido->estado->nombre }}</td>
                                     <td class="border px-4 py-2 text-center">
-                                        <button wire:click="detalle({{ $item->id }})"
+                                        <button wire:click="detalle({{ $pedido->id }})"
                                             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Detalle</button>
                                     </td>
                                 </tr>
                                 @for ($i = 0; $i < $cantidad_detalle; $i++) 
-                                        @if ($muestra_detalle[$i]['id'] == $item->id) 
+                                        @if ($muestra_detalle[$i]['id'] == $pedido->id) 
                                             @if ($muestra_detalle[$i]['ver'] == 1) 
-                                                <tr class="bg-gray-200 text-gray-700">
-                                                       <td colspan=6>Detalle</td>
+                                                <tr class="border">
+                                                    <td colspan=6>
+                                                        <table class="table-auto w-full">
+                                                            <th>Codigo</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Precio</th>
+                                                            <th>Total</th>
+                                                            <th>Talle</th>
+                                                            <th>Color</th>
+                                                            <th>Producto</th>
+                                                            @foreach ($pedidos_items as $items)
+                                                                @if ($items->pedido_id == $muestra_detalle[$i]['id'])
+                                                                    <tr>
+                                                                        <td class="border" >{{$items->sku->producto_id}}</td>
+                                                                        <td class="border" >{{$items->cantidad}}</td>
+                                                                        <td class="border" >{{$items->precioItem}}</td>
+                                                                        <td class="border">{{$items->precioUnitario}}</td>
+                                                                        <td class="border">{{$items->sku->talle->talle}}</td>
+                                                                        <td class="border">{{$items->sku->color->color}}</td>
+                                                                        <td class="border">{{$items->sku->producto->nombre}}</td>
+                                                                    </tr>
+                                                                @endif    
+                                                            @endforeach
+                                                        </table>
+
+                                                    </td>
                                                 </tr>       
                                             @endif
                                         @endif

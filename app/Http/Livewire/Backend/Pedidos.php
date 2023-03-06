@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 
 
 use App\Models\Pedido;
+use App\Models\Pedido_item;
 use App\Models\Estadospedido;
 use App\Models\Producto;
 use App\Models\Color;
@@ -53,7 +54,7 @@ class Pedidos extends Component
 
 
     //tablas usadas
-    protected $productos,$talles,$colores,$pedidos,$entregas,$provincias,$localidades;
+    protected $productos,$talles,$colores,$pedidos,$entregas,$provincias,$localidades,$sku;
 
     protected $listeners = ['delete'];
 
@@ -110,7 +111,9 @@ class Pedidos extends Component
 
         
 
+        $this->sku              = Sku::all();
         $this->estados_pedidos  = Estadospedido::all();
+        $this->pedidos_items  = Pedido_item::all();
         $this->productos  = Producto::where('estado','=',1)->get();
         $this->colores  = Color::all();
         $this->talles  = Talle::all();
@@ -137,6 +140,8 @@ class Pedidos extends Component
                          'estados_pedidos' => $this->estados_pedidos,
                          'muestra_detalle' => $this->muestra_detalle,
                          'cantidad_detalle' => $this->cantidad_detalle,
+                         'pedidos_items' => $this->pedidos_items,
+                         'sku' => $this->sku,
                         ]);
     }
 
@@ -204,8 +209,8 @@ public function finalizar()
         $this->del_costo = 0;
     }
         
-    //$lastid =
-    Pedido::updateOrCreate(
+    
+    $lastid = Pedido::updateOrCreate(
         ['id' => $this->id,
         ],
         [
@@ -235,8 +240,6 @@ public function finalizar()
             'detail_mp'    => $this->detail_mp
         ]);
 
-          
-
    
         for($i=0;$i<count($this->movimientos);$i++) {
              ////obtenemos la cantidad original de stock
@@ -264,15 +267,25 @@ public function finalizar()
              ->where('talle_id',$this->movimientos[$i]['talle_id'])
              ->where('color_id',$this->movimientos[$i]['color_id'])
              ->value('id');
+            
              Movimiento::Create([
                  'tipoMovimiento_id' => 2, 
                  'sku_id' => $sku_id,
                  'cantidad' => $cantidad,
-                 'pedido_id' => 0,
+                 'pedido_id' => $lastid['id'],
                  'estado' => 0,   //no se que es
                  'user_id' => auth()->user()->id,
             ]);
 
+
+            Pedido_item::Create([
+                'cantidad' => $this->movimientos[$i]['cantidad'],
+                'pedido_id' => $lastid['id'],
+                'precioItem' => $this->movimientos[$i]['precio'],
+                'precioUnitario' => $this->movimientos[$i]['precio']*$this->movimientos[$i]['cantidad'],
+                'sku_id' => $sku_id,
+                'vacio' => 0
+            ]);
         }       
         session()->flash('message','¡Actualización exitosa!');
         $this->emit('alertSave');
@@ -314,8 +327,8 @@ public function detalle($id)
 } 
 
 
-    public function order($sort)
-    {
+public function order($sort)
+{
         if ($this->sort == $sort) {
 
             if ($this->order == 'desc') {
@@ -327,30 +340,31 @@ public function detalle($id)
             $this->sort = $sort;
             $this->order = 'asc';
         }
-    }
+}
 
 
-    public function abrirModal()
-    {
+public function abrirModal()
+{
         $this->modal = true;
-    }
+}
 
-    public function cerrarModal()
-    {
+public function cerrarModal()
+{
         $this->modal = false;
         $this->movimientos=[];
-    }
+}
 
 
-    //nuevo item del pedido
-    public function nuevo() {
+//nuevo item del pedido
+public function nuevo() 
+{
         $this->limpiarCamposItem();
         $this->abrirModalItem();
-    }
+}
 
-    //elimina item
-    public function delete($id)
-    {
+//elimina item
+public function delete($id)
+{
         unset($this->movimientos[$id]);
         //re acomoda el vector para que noque posiciones null
         $this->movimientos = array_values($this->movimientos);
@@ -360,18 +374,18 @@ public function detalle($id)
     public function abrirModalItem()
     {
         $this->modalitem = true;
-    }
+}
 
-    //cierra modal item sin grabar
-    public function cerrarModalItem()
-    {
+//cierra modal item sin grabar
+public function cerrarModalItem()
+{
         $this->limpiarCampositem();
         $this->modalitem = false;
-    }
+}
 
-   //guarda item
-   public function guardaritem()
-   {
+//guarda item
+public function guardaritem()
+{
 
 
        $this->validate();
@@ -399,13 +413,13 @@ public function detalle($id)
        $this->emit('alertSave');
        $this->limpiarCamposItem();
        $this->modalitem=false;
-   }
+}
 
 
 
-    //inicializa las propiedades para el alta del pedido
-    public function limpiarCampos()
-    {
+//inicializa las propiedades para el alta del pedido
+public function limpiarCampos()
+{
          $this->apellido='';
          $this->nombre='';
          $this->indice_productos=0;
@@ -431,10 +445,10 @@ public function detalle($id)
          $this->transac_mp=0;
          $this->detail_mp='';
         
-    }
+}
 
-    public function limpiarCamposItem()
-    {
+public function limpiarCamposItem()
+{
             $this->producto_id=0;
             $this->talle_id=0;
             $this->color_id=0;
@@ -442,7 +456,7 @@ public function detalle($id)
             $this->precio=0;
             $this->total=0;
 
-    }
+}
 
 
 

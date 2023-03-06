@@ -47,4 +47,12 @@ public function estado()
 }
 
 
+public function items()
+{
+    return $this->belongsToMany(Pedido_item::class);
+}
+
+
+
+
 }
