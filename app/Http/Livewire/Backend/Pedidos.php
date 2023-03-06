@@ -48,11 +48,12 @@ class Pedidos extends Component
     public $edicion = false;
 
     public $muestra_detalle = array();
+    public $cantidad_detalle = 0;
 
 
 
     //tablas usadas
-    protected $productos,$colores,$talles,$pedidos,$entregas,$provincias,$localidades;
+    protected $productos,$talles,$colores,$pedidos,$entregas,$provincias,$localidades;
 
     protected $listeners = ['delete'];
 
@@ -61,7 +62,6 @@ class Pedidos extends Component
 
     public function render()
     {
-       
 
         if ($this->fecha == null) {
             $this->fecha = date('Y-m-d H:i:s');
@@ -108,15 +108,7 @@ class Pedidos extends Component
         ->orderBy($this->sort, $this->order)
         ->paginate(5);
 
-        //inicializo el array 
-        if (count($this->muestra_detalle) == 0 ) {
-                foreach ($this->pedidos as $p) {
-                    $this->muestra_detalle[$p->id]['id'] = $p->id;
-                    $this->muestra_detalle[$p->id]['ver'] = 0;
-                }
-        }
-
-
+        
 
         $this->estados_pedidos  = Estadospedido::all();
         $this->productos  = Producto::where('estado','=',1)->get();
@@ -131,7 +123,7 @@ class Pedidos extends Component
                             ->get();
 
         //dd(auth()->user());
-      
+     
 
         return view('livewire.backend.pedidos',
                         [
@@ -143,7 +135,8 @@ class Pedidos extends Component
                          'provincias' => $this->provincias,
                          'localidades' => $this->localidades,
                          'estados_pedidos' => $this->estados_pedidos,
-                         'muestra_detalle' => $this->muestra_detalle
+                         'muestra_detalle' => $this->muestra_detalle,
+                         'cantidad_detalle' => $this->cantidad_detalle,
                         ]);
     }
 
@@ -242,10 +235,7 @@ public function finalizar()
             'detail_mp'    => $this->detail_mp
         ]);
 
-        //genera el id en muestra detalle
-        // $this->muestra_detalle[$lastid['id']]['id'] = $lastid['id'];
-        // $this->muestra_detalle[$lastid['id']]['ver'] = 0;
-      
+          
 
    
         for($i=0;$i<count($this->movimientos);$i++) {
@@ -297,53 +287,30 @@ public function finalizar()
 public function detalle($id)
 {
     
-    // //cuenta cuantos items se debe mostrar el detalle
-    // $cantidad_detalle = count($this->muestra_detalle);
-    // $encontro = 0;
-    // //verifica si esta ya en detalle para apagarlo o encenderlo
-    // if ($cantidad_detalle != 0){
-    //         for($i=0;$i<count($this->muestra_detalle);$i++) {
-    //             if($this->muestra_detalle[$i]['id']== $id) {
-    //                 if ($this->muestra_detalle[$i]['ver']== 0) {
-    //                     $this->muestra_detalle[$i]['ver'] = 1;
-    //                 }else{ 
-    //                     $this->muestra_detalle[$i]['ver'] = 0;
-    //                 }
-    //                 $encontro=1;
-    //                 break;
-    //             }
-    //         }
-    // }
-    // //lo agrega a muestra detalle
-    // if ($encontro == 0 ){
-    //     $indice = count($this->muestra_detalle);
-    //     $this->muestra_detalle[$indice] = ['id' => $id, 'ver' => 1];
-    // }    
-            
-    if ($this->muestra_detalle[$id]['ver'] == 0) {
-        $this->muestra_detalle[$id]['ver'] = 1;
-    }else{
-        $this->muestra_detalle[$id]['ver'] = 0;
-    }
-}
-
-public function muestrad($id) {
-
-    $cantidad_detalle = count($this->muestra_detalle);
+    //cuenta cuantos items se debe mostrar el detalle
+    $cantidad_det = count($this->muestra_detalle);
     $encontro = 0;
-    if ($cantidad_detalle != 0){
+    //verifica si esta ya en detalle para apagarlo o encenderlo
+    if ($cantidad_det != 0){
             for($i=0;$i<count($this->muestra_detalle);$i++) {
                 if($this->muestra_detalle[$i]['id']== $id) {
-                    $encontro=1;
-                    break;
+                     if ($this->muestra_detalle[$i]['ver']== 0) {
+                         $this->muestra_detalle[$i]['ver'] = 1;
+                     }else{ 
+                         $this->muestra_detalle[$i]['ver'] = 0;
+                     }
+                     $encontro=1;
+                     break;
                 }
             }
     }
-    return $encontro;            
-
-   
-
-  
+    //lo agrega a muestra detalle si no lo encontro
+    if ($encontro == 0 ){
+         $indice = count($this->muestra_detalle);
+         $this->muestra_detalle[$indice] = ['id' => $id, 'ver' => 1];
+    }    
+    $this->cantidad_detalle = count($this->muestra_detalle);
+     
 } 
 
 
@@ -372,7 +339,6 @@ public function muestrad($id) {
     {
         $this->modal = false;
         $this->movimientos=[];
-        $this->muestra_detalle=[];
     }
 
 
@@ -464,7 +430,6 @@ public function muestrad($id) {
          $this->total=0;
          $this->transac_mp=0;
          $this->detail_mp='';
-         $this->muestra_detalle=[];
         
     }
 

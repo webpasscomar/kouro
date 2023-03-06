@@ -139,13 +139,19 @@
                                             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Detalle</button>
                                     </td>
                                 </tr>
-                                 
-                                @if ($muestra_detalle[$item->id]['ver'] == 1) 
-                                    <tr class="bg-gray-200 text-gray-700">
-                                            <td colspan=6>Detalle</td>
-                                    </tr>
-                                @endif
-                            @endforeach
+                                @for ($i = 0; $i < $cantidad_detalle; $i++) 
+                                        @if ($muestra_detalle[$i]['id'] == $item->id) 
+                                            @if ($muestra_detalle[$i]['ver'] == 1) 
+                                                <tr class="bg-gray-200 text-gray-700">
+                                                       <td colspan=6>Detalle</td>
+                                                </tr>       
+                                            @endif
+                                        @endif
+                                @endfor
+
+                           
+
+                            @endforeach     
                         </tbody>
             </table>
 
