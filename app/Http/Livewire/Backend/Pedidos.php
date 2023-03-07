@@ -31,13 +31,14 @@ class Pedidos extends Component
     public $search;
     public $sort = 'id';
     public $order = 'desc';
+    public $id_pedido = 0;
 
     //campos vista
     public $nombre,$apellido,$entrega_id,$fecha,$telefono,$correo,$transac_mp;
     public $del_calle,$del_piso,$del_dpto,$del_costo,$status_mp;
     public $producto_id,$talle_id,$color_id,$cantidad,$precio,$total;
     public $formapago_id,$observaciones,$detail_mp;
-
+    public $estado_id=1;
     public $provincia_id = 0;
     public $localidad_id = 0;
     public $movimientos = array();
@@ -54,7 +55,8 @@ class Pedidos extends Component
 
 
     //tablas usadas
-    protected $productos,$talles,$colores,$pedidos,$entregas,$provincias,$localidades,$sku;
+    protected $productos,$talles,$colores,$estados_pedidos;
+    protected $pedidos,$entregas,$provincias,$localidades,$sku;
 
     protected $listeners = ['delete'];
 
@@ -163,20 +165,20 @@ class Pedidos extends Component
                     'nombre' => 'required|string',
                     'del_calle' => 'required',
                     'del_nro' => 'required',
-                    'entrega_id' => 'required|not_in:0',
                     'provincia_id' => 'required|not_in:0',
                     'localidad_id' => 'required|not_in:0',
                     'telefono' => 'required',
-                    'correo' => 'required|email'
+                    'correo' => 'required|email',
+                    'estado_id' => 'required|not_in:0',
                 ]; 
             }else{  //valida pedido sin direccion requerida
                 return [
                     'entrega_id' => 'not_in:0|required',
                     'apellido' => 'required|string',
                     'nombre' => 'required|string',
-                    'entrega_id' => 'required|not_in:0',
                     'telefono' => 'required',
-                    'correo' => 'required|email'
+                    'correo' => 'required|email',
+                    'estado_id' => 'required|not_in:0',
                 ]; 
             }    
         }
@@ -185,9 +187,67 @@ class Pedidos extends Component
 //agrega un nuevo pedido
 public function crear()
 {
+    $this->id_pedido=0;
+    $this->estado_id=1;
     $this->limpiarCampos();
     $this->abrirModal();
 }
+
+
+//editar pedido un nuevo pedido
+public function editar($id_pedido)
+{
+    $this->id_pedido = $id_pedido;
+    $this->edicion   = 1;
+    //asigna valores propiedades del formulario
+    $ped = Pedido::where('id', '=', $id_pedido)->first();
+    $this->apellido      =   $ped['apellido'];
+    $this->nombre        =   $ped['nombre'];
+    $this->cliente_id    =   $ped['cliente_id'];
+    $this->correo        =   $ped['correo'];
+    $this->del_calle     =   $ped['del_calle'];
+    $this->del_nro       =   $ped['del_nro'];
+    $this->del_piso      =   $ped['del_piso'];
+    $this->del_dpto      =   $ped['del_dpto'];
+    $this->del_costo     =   $ped['del_costo'];
+    $this->entrega_id    =   $ped['entrega_id'];
+    $this->estado_id     =   $ped['estado_id'];
+    $this->fecha         =   $ped['fecha'];
+    $this->formapago_id  =   $ped['formaPago_id'];
+    $this->provincia_id  =   $ped['provincia_id'];
+    $this->localidad_id  =   $ped['localidad_id'];
+    $this->observaciones =   $ped['observaciones'];
+    $this->status_mp     =   $ped['status_mp'];
+    $this->subTotal      =   $ped['subTotal'];
+    $this->sucursal_id   =   $ped['sucursal_id'];
+    $this->telefono      =   $ped['telefono'];
+    $this->total         =   $ped['total'];
+    $this->transac_mp    =   $ped['transac_mp'];
+    $this->detail_mp     =   $ped['detail_mp'];
+    $this->cantidaditems =   $ped['indice_productos'];
+    
+    //arma items en memoria
+    $this->pedidos_items  = Pedido_item::where('pedido_id', '=', $id_pedido)->get();
+    $this->indice_productos=0;
+    foreach ($this->pedidos_items as $item) {
+        //obtiene datos de producto, talle y color 
+        $sku  = Sku::where('id','=',$item->sku_id)->first();
+        $this-> movimientos[ $this->indice_productos] = [
+                'id' => $item->id,
+                'producto_id' => $sku->producto_id,
+                'producto_descripcion' => $sku->producto->nombre,
+                'color_id' => $sku->color_id,
+                'color' => $sku->color->color,
+                'talle_id' => $sku->talle_id,
+                'talle' =>  $sku->talle->talle,
+                'cantidad' => $item->cantidad,
+                'precio' =>  $item->precioUnitario];
+                $this->indice_productos=$this->indice_productos+1;
+    }
+    $this->abrirModal();
+}
+
+
 
 //graba el pedido
 public function finalizar()
@@ -209,9 +269,9 @@ public function finalizar()
         $this->del_costo = 0;
     }
         
-    
+    //actualiza cabecera
     $lastid = Pedido::updateOrCreate(
-        ['id' => $this->id,
+        ['id' => $this->id_pedido,
         ],
         [
             'apellido'      => $this->apellido,
@@ -225,7 +285,7 @@ public function finalizar()
             'del_dpto'      => $this->del_dpto,
             'del_costo'     => $this->del_costo,
             'entrega_id'    => $this->entrega_id,
-            'estado_id'        =>  1,
+            'estado_id'     => $this->estado_id,
             'fecha'         => $this->fecha,
             'formaPago_id'  => $this->formapago_id,
             'provincia_id'  => $this->provincia_id,
@@ -242,56 +302,61 @@ public function finalizar()
 
    
         for($i=0;$i<count($this->movimientos);$i++) {
-             ////obtenemos la cantidad original de stock
-             $canti_ori = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
-                 ->where('talle_id',$this->movimientos[$i]['talle_id'])
-                 ->where('color_id',$this->movimientos[$i]['color_id'])
-                 ->value('stock');
-            if($canti_ori===null) {
-                   $canti_ori=0;
-            }
-            //// actualizamos stock sku
-            $cantidad = $this->movimientos[$i]['cantidad']+$canti_ori;
-            Sku::updateOrCreate(
-                 ['producto_id' => $this->movimientos[$i]['producto_id'],
-                  'talle_id'    => $this->movimientos[$i]['talle_id'],
-                  'color_id'    => $this->movimientos[$i]['color_id'],
-                 ],
-                 [
-                     'stock' =>$cantidad,
-                     'estado' => 1
-            ]);
-            //// grabamos en historia en movimiento
-            //obtengo el id del sku
-            $sku_id = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
-             ->where('talle_id',$this->movimientos[$i]['talle_id'])
-             ->where('color_id',$this->movimientos[$i]['color_id'])
-             ->value('id');
-            
-             Movimiento::Create([
-                 'tipoMovimiento_id' => 2, 
-                 'sku_id' => $sku_id,
-                 'cantidad' => $cantidad,
-                 'pedido_id' => $lastid['id'],
-                 'estado' => 0,   //no se que es
-                 'user_id' => auth()->user()->id,
-            ]);
+            //solo agrega los items nuevos
+            if ($this->movimientos[$i]['id'] == 0) {          
+                    ////obtenemos la cantidad original de stock
+                    $canti_ori = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
+                        ->where('talle_id',$this->movimientos[$i]['talle_id'])
+                        ->where('color_id',$this->movimientos[$i]['color_id'])
+                        ->value('stock');
+                    if($canti_ori===null) {
+                        $canti_ori=0;
+                    }
+                    //// actualizamos stock sku
+                    $cantidad = $this->movimientos[$i]['cantidad']-$canti_ori;
+                    Sku::updateOrCreate(
+                        ['producto_id' => $this->movimientos[$i]['producto_id'],
+                        'talle_id'    => $this->movimientos[$i]['talle_id'],
+                        'color_id'    => $this->movimientos[$i]['color_id'],
+                        ],
+                        [
+                            'stock' =>$cantidad,
+                            'estado' => 1
+                    ]);
+                    //// grabamos en historia en movimiento
+                    //obtengo el id del sku
+                    $sku_id = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
+                    ->where('talle_id',$this->movimientos[$i]['talle_id'])
+                    ->where('color_id',$this->movimientos[$i]['color_id'])
+                    ->value('id');
+                    
+                    Movimiento::Create([
+                        'tipoMovimiento_id' => 2, 
+                        'sku_id' => $sku_id,
+                        'cantidad' => $cantidad,
+                        'pedido_id' => $lastid['id'],
+                        'estado' => 0,   //no se que es
+                        'user_id' => auth()->user()->id,
+                    ]);
 
 
-            Pedido_item::Create([
-                'cantidad' => $this->movimientos[$i]['cantidad'],
-                'pedido_id' => $lastid['id'],
-                'precioItem' => $this->movimientos[$i]['precio'],
-                'precioUnitario' => $this->movimientos[$i]['precio']*$this->movimientos[$i]['cantidad'],
-                'sku_id' => $sku_id,
-                'vacio' => 0
-            ]);
+                    Pedido_item::Create([
+                        'cantidad' => $this->movimientos[$i]['cantidad'],
+                        'pedido_id' => $lastid['id'],
+                        'precioItem' => $this->movimientos[$i]['precio'],
+                        'precioUnitario' => $this->movimientos[$i]['precio']*$this->movimientos[$i]['cantidad'],
+                        'sku_id' => $sku_id,
+                        'vacio' => 0
+                    ]);
+            } 
+
         }       
         session()->flash('message','¡Actualización exitosa!');
         $this->emit('alertSave');
         $this->limpiarCampos();
         $this->movimientos=[];
         $this->modal=false;
+        $this->edicion = 0;
 
     
 }
@@ -363,16 +428,64 @@ public function nuevo()
 }
 
 //elimina item
-public function delete($id)
+public function delete($indice)
 {
-        unset($this->movimientos[$id]);
+    
+    if ($this->modalitem==1) { //esta borrando un item $indice es el indice del item
+
+        //si el item tiene id se debe eliminar de los detalles
+        // grabar la anulacion y descontar stock 
+        if ($this->edicion=1 && $this->movimientos[$indice]['id'] != 0) {
+                ////obtenemos la cantidad original de stock
+                $canti_ori = Sku::where('producto_id',$this->movimientos[$indice]['producto_id'])
+                    ->where('talle_id',$this->movimientos[$indice]['talle_id'])
+                    ->where('color_id',$this->movimientos[$indice]['color_id'])
+                    ->value('stock');
+               //// actualizamos stock sku
+               $cantidad = $this->movimientos[$indice]['cantidad']+$canti_ori;
+               Sku::updateOrCreate(
+                    ['producto_id' => $this->movimientos[$indice]['producto_id'],
+                     'talle_id'    => $this->movimientos[$indice]['talle_id'],
+                     'color_id'    => $this->movimientos[$indice]['color_id'],
+                    ],
+                    [
+                        'stock' =>$cantidad,
+                        'estado' => 1
+               ]);
+               //// grabamos en historia en movimiento
+               //obtengo el id del sku
+               $sku_id = Sku::where('producto_id',$this->movimientos[$indice]['producto_id'])
+                ->where('talle_id',$this->movimientos[$indice]['talle_id'])
+                ->where('color_id',$this->movimientos[$indice]['color_id'])
+                ->value('id');
+
+                //genera movimiento en la historia
+                Movimiento::Create([
+                    'tipoMovimiento_id' => 9, 
+                    'sku_id' => $sku_id,
+                    'cantidad' => $cantidad,
+                    'pedido_id' => $this->id_pedido,
+                    'estado' => 0,   //no se que es
+                    'user_id' => auth()->user()->id,
+               ]);
+
+               //elimina de la tabla pedidos_item
+               Pedido_item::find($this->movimientos[$indice]['id'])->delete();
+        }
+        unset($this->movimientos[$indice]);
         //re acomoda el vector para que noque posiciones null
         $this->movimientos = array_values($this->movimientos);
-    }
+    }else{  //esta borrando el pedido completo $indice es el numero de pedido
+        $ped = Pedido::where('id', '=', $id_pedido)->first();
 
-    //abre modal item
-    public function abrirModalItem()
-    {
+
+    }
+}
+
+
+//abre modal item
+public function abrirModalItem()
+{
         $this->modalitem = true;
 }
 
@@ -401,6 +514,7 @@ public function guardaritem()
 
 
       $this-> movimientos[ $this->indice_productos] = [
+                        'id' => 0,
                         'producto_id' => $this->producto_id,
                         'producto_descripcion' => $this->producto_nombre,
                         'color_id' => $this->color_id,

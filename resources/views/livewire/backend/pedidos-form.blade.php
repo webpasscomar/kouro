@@ -79,11 +79,11 @@
     <p class="pb-4 font-bold text-xl decoration-emerald-800">Pedidos</p>
          <div class="grid grid-cols-4 gap-3">
                 <div>
-                    <label for="id" class="block text-gray-700 text-sm font-bold mb-2">ID</label>
+                    <label for="id_pedido" class="block text-gray-700 text-sm font-bold mb-2">ID</label>
                     <input type="text"
                         class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="id" wire:model="id" disabled="disabled">
-                        <x-jet-input-error for="id" />
+                        id="id_pedido" wire:model="id_pedido" disabled="disabled">
+                        <x-jet-input-error for="id_pedido" />
                 </div>
                 <div>
                     <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Fecha</label>
@@ -196,6 +196,19 @@
                             id="correo" wire:model="correo">
                             <x-jet-input-error for="correo" />
                     </div>
+                    <div>
+                        <label for="estado_id" class="block text-gray-700 text-sm font-bold mb-2">Estado</label>
+                        <select
+                            class="shadow appearance-none border rounded py-2 px-0 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            wire:model="estado_id">
+                            <option value="0">Selecciona un Estado</option>
+                            @foreach ($estados_pedidos as $p)
+                                <option value="{{ $p->id }}">{{ $p->nombre }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="estado_id" />                                
+                    </div>
+
     </div>
                         <div>
                             <button wire:click.prevent="nuevo()"
@@ -248,7 +261,7 @@
                        
                            <button wire:click.prevent="finalizar()" type="button"
                             class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-purple-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-purple-800 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5" 
-                            {{ $cantitems > 0 ? '' : 'disabled' }}
+                            {{  $cantitems > 0 ? '' : 'disabled' }} 
                             >Guardar</button>
                     
                         </span>

@@ -136,8 +136,19 @@
                                     <td class="border px-4 py-2">{{ $pedido->estado->nombre }}</td>
                                     <td class="border px-4 py-2 text-center">
                                         <button wire:click="detalle({{ $pedido->id }})"
-                                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Detalle</button>
-                                    </td>
+                                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4">Detalle</button>
+                                        <!-- solo se puede editar en pendiente o en preparacion -->
+                                        @if ($pedido->estado_id == 1 || $pedido->estado_id == 2)   
+                                            <button wire:click="editar({{ $pedido->id }})"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>                                            
+
+                                                <button wire:click="$emit('alertDelete',{{ $pedido->id }})"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                        
+                                        
+                                        @endif
+                                                
+                                        </td>
                                 </tr>
                                 @for ($i = 0; $i < $cantidad_detalle; $i++) 
                                         @if ($muestra_detalle[$i]['id'] == $pedido->id) 
