@@ -148,6 +148,35 @@ class Pedidos extends Component
     }
 
 
+
+    protected function messages()
+    {
+        return [
+            'producto_id.not_in' => 'El producto debe ser seleccionado.',
+            'color_id.not_in'    => 'El color debe ser seleccionado.',
+            'talle_id.not_in'    => 'El talle debe ser seleccionado.',
+            'cantidad.not_in'    => 'Debe ingresar la cantidad.',
+            'cantidad.numeric'   => 'Debe ingresar un valor numerico.',
+            'entrega_id.not_in'  => 'Debe seleccionar una forma de entrega.',
+            'apellido.required'  => 'Debe ingresar el apellido',
+            'apellido.string'    => 'El apellido no puede ser numerico.',
+            'nombre.required'    => 'Debe ingresar el nombre.',
+            'nombre.string'      => 'El nombre no puede ser numerico.',
+            'del_calle.required' => 'Debe ingresar una calle',
+            'del_nro.required'   => 'Debe ingresar el numero',
+            'del_nro.numeric'    => 'Debe ingresar un valor numerico.',
+            'del_piso.numeric'    => 'Debe ingresar un valor numerico.',
+            'provincia_id.not_in' => 'Debe seleccionar una provincia',
+            'localidad_id.not_in' => 'Debe seleccionar una localidad',
+            'telefono.required'   => 'Debe ingresar un telefono',
+            'correo.required'     => 'Debe ingresar un E-mail',
+            'correo.email'        => 'El E-mail no es valido',
+            'estado_id.required' => 'Debe Seleccionar un estado.',
+            'estado_id.not_in'   => 'El estado debe ser seleccionado.',
+
+        ];
+    }
+
     protected function rules() {
         
         if ($this->modalitem==1) {  //valida el item
@@ -155,7 +184,7 @@ class Pedidos extends Component
                     'producto_id' => 'required|not_in:0',
                     'color_id' => 'required|not_in:0',
                     'talle_id' => 'required|not_in:0',
-                    'cantidad' => 'required|not_in:0',
+                    'cantidad' => 'required|not_in:0|numeric',
                 ];
         }else{
             if ($this->pidedirec==1) { //valida pedido con direccion requerida
@@ -164,7 +193,8 @@ class Pedidos extends Component
                     'apellido' => 'required|string',
                     'nombre' => 'required|string',
                     'del_calle' => 'required',
-                    'del_nro' => 'required',
+                    'del_nro' => 'required|numeric',
+                    'del_piso' => 'numeric',
                     'provincia_id' => 'required|not_in:0',
                     'localidad_id' => 'required|not_in:0',
                     'telefono' => 'required',
