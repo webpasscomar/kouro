@@ -431,7 +431,7 @@ public function nuevo()
 public function delete($indice)
 {
     
-    if ($this->modalitem==1) { //esta borrando un item $indice es el indice del item
+    if ($this->modal==1) { //esta borrando un item $indice es el indice del item
 
         //si el item tiene id se debe eliminar de los detalles
         // grabar la anulacion y descontar stock 
@@ -476,9 +476,46 @@ public function delete($indice)
         //re acomoda el vector para que noque posiciones null
         $this->movimientos = array_values($this->movimientos);
     }else{  //esta borrando el pedido completo $indice es el numero de pedido
-        $ped = Pedido::where('id', '=', $id_pedido)->first();
+        $pedido       = Pedido::where('id', '=', $indice)->first();
+        $itemspedidos = Pedido_item::where('pedido_id', '=', $indice)->get();
 
+        //eliminamos items 
+        foreach ($itemspedidos as $items) {
+            $sku  = Sku::where('id','=',$items->sku_id)->first();
 
+            ////obtenemos la cantidad original de stock
+            $canti_ori = Sku::where('producto_id',$sku['producto_id'])
+                            ->where('talle_id',$sku['talle_id'])
+                            ->where('color_id',$sku['color_id'])
+                            ->value('stock');
+            
+            //// actualizamos stock sku
+            $cantidad = $items['cantidad']+$canti_ori;
+            Sku::updateOrCreate(
+                [ 'producto_id' => $sku['producto_id'],
+                  'talle_id'    => $sku['talle_id'],
+                  'color_id'    => $sku['color_id'],
+                ],
+                  [
+                    'stock' =>$cantidad,
+                    'estado' => 1
+                ]);
+          
+
+            //genera movimiento en la historia
+            Movimiento::Create([
+                'tipoMovimiento_id' => 9, 
+                'sku_id' => $sku['id'],
+                'cantidad' => $cantidad,
+                'pedido_id' => $indice,
+                'estado' => 0,   //no se que es
+                'user_id' => auth()->user()->id,
+            ]);
+
+            //elimina de la tabla pedidos_item
+            Pedido_item::find($items['id'])->delete();
+        }
+        Pedido::find($indice)->delete();
     }
 }
 
