@@ -64,7 +64,16 @@
                     @livewire('contactoFront')
                 @break
 
+                @case('colores')
+                    @livewire('backend.colores')
+                @break
+
+                @case('dashboard')
+                    @livewire('dashboard')
+                @break
+
                 @default
+                    {{-- {{ $slot }} --}}
                     <h1>Error 404</h1>
             @endswitch
         </main>

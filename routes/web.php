@@ -8,6 +8,7 @@ use App\Http\Livewire\Backend\Categorias;
 
 use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
+use App\Http\Livewire\Dashboard;
 
 use App\Http\Livewire\Backend\Talles;
 use App\Http\Livewire\Backend\Colores;
@@ -81,7 +82,8 @@ Route::middleware([
     // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
     // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
 });
