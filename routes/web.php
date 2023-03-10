@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Backend\Parametros;
 use App\Http\Livewire\Backend\Categorias;
 
-use App\Http\Livewire\Product;
+// use App\Http\Livewire\Product;
+// use App\Http\Livewire\ProductosFront;
 use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
 
@@ -28,12 +29,50 @@ use App\Http\Controllers\FaqController;
 use App\Http\Livewire\Backend\Testimonios;
 use App\Http\Livewire\Backend\Historias;
 
+use App\Http\Livewire\ProductosFront;
+use App\Http\Livewire\ProductoFront;
+// use App\Http\Livewire\ContactoFront;
+// use App\Http\Livewire\NosotrosFront;
 
+Route::get('/productos', ProductosFront::class)->name('productos');
+Route::get('productos/categoria/{categoria}', [\App\Http\Livewire\ProductosFront::class, 'setCategoria'])->name('productos.categoria');
+Route::get('/productos/{id}', ProductoFront::class)->name('producto');
+// Route::get('/contacto', ContactoFront::class)->name('contacto');
+// Route::get('/nosotros', NosotrosFront::class)->name('nosotros');
+
+
+// Rutas de productos
+// Route::get('productos', [\App\Http\Livewire\ProductosFront::class, 'setCategoria'])->name('productos.index');
+// Route::get('productos/categoria/{categoria}', [\App\Http\Livewire\ProductosFront::class, 'setCategoria'])->name('productos.categoria');
+
+
+// Route::livewire('/productos', 'productos');
+// Route::get('/productos', function () {
+//     return view('livewire.productos');
+// })->name('productos.index');
+
+// Route::get('/productos/categoria/{categoria}', function () {
+//     return view('productos.index');
+// })->name('productos.index');
+
+// Route::get('/contacto', function () {
+//     return view('contacto.index');
+// })->name('contacto.index');
+
+// Route::get('/nosotros', function () {
+//     return view('nosotros.index');
+// })->name('nosotros.index');
+
+// Route::get('/servicios', function () {
+//     return view('servicios.index');
+// })->name('servicios.index');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 // Route::get('/shop/{categoria}/{producto}', [ProductoController::class, 'show'])->name('productos.show');
-
-Route::get('categorias', [CategoriaController::class, 'index']);
-
-Route::get('/shop/{categoria}/{producto}', Product::class)->name('productos.show');
+// Route::get('categorias', [CategoriaController::class, 'index']);
+// Route::get('/shop/{categoria}/{producto}', Product::class)->name('productos.show');
 
 
 Route::get('/mipanel', function () {
@@ -41,8 +80,8 @@ Route::get('/mipanel', function () {
 })->name('dashboard');
 
 
-Route::get('shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
-Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
+// Route::get('shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
+// Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
 // Route::get('/', [ProductoController::class, 'index'])->name('productos.index');
 
 Route::get('contacto', [ContactController::class, 'index'])->name('contacto');
