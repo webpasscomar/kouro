@@ -19,8 +19,7 @@ class CreateProductosTable extends Migration
 			$table->string('nombre');
 			$table->string('desCorta');
 			$table->text('descLarga');
-			$table->string('codigo');
-
+			$table->string('codigo')->nullable();
 			$table->foreignId('presentacion_id')
 				->nullable()
 				->constrained('presentaciones')
@@ -33,12 +32,12 @@ class CreateProductosTable extends Migration
 			$table->string('ofertaDesde')->nullable();
 			$table->string('ofertaHasta')->nullable();
 
-			$table->string('peso');
-			$table->string('tamano');
-			$table->string('link');
+			$table->string('peso')->nullable();;
+			$table->string('tamano')->nullable();;
+			$table->string('link')->nullable();;
 
-			$table->string('orden');
-			$table->string('unidadVenta');
+			$table->string('orden')->default(0);
+			$table->string('unidadVenta')->default(0);
 
 			$table->tinyInteger('destacar')->default(0);
 			$table->tinyInteger('estado')->default(1);

@@ -39,10 +39,73 @@
             </header>
         @endif
 
-        <!-- Page Content -->
+        {{-- <!-- Page Content -->
         <main>
             {{ $slot }}
+        </main> --}}
+
+
+        <main>
+            @switch(Route::currentRouteName())
+                @case('productos')
+                @case('productos.categoria')
+                    @livewire('productos-front')
+                @break
+
+                @case('producto')
+                    @livewire('producto-front')
+                @break
+
+                @case('nosotros')
+                    @livewire('nosotrosFront')
+                @break
+
+                @case('contacto')
+                    @livewire('contactoFront')
+                @break
+
+                @default
+                    <h1>Error 404</h1>
+            @endswitch
         </main>
+
+        {{-- <main>
+            @if (request()->is('productos'))
+                @livewire('productos-front')
+            @elseif(request()->is('contacto'))
+                @livewire('contacto-front')
+            @elseif(request()->is('nosotros'))
+                @livewire('nosotros-front')
+            @endif
+        </main> --}}
+
+
+        <!-- Page Content -->
+        {{-- <main>
+            <h1>{{ request()->route()->getName() }}</h1>
+            @switch(request()->route()->getName())
+                @case('livewire.productos.index')
+                    @livewire('productos')
+                @break
+
+                @case('contacto.index')
+                    @livewire('contacto.index')
+                @break
+
+                @case('nosotros.index')
+                    @livewire('nosotros.index')
+                @break
+
+                @case('servicios.index')
+                    @livewire('servicios.index')
+                @break
+
+                @default
+                    @livewire('default.index')
+            @endswitch
+        </main> --}}
+
+
     </div>
     {{-- @livewire('footer') --}}
     @stack('modals')

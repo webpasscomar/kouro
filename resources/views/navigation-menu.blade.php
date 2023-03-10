@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('productos.index') }}" :active="request()->routeIs('productos.index')">
+                    <x-jet-nav-link href="{{ route('productos') }}" :active="request()->routeIs('productos')">
                         Shop
                     </x-jet-nav-link>
                 </div>
@@ -40,18 +40,6 @@
                         Carrito
                     </x-jet-nav-link>
                 </div>
-
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('parametros') }}" :active="request()->routeIs('parametros')">
-                        Parametros
-                    </x-jet-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('categorias') }}" :active="request()->routeIs('categorias')">
-                        Categorias
-                    </x-jet-nav-link>
-                </div> --}}
 
             </div>
 
