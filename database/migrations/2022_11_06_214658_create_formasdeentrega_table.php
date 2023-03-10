@@ -17,6 +17,9 @@ class CreateFormasdeentregaTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->tinyInteger('estado')->default(1);
+            $table->tinyInteger('pidedirec')->default(0);
+            $table->float('costo')->default(0);
+
             $table->timestamps();
         });
     }

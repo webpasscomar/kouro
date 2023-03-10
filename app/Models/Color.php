@@ -14,4 +14,12 @@ class Color extends Model
     protected $fillable = [
         'color'
     ];
+
+
+    public function sku_colores()
+    {
+        return $this->belongsToMany(Sku::class);
+    }
+
+
 }

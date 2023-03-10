@@ -13,4 +13,10 @@ class Talle extends Model
         'talle',
         'estado'
     ];
+
+
+    public function sku_talles()
+    {
+        return $this->belongsToMany(Sku::class);
+    }
 }

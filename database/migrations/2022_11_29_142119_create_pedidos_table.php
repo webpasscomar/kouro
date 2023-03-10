@@ -27,17 +27,30 @@ class CreatePedidosTable extends Migration
 
             $table->string('telefono');
 
+            $table->string('del_calle');
+            $table->integer('del_nro');
+            $table->string('del_piso');
+            $table->string('del_dpto');
+            $table->integer('localidad_id');
+            $table->integer('provincia_id');
+
             $table->string('observaciones');
 
             $table->integer('cantidadItems');
             $table->float('subTotal');
             $table->float('total');
+            $table->float('del_costo');
 
             $table->integer('formaPago_id');
-            $table->integer('localidad_id');
             $table->integer('entrega_id');
 
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado_id');
+
+
+            $table->string('status_mp');
+            $table->string('detail_mp');
+            $table->integer('transac_mp');
+
 
             $table->timestamps();
         });
