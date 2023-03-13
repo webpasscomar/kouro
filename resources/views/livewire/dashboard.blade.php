@@ -1,3 +1,138 @@
+<div class="overflow-x-scroll">
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th class="px-4 py-2"></th>
+                <th class="px-4 py-2">Tarea 1</th>
+                <th class="px-4 py-2">Tarea 2</th>
+                <th class="px-4 py-2">Tarea 3</th>
+                <th class="px-4 py-2">Tarea 4</th>
+                <th class="px-4 py-2">Tarea 5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="px-4 py-2">Tiempo</td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
+                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
+                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-yellow-500 rounded-lg px-2 py-1 text-white">Medio</div>
+                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
+                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
+                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-yellow-500 rounded-lg px-2 py-1 text-white">Medio</div>
+                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py</td>
+        <td class="relative">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
+                        <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
+                        <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
+                        <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2">Tarea 1</td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-blue-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-blue-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2">Tarea 2</td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2">Tarea 3</td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
+                </td>
+                <td class="relative">
+                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
+                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+
+
+
+
 {{-- <x-app-layout>
 
     <x-slot name="header">
@@ -5,6 +140,10 @@
             {{ __('Dashboard') }} | {{ date('d-m-Y', time()) }}
         </h2>
     </x-slot> --}}
+
+
+
+
 
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
