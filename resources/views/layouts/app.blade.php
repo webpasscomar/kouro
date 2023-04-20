@@ -72,6 +72,18 @@
                     @livewire('dashboard')
                 @break
 
+                @case('historias')
+                    @livewire('backend.historias')
+                @break
+
+                @case('pedidos')
+                    @livewire('backend.pedidos')
+                @break
+
+                @case('carrito')
+                    @livewire('carrito')
+                @break
+
                 @default
                     {{-- {{ $slot }} --}}
                     <h1>Error 404</h1>

@@ -14,9 +14,11 @@ use App\Http\Livewire\ProductoFront;
 // use App\Http\Livewire\ContactoFront;
 // use App\Http\Livewire\NosotrosFront;
 
+
 Route::get('/productos', ProductosFront::class)->name('productos');
 Route::get('productos/categoria/{categoria}', [\App\Http\Livewire\ProductosFront::class, 'setCategoria'])->name('productos.categoria');
 Route::get('/productos/{id}', ProductoFront::class)->name('producto');
+
 // Route::get('/contacto', ContactoFront::class)->name('contacto');
 // Route::get('/nosotros', NosotrosFront::class)->name('nosotros');
 

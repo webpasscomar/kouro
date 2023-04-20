@@ -25,19 +25,19 @@ Route::middleware([
   config('jetstream.auth_session'),
   'verified'
 ])->group(function () {
-  Route::get('/mipanel/parametros', Parametros::class)->name('parametros');
-  Route::get('/mipanel/categorias', Categorias::class)->name('categorias');
-  Route::get('/mipanel/productos', Productos::class)->name('productos');
-  Route::get('/mipanel/presentaciones', Presentaciones::class)->name('presentaciones');
-  Route::get('/mipanel/faqs', Faqs::class)->name('faqs');
-  Route::get('/mipanel/testimonios', Testimonios::class)->name('testimonios');
-  Route::get('/mipanel/formasdeentrega', Formasdeentregas::class)->name('formasdeentrega');
-  Route::get('/mipanel/colores', Colores::class)->name('colores');
-  Route::get('/mipanel/talles', Talles::class)->name('talles');
-  Route::get('/mipanel/sitio', Sitios::class)->name('sitio');
-  Route::get('/mipanel/movimientos', Movimientos::class)->name('movimientos');
-  Route::get('/mipanel/historias', Historias::class)->name('historias');
-  Route::get('/mipanel/pedidos', Pedidos::class)->name('pedidos');
+  Route::get('/parametros', Parametros::class)->name('parametros');
+  Route::get('/categorias', Categorias::class)->name('categorias');
+  Route::get('/productos', Productos::class)->name('productos');
+  Route::get('/presentaciones', Presentaciones::class)->name('presentaciones');
+  Route::get('/faqs', Faqs::class)->name('faqs');
+  Route::get('/testimonios', Testimonios::class)->name('testimonios');
+  Route::get('/formasdeentrega', Formasdeentregas::class)->name('formasdeentrega');
+  Route::get('/colores', Colores::class)->name('colores');
+  Route::get('/talles', Talles::class)->name('talles');
+  Route::get('/sitio', Sitios::class)->name('sitio');
+  Route::get('/movimientos', Movimientos::class)->name('movimientos');
+  Route::get('/historias', Historias::class)->name('historias');
+  Route::get('/pedidos', Pedidos::class)->name('pedidos');
   // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
   // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
   // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');

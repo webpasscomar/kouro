@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ColorSeeder::class);
         $this->call(ParametroSeeder::class);
         $this->call(FormasdeentregaSeeder::class);
-        $this->call(FormasdepagoSeeder::class);
+        $this->call(FormasdepagosSeeder::class);
         $this->call(PresentacionSeeder::class);
         $this->call(TalleSeeder::class);
         $this->call(TeamSeeder::class);

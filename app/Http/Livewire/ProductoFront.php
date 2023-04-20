@@ -19,7 +19,6 @@ class ProductoFront extends Component
     {
         // return view('livewire.producto-front')->layout('layouts.app');
         $producto = $this->producto;
-
         return view('livewire.producto-front', $producto);
     }
 }

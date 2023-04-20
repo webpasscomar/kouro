@@ -37,6 +37,11 @@ class ProductosFront extends Component
         return view('livewire.productos-front', compact('productos', 'categorias'));
     }
 
+
+
+
+
+    
     public function setCategoria($categoriaSlug = null)
     {
         $this->categoriaSlug = $categoriaSlug;
