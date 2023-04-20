@@ -20,14 +20,16 @@
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Talle:</label>
                         <select class="form-select mt-1 block w-full" id="talle">
-                            
                         </select>
                     </div>
 
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Color:</label>
                         <select class="form-select mt-1 block w-full" id="color">
-                            
+                            <option>Seleccione un Color</option>
+                            @foreach ($colores as $color)
+                                <option>{{ $color['color'] }}</option>
+                            @endforeach
                         </select>
                     </div>
 

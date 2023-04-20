@@ -23,11 +23,10 @@ class ProductoFront extends Component
         ->join('colores', 'sku.color_id', '=','colores.id')
         ->where('sku.producto_id', '=', $id)
         ->groupBy('sku.color_id','colores.color')
-        ->get();
+        ->get()
+        ->toArray();
 
-         dd($this->colores);
-
-
+      
         // $this->sku = Sku::select(['sku.id',
         // 'sku.stock',
         // 'sku.producto_id',
@@ -49,6 +48,7 @@ class ProductoFront extends Component
     {
         // return view('livewire.producto-front')->layout('layouts.app');
         $producto = $this->producto;
-        return view('livewire.producto-front', $producto);
+        $colores = $this->colores;
+        return view('livewire.producto-front', $producto,$colores);
     }
 }
