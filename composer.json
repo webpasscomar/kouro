@@ -32,7 +32,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/helpers/webpass.php"
+            "app/Helpers/webpass.php"
         ]
     },
     "autoload-dev": {

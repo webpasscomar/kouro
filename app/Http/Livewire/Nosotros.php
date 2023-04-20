@@ -8,6 +8,7 @@ class Nosotros extends Component
 {
     public function render()
     {
-        return view('livewire.nosotros');
+        return view('livewire.nosotros')
+            ->extends('layouts.app');
     }
 }

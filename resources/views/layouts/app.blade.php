@@ -25,6 +25,10 @@
 </head>
 
 <body class="font-sans antialiased">
+    @php
+        use Illuminate\Support\Str;
+        use Livewire\Livewire;
+    @endphp
     <x-jet-banner />
 
     <div class="min-h-screen bg-gray-100">
@@ -39,13 +43,18 @@
             </header>
         @endif
 
-        {{-- <!-- Page Content -->
+        <!-- Page Content -->
         <main>
-            {{ $slot }}
-        </main> --}}
+            <div>
+                @isset($slot)
+                    {{ $slot }}
+                @else
+                    @yield('content')
+                    @endif
+                </div>
+            </main>
 
-
-        <main>
+            {{-- <main>
             @switch(Route::currentRouteName())
                 @case('productos')
                 @case('productos.categoria')
@@ -85,12 +94,12 @@
                 @break
 
                 @default
-                    {{-- {{ $slot }} --}}
+                
                     <h1>Error 404</h1>
             @endswitch
-        </main>
+        </main> --}}
 
-        {{-- <main>
+            {{-- <main>
             @if (request()->is('productos'))
                 @livewire('productos-front')
             @elseif(request()->is('contacto'))
@@ -101,8 +110,8 @@
         </main> --}}
 
 
-        <!-- Page Content -->
-        {{-- <main>
+            <!-- Page Content -->
+            {{-- <main>
             <h1>{{ request()->route()->getName() }}</h1>
             @switch(request()->route()->getName())
                 @case('livewire.productos.index')
@@ -126,48 +135,65 @@
             @endswitch
         </main> --}}
 
-
-    </div>
-    {{-- @livewire('footer') --}}
-    @stack('modals')
-
-    @livewireScripts
-
-    <script>
-        Livewire.on('alertSave', function() {
-            Swal.fire(
-                'Excelente!',
-                'Ha sido guardado correctamente!',
-                'success'
-            )
-        });
-
-        Livewire.on('alertDelete', id => {
-            Swal.fire({
-                title: '¿Está seguro /a?',
-                text: "La acción no podrá ser revertida!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, borrar!'
-            }).then((result) => {
-
-
-                if (result.isConfirmed) {
-                    // alert('Borrar el id: ' + id);
-                    Livewire.emit('delete', id);
-
-                    Swal.fire(
-                        'Borrado!',
-                        'Ha sido eliminado con éxito.',
-                        'success'
+            {{-- <main>
+            @if (Str::contains(view()->getName(), 'livewire'))
+                <div>
+                    @livewire(
+                        request()->route()->getActionMethod()
                     )
-                }
+                </div>
+            @else
+                <div>
+                    @isset($slot)
+                        {{ $slot }}
+                    @else
+                        @yield('content')
+                @endif
+        </div>
+        @endif
+        </main> --}}
+
+        </div>
+        {{-- @livewire('footer') --}}
+        @stack('modals')
+
+        @livewireScripts
+
+        <script>
+            Livewire.on('alertSave', function() {
+                Swal.fire(
+                    'Excelente!',
+                    'Ha sido guardado correctamente!',
+                    'success'
+                )
+            });
+
+            Livewire.on('alertDelete', id => {
+                Swal.fire({
+                    title: '¿Está seguro /a?',
+                    text: "La acción no podrá ser revertida!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrar!'
+                }).then((result) => {
+
+
+                    if (result.isConfirmed) {
+                        // alert('Borrar el id: ' + id);
+                        Livewire.emit('delete', id);
+
+                        Swal.fire(
+                            'Borrado!',
+                            'Ha sido eliminado con éxito.',
+                            'success'
+                        )
+                    }
+                })
             })
-        })
-    </script>
+        </script>
 
-</body>
+    </body>
 
-</html>
+    </html>
