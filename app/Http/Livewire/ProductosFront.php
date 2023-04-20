@@ -34,7 +34,6 @@ class ProductosFront extends Component
         }
 
         $categorias = Categoria::all();
-        dd($productos);
         return view('livewire.productos-front', compact('productos', 'categorias'))
             ->extends('layouts.app');
     }
