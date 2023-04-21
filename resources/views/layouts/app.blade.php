@@ -192,6 +192,18 @@
                     }
                 })
             })
+
+
+            //emit del cambio de cantidades en  carrito
+            Livewire.on('carrito', function() {
+                
+                
+                Swal.fire(
+                    'Excelente!',
+                    'Se ha agregado el producto al carrito',
+                    'success'
+                )
+            });
         </script>
 
     </body>

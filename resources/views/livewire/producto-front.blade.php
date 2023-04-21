@@ -51,27 +51,17 @@
 
                     <div class="mt-4">
                         <button class="py-2 px-4 
-                            {{ $cantidad > $disponibles
+                            {{ $cantidad > $disponibles | $talle_id == 0 | $color_id == 0
                                                   ? 'bg-slate-100 hover:bg-slate-200 text-{212 212 216}' : ' bg-blue-500 hover:bg-blue-600 text-white' }}
                                                            font-bold rounded-md
                             shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                            {{ $cantidad > $disponibles ? 'disabled' : '' }}
-                            ">
+                            {{ $cantidad > $disponibles | $talle_id == 0 | $color_id == 0 ? 'disabled' : '' }}
+                            " wire:click.prevent="agregarcarrito()">
                             {{ $cantidad > $disponibles
                                                    && $talle_id > 0
                                                    && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}
-                        </button>
-                    </div>
-                    <div>
-                    <div
-  class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-  role="status">
-  <span
-    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-    >Loading...</span
-  >
-</div>
 
+                        </button>
                     </div>
                 </div>
             </div>

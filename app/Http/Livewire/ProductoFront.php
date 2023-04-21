@@ -76,6 +76,11 @@ class ProductoFront extends Component
 
     }
 
+
+    public function agregarcarrito() {
+        $this->emit('carrito', ['mensaje' => $this->cantidad]);
+    }
+
     public function render()
     {
         // return view('livewire.producto-front')->layout('layouts.app');
