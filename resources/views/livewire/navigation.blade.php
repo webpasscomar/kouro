@@ -72,12 +72,12 @@
                 <!-- Icono de Carrito -->
                 <li class="font-sans block mt-4 lg:inline-block lg:mt-0 lg:ml-6 align-middle text-white hover:text-gray-700">
                     <a href="#" role="button" class="relative flex">
-                        <svg class="flex-1 w-8 h-8 fill-current" viewbox="0 0 24 24">
+                        <svg class="flex-1 w-8 h-8 fill-current" style="background-color: white" viewbox="0 0 24 24">
                             <path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" />
                         </svg>
-                        <span class="absolute right-0 top-0 rounded-full 
-                                            bg-blue-600 w-4 h-4 top right p-0 m-0 
-                                            text-white font-mono text-sm  leading-tight 
+                        <span class="absolute right-0 top-0 rounded-full
+                                            bg-blue-600 w-4 h-4 top right p-0 m-0
+                                            text-white font-mono text-sm  leading-tight
                                             text-center">{{$carrito}}
                                              <!-- {{ session('cantidad') ? session('cantidad') : 0 }} -->
                         </span>
@@ -85,13 +85,8 @@
                 </li>
 
 
-                <button type="button" class="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                    <span class="sr-only">View notifications</span>
-                    <!-- Heroicon name: outline/bell -->
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>
-                </button>
+
+
 
                 <!-- Profile dropdown -->
                 <div class="relative ml-3" x-data="{ open: false }">

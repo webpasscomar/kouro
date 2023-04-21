@@ -94,7 +94,7 @@
                 @break
 
                 @default
-                
+
                     <h1>Error 404</h1>
             @endswitch
         </main> --}}
@@ -198,8 +198,7 @@
             Livewire.on('carrito', function(mensaje)  {
                 Swal.fire(
                     'Excelente!',
-                    'Se ha agregado el producto al carrito ' + mensaje['mensaje'] + 
-                    'Productos ' + mensaje['cantidad'],
+                    'Se ha agregado el producto al carrito ' ,
                     'success'
                 )
             });
