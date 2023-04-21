@@ -78,7 +78,34 @@ class ProductoFront extends Component
 
 
     public function agregarcarrito() {
-        $this->emit('carrito', ['mensaje' => $this->cantidad]);
+
+        //grabamos en la session 
+        //nuevo item
+        $item=['cantidad' => $this->cantidad, 
+                'talle_id' => $this->talle_id,
+                'color_id' => $this->color_id,
+                'producto_id' => $this->producto_id];
+        //tomo en items lo que tiene la sesion
+        $items = session('items');
+
+        //le agrego el nuevo item 
+        //si no es el primero
+        if ($items) {
+            array_push($items,$item);
+        }else{
+            $items = [$item];
+        }
+
+        
+        //cuento la cantidad
+        $cantitems = count($items);
+          
+        //actualizo la sesion los items y la cantidad total de items
+        session(['items' => $items, 'cantidad' => $cantitems]);
+
+        //envio al icono de cart 
+        $this->emit('carrito',['mensaje' => 'existe session', 'cantidad' => session('cantidad') ]);
+     
     }
 
     public function render()

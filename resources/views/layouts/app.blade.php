@@ -195,12 +195,11 @@
 
 
             //emit del cambio de cantidades en  carrito
-            Livewire.on('carrito', function() {
-                
-                
+            Livewire.on('carrito', function(mensaje)  {
                 Swal.fire(
                     'Excelente!',
-                    'Se ha agregado el producto al carrito',
+                    'Se ha agregado el producto al carrito ' + mensaje['mensaje'] + 
+                    'Productos ' + mensaje['cantidad'],
                     'success'
                 )
             });

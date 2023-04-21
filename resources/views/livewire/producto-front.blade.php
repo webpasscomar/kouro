@@ -62,6 +62,23 @@
                                                    && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}
 
                         </button>
+                        <div>
+                        
+                        <h2  >Carrito</h2>
+                                @if(session('items'))
+                                    <ul>
+                                        @foreach(session('items') as $item)
+                                            <li>{{ $item['producto_id'] }} - {{ $item['color_id'] }} - {{ $item['talle_id'] }} - {{ $item['cantidad'] }}</li>
+                                        @endforeach
+                                    </ul>
+                                  @else
+                                    <p>No hay productos disponibles</p>
+                                @endif
+                        </div>
+
+
+
+
                     </div>
                 </div>
             </div>
