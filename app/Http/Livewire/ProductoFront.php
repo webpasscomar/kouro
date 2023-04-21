@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class ProductoFront extends Component
 {
-   
+
     //variables del formulario
     public $talle_id,$color_id,$producto_id,$cantidad;
 
@@ -18,15 +18,15 @@ class ProductoFront extends Component
     public $colores;
     public $talles;
     public $disponibles;
-    
+
 
     public function mount($id)
     {
-        $this->cantidad = 0;    
+        $this->cantidad = 1;
         $this->disponibles = 0;
         $this->talle_id = 0;
-        $this->color_id = 0;       
-        $this->producto_id = $id;         
+        $this->color_id = 0;
+        $this->producto_id = $id;
         $this->producto = Producto::where('id', $id)->firstOrFail();
 
 
@@ -47,14 +47,14 @@ class ProductoFront extends Component
         ->toArray();
     }
 
-    public function incrementa() 
+    public function incrementa()
     {
         $this->cantidad = $this->cantidad +1;
         $this->checkstock();
     }
 
 
-    public function decrementa() 
+    public function decrementa()
     {
         if ($this->cantidad > 1) {
             $this->cantidad = $this->cantidad -1;
@@ -73,7 +73,7 @@ class ProductoFront extends Component
            $this->disponibles = $dispo;
 
        }
-       
+
     }
 
     public function render()

@@ -1,5 +1,5 @@
 <div>
-   
+
     <h1>Detalle del producto</h1>
 
 
@@ -17,7 +17,7 @@
                     <p class="text-gray-700 text-base font-bold mt-2">Precio Lista {{$producto->precioLista}}</p>
                     <p class="text-gray-700 text-base font-bold mt-2">Precio Oferta {{$producto->precioOferta}}</p>
                     <p class="text-gray-700 text-base font-bold mt-2">Codigo {{$producto->codigo}}</p>
-                    
+
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Talle:</label>
                         <select class="form-select mt-1 block w-full"  id="talle_id" wire:model="talle_id" wire:change="checkstock()">
@@ -38,28 +38,30 @@
                         </select>
                     </div>
                     <div class="mt-4">
-                        <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md 
+                        <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
                                        shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                        wire:click.prevent="incrementa()" >
                             +
                         </button>
-                        <input class="py-2 px-2 " type="numeric"  id="cantidad" wire:model="cantidad" wire:change="checkstock()"></input> 
-                        <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md 
-                                      shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" 
+                        <input class="py-2 px-2 " type="numeric"  id="cantidad" wire:model="cantidad" wire:change="checkstock()"></input>
+                        <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
+                                      shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                                       wire:click.prevent="decrementa()" >
                             -
                         </button>
-                        Disponibles<input class="py-2 px-2 " type="numeric"  id="disponibles" wire:model="disponibles" disabled></input> 
+                        Disponibles<input class="py-2 px-2 " type="numeric"  id="disponibles" wire:model="disponibles" disabled></input>
                     </div>
-                 
+
                     <div class="mt-4">
                         <button
-                            
-                            class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md 
+
+                            class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
                             shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
                             {{ $cantidad > $disponibles ? 'disabled' : '' }}
-                            "> 
-                            Agregar al carrito  {{ $cantidad > $disponibles ? '(sin stock)' : '' }}
+                            ">
+                            Agregar al carrito  {{ $cantidad > $disponibles
+                                                   && $talle_id > 0
+                                                   && $color_id > 0 ? '(sin stock)' : '' }}
                         </button>
                     </div>
                 </div>
@@ -68,7 +70,7 @@
         <div class="col-span-3">
             {{-- @livewire('categorias-front') --}}
 </div>
-</div> 
+</div>
 
 
 </div>
