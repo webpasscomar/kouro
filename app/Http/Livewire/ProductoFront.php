@@ -79,16 +79,35 @@ class ProductoFront extends Component
 
     public function agregarcarrito() {
 
-        //grabamos en la session 
+        //grabamos en la session
         //nuevo item
-        $item=['cantidad' => $this->cantidad, 
+        ////verifico precio a tomar
+        $ldate = date('Y-m-d H:i:s');
+        $precio =0;
+        if(is_null($this->producto->ofertaDesde) or is_null($this->producto->ofertaHasta)) {
+            $precio =  $this->poducto->precioLista;
+        }else{
+            if ($this->producto->ofertaDesde <= $ldate and $this->producto->ofertaHasta >= $ldate) {
+                $precio =  $this->producto->precioOferta;
+            }else{
+                $precio =  $this->producto->precioLista;
+            }
+        }
+
+        $item=['cantidad' => $this->cantidad,
                 'talle_id' => $this->talle_id,
+                'talle_nombre' => $this->talle->talles,
                 'color_id' => $this->color_id,
-                'producto_id' => $this->producto_id];
+                'color_nombre' => $this->colores->color,
+                'producto_id' => $this->producto_id,
+                'producto_nombre' => $this->producto->nombre,
+                'producto_precio' => $precio,
+
+            ];
         //tomo en items lo que tiene la sesion
         $items = session('items');
 
-        //le agrego el nuevo item 
+        //le agrego el nuevo item
         //si no es el primero
         if ($items) {
             array_push($items,$item);
@@ -96,16 +115,16 @@ class ProductoFront extends Component
             $items = [$item];
         }
 
-        
+
         //cuento la cantidad
         $cantitems = count($items);
-          
+
         //actualizo la sesion los items y la cantidad total de items
         session(['items' => $items, 'cantidad' => $cantitems]);
 
-        //envio al icono de cart 
+        //envio al icono de cart
         $this->emit('carrito',['mensaje' => 'existe session', 'cantidad' => session('cantidad') ]);
-     
+
     }
 
     public function render()

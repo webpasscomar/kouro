@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="mt-4">
-                        <button class="py-2 px-4 
+                        <button class="py-2 px-4
                             {{ $cantidad > $disponibles | $talle_id == 0 | $color_id == 0
                                                   ? 'bg-slate-100 hover:bg-slate-200 text-{212 212 216}' : ' bg-blue-500 hover:bg-blue-600 text-white' }}
                                                            font-bold rounded-md
@@ -63,12 +63,19 @@
 
                         </button>
                         <div>
-                        
+
                         <h2  >Carrito</h2>
                                 @if(session('items'))
                                     <ul>
                                         @foreach(session('items') as $item)
-                                            <li>{{ $item['producto_id'] }} - {{ $item['color_id'] }} - {{ $item['talle_id'] }} - {{ $item['cantidad'] }}</li>
+                                            <li>{{ $item['producto_id'] }} -
+                                                {{ $item['producto_nombre'] }} -
+                                                {{ $item['producto_precio'] }} -
+                                                {{ $item['color_id'] }} -
+                                                {{ $item['color_nombre'] }} -
+                                                {{ $item['talle_id'] }} -
+                                                {{ $item['talle_nombre'] }} -
+                                                {{ $item['cantidad'] }}</li>
                                         @endforeach
                                     </ul>
                                   @else
