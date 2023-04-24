@@ -24,8 +24,7 @@ Route::get('/productos/{id}', ProductoFront::class)->name('producto');
 
 Route::get('/categorias', [CategoriaController::class, 'index']);
 
-// Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
-Route::get('/shop}', ProductoFront::class)->name('producto');
+Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
 
 
