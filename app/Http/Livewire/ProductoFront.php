@@ -4,8 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Producto;
 use App\Models\Sku;
-use App\Models\Colores;
-use App\Models\Talles;
+use App\Models\Color;
+use App\Models\Talle;
 use Livewire\Component;
 
 class ProductoFront extends Component
@@ -85,7 +85,7 @@ class ProductoFront extends Component
         $ldate = date('Y-m-d H:i:s');
         $precio =0;
         if(is_null($this->producto->ofertaDesde) or is_null($this->producto->ofertaHasta)) {
-            $precio =  $this->poducto->precioLista;
+            $precio =  $this->producto->precioLista;
         }else{
             if ($this->producto->ofertaDesde <= $ldate and $this->producto->ofertaHasta >= $ldate) {
                 $precio =  $this->producto->precioOferta;
@@ -94,14 +94,21 @@ class ProductoFront extends Component
             }
         }
 
+        $talle_nombre = Talle::where('id',$this->talle_id)
+        ->value('talle');
+
+        $color_nombre = Color::where('id',$this->color_id)
+        ->value('color');
+
         $item=['cantidad' => $this->cantidad,
                 'talle_id' => $this->talle_id,
-                'talle_nombre' => $this->talle->talles,
+                'talle_nombre' => $talle_nombre,
                 'color_id' => $this->color_id,
-                'color_nombre' => $this->colores->color,
+                'color_nombre' => $color_nombre,
                 'producto_id' => $this->producto_id,
                 'producto_nombre' => $this->producto->nombre,
                 'producto_precio' => $precio,
+                'total_item' => $this->cantidad*$precio
 
             ];
         //tomo en items lo que tiene la sesion
@@ -118,12 +125,19 @@ class ProductoFront extends Component
 
         //cuento la cantidad
         $cantitems = count($items);
+        $subtotal = 0;
+        for ($i = 0; $i < $cantitems; $i++) {
+            $subtotal += $items[$i]['total_item'];
+        }
+        
+        //ver tema datop envio 
+        $envio = 150;
 
         //actualizo la sesion los items y la cantidad total de items
-        session(['items' => $items, 'cantidad' => $cantitems]);
+        session(['items' => $items, 'cantidad' => $cantitems, 'sub_total' => $subtotal, 'envio' => $envio]);
 
         //envio al icono de cart
-        $this->emit('carrito',['mensaje' => 'existe session', 'cantidad' => session('cantidad') ]);
+        $this->emit('carrito',['mensaje' => 'Se agrego el producto al carrito', 'cantidad' => session('cantidad') ]);
 
     }
 

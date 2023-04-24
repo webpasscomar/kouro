@@ -14,7 +14,7 @@
                 <thead>
                     <tr>
                         <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2">Productos</th>
+                        <th class="px-4 py-2">Producto</th>
                         <th class="px-4 py-2">Talle</th>
                         <th class="px-4 py-2">Color</th>
                         <th class="px-4 py-2">Precio</th>
@@ -22,48 +22,51 @@
                         <th class="px-4 py-2">Subtotal</th>
                     </tr>
                 </thead>
-                @if (isset($productos))
+                @if(session('items'))
                     <tbody>
-                        @foreach ($productos as $p)
+                        @foreach (session('items') as $item)
                             <tr>
-                                <td class="border px-4 py-2">{{ $p->id }}</td>
-                                <td class="border px-4 py-2">{{ $p->descripcion }}</td>
-                                <td class="border px-4 py-2">{{ $p->default }}</td>
-                                <td class="border px-4 py-2">{{ $p->valor }}</td>
-                                {{-- <td class="border px-4 py-2">{{ $p->detalle }}</td> --}}
-                                <td class="border px-4 py-2">{{ $p->relacionados }}</td>
-
+                                <td class="border px-4 py-2">{{ $item['producto_id'] }}</td>
+                                <td class="border px-4 py-2">{{ $item['producto_nombre'] }}</td>
+                                <td class="border px-4 py-2">{{$item['talle_nombre'] }}</td>
+                                <td class="border px-4 py-2">{{  $item['color_nombre']  }}</td>
+                                <td class="border px-4 py-2" style="text-align: right;">{{ number_format($item['producto_precio'], 2, ',', '.') }}</td>
+                                <td class="border px-4 py-2" style="text-align: right;">{{ $item['cantidad'] }}</td>
+                                <td class="border px-4 py-2"  style="text-align: right;">{{ number_format($item['cantidad']*$item['producto_precio'], 2, ',', '.') }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <button wire:click="editar({{ $p->id }})"
-                                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
-                                    <button wire:click="borrar({{ $p->id }})"
+                                    <!-- <button wire:click="editar({{ $item['producto_id'] }})"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button> -->
+                                    <button wire:click="borrar({{ $item['producto_id'] }})"
                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
+                    @else
+                            <p>No hay compras</p>                    
                 @endif
             </table>
 
             <hr>
 
-            <table>
+            <table class="table-auto">
                 <thead>
                     <th></th>
                     <th></th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>{{ $subTotal }}</td>
+                    <tr >
+                        <td class="border px-4 py-2 ">Subtotal</td>
+                        <td class="border px-4 py-2 " style="text-align: right;">{{ number_format(session('sub_total'), 2, ',', '.')}}</td>
+                        
                     </tr>
                     <tr>
-                        <td>Costo de envío</td>
-                        <td>{{ $envio }}</td>
+                        <td class="border px-4 py-2">Costo de envío</td>
+                        <td class="border px-4 py-2" style="text-align: right;">{{ number_format(session('envio'), 2, ',', '.') }}</td>
                     </tr>
                     <tr>
-                        <td>Total</td>
-                        <td>{{ $total }}</td>
+                        <td class="border px-4 py-2">Total</td>
+                        <td class="border px-4 py-2" style="text-align: right;">{{ number_format(session('sub_total')+session('envio'), 2, ',', '.') }}</td>
                     </tr>
                 </tbody>
             </table>

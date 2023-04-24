@@ -64,7 +64,7 @@
                         </button>
                         <div>
 
-                        <h2  >Carrito</h2>
+                        <!-- <h2  >Carrito</h2>
                                 @if(session('items'))
                                     <ul>
                                         @foreach(session('items') as $item)
@@ -81,7 +81,7 @@
                                   @else
                                     <p>No hay productos disponibles</p>
                                 @endif
-                        </div>
+                        </div> -->
 
 
 
