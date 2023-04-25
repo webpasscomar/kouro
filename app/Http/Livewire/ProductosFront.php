@@ -42,7 +42,7 @@ class ProductosFront extends Component
 
 
 
-    
+
     public function setCategoria($categoriaSlug = null)
     {
         $this->categoriaSlug = $categoriaSlug;

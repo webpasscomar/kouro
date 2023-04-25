@@ -114,11 +114,28 @@ class ProductoFront extends Component
         //tomo en items lo que tiene la sesion
         $items = session('items');
 
-        //le agrego el nuevo item
-        //si no es el primero
+        //si no es el primero verifico
+        //si ya eligio algun producto igual
+        //y solo le cambio cantidad y subtotal
         if ($items) {
-            array_push($items,$item);
-        }else{
+            $cantitems = count($items);
+            $esta = 0;
+            for ($i = 0; $i < $cantitems; $i++) {
+                if ($items[$i]['producto_id'] == $this->producto_id &&
+                    $items[$i]['talle_id'] == $this->talle_id &&
+                    $items[$i]['color_id'] == $this->color_id  ){
+
+                    $items[$i]['cantidad'] = $items[$i]['cantidad']+$this->cantidad;
+                    $items[$i]['totasl_item'] = $items[$i]['cantidad']+$precio;
+                    $esta=1;
+                }
+            }
+            //no esta en la lista
+            //lo agrego
+            if ($esta == 0) {
+                array_push($items,$item);
+            }
+        }else{  //es el primer articulo
             $items = [$item];
         }
 
@@ -129,8 +146,8 @@ class ProductoFront extends Component
         for ($i = 0; $i < $cantitems; $i++) {
             $subtotal += $items[$i]['total_item'];
         }
-        
-        //ver tema datop envio 
+
+        //ver tema datop envio
         $envio = 150;
 
         //actualizo la sesion los items y la cantidad total de items

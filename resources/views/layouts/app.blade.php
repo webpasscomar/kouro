@@ -194,6 +194,33 @@
             })
 
 
+            Livewire.on('alertCarritoDelete', function(idproducto,idtalle,idcolor)  {
+                Swal.fire({
+                    title: '¿Está seguro /a?',
+                    text: "La acción no podrá ser revertida!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrar!'
+                }).then((result) => {
+
+
+                    if (result.isConfirmed) {
+                         alert('Borrar el id: ' + idproducto);
+                        //Livewire.emit('delete', idproducto,idtalle,idcolor);
+
+                        Swal.fire(
+                            'Borrado!',
+                            'Ha sido eliminado con éxito.',
+                            'success'
+                        )
+                    }
+                })
+            })
+
+
+
             //emit del cambio de cantidades en  carrito
             Livewire.on('carrito', function(mensaje)  {
                 Swal.fire(

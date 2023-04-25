@@ -33,17 +33,17 @@ class Product extends Component
         return view('livewire.product');
     }
 
-    public function agregarAlCarrito()
-    {
-        // Obtener el id del SKU
-        $this->sku = SKU::where('producto_id', $this->producto->id)
-            ->where('talle_id', $this->talle)
-            ->where('color_id', $this->color)
-            ->first();
+    // public function agregarAlCarrito()
+    // {
+    //     // Obtener el id del SKU
+    //     $this->sku = SKU::where('producto_id', $this->producto->id)
+    //         ->where('talle_id', $this->talle)
+    //         ->where('color_id', $this->color)
+    //         ->first();
 
-        // Agregarlo al carrito
+    //     // Agregarlo al carrito
 
-        dd($this->talle, $this->color, $this->producto->id, $this->sku);
-        //session(['idCarrito' => $this->id_parametro]);
-    }
+    //     //dd($this->talle, $this->color, $this->producto->id, $this->sku);
+    //     //session(['idCarrito' => $this->id_parametro]);
+    // }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
+
+
+
 class Carrito extends Component
 {
     public $subTotal = 0;
@@ -12,6 +15,14 @@ class Carrito extends Component
 
     public function render()
     {
-        return view('livewire.carrito');
+        $subTotal = $this->subTotal;
+        return view('livewire.carrito',['subTotal' => $subTotal])
+        ->extends('layouts.app');
+    }
+
+
+
+    public function prueba() {
+        $this->subTotal = $this->subTotal + 10000;
     }
 }
