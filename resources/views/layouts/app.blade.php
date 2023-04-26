@@ -194,7 +194,7 @@
             })
 
 
-            Livewire.on('alertCarritoDelete', function(idproducto,idtalle,idcolor)  {
+            Livewire.on('alertCarritoDelete', (idproducto,idtalle,idcolor) =>  {
                 Swal.fire({
                     title: '¿Está seguro /a?',
                     text: "La acción no podrá ser revertida!",
@@ -207,8 +207,7 @@
 
 
                     if (result.isConfirmed) {
-                         alert('Borrar el id: ' + idproducto);
-                        //Livewire.emit('delete', idproducto,idtalle,idcolor);
+                        Livewire.emit('delete', idproducto,idtalle,idcolor);
 
                         Swal.fire(
                             'Borrado!',

@@ -32,6 +32,7 @@ Route::get('/contacto', [ContactController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.store');
 
 Route::get('/carrito', Carrito::class)->name('carrito');
+Route::get('/carrito', Carrito::class)->name('carrito');
 Route::get('/nosotros', Nosotros::class)->name('nosotros');
 
 Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs.index');
