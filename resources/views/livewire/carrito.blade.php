@@ -81,7 +81,7 @@
                     <label for="cli_nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre *</label>
                     <input type="text"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_nombre" wire:model="cli_nombre">
+                        id="cli_nombre" wire:model="cli_nombre" >
                     <x-jet-input-error for="cli_nombre" />
                 </div>
 
@@ -89,7 +89,7 @@
                     <label for="cli_apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido *</label>
                     <input type="text"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_apellido" wire:model="cli_apellido">
+                        id="cli_apellido" wire:model="cli_apellido" >
                     <x-jet-input-error for="cli_apellido" />
                 </div>
 
@@ -98,7 +98,7 @@
                     <label for="cli_email" class="block text-gray-700 text-sm font-bold mb-2">E-mail *</label>
                     <input type="text"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_email" wire:model="cli_email">
+                        id="cli_email" wire:model="cli_email" >
                     <x-jet-input-error for="cli_email" />
                 </div>
 
@@ -106,7 +106,7 @@
                     <label for="cli_telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono *</label>
                     <input type="text"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_telefono" wire:model="cli_telefono">
+                        id="cli_telefono" wire:model="cli_telefono" >
                     <x-jet-input-error for="cli_telefono" />
                 </div>
 
@@ -114,7 +114,7 @@
 
                 <div class="mt-4">
                     <label class="block font-bold text-gray-700">Forma de Entrega</label>
-                    <select class="form-select mt-1 block w-full" id="talle_id" wire:model="entrega_id"
+                    <select class="form-select mt-1 block w-full" id="entrega_id" wire:model="entrega_id"
                         wire:change="tipoentrega()">
                         <option value="0">Seleccione una Forma de Entrega</option>
                         @foreach ($formasdeentregas as $forma)
@@ -123,7 +123,7 @@
                     </select>
                 </div>
 
-                @if (session('pidedirec') == 1)
+                @if ($pidedirec == '1')
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Direccion del comprador</label>
                     </div>
@@ -132,7 +132,8 @@
                         <label for="cli_calle class="block text-gray-700 text-sm font-bold mb-2">Calle</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_calle" wire:model="cli_calle">
+                            id="cli_calle" wire:model="cli_calle"
+                            >
                         <x-jet-input-error for="cli_calle" />
                     </div>
 
@@ -140,7 +141,7 @@
                         <label for="cli_nro class="block text-gray-700 text-sm font-bold mb-2">Nro</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_nro" wire:model="cli_nro">
+                            id="cli_nro" wire:model="cli_nro" >
                         <x-jet-input-error for="cli_nro" />
                     </div>
 
@@ -148,7 +149,7 @@
                         <label for="cli_piso class="block text-gray-700 text-sm font-bold mb-2">Piso</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_piso" wire:model="cli_piso">
+                            id="cli_piso" wire:model="cli_piso" >
                         <x-jet-input-error for="cli_piso" />
                     </div>
 
@@ -157,7 +158,7 @@
                         <label for="cli_dpto class="block text-gray-700 text-sm font-bold mb-2">Dpto</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_dpto" wire:model="cli_dpto">
+                            id="cli_dpto" wire:model="cli_dpto" >
                         <x-jet-input-error for="cli_dpto" />
                     </div>
 
@@ -165,7 +166,7 @@
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Provincia</label>
                         <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_prov_id"
-                            wire:change="">
+                        >
                             <option value="0">Seleccione una Provincia</option>
                             @foreach ($provincias as $provincia)
                                 <option value="{{ $provincia['id'] }}">{{ $provincia['nombre'] }}</option>
@@ -176,7 +177,7 @@
 
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Localidad</label>
-                        <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_loc_id">
+                        <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_loc_id" >
                             <option value="0">Seleccione una Localidad</option>
                             @if($localidades)
                                 @foreach ($localidades as $localidad)
