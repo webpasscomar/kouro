@@ -224,7 +224,7 @@
             Livewire.on('carrito', function(mensaje)  {
                 Swal.fire(
                     'Excelente!',
-                    mensaje ,
+                    mensaje['mensaje'] ,
                     'success'
                 )
             });

@@ -93,7 +93,7 @@ class Carrito extends Component
             session(['items' => $items, 'cantidad' => $cantitems, 'sub_total' => $subtotal]);
 
             //envio al icono de cart
-            $this->emit('carrito', ['mensaje' => 'Se elimino  el producto al carrito', 'cantidad' => session('cantidad')]);
+            $this->emit('carrito', ['mensaje' => 'Se elimino  el producto de carrito', 'cantidad' => session('cantidad')]);
         }
     }
 
