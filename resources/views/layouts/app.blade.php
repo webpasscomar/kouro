@@ -209,11 +209,11 @@
                     if (result.isConfirmed) {
                         Livewire.emit('delete', idproducto,idtalle,idcolor);
 
-                        Swal.fire(
-                            'Borrado!',
-                            'Ha sido eliminado con éxito.',
-                            'success'
-                        )
+                        // Swal.fire(
+                        //     'Borrado!',
+                        //     'Ha sido eliminado con éxito.',
+                        //     'success'
+                        // )
                     }
                 })
             })
@@ -224,7 +224,7 @@
             Livewire.on('carrito', function(mensaje)  {
                 Swal.fire(
                     'Excelente!',
-                    'Se ha agregado el producto al carrito ' ,
+                    mensaje ,
                     'success'
                 )
             });

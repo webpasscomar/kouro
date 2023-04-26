@@ -9,18 +9,13 @@ use Livewire\Component;
 
 class Carrito extends Component
 {
-    public $subTotal = 0;
-    public $envio = 0;
-    public $total = 0;
-
 
     protected $listeners = ['delete'];
 
 
     public function render()
     {
-        $subTotal = $this->subTotal;
-        return view('livewire.carrito',['subTotal' => $subTotal]);
+        return view('livewire.carrito');
         // ->extends('layouts.app');
     }
 
@@ -32,7 +27,6 @@ class Carrito extends Component
             $items = session('items');
             if ($items) {
                 $cantitems = count($items);
-
                 for ($i = 0; $i < $cantitems; $i++) {
                     if ($items[$i]['producto_id'] == $idproducto &&
                         $items[$i]['talle_id'] == $idtalle &&
@@ -42,8 +36,7 @@ class Carrito extends Component
                         unset($items[$i]);
                         //reordeno indices para que no queden espacios en null
                         $items=array_values($items);
-
-
+                        break;
                     }
                 }
             //cuento la cantidad
