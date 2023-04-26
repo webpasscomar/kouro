@@ -147,15 +147,8 @@ class ProductoFront extends Component
             $subtotal += $items[$i]['total_item'];
         }
 
-           //ver tema datop envio
-        if ($items) {
-            $envio = 150;
-        }else{
-            $envio = 0;
-        }
-
         //actualizo la sesion los items y la cantidad total de items
-        session(['items' => $items, 'cantidad' => $cantitems, 'sub_total' => $subtotal, 'envio' => $envio]);
+        session(['items' => $items, 'cantidad' => $cantitems, 'sub_total' => $subtotal]);
 
         //envio al icono de cart
         $this->emit('carrito',['mensaje' => 'Se agrego el producto al carrito', 'cantidad' => session('cantidad') ]);

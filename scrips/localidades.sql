@@ -1,54 +1,23 @@
--- phpMyAdmin SQL Dump
--- version 5.1.3
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-02-2023 a las 11:27:26
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.28
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `cibase`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `localidades`
---
 
 CREATE TABLE `localidades` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `provincia_id` int(11) DEFAULT NULL,
-  `provincia_nombre` varchar(255) DEFAULT NULL,
-  `categoria` varchar(255) DEFAULT NULL,
-  `centroide_lat` float DEFAULT NULL,
-  `centroide_lon` float DEFAULT NULL,
-  `departamento_id` float DEFAULT NULL,
-  `departamento_nombre` varchar(255) DEFAULT NULL,
-  `fuente` varchar(255) DEFAULT NULL,
-  `id2` float NOT NULL,
-  `localidad_censal_id` float DEFAULT NULL,
-  `localidad_censal_nombre` varchar(255) DEFAULT NULL,
-  `municipio_id` float DEFAULT NULL,
-  `municipio_nombre` varchar(255) DEFAULT NULL,
-  `estado` tinyint(4) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` INT(11) NOT NULL,
+  `nombre` VARCHAR(255) DEFAULT NULL,
+  `provincia_id` INT(11) DEFAULT NULL,
+  `provincia_nombre` VARCHAR(255) DEFAULT NULL,
+  `categoria` VARCHAR(255) DEFAULT NULL,
+  `centroide_lat` FLOAT DEFAULT NULL,
+  `centroide_lon` FLOAT DEFAULT NULL,
+  `departamento_id` FLOAT DEFAULT NULL,
+  `departamento_nombre` VARCHAR(255) DEFAULT NULL,
+  `fuente` VARCHAR(255) DEFAULT NULL,
+  `id2` FLOAT NOT NULL,
+  `localidad_censal_id` FLOAT DEFAULT NULL,
+  `localidad_censal_nombre` VARCHAR(255) DEFAULT NULL,
+  `municipio_id` FLOAT DEFAULT NULL,
+  `municipio_nombre` VARCHAR(255) DEFAULT NULL,
+  `estado` TINYINT(4) DEFAULT 1
+) ENGINE=INNODB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `localidades`
---
 
 INSERT INTO `localidades` (`id`, `nombre`, `provincia_id`, `provincia_nombre`, `categoria`, `centroide_lat`, `centroide_lon`, `departamento_id`, `departamento_nombre`, `fuente`, `id2`, `localidad_censal_id`, `localidad_censal_nombre`, `municipio_id`, `municipio_nombre`) VALUES
 (1, 'CIUDAD DE BUENOS AIRES', 2, 'Ciudad AutÃ³noma de Buenos Aires', 'Componente de localidad compuesta', -34.6133, -58.3888, NULL, NULL, 'INDEC', 2000010000, 2000010, 'Ciudad AutÃ³noma de Buenos Aires', NULL, NULL),
@@ -3587,27 +3556,11 @@ INSERT INTO `localidades` (`id`, `nombre`, `provincia_id`, `provincia_nombre`, `
 (3522, 'LAGUNA ESCONDIDA', 94, 'Tierra del Fuego, AntÃ¡rtida e Islas del AtlÃ¡ntico Sur', 'Localidad simple', -54.6377, -67.7669, 94015, 'Ushuaia', 'INDEC', 94015000000, 94015000, 'Laguna Escondida', NULL, NULL),
 (3523, 'USHUAIA', 94, 'Tierra del Fuego, AntÃ¡rtida e Islas del AtlÃ¡ntico Sur', 'Localidad simple', -54.8036, -68.3161, 94015, 'Ushuaia', 'INDEC', 94015000000, 94015000, 'Ushuaia', 940014, 'Ushuaia');
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `localidades`
---
 ALTER TABLE `localidades`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `localidades`
---
 ALTER TABLE `localidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3572;
+  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3572;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
