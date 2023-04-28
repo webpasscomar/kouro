@@ -60,7 +60,8 @@ class Carrito extends Component
     }
 
 
-    protected function rules() {
+    protected function rules()
+    {
 
       if ($this->pidedirec==1) { //valida pedido con direccion requerida
                 return [
@@ -139,7 +140,7 @@ class Carrito extends Component
             }
 
             if ($ok==1) {
-                $this->emit('carrito', ['mensaje' => 'Ya finalizaste tu compra']);
+                $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra']);
              }
 
         }

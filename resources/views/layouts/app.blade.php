@@ -237,6 +237,17 @@
                     showCloseButton: true}
                 )
             });
+
+
+                 //emit mensaje positivo
+                 Livewire.on('mensajePositivo', function(mensaje)  {
+                Swal.fire({
+                    title: 'Excelente!',
+                    text: mensaje['mensaje'] ,
+                    icon: 'success',
+                    showCloseButton: true}
+                )
+            });
         </script>
 
     </body>
