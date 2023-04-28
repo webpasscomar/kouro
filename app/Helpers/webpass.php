@@ -16,3 +16,7 @@ function setting()
   $setting = DB::table('sitio')->get();
   return $setting;
 }
+
+
+
+

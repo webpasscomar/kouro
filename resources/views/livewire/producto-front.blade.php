@@ -2,7 +2,6 @@
 
     <h1>Detalle del producto</h1>
 
-
     <div class="grid grid-cols-12 gap-6 pt-8">
         <div class="col-span-9">
             <div class="grid grid-cols-12 gap-6">
@@ -48,20 +47,23 @@
                             +
                         </button>
                         <input class="py-2 px-2 " type="numeric" id="cantidad" wire:model="cantidad"
-                            wire:change="checkstock()"/>
+                            wire:change="checkstock()" />
                         <button
                             class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
                                       shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             wire:click.prevent="decrementa()">
                             -
                         </button>
-                        Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model="disponibles"
+                        @if (parametro(10) === 'S')
+                            Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model="disponibles"
                             disabled></input>
-                    </div>
+                        @endif
+                        </div>
 
                     <div class="mt-4">
-                        <button
-                            class="py-2 px-4
+                        @if (parametro(10) === 'S')
+                            <button
+                                class="py-2 px-4
                             {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0)
                                 ? 'bg-slate-100 hover:bg-slate-200 text-{212 212 216}'
                                 : ' bg-blue-500 hover:bg-blue-600 text-white' }}
@@ -69,15 +71,21 @@
                             shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
                             {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}
                             "
-                            wire:click.prevent="agregarcarrito()">
-                            {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}
+                                wire:click.prevent="agregarcarrito()">
+                                {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}
 
-                        </button>
+                            </button>
+                        @else
+                        <button
+                        class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                                         focus:ring-blue-500 focus:ring-offset-2 "  wire:click.prevent="agregarcarrito()">Agregar al carrito</button>
+
+                        @endif
                         <div>
 
                             <!-- <h2  >Carrito</h2>
                                 @if (session('items'))
-                                    <ul>
+<ul>
                                         @foreach (session('items') as $item)
 <li>{{ $item['producto_id'] }} -
                                                 {{ $item['producto_nombre'] }} -
@@ -91,7 +99,7 @@
                                     </ul>
 @else
 <p>No hay productos disponibles</p>
-                                @endif
+@endif
                         </div> -->
 
 

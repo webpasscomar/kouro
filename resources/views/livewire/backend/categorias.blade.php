@@ -26,7 +26,7 @@
                 <thead>
                     <tr class="bg-gray-200 text-gray-700">
                         <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Id
-                            {{-- -- Ordenar -- --}}
+
                             @if ($sort == 'id')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -39,7 +39,7 @@
                         </th>
                         <th class="cursor-pointer px-4 py-2">Imagen</th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('categoriaPadre_id')">Padre
-                            {{-- -- Ordenar -- --}}
+
                             @if ($sort == 'categoriaPadre_id')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -51,7 +51,7 @@
                             @endif
                         </th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('categoria')">Nombre
-                            {{-- -- Ordenar -- --}}
+
                             @if ($sort == 'categoria')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -63,7 +63,7 @@
                             @endif
                         </th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('slug')">Slug
-                            {{-- -- Ordenar -- --}}
+
                             @if ($sort == 'categoria')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -74,8 +74,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
-                        {{-- <th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripción
-                            {{-- -- Ordenar -- --}}
+
                         @if ($sort == 'descripcion')
                             @if ($order == 'asc')
                                 <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -85,9 +84,9 @@
                         @else
                             <i class="fas fa-sort float-right mt-1"></i>
                         @endif
-                        </th> --}}
+                        </th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('orden')">Orden
-                            {{-- -- Ordenar -- --}}
+
                             @if ($sort == 'orden')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -99,7 +98,7 @@
                             @endif
                         </th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado
-                            {{-- -- Ordenar -- --}}
+
                             @if ($sort == 'estado')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -126,7 +125,6 @@
                             <td class="border px-4 py-2">{{ $categoria->categoriaPadre_id }}</td>
                             <td class="border px-4 py-2">{{ $categoria->categoria }}</td>
                             <td class="border px-4 py-2">{{ $categoria->slug }}</td>
-                            {{-- <td class="border px-4 py-2">{{ $categoria->descripcion }}</td> --}}
                             <td class="border px-4 py-2">{{ $categoria->orden }}</td>
                             <td class="border px-4 py-2 text-center">
                                 @livewire(

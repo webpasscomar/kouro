@@ -2,11 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            @if (parametro(10) === 'S')
-                Realiza control de stock
-            @else
-                Sin control de stock
-            @endif
+           Shop
         </h2>
     </x-slot>
 

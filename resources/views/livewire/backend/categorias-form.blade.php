@@ -10,13 +10,7 @@
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <!-- Aquí puedes añadir el contenido del modal -->
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                <p>
+              git branch
                     It is a long established fact that a reader will be distracted by the readable content of a page
                     when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
                     distribution of letters, as opposed to using 'Content here, content here', making it look like
@@ -39,11 +33,7 @@
     </div>
 </div>
 
-
-
-
-
-{{-- <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
+ <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
     <div class="flex justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
         <div class="fixed inset-0 transition-opacity">
@@ -151,4 +141,4 @@
 
 
     </div>
-</div> --}}
+</div>

@@ -4,7 +4,6 @@
 
             <h1 class="font-bold py-2 text-3xl">Carrito</h1>
 
-            {{-- <h1>{{$subTotal}}</h1> --}}
 
             <table class="table-auto w-full">
                 <thead>
@@ -74,122 +73,133 @@
             </table>
 
             @if (session('items'))
-                <div class="mt-4">
-                    <label class="block font-bold text-gray-700">Datos del comprador</label>
-                </div>
-                <div class="mb-4 col-span-3">
-                    <label for="cli_nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre *</label>
-                    <input type="text"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_nombre" wire:model="cli_nombre" >
-                    <x-jet-input-error for="cli_nombre" />
-                </div>
-
-                <div class="mb-4 col-span-3">
-                    <label for="cli_apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido *</label>
-                    <input type="text"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_apellido" wire:model="cli_apellido" >
-                    <x-jet-input-error for="cli_apellido" />
-                </div>
-
-
-                <div class="mb-4 col-span-3">
-                    <label for="cli_email" class="block text-gray-700 text-sm font-bold mb-2">E-mail *</label>
-                    <input type="text"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_email" wire:model="cli_email" >
-                    <x-jet-input-error for="cli_email" />
-                </div>
-
-                <div class="mb-4 col-span-3">
-                    <label for="cli_telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono *</label>
-                    <input type="text"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="cli_telefono" wire:model="cli_telefono" >
-                    <x-jet-input-error for="cli_telefono" />
-                </div>
-
-
-
-                <div class="mt-4">
-                    <label class="block font-bold text-gray-700">Forma de Entrega</label>
-                    <select class="form-select mt-1 block w-full" id="entrega_id" wire:model="entrega_id"
-                        wire:change="tipoentrega()">
-                        <option value="0">Seleccione una Forma de Entrega</option>
-                        @foreach ($formasdeentregas as $forma)
-                            <option value="{{ $forma['id'] }}">{{ $forma['nombre'] }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                @if ($pidedirec == '1')
+                <form>
                     <div class="mt-4">
-                        <label class="block font-bold text-gray-700">Direccion del comprador</label>
+                        <label class="block font-bold text-gray-700">Datos del comprador</label>
+                    </div>
+                    <div class="mb-4 col-span-3">
+                        <label for="cli_nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre *</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="cli_nombre" wire:model="cli_nombre">
+                        <x-jet-input-error for="cli_nombre" />
                     </div>
 
                     <div class="mb-4 col-span-3">
-                        <label for="cli_calle class="block text-gray-700 text-sm font-bold mb-2">Calle</label>
+                        <label for="cli_apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido *</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_calle" wire:model="cli_calle"
-                            >
-                        <x-jet-input-error for="cli_calle" />
-                    </div>
-
-                    <div class="mb-4 col-span-3">
-                        <label for="cli_nro class="block text-gray-700 text-sm font-bold mb-2">Nro</label>
-                        <input type="text"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_nro" wire:model="cli_nro" >
-                        <x-jet-input-error for="cli_nro" />
-                    </div>
-
-                    <div class="mb-4 col-span-3">
-                        <label for="cli_piso class="block text-gray-700 text-sm font-bold mb-2">Piso</label>
-                        <input type="text"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_piso" wire:model="cli_piso" >
-                        <x-jet-input-error for="cli_piso" />
+                            id="cli_apellido" wire:model="cli_apellido">
+                        <x-jet-input-error for="cli_apellido" />
                     </div>
 
 
                     <div class="mb-4 col-span-3">
-                        <label for="cli_dpto class="block text-gray-700 text-sm font-bold mb-2">Dpto</label>
+                        <label for="cli_email" class="block text-gray-700 text-sm font-bold mb-2">E-mail *</label>
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cli_dpto" wire:model="cli_dpto" >
-                        <x-jet-input-error for="cli_dpto" />
+                            id="cli_email" wire:model="cli_email">
+                        <x-jet-input-error for="cli_email" />
                     </div>
+
+                    <div class="mb-4 col-span-3">
+                        <label for="cli_telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono *</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="cli_telefono" wire:model="cli_telefono">
+                        <x-jet-input-error for="cli_telefono" />
+                    </div>
+
 
 
                     <div class="mt-4">
-                        <label class="block font-bold text-gray-700">Provincia</label>
-                        <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_prov_id"
-                        >
-                            <option value="0">Seleccione una Provincia</option>
-                            @foreach ($provincias as $provincia)
-                                <option value="{{ $provincia['id'] }}">{{ $provincia['nombre'] }}</option>
+                        <label class="block font-bold text-gray-700">Forma de Entrega</label>
+                        <select class="form-select mt-1 block w-full" id="entrega_id" wire:model="entrega_id"
+                            wire:change="tipoentrega()">
+                            <option value="0">Seleccione una Forma de Entrega</option>
+                            @foreach ($formasdeentregas as $forma)
+                                <option value="{{ $forma['id'] }}">{{ $forma['nombre'] }}</option>
                             @endforeach
                         </select>
+                        <x-jet-input-error for="entrega_id" />
                     </div>
 
+                    @if ($pidedirec == '1')
+                        <div class="mt-4">
+                            <label class="block font-bold text-gray-700">Direccion del comprador</label>
+                        </div>
 
-                    <div class="mt-4">
-                        <label class="block font-bold text-gray-700">Localidad</label>
-                        <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_loc_id" >
-                            <option value="0">Seleccione una Localidad</option>
-                            @if($localidades)
-                                @foreach ($localidades as $localidad)
-                                    <option value="{{ $localidad['id'] }}">{{ $localidad['nombre'] }}</option>
+                        <div class="mb-4 col-span-3">
+                            <label for="cli_calle class="block text-gray-700 text-sm font-bold mb-2">Calle</label>
+                            <input type="text"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="cli_calle" wire:model="cli_calle">
+                            <x-jet-input-error for="cli_calle" />
+                        </div>
+
+                        <div class="mb-4 col-span-3">
+                            <label for="cli_nro class="block text-gray-700 text-sm font-bold mb-2">Nro</label>
+                            <input type="text"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="cli_nro" wire:model="cli_nro">
+                            <x-jet-input-error for="cli_nro" />
+                        </div>
+
+                        <div class="mb-4 col-span-3">
+                            <label for="cli_piso class="block text-gray-700 text-sm font-bold mb-2">Piso</label>
+                            <input type="text"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="cli_piso" wire:model="cli_piso">
+                            <x-jet-input-error for="cli_piso" />
+                        </div>
+
+
+                        <div class="mb-4 col-span-3">
+                            <label for="cli_dpto class="block text-gray-700 text-sm font-bold mb-2">Dpto</label>
+                            <input type="text"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                id="cli_dpto" wire:model="cli_dpto">
+                            <x-jet-input-error for="cli_dpto" />
+                        </div>
+
+
+                        <div class="mt-4">
+                            <label class="block font-bold text-gray-700">Provincia</label>
+                            <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_prov_id">
+                                <option value="0">Seleccione una Provincia</option>
+                                @foreach ($provincias as $provincia)
+                                    <option value="{{ $provincia['id'] }}">{{ $provincia['nombre'] }}</option>
                                 @endforeach
-                            @endif
-                        </select>
-                    </div>
+                            </select>
+                            <x-jet-input-error for="cli_prov_id" />
+                        </div>
 
 
-                @endif
+                        <div class="mt-4">
+                            <label class="block font-bold text-gray-700">Localidad</label>
+                            <select class="form-select mt-1 block w-full" id="cli_prov_id" wire:model="cli_loc_id">
+                                <option value="0">Seleccione una Localidad</option>
+                                @if ($localidades)
+                                    @foreach ($localidades as $localidad)
+                                        <option value="{{ $localidad['id'] }}">{{ $localidad['nombre'] }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <x-jet-input-error for="cli_loc_id" />
+                        </div>
+
+
+                    @endif
+                </form>
             @endif
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
+                <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                    <button wire:click.prevent="cerrarCarrito()" type="button"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">Finalizar
+                        Compra</button>
+                </span>
+            </div>
+
 
 
 
