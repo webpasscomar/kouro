@@ -2,7 +2,7 @@
 
 
     <x-header>
-        Acerca de Nosotros
+        Acerca de Nosotros 2
     </x-header>
 
     <div class="py-12">
