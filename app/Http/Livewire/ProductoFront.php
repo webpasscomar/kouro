@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Sku;
 use App\Models\Color;
 use App\Models\Talle;
+
 use Livewire\Component;
 
 class ProductoFront extends Component
@@ -18,6 +20,7 @@ class ProductoFront extends Component
     public $colores;
     public $talles;
     public $disponibles;
+    public $categorias;
 
 
     public function mount($id)
@@ -45,6 +48,12 @@ class ProductoFront extends Component
             ->groupBy('sku.talle_id', 'talles.talle')
             ->get()
             ->toArray();
+
+        $this->categorias = Categoria::where('estado', 1)
+            ->orderBy('categoria')
+            ->get()
+            ->toArray();
+        // $this->categorias = Categoria::where('estado', 1)->get();
     }
 
     public function incrementa()
@@ -174,6 +183,8 @@ class ProductoFront extends Component
         $producto = $this->producto;
         $colores  = $this->colores;
         $talles   = $this->talles;
-        return view('livewire.producto-front', $producto, $colores, $talles);
+        $categorias = $this->categorias;
+        // dd($categorias);
+        return view('livewire.producto-front', $producto, $colores, $talles, $this->categorias);
     }
 }

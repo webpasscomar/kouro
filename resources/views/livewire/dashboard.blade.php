@@ -1,453 +1,139 @@
-<div class="overflow-x-scroll">
-    <table class="table-auto w-full">
-        <thead>
-            <tr>
-                <th class="px-4 py-2"></th>
-                <th class="px-4 py-2">Tarea 1</th>
-                <th class="px-4 py-2">Tarea 2</th>
-                <th class="px-4 py-2">Tarea 3</th>
-                <th class="px-4 py-2">Tarea 4</th>
-                <th class="px-4 py-2">Tarea 5</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="px-4 py-2">Tiempo</td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
-                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
-                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-yellow-500 rounded-lg px-2 py-1 text-white">Medio</div>
-                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
-                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
-                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-yellow-500 rounded-lg px-2 py-1 text-white">Medio</div>
-                    <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                    <div class="relative z-10 bg-red-500 rounded-lg px-2 py</td>
-        <td class="relative">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
-                        <div class="relative z-10 bg-blue-500 rounded-lg px-2 py-1 text-white">Inicio</div>
-                        <div class="absolute bottom-0 left-0 w-1 h-full bg-gray-500"></div>
-                        <div class="relative z-10 bg-red-500 rounded-lg px-2 py-1 text-white">Fin</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2">Tarea 1</td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-blue-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-blue-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2">Tarea 2</td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="px-4 py-2">Tarea 3</td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-500 rounded-lg"></div>
-                </td>
-                <td class="relative">
-                    <div class="absolute top-0 left-0 w-full h-full bg-gray-300"></div>
-                    <div class="absolute top-0 left-0 w-1/3 h-full bg-yellow-500 rounded-lg"></div>
-                    <div class="absolute top-0 right-0 w-1/3 h-full bg-red-500 rounded-lg"></div>
-                </td>
-            </tr>
-        </tbody>
+<?php
+$categories_count = 5;
+$products_count = 5;
+$sizes_count = 5;
+$colors_count = 5;
+$orders_count = 5;
+$stock_count = 5;
+$testimonies_count = 5;
+$parameters_count = 5;
+$delivery_methods_count = 5;
+$faq_count = 5;
+$places_count = 5;
+$contact_messages_count = 5;
+$gallery_count = 5;
+?>
 
-    </table>
-</div>
-
-
-
-
-
-
-{{-- <x-app-layout>
-
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }} | {{ date('d-m-Y', time()) }}
-        </h2>
-    </x-slot> --}}
-
-
-
-
+<x-header>
+    Panel de administración
+</x-header>
 
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-            <table class="w-full border">
-                <thead>
-                    <tr>
-                        <th class="px-2 py-2 border bg-gray-300">9/1 al 13/1</th>
-                        <th class="px-2 py-2 border">16/1 al 20/1</th>
-                        <th class="px-2 py-2 border">23/1 al 27/1</th>
-                        <th class="px-2 py-2 border">30/1 al 3/2</th>
-                        <th class="px-2 py-2 border">6/2 al 10/2</th>
-                        <th class="px-2 py-2 border">13/2 al 17/2</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
-                                    alt="Edu">
-                                <span class="py-2"><a href="{{ route('testimonios') }}"> Bk-
-                                        Testimonios</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
-                                    alt="Kari">
-                                <span class="py-2"><a href="{{ route('faqs') }}"> Bk- FAQs</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/categorias"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Categorías</div>
+                    <i class="fas fa-tags text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $categories_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
-                                    alt="Kari">
-                                <span class="py-2"><a href="{{ route('colores') }}"> Bk- Colores</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
-                                    alt="Edu">
-                                <span class="py-2"><a href="{{ route('productos') }}"> Bk-
-                                        productos</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/productos"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Productos</div>
+                    <i class="fas fa-boxes text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $products_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
-                                    alt="Edu">
-                                <span class="py-2"><a href="{{ route('categorias') }}"> Bk-
-                                        Categorias</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="{{ route('productos.index') }}"> Ft-
-                                        Categorias</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/talles" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Talles</div>
+                    <i class="fas fa-ruler-horizontal text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $sizes_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
-                                    alt="Kari">
-                                <span class="py-2"><a href="{{ route('talles') }}"> Bk- talles</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
-                                    alt="Edu">
-                                <span class="py-2"><a href="{{ route('productos') }}"> Bk-
-                                        Prod. Img-Color</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/colores"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Colores</div>
+                    <i class="fas fa-palette text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $colors_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
-                                    alt="Edu">
-                                <span class="py-2"><a href="{{ route('sitio') }}"> Bk-
-                                        sitio</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="shop/1"> Ft-
-                                        Productos</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/pedidos"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Pedidos</div>
+                    <i class="fas fa-shopping-cart text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $orders_count }}</div>
+            </a>
+            <a href="/admin/stock" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Stock</div>
+                    <i class="fas fa-box-open text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $stock_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
-                                    alt="Kari">
-                                <span class="py-2"><a href="{{ route('presentaciones') }}"> Bk-
-                                        presentaciones</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="shop/1/1"> Ft-
-                                        Detalle Prod</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/testimonios"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Testimonios</div>
+                    <i class="fas fa-comment-alt text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $testimonies_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/edu.jpg') }}"
-                                    alt="Edu">
-                                <span class="py-2"><a href="{{ route('parametros') }}"> Bk-
-                                        parametros</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="shop/1/1"> Ft-
-                                        Faqs</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/parametros"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Parámetros</div>
+                    <i class="fas fa-cog text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $parameters_count }}</div>
+            </a>
 
-                    <tr>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/kari.jpg') }}"
-                                    alt="Kari">
-                                <span class="py-2"><a href="{{ route('formasdeentrega') }}"> Bk- formas de
-                                        entrega</a></span>
-                            </div>
-                        </td>
-                        <td class="px-2 py-2 border">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="shop/1/1"> Ft-
-                                        Testimonios</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/formasdeentrega"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Formas de entrega</div>
+                    <i class="fas fa-truck text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $delivery_methods_count }}</div>
+            </a>
 
-                    <tr>
-                        <td></td>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="{{ route('movimientos') }}">Bk-
-                                        Stock, ing y egr</a></span>
-                            </div>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+            <a href="/admin/faqs" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Preguntas frecuentes</div>
+                    <i class="fas fa-question-circle text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $faq_count }}</div>
+            </a>
 
-                    <tr>
-                        <td></td>
-                        <td class="px-2 py-2 border bg-green-500">
-                            <div class="inline-flex">
-                                <img class="h-10 w-10 rounded-full mr-2" src="{{ asset('storage/quien.jpg') }}"
-                                    alt="Quien?">
-                                <span class="py-2"><a href="{{ route('historias') }}"> Bk-
-                                        Stock vista</a></span>
-                            </div>
-                        </td>
-                        <td><a href="{{ route('dashboard') }}">Pedidos (Falta)</a></td>
-                        <td><a href="{{ route('dashboard') }}">Stock (Falta)</a></td>
-                        <td><a href="{{ route('dashboard') }}">Movimientos de Stock (Falta)</a></td>
-                        <td>
-                            <a href="{{ route('talles') }}">Contacto</a>
-                        </td>
-                    </tr>
-                </tbody>
+            <a href="/admin/contacto"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Contacto</div>
+                    <i class="fas fa-envelope text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $contact_messages_count }}</div>
+            </a>
 
-            </table>
+            <a href="/admin/slider"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Galería</div>
+                    <i class="fas fa-images text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $gallery_count }}</div>
+            </a>
 
-
-            {{-- 
-                <div class="grid col-grid-1 sm:grid-cols-3 gap-4">
-                    <div>
-                        <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                                <a href="#!">
-                                    <img class="rounded-t-lg"
-                                        src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
-                                </a>
-                                <div class="p-6">
-                                    <h5 class="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                                    <p class="text-gray-700 text-base mb-4">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-                                    <button type="button"
-                                        class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                                <a href="#!">
-                                    <img class="rounded-t-lg"
-                                        src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
-                                </a>
-                                <div class="p-6">
-                                    <h5 class="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                                    <p class="text-gray-700 text-base mb-4">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-                                    <button type="button"
-                                        class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-center">
-                            <div class="rounded-lg shadow-lg bg-white max-w-sm">
-                                <a href="#!">
-                                    <img class="rounded-t-lg"
-                                        src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt="" />
-                                </a>
-                                <div class="p-6">
-                                    <h5 class="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                                    <p class="text-gray-700 text-base mb-4">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-                                    <button type="button"
-                                        class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-                --}}
-
+            <a href="/admin/locales" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Locales</div>
+                    <i class="fas fa-map-marker-alt text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $places_count }}</div>
+            </a>
 
         </div>
     </div>
 </div>
-
-{{-- </x-app-layout> --}}
