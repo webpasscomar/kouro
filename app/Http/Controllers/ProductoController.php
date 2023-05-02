@@ -9,10 +9,8 @@ use App\Models\Categoria;
 class ProductoController extends Controller
 {
 
-
     public function index()
     {
-       
         $categorias = Categoria::where('estado', 1)
             ->where('id', '>', 1)
             ->orderBy('categoria', 'asc')
@@ -21,18 +19,18 @@ class ProductoController extends Controller
         return view('productos.index', compact('categorias'));
     }
 
-    public function categoria(Categoria $categoria)
+    public function categoria($slugCategoria)
     {
+        $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
         $productos = $categoria->productos()->get();
         $categorias = Categoria::all();
-        $categoria = $categoria;
         return view('productos.categoria', compact('productos', 'categorias', 'categoria'));
     }
 
-    public function show(Categoria $categoria, Producto $producto)
+    public function show($slugCategoria, Producto $producto)
     {
         $producto = $producto;
-        $categoria = $categoria;
+        $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
         $categorias = Categoria::where('estado', 1)->get();
         return view('productos.show', compact('producto', 'categorias', 'categoria'));
     }

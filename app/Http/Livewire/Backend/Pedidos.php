@@ -33,6 +33,7 @@ class Pedidos extends Component
     public $order = 'desc';
     public $id_pedido = 0;
 
+
     //campos vista
     public $nombre,$apellido,$entrega_id,$fecha,$telefono,$correo,$transac_mp;
     public $del_calle,$del_piso,$del_dpto,$del_costo,$status_mp;
@@ -43,6 +44,7 @@ class Pedidos extends Component
     public $localidad_id = 0;
     public $movimientos = array();
     public $del_nro = 0;
+    public $delcosto=0;
     // este campo activo o desactiva los imput de direccion
     // configurador en las formasdeentrega
     public $pidedirec = 0;
@@ -51,6 +53,15 @@ class Pedidos extends Component
 
     public $muestra_detalle = array();
     public $cantidad_detalle = 0;
+    public $pedidos_items  = array();
+
+
+
+    public $cliente_id=0;
+    public $subTotal=0;
+    public $sucursal_id=0;
+    public $cantidaditems=0;
+    public $indice_productos,$producto_nombre,$color_nombre,$talle_nombre,$estado;
 
 
 
@@ -76,7 +87,7 @@ class Pedidos extends Component
                  ->value('pidedirec');
             $this->delcosto = Formadeentrega::where('id',$this->entrega_id)
                  ->value('costo');
-        }            
+        }
 
         if ($this->producto_id != 0) {
 
@@ -111,7 +122,7 @@ class Pedidos extends Component
         ->orderBy($this->sort, $this->order)
         ->paginate(5);
 
-        
+
 
         $this->sku              = Sku::all();
         $this->estados_pedidos  = Estadospedido::all();
@@ -128,7 +139,7 @@ class Pedidos extends Component
                             ->get();
 
         //dd(auth()->user());
-     
+
 
         return view('livewire.backend.pedidos',
                         [
@@ -178,7 +189,7 @@ class Pedidos extends Component
     }
 
     protected function rules() {
-        
+
         if ($this->modalitem==1) {  //valida el item
                 return [
                     'producto_id' => 'required|not_in:0',
@@ -200,7 +211,7 @@ class Pedidos extends Component
                     'telefono' => 'required',
                     'correo' => 'required|email',
                     'estado_id' => 'required|not_in:0',
-                ]; 
+                ];
             }else{  //valida pedido sin direccion requerida
                 return [
                     'entrega_id' => 'not_in:0|required',
@@ -209,8 +220,8 @@ class Pedidos extends Component
                     'telefono' => 'required',
                     'correo' => 'required|email',
                     'estado_id' => 'required|not_in:0',
-                ]; 
-            }    
+                ];
+            }
         }
     }
 
@@ -255,12 +266,12 @@ public function editar($id_pedido)
     $this->transac_mp    =   $ped['transac_mp'];
     $this->detail_mp     =   $ped['detail_mp'];
     $this->cantidaditems =   $ped['indice_productos'];
-    
+
     //arma items en memoria
     $this->pedidos_items  = Pedido_item::where('pedido_id', '=', $id_pedido)->get();
     $this->indice_productos=0;
     foreach ($this->pedidos_items as $item) {
-        //obtiene datos de producto, talle y color 
+        //obtiene datos de producto, talle y color
         $sku  = Sku::where('id','=',$item->sku_id)->first();
         $this-> movimientos[ $this->indice_productos] = [
                 'id' => $item->id,
@@ -282,7 +293,7 @@ public function editar($id_pedido)
 //graba el pedido
 public function finalizar()
 {
- 
+
     $this->validate();
 
     $this->indice_productos = count($this->movimientos);
@@ -298,7 +309,7 @@ public function finalizar()
         $this->del_dpto = "";
         $this->del_costo = 0;
     }
-        
+
     //actualiza cabecera
     $lastid = Pedido::updateOrCreate(
         ['id' => $this->id_pedido,
@@ -330,10 +341,10 @@ public function finalizar()
             'detail_mp'    => $this->detail_mp
         ]);
 
-   
+
         for($i=0;$i<count($this->movimientos);$i++) {
             //solo agrega los items nuevos
-            if ($this->movimientos[$i]['id'] == 0) {          
+            if ($this->movimientos[$i]['id'] == 0) {
                     ////obtenemos la cantidad original de stock
                     $canti_ori = Sku::where('producto_id',$this->movimientos[$i]['producto_id'])
                         ->where('talle_id',$this->movimientos[$i]['talle_id'])
@@ -359,9 +370,9 @@ public function finalizar()
                     ->where('talle_id',$this->movimientos[$i]['talle_id'])
                     ->where('color_id',$this->movimientos[$i]['color_id'])
                     ->value('id');
-                    
+
                     Movimiento::Create([
-                        'tipoMovimiento_id' => 2, 
+                        'tipoMovimiento_id' => 2,
                         'sku_id' => $sku_id,
                         'cantidad' => $cantidad,
                         'pedido_id' => $lastid['id'],
@@ -378,9 +389,9 @@ public function finalizar()
                         'sku_id' => $sku_id,
                         'vacio' => 0
                     ]);
-            } 
+            }
 
-        }       
+        }
         session()->flash('message','¡Actualización exitosa!');
         $this->emit('alertSave');
         $this->limpiarCampos();
@@ -388,13 +399,13 @@ public function finalizar()
         $this->modal=false;
         $this->edicion = 0;
 
-    
+
 }
 
 
 public function detalle($id)
 {
-    
+
     //cuenta cuantos items se debe mostrar el detalle
     $cantidad_det = count($this->muestra_detalle);
     $encontro = 0;
@@ -404,7 +415,7 @@ public function detalle($id)
                 if($this->muestra_detalle[$i]['id']== $id) {
                      if ($this->muestra_detalle[$i]['ver']== 0) {
                          $this->muestra_detalle[$i]['ver'] = 1;
-                     }else{ 
+                     }else{
                          $this->muestra_detalle[$i]['ver'] = 0;
                      }
                      $encontro=1;
@@ -416,10 +427,10 @@ public function detalle($id)
     if ($encontro == 0 ){
          $indice = count($this->muestra_detalle);
          $this->muestra_detalle[$indice] = ['id' => $id, 'ver' => 1];
-    }    
+    }
     $this->cantidad_detalle = count($this->muestra_detalle);
-     
-} 
+
+}
 
 
 public function order($sort)
@@ -451,7 +462,7 @@ public function cerrarModal()
 
 
 //nuevo item del pedido
-public function nuevo() 
+public function nuevo()
 {
         $this->limpiarCamposItem();
         $this->abrirModalItem();
@@ -460,11 +471,11 @@ public function nuevo()
 //elimina item
 public function delete($indice)
 {
-    
+
     if ($this->modal==1) { //esta borrando un item $indice es el indice del item
 
         //si el item tiene id se debe eliminar de los detalles
-        // grabar la anulacion y descontar stock 
+        // grabar la anulacion y descontar stock
         if ($this->edicion=1 && $this->movimientos[$indice]['id'] != 0) {
                 ////obtenemos la cantidad original de stock
                 $canti_ori = Sku::where('producto_id',$this->movimientos[$indice]['producto_id'])
@@ -491,7 +502,7 @@ public function delete($indice)
 
                 //genera movimiento en la historia
                 Movimiento::Create([
-                    'tipoMovimiento_id' => 9, 
+                    'tipoMovimiento_id' => 9,
                     'sku_id' => $sku_id,
                     'cantidad' => $cantidad,
                     'pedido_id' => $this->id_pedido,
@@ -509,7 +520,7 @@ public function delete($indice)
         $pedido       = Pedido::where('id', '=', $indice)->first();
         $itemspedidos = Pedido_item::where('pedido_id', '=', $indice)->get();
 
-        //eliminamos items 
+        //eliminamos items
         foreach ($itemspedidos as $items) {
             $sku  = Sku::where('id','=',$items->sku_id)->first();
 
@@ -518,7 +529,7 @@ public function delete($indice)
                             ->where('talle_id',$sku['talle_id'])
                             ->where('color_id',$sku['color_id'])
                             ->value('stock');
-            
+
             //// actualizamos stock sku
             $cantidad = $items['cantidad']+$canti_ori;
             Sku::updateOrCreate(
@@ -530,11 +541,11 @@ public function delete($indice)
                     'stock' =>$cantidad,
                     'estado' => 1
                 ]);
-          
+
 
             //genera movimiento en la historia
             Movimiento::Create([
-                'tipoMovimiento_id' => 9, 
+                'tipoMovimiento_id' => 9,
                 'sku_id' => $sku['id'],
                 'cantidad' => $cantidad,
                 'pedido_id' => $indice,
@@ -625,7 +636,7 @@ public function limpiarCampos()
          $this->total=0;
          $this->transac_mp=0;
          $this->detail_mp='';
-        
+
 }
 
 public function limpiarCamposItem()

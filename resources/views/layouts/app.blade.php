@@ -218,14 +218,34 @@
                 })
             })
 
-
-
             //emit del cambio de cantidades en  carrito
             Livewire.on('carrito', function(mensaje)  {
                 Swal.fire(
                     'Excelente!',
                     mensaje['mensaje'] ,
                     'success'
+                )
+            });
+
+
+             //emit mensaje negativo
+             Livewire.on('mensajeNegativo', function(mensaje)  {
+                Swal.fire({
+                    title: 'Atencion',
+                    text: mensaje['mensaje'] ,
+                    icon: 'warning',
+                    showCloseButton: true}
+                )
+            });
+
+
+                 //emit mensaje positivo
+                 Livewire.on('mensajePositivo', function(mensaje)  {
+                Swal.fire({
+                    title: 'Excelente!',
+                    text: mensaje['mensaje'] ,
+                    icon: 'success',
+                    showCloseButton: true}
                 )
             });
         </script>
