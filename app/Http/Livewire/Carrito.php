@@ -32,7 +32,7 @@ class Carrito extends Component
     //estas publicas las usa ´para ir a pagar
     //despues de eliminar los valores de las
     //variables de session
-    public $articulos,$importe,$delivery;
+    public $articulos,$importe,$delivery,$cant_art;
 
 
 
@@ -162,6 +162,7 @@ class Carrito extends Component
                     $this->articulos = session('items');
                     $this->importe = session('sub_total');
                     $this->delivery = session('costoentrega');
+                    $this->cant_art = count(session('items'));
                     session(['items' => null, 'cantidad' => 0, 'sub_total' => 0,'costoentrega' => 0]);
                     $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
                     $this->apagar=1;
@@ -177,7 +178,10 @@ class Carrito extends Component
 
 
     public function pagar() {
-       $opciones = ['items' => $this->articulos,'total' => $this->importe,'envio' => $this->delivery];
+       $opciones = ['items' => $this->articulos,
+                    'total' => $this->importe,
+                    'envio' => $this->delivery,
+                    'cant_art' => $this->cant_art];
 
        switch ($this->forma_pago_id) {
             case 1: //efectivo contra entrega

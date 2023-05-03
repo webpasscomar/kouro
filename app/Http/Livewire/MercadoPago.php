@@ -14,7 +14,14 @@ class MercadoPago extends Component
     public function mount()
     {
         $this->opciones = session()->get('opciones');
-        dd($this->opciones);
+
+        if ($this->opciones == null ) {
+             $this->opciones['items'] = [];
+             $this->opciones['total'] = 0 ;
+             $this->opciones['envio'] = 0;
+             $this->opciones['cant_art'] =0;
+        }
+
     }
 
 
@@ -23,10 +30,12 @@ class MercadoPago extends Component
     public function render()
     {
 
+
             return view('livewire.mercadopago', [
                     'items' => $this->opciones['items'],
                     'total' => $this->opciones['total'],
-                    'envio' => $this->opciones['envio'] ]);
+                    'envio' => $this->opciones['envio'],
+                    'cant_art' => $this->opciones['cant_art'] ]);
     }
 
 
