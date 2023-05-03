@@ -1,86 +1,52 @@
 <div>
+  <x-header>
+    Sucursales
+  </x-header>
 
+  <!-- Información de cada sucursal -->
 
-    <x-header>
-        Acerca de Nosotros 2
-    </x-header>
+  <!-- Sucursal Morón -->
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-
-            <!-- <div class="grid md:grid-cols-1">
-                <div>
-                    <div class="flex justify-center">
-                        <div class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">
-                            <img class=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg" alt="" />
-                            <div class="p-6 flex flex-col justify-start">
-                                <h5 class="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                                <p class="text-gray-700 text-base mb-4">
-                                    This is a wider card with supporting text below as a natural lead-in to additional
-                                    content.
-                                    This
-                                    content is a little bit longer.
-                                </p>
-                                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <>
-                    <!-- <div class="flex justify-center">
-                        <div class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">
-                            <img class=" w-full h-96 md:h-auto object-cover md:w-48 rounded-t-lg md:rounded-none md:rounded-l-lg"
-                                src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg" alt="" />
-                            <div class="p-6 flex flex-col justify-start">
-                                <h5 class="text-gray-900 text-xl font-medium mb-2">Card title</h5>
-                                <p class="text-gray-700 text-base mb-4">
-                                    This is a wider card with supporting text below as a natural lead-in to additional
-                                    content.
-                                    This content is a little bit longer.
-                                </p>
-                                <p class="text-gray-600 text-xs">Last updated 3 mins ago</p>
-                            </div>
-                        </div>
-                    </div> -->
-                <!-- </div> -->
-            <!-- </div> -->
-
-            <!-- Información de cada sucursal -->
-        
-            <div class="grid grid-cols-3 gap-x-11 rounded-lg shadow-lg shadow-gray-500 hover:shadow-gray-700 bg-red-500">
-
-                <!-- Imagen y descripción de la sucursal -->
-                <div class="max-w-sm bg-red-700">
-                    <a href="#">
-                        <img class="w-full h-96 md:h-64 object-cover md:rounded-none"
-                            src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg" alt="" />
-                    </a>
-                    <div class="p-5">
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-slate-100">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-                        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Read more
-                            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </a>
-                    </div>
-                </div>
-                <!-- Google Maps -->
-                <div class="w-full mx-auto my-auto">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.7824418513887!2d-58.52391016947474!3d-34.508399390813125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb0ee292497e9%3A0xf9a611e58747f528!2sUnicenter!5e0!3m2!1ses!2sar!4v1683031606595!5m2!1ses!2sar" width="750" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-
-
-
-
-
-
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 mt-5 rounded-lg md:gap-x-4 shadow-lg shadow-gray-500 bg-red-700">
+        <!-- Imagen y descripción de la sucursal -->
+        <div class="bg-red-700 p-6 rounded-lg">
+          <img class="w-full h-96 md:h-64 object-cover rounded-lg" src="https://kouro.webpass.online/assets/uploads/7/local1.jpg" alt="sucursal Moron" />
+          <div class="mt-5">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Sucursal Morón</h5>
+            <h6 class="mb-3 font-normal text-slate-100">Almte. Brown 744</h6>
+            <p class="text-white">Lunes a Sábados de 9:00 a 19:30 hs</p>
+            <p class="text-white font-semibold">Domingos Cerrado</p>
+            <p class="mt-3"><strong class="text-white">Tel 11-4629-4476</strong></p>
+          </div>
         </div>
+        <!-- Google Maps -->
+        <div class="aspect-auto p-6 md:col-span-2">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1641.081374353732!2d-58.62018834310188!3d-34.65059256748799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc766ccb08501%3A0x8be78c8a0de27125!2sKouro%20Linea%20Fina%20-%20Cuero%20Argentino!5e0!3m2!1ses!2sar!4v1674231149687!5m2!1ses!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full md:h-full rounded-lg h-64"></iframe>
+        </div>
+      </div>
+
+      <!-- Sucursal Ramos Mejía -->
+
+      <div class="grid grid-cols-1 md:grid-cols-3 mt-20 rounded-lg md:gap-x-4 shadow-lg shadow-gray-500 bg-red-700">
+
+        <!-- Imagen y descripción de la sucursal -->
+        <div class="bg-red-700 p-6 rounded-lg">
+          <img class="w-full h-96 md:h-64 object-cover rounded-lg" src="https://kouro.webpass.online/assets/uploads/7/local1.jpg" alt="sucursal Moron" />
+          <div class="mt-5">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Sucursal Ramos Mejía</h5>
+            <h6 class="mb-3 font-normal text-slate-100">Av. de Mayo 32</h6>
+            <p class="text-white">Lunes a Sábados de 10:00 a 14:00 hs y de 15:00 a 19:00 hs</p>
+            <p class="text-white font-semibold">Domingos Cerrado</p>
+            <p class="mt-3"><strong class="text-white">Tel 11-4658-0343</strong></p>
+          </div>
+        </div>
+        <!-- Google Maps -->
+        <div class="aspect-auto p-6 md:col-span-2">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.5337033793307!2d-58.567683284946625!3d-34.64122218044985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7e56394cfc5%3A0xb5e898c27e5a80a6!2sKouro%20Linea%20Fina%20-%20Cuero%20Argentino!5e0!3m2!1ses!2sar!4v1674235251006!5m2!1ses!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full md:h-full rounded-lg h-64"></iframe>
+        </div>
+      </div>
     </div>
-
-
-
+  </div>
 </div>
