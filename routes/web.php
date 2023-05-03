@@ -8,6 +8,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\CategoriaController;
 
 use App\Http\Livewire\Carrito;
+use App\Http\Livewire\MercadoPago;
 use App\Http\Livewire\Nosotros;
 use App\Http\Livewire\ProductosFront;
 use App\Http\Livewire\ProductoFront;
@@ -30,7 +31,7 @@ Route::get('/contacto', [ContactController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.store');
 
 Route::get('/carrito', Carrito::class)->name('carrito');
-Route::get('/carrito', Carrito::class)->name('carrito');
+Route::get('/mercadopago',MercadoPago::class)->name('mercadopago');
 
 Route::get('/nosotros', Nosotros::class)->name('nosotros');
 
