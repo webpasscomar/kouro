@@ -24,10 +24,18 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('sucursales') }}" :active="request()->routeIs('sucursales')">
+                        Sucursales
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('nosotros') }}" :active="request()->routeIs('nosotros')">
                         Nosotros
                     </x-jet-nav-link>
                 </div>
+
+
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('contacto') }}" :active="request()->routeIs('contacto')">

@@ -12,6 +12,8 @@ $faq_count = 5;
 $places_count = 5;
 $contact_messages_count = 5;
 $gallery_count = 5;
+$existencias_count = 10;
+$stock_count = 20;
 ?>
 
 <x-header>
@@ -22,13 +24,22 @@ $gallery_count = 5;
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 
-            <a href="/admin/categorias"
+            <a href="/admin/movimientos"
                 class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
                 <div class="flex justify-between items-center mb-4">
-                    <div class="text-gray-600 font-bold text-xl">Categorías</div>
-                    <i class="fas fa-tags text-gray-600 text-2xl"></i>
+                    <div class="text-gray-600 font-bold text-xl">Manejo de Existencias</div>
+                    <i class="fas fa-boxes text-gray-600 text-2xl"></i>
                 </div>
-                <div class="text-gray-600 font-bold text-xl">{{ $categories_count }}</div>
+                <div class="text-gray-600 font-bold text-xl">{{ $existencias_count }}</div>
+            </a>
+
+            <a href="/admin/historias"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Stock</div>
+                    <i class="fas fa-box-open text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $stock_count }}</div>
             </a>
 
             <a href="/admin/productos"
@@ -38,6 +49,15 @@ $gallery_count = 5;
                     <i class="fas fa-boxes text-gray-600 text-2xl"></i>
                 </div>
                 <div class="text-gray-600 font-bold text-xl">{{ $products_count }}</div>
+            </a>
+
+            <a href="/admin/categorias"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Categorías</div>
+                    <i class="fas fa-tags text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $categories_count }}</div>
             </a>
 
             <a href="/admin/talles" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
@@ -64,13 +84,6 @@ $gallery_count = 5;
                     <i class="fas fa-shopping-cart text-gray-600 text-2xl"></i>
                 </div>
                 <div class="text-gray-600 font-bold text-xl">{{ $orders_count }}</div>
-            </a>
-            <a href="/admin/stock" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
-                <div class="flex justify-between items-center mb-4">
-                    <div class="text-gray-600 font-bold text-xl">Stock</div>
-                    <i class="fas fa-box-open text-gray-600 text-2xl"></i>
-                </div>
-                <div class="text-gray-600 font-bold text-xl">{{ $stock_count }}</div>
             </a>
 
             <a href="/admin/testimonios"
@@ -117,8 +130,7 @@ $gallery_count = 5;
                 <div class="text-gray-600 font-bold text-xl">{{ $contact_messages_count }}</div>
             </a>
 
-            <a href="/admin/slider"
-                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+            <a href="/admin/slider" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
                 <div class="flex justify-between items-center mb-4">
                     <div class="text-gray-600 font-bold text-xl">Galería</div>
                     <i class="fas fa-images text-gray-600 text-2xl"></i>
@@ -126,7 +138,8 @@ $gallery_count = 5;
                 <div class="text-gray-600 font-bold text-xl">{{ $gallery_count }}</div>
             </a>
 
-            <a href="/admin/locales" class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+            <a href="/admin/locales"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
                 <div class="flex justify-between items-center mb-4">
                     <div class="text-gray-600 font-bold text-xl">Locales</div>
                     <i class="fas fa-map-marker-alt text-gray-600 text-2xl"></i>

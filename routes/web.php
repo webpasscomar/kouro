@@ -11,6 +11,8 @@ use App\Http\Livewire\Carrito;
 use App\Http\Livewire\Nosotros;
 use App\Http\Livewire\ProductosFront;
 use App\Http\Livewire\ProductoFront;
+use App\Http\Livewire\Sucursales;
+
 // use App\Http\Livewire\ContactoFront;
 // use App\Http\Livewire\NosotrosFront;
 
@@ -33,6 +35,8 @@ Route::get('/carrito', Carrito::class)->name('carrito');
 Route::get('/carrito', Carrito::class)->name('carrito');
 
 Route::get('/nosotros', Nosotros::class)->name('nosotros');
+
+Route::get('/sucursales', Sucursales::class)->name('sucursales');
 
 Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs.index');
 
