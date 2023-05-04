@@ -26,8 +26,11 @@ class Carrito extends Component
     public $costoentrega;
 
     public $cli_nombre, $cli_apellido, $cli_email, $cli_telefono,$cli_calle,$cli_nro,$cli_piso,$cli_dpto;
-    public $cli_prov_id, $cli_loc_id,$forma_pago_id;
+    public $cli_prov_id, $cli_loc_id;
     public $apagar=0;
+    public $forma_pago_id=0;
+    public $numero_pedido;
+
 
     //estas publicas las usa ´para ir a pagar
     //despues de eliminar los valores de las
@@ -156,9 +159,9 @@ class Carrito extends Component
 
             if ($ok==1) {
                 //grabar pedido
-                $numero_pedido = null;
-                $numero_pedido = $this->grabarPedido();
-                if ($numero_pedido)  {
+                $this->numero_pedido = null;
+                $this->numero_pedido = $this->grabarPedido();
+                if ($this->numero_pedido)  {
                     $this->articulos = session('items');
                     $this->importe = session('sub_total');
                     $this->delivery = session('costoentrega');
@@ -166,7 +169,7 @@ class Carrito extends Component
                     session(['items' => null, 'cantidad' => 0, 'sub_total' => 0,'costoentrega' => 0]);
                     $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
                     $this->apagar=1;
-                    $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $numero_pedido->id]);
+                    $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $this->numero_pedido->id]);
                     //$this->pagar($articulos, $importe, $delivery, $this->forma_pago_id);
 
                 }
@@ -181,7 +184,8 @@ class Carrito extends Component
        $opciones = ['items' => $this->articulos,
                     'total' => $this->importe,
                     'envio' => $this->delivery,
-                    'cant_art' => $this->cant_art];
+                    'cant_art' => $this->cant_art,
+                    'nro_pedido' => $this->numero_pedido->id];
 
        switch ($this->forma_pago_id) {
             case 1: //efectivo contra entrega
