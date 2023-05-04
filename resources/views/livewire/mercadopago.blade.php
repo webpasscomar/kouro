@@ -8,18 +8,11 @@
     //crea el objeto
     $preference = new MercadoPago\Preference();
 
-    //crea un item de la preferencia
-    $item = new MercadoPago\Item();
-
-    // $item->title = "Mi producto";
-    // $item->quantity = 1;
-    // $item->unit_price = 75.56;
-    // $preference->items = array($item);
-    // $preference->save();
-
 
     if ($cant_art > 0) {
         for ($i = 0; $i < $cant_art; $i++){
+            //crea un item de la preferencia
+            $item = new MercadoPago\Item();
             $item->title = $items[$i]['producto_nombre'] . ' ' . $items[$i]['talle_nombre'] . ' ' . $items[$i]['color_nombre'];
             $item->quantity = $items[$i]['cantidad'];
             $item->unit_price = $items[$i]['producto_precio'];
@@ -27,12 +20,13 @@
             $products[] = $item;
         }
 
-        if ($envio > 0 ) {
-            $item->title = 'Envio';
-            $item->quantity = 1;
-            $item->unit_price = $envio;
-            $products[] = $item;
-        }
+         if ($envio > 0 ) {
+             $item = new MercadoPago\Item();
+             $item->title = 'Envio';
+             $item->quantity = 1;
+             $item->unit_price = $envio;
+             $products[] = $item;
+         }
 
         $preference->notification_url = config('services.mercadopago.url_post');
 

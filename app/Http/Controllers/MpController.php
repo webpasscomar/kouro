@@ -6,6 +6,9 @@ use App\Http\Livewire\MercadoPago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+use App\Models\Log_pago;
+
+
 
 class MpController extends Controller
 {
@@ -20,9 +23,10 @@ class MpController extends Controller
 
 
             $response_jason = json_decode($response);
-           // dump($response_jason->external_reference);
-           // dump($response_jason->status);
-           dump($response_jason);
+            //dump($response_jason->external_reference);
+            //dump($response_jason->status);
+            //dump($response_jason);
+            dump($response_jason->notification_url);
 
 
 
