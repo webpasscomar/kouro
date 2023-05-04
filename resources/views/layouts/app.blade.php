@@ -13,21 +13,26 @@
 
 
     <!-- Styles -->
+    <!-- styles tw-elements -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+    <!-- ---------------- -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+
 
     @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="font-sans antialiased">
     @php
-        use Illuminate\Support\Str;
-        use Livewire\Livewire;
+    use Illuminate\Support\Str;
+    use Livewire\Livewire;
     @endphp
     <x-jet-banner />
 
@@ -36,25 +41,25 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
         @endif
 
         <!-- Page Content -->
         <main>
             <div>
                 @isset($slot)
-                    {{ $slot }}
+                {{ $slot }}
                 @else
-                    @yield('content')
-                    @endif
-                </div>
-            </main>
+                @yield('content')
+                @endif
+            </div>
+        </main>
 
-            {{-- <main>
+        {{-- <main>
             @switch(Route::currentRouteName())
                 @case('productos')
                 @case('productos.categoria')
@@ -99,7 +104,7 @@
             @endswitch
         </main> --}}
 
-            {{-- <main>
+        {{-- <main>
             @if (request()->is('productos'))
                 @livewire('productos-front')
             @elseif(request()->is('contacto'))
@@ -110,32 +115,32 @@
         </main> --}}
 
 
-            <!-- Page Content -->
-            {{-- <main>
+        <!-- Page Content -->
+        {{-- <main>
             <h1>{{ request()->route()->getName() }}</h1>
-            @switch(request()->route()->getName())
-                @case('livewire.productos.index')
-                    @livewire('productos')
-                @break
+        @switch(request()->route()->getName())
+        @case('livewire.productos.index')
+        @livewire('productos')
+        @break
 
-                @case('contacto.index')
-                    @livewire('contacto.index')
-                @break
+        @case('contacto.index')
+        @livewire('contacto.index')
+        @break
 
-                @case('nosotros.index')
-                    @livewire('nosotros.index')
-                @break
+        @case('nosotros.index')
+        @livewire('nosotros.index')
+        @break
 
-                @case('servicios.index')
-                    @livewire('servicios.index')
-                @break
+        @case('servicios.index')
+        @livewire('servicios.index')
+        @break
 
-                @default
-                    @livewire('default.index')
-            @endswitch
+        @default
+        @livewire('default.index')
+        @endswitch
         </main> --}}
 
-            {{-- <main>
+        {{-- <main>
             @if (Str::contains(view()->getName(), 'livewire'))
                 <div>
                     @livewire(
@@ -146,110 +151,113 @@
                 <div>
                     @isset($slot)
                         {{ $slot }}
-                    @else
-                        @yield('content')
-                @endif
-        </div>
+        @else
+        @yield('content')
         @endif
-        </main> --}}
+    </div>
+    @endif
+    </main> --}}
 
-        </div>
-        {{-- @livewire('footer') --}}
-        @stack('modals')
+    </div>
+    {{-- @livewire('footer') --}}
+    @stack('modals')
 
-        @livewireScripts
+    @livewireScripts
 
-        <script>
-            Livewire.on('alertSave', function() {
-                Swal.fire(
-                    'Excelente!',
-                    'Ha sido guardado correctamente!',
-                    'success'
-                )
-            });
+    <script>
+        Livewire.on('alertSave', function() {
+            Swal.fire(
+                'Excelente!',
+                'Ha sido guardado correctamente!',
+                'success'
+            )
+        });
 
-            Livewire.on('alertDelete', id => {
-                Swal.fire({
-                    title: '¿Está seguro /a?',
-                    text: "La acción no podrá ser revertida!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, borrar!'
-                }).then((result) => {
+        Livewire.on('alertDelete', id => {
+            Swal.fire({
+                title: '¿Está seguro /a?',
+                text: "La acción no podrá ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, borrar!'
+            }).then((result) => {
 
 
-                    if (result.isConfirmed) {
-                        // alert('Borrar el id: ' + id);
-                        Livewire.emit('delete', id);
+                if (result.isConfirmed) {
+                    // alert('Borrar el id: ' + id);
+                    Livewire.emit('delete', id);
 
-                        Swal.fire(
-                            'Borrado!',
-                            'Ha sido eliminado con éxito.',
-                            'success'
-                        )
-                    }
-                })
+                    Swal.fire(
+                        'Borrado!',
+                        'Ha sido eliminado con éxito.',
+                        'success'
+                    )
+                }
             })
+        })
 
 
-            Livewire.on('alertCarritoDelete', (idproducto,idtalle,idcolor) =>  {
-                Swal.fire({
-                    title: '¿Está seguro /a?',
-                    text: "La acción no podrá ser revertida!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, borrar!'
-                }).then((result) => {
+        Livewire.on('alertCarritoDelete', (idproducto, idtalle, idcolor) => {
+            Swal.fire({
+                title: '¿Está seguro /a?',
+                text: "La acción no podrá ser revertida!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, borrar!'
+            }).then((result) => {
 
 
-                    if (result.isConfirmed) {
-                        Livewire.emit('delete', idproducto,idtalle,idcolor);
+                if (result.isConfirmed) {
+                    Livewire.emit('delete', idproducto, idtalle, idcolor);
 
-                        // Swal.fire(
-                        //     'Borrado!',
-                        //     'Ha sido eliminado con éxito.',
-                        //     'success'
-                        // )
-                    }
-                })
+                    // Swal.fire(
+                    //     'Borrado!',
+                    //     'Ha sido eliminado con éxito.',
+                    //     'success'
+                    // )
+                }
             })
+        })
 
-            //emit del cambio de cantidades en  carrito
-            Livewire.on('carrito', function(mensaje)  {
-                Swal.fire(
-                    'Excelente!',
-                    mensaje['mensaje'] ,
-                    'success'
-                )
-            });
-
-
-             //emit mensaje negativo
-             Livewire.on('mensajeNegativo', function(mensaje)  {
-                Swal.fire({
-                    title: 'Atencion',
-                    text: mensaje['mensaje'] ,
-                    icon: 'warning',
-                    showCloseButton: true}
-                )
-            });
+        //emit del cambio de cantidades en  carrito
+        Livewire.on('carrito', function(mensaje) {
+            Swal.fire(
+                'Excelente!',
+                mensaje['mensaje'],
+                'success'
+            )
+        });
 
 
-                 //emit mensaje positivo
-                 Livewire.on('mensajePositivo', function(mensaje)  {
-                Swal.fire({
-                    title: 'Excelente!',
-                    text: mensaje['mensaje'] ,
-                    icon: 'success',
-                    showCloseButton: true}
-                )
-            });
-        </script>
+        //emit mensaje negativo
+        Livewire.on('mensajeNegativo', function(mensaje) {
+            Swal.fire({
+                title: 'Atencion',
+                text: mensaje['mensaje'],
+                icon: 'warning',
+                showCloseButton: true
+            })
+        });
 
-    </body>
 
-    </html>
+        //emit mensaje positivo
+        Livewire.on('mensajePositivo', function(mensaje) {
+            Swal.fire({
+                title: 'Excelente!',
+                text: mensaje['mensaje'],
+                icon: 'success',
+                showCloseButton: true
+            })
+        });
+    </script>
+
+    <!-- Script de tw-elements -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+
+</body>
+
+</html>

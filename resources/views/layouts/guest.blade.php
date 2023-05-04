@@ -13,7 +13,15 @@
 
     <!-- Scripts -->
     <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
+
+    <!-- styles tw-elements -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    <!-- Script de tw-elements -->
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
