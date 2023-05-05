@@ -38,7 +38,7 @@ class MpController extends Controller
                     'log'             => $response,
                 ]);
                 //$this->emit('mensajePositivo', ['mensaje' => 'El pago se realizo con exito']);
-                //redirect()->to('/shop');
+                return redirect()->to('/shop');
 
     }
 }
