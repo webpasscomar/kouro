@@ -158,6 +158,11 @@
     @endif
     </main> --}}
 
+    <!-- Footer del sitio  -->
+    <footer>
+        <x-footer></x-footer>
+    </footer>
+
     </div>
     {{-- @livewire('footer') --}}
     @stack('modals')
