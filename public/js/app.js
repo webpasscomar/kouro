@@ -5049,6 +5049,16 @@ __webpack_require__.r(__webpack_exports__);
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 
+//  Botón Top
+
+var botonIrArriba = document.querySelector("#btn-top");
+botonIrArriba.addEventListener("click", function () {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
