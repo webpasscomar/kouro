@@ -37,6 +37,7 @@ class MpController extends Controller
                     'status'          => $response_json->status,
                     'log'             => $response,
                 ]);
+                //no tiene emit porque no es un controlador livewire
                 //$this->emit('mensajePositivo', ['mensaje' => 'El pago se realizo con exito']);
                 return redirect()->to('/shop');
 
