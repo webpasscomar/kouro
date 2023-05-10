@@ -17,6 +17,7 @@ use App\Models\Formadeentrega;
 use App\Models\Provincia;
 use App\Models\Localidad;
 use App\Models\Movimiento;
+use App\Models\Log_pago;
 
 
 
@@ -28,6 +29,8 @@ class Pedidos extends Component
 
     public $modal = false;
     public $modalitem = false;
+    public $modalpago = false;
+
     public $search;
     public $sort = 'id';
     public $order = 'desc';
@@ -62,6 +65,12 @@ class Pedidos extends Component
     public $sucursal_id=0;
     public $cantidaditems=0;
     public $indice_productos,$producto_nombre,$color_nombre,$talle_nombre,$estado;
+
+
+
+    //campos del modal de verpago
+
+
 
 
 
@@ -254,7 +263,6 @@ public function editar($id_pedido)
     $this->entrega_id    =   $ped['entrega_id'];
     $this->estado_id     =   $ped['estado_id'];
     $this->fecha         =   $ped['fecha'];
-    $this->formapago_id  =   $ped['formaPago_id'];
     $this->provincia_id  =   $ped['provincia_id'];
     $this->localidad_id  =   $ped['localidad_id'];
     $this->observaciones =   $ped['observaciones'];
@@ -328,17 +336,13 @@ public function finalizar()
             'entrega_id'    => $this->entrega_id,
             'estado_id'     => $this->estado_id,
             'fecha'         => $this->fecha,
-            'formaPago_id'  => $this->formapago_id,
             'provincia_id'  => $this->provincia_id,
             'localidad_id'  => $this->localidad_id,
             'observaciones' => $this->observaciones,
-            'status_mp'     => $this->status_mp,
             'subTotal'      => $costototal,
             'sucursal_id'   => 0,
             'telefono'      => $this->telefono,
             'total'         => $this->del_costo+$costototal,
-            'transac_mp'    => $this->transac_mp,
-            'detail_mp'    => $this->detail_mp
         ]);
 
 
@@ -650,6 +654,39 @@ public function limpiarCamposItem()
 
 }
 
+
+
+//abre modal de verpago
+public function abrirModalVerpago()
+{
+    $this->modalpago = true;
+}
+
+//cierra modal verpago  sin grabar
+public function cerrarModalVerpago()
+{
+        $this->modalpago = false;
+}
+
+
+
+public function verpago($idpedido)
+{
+
+
+    $datos_pago = Log_pago::where('idpedido',$idpedido)->get();
+    if ($datos_pago) {
+        foreach ($datos_pago as $dato) {
+                dump($dato->formasdepago->nombre);
+                //dump($datos_pago[0]->formasdepago->nombre);
+        }
+    }else{
+        dump('no encontrado');
+    }
+
+
+    //$this->abrirModalVerpago();
+}
 
 
 }

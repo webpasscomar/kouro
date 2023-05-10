@@ -18,6 +18,7 @@ class CreateLogPagosTable extends Migration
             $table->integer('idpedido');
             $table->integer('operacion_pago');
             $table->string('status');
+            $table->integer('formaPago_id');
             $table->text('log');
             $table->timestamps();
         });

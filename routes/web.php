@@ -40,7 +40,7 @@ Route::get('/nosotros', Nosotros::class)->name('nosotros');
 
 
 Route::get('/pagomp/{datos}/pago', [MpController::class, 'pago'])->name('pagomp.pago'); //url de testing
-Route::get('/pagosmp/{datos}/pagos', [MpController::class, 'pagos'])->name('pagomp.pagos'); //url de producccion
+
 
 Route::post('/webhooks',  WebhooksController::class);
 

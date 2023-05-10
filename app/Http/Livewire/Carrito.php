@@ -308,17 +308,13 @@ class Carrito extends Component
                 'entrega_id'    => $this->entrega_id,
                 'estado_id'     => 1,
                 'fecha'         => date('Y-m-d H:i:s'),
-                'formaPago_id'  => 0,
                 'provincia_id'  => $this->cli_prov_id,
                 'localidad_id'  => $this->cli_loc_id,
                 'observaciones' => '',
-                'status_mp'     => '',
                 'subTotal'      => $costototal,
                 'sucursal_id'   => 0,
                 'telefono'      => $this->cli_telefono,
                 'total'         => session('sub_total') + session('costoentrega'),
-                'transac_mp'    => 0,
-                'detail_mp'    => ''
             ]
         );
 

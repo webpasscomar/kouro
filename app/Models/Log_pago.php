@@ -13,7 +13,18 @@ class Log_pago extends Model
 protected $table = 'log_pagos';
 
 protected  $fillable = [
-    'idpedido','operacion_pago','status','log'
+    'idpedido','operacion_pago','status','log','formapago_id',
 ];
 
+
+
+public function formasdepago()
+{
+    return $this->belongsTo(Formasdepagos::class);
+
 }
+
+
+}
+
+

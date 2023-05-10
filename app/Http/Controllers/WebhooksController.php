@@ -26,18 +26,20 @@ class WebhooksController extends Controller
         //      'user_id' => 44444,
         //      'api_version' =>  'v1',
         //      'action' => 'payment.created',
-        //      'data' => ['id' => '1312869096',],
+        //      'data' => ['id' => '1314820621',],
         //      ];
         //  $jsonData = json_encode($data);
         //  $payment_id = json_decode($jsonData)->data->id;
         //----------------------------------------------------------------
-        $payment_id = json_decode($request)->data->id;
+        $payment_id = $request->get('data')['id'];
         $response = Http::get(
               config('services.mercadopago.url_getpago') .  $payment_id  . "?access_token=" . config('services.mercadopago.token')
          );
 
         $response_json = json_decode($response);
         $response_idpedido = $response_json->external_reference;
+
+        //return $response_json;
 
         $procesado = null;
         $procesado = Log_pago::where('idpedido', $response_idpedido)
@@ -51,6 +53,7 @@ class WebhooksController extends Controller
                   'operacion_pago'  => $payment_id,
                   'status'          => $response_json->status,
                   'log'             => $response,
+                  'formapago_id'    => 2,
               ]);
 
 

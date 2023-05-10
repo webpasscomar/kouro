@@ -9,7 +9,7 @@
             @if ($modal==1)
                 @include('livewire.backend.pedidos-form')
             @endif
-            @if ($modal==0) 
+            @if ($modal==0)
             <div class="grid grid-cols-1 sm:grid-cols-3">
                 <div>
                     <button wire:click="crear()"
@@ -137,22 +137,25 @@
                                     <td class="border px-4 py-2 text-center">
                                         <button wire:click="detalle({{ $pedido->id }})"
                                             class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4">Detalle</button>
-                                        <!-- solo se puede editar en pendiente o en preparacion -->
-                                        @if ($pedido->estado_id == 1 || $pedido->estado_id == 2)   
+
+                                            <!-- solo se puede editar en pendiente o en preparacion -->
+                                        @if ($pedido->estado_id == 1 || $pedido->estado_id == 2)
                                             <button wire:click="editar({{ $pedido->id }})"
-                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>                                            
+                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
 
                                                 <button wire:click="$emit('alertDelete',{{ $pedido->id }})"
                                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
-                                        
-                                        
+
                                         @endif
-                                                
+
+                                        <button wire:click="verpago({{ $pedido->id }})"
+                                            class="bg-gray-200 hover:bg-green-400 text-black font-bold py-2 px-4">Ver Pago</button>
+
                                         </td>
                                 </tr>
-                                @for ($i = 0; $i < $cantidad_detalle; $i++) 
-                                        @if ($muestra_detalle[$i]['id'] == $pedido->id) 
-                                            @if ($muestra_detalle[$i]['ver'] == 1) 
+                                @for ($i = 0; $i < $cantidad_detalle; $i++)
+                                        @if ($muestra_detalle[$i]['id'] == $pedido->id)
+                                            @if ($muestra_detalle[$i]['ver'] == 1)
                                                 <tr class="border">
                                                     <td colspan=6>
                                                         <table class="table-auto w-full">
@@ -174,24 +177,28 @@
                                                                         <td class="border">{{$items->sku->color->color}}</td>
                                                                         <td class="border">{{$items->sku->producto->nombre}}</td>
                                                                     </tr>
-                                                                @endif    
+                                                                @endif
                                                             @endforeach
                                                         </table>
 
                                                     </td>
-                                                </tr>       
+                                                </tr>
                                             @endif
                                         @endif
                                 @endfor
 
-                           
 
-                            @endforeach     
+
+                            @endforeach
                         </tbody>
             </table>
 
                     {{ $pedidos->links() }}
             @endif
+            @if ($modalpago==1)
+                @include('livewire.backend.verpago-form')
+            @endif
+
         </div>
     </div>
 </div>
