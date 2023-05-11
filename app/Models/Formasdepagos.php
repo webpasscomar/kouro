@@ -12,7 +12,7 @@ class Formasdepagos extends Model
 
 public function logpagos()
 {
-    return $this->hasToMany(Log_pago::class);
+    return $this->belognsToMany(Log_pago::class);
 }
 
 

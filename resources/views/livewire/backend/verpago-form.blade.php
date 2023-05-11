@@ -12,18 +12,30 @@
         <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
-            <form>
 
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    @if ($datos_pago->pago_operacion !== null)
+                        <table class="table-auto w-full">
+                            <thead>
+                                <th>Operacion</th>
+                                <th>Estado</th>
+                                <th>Forma de Pago</th>
+                                <th>fecha</th>
+                            </thead>
+                            <tbody>
 
-                    <div class="mb-4 col-span-3">
-                        <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Color:</label>
-                        <input type="text"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="color" wire:model="color">
-                            <x-jet-input-error for="color" />
-                    </div>
+                                <tr>
+                                    <td class="border">{{ $datos_pago->pago_operacion }}</td>
+                                    <td class="border">{{ $datos_pago->pago_estado }}</td>
+                                    <td class="border">{{ $datos_pago->formadepago }}</td>
+                                    <td class="border">{{ $datos_pago->pago_fecha }}</td>
+                                </tr>
 
+                            </tbody>
+                        </table>
+                    @else
+                        <h2>Sin pago registrado</h2>
+                    @endif
 
 
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3">
@@ -35,7 +47,6 @@
                     </div>
 
                 </div>
-            </form>
         </div>
 
 

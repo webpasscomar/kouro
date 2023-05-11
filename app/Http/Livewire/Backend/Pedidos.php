@@ -18,10 +18,7 @@ use App\Models\Provincia;
 use App\Models\Localidad;
 use App\Models\Movimiento;
 use App\Models\Log_pago;
-
-
-
-
+use App\Models\Formasdepagos;
 
 
 class Pedidos extends Component
@@ -69,9 +66,7 @@ class Pedidos extends Component
 
 
     //campos del modal de verpago
-
-
-
+    public $datos_pago = null;
 
 
     //tablas usadas
@@ -163,6 +158,7 @@ class Pedidos extends Component
                          'muestra_detalle' => $this->muestra_detalle,
                          'cantidad_detalle' => $this->cantidad_detalle,
                          'pedidos_items' => $this->pedidos_items,
+                         'datos_pago' => $this->datos_pago,
                          'sku' => $this->sku,
                         ]);
     }
@@ -674,19 +670,35 @@ public function verpago($idpedido)
 {
 
 
-    $datos_pago = Log_pago::where('idpedido',$idpedido)->get();
-    if ($datos_pago) {
-        foreach ($datos_pago as $dato) {
-                dump($dato->formasdepago->nombre);
-                //dump($datos_pago[0]->formasdepago->nombre);
+    $this->datos_pago = Log_pago::where('idpedido',$idpedido)->first();
+
+
+    if ($this->datos_pago) {
+
+        //hay que respetar el alias de los campos de pagos
+        //ya que es la misma pantalla para mostrar todas las
+        //formas de pago
+        switch ($this->datos_pago->formapago_id) {
+            case 1: //efectivo contra entrega
+                break;
+            case 2:  //mercado pago
+                $this->datos_pago = Log_pago::select(['log_pagos.id as pago_id',
+                'log_pagos.operacion_pago as pago_operacion',
+                'log_pagos.status as pago_estado',
+                'formasdepagos.nombre as formadepago',
+                 'log_pagos.created_at as pago_fecha'])
+                 ->join('formasdepagos', 'log_pagos.formapago_id', '=', 'formasdepagos.id')
+                 ->where('log_pagos.idpedido', '=', $idpedido)
+                 ->first();
+                break;
+            case 3: //modo
+                break;
+            default:
         }
-    }else{
-        dump('no encontrado');
+
     }
-
-
-    //$this->abrirModalVerpago();
+    $this->abrirModalVerpago();
 }
 
-
 }
+
