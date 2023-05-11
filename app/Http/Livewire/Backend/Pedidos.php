@@ -670,7 +670,9 @@ public function verpago($idpedido)
 {
 
 
-    $this->datos_pago = Log_pago::where('idpedido',$idpedido)->first();
+    $this->datos_pago = Log_pago::where('idpedido',$idpedido)
+                            ->where('status','approved')
+                            ->first();
 
 
     if ($this->datos_pago) {
@@ -700,5 +702,73 @@ public function verpago($idpedido)
     $this->abrirModalVerpago();
 }
 
+
+
+public function cobrarmp($idpedido)
+    {
+
+        //chequear que no este pago
+        $this->datos_pago = Log_pago::where('idpedido',$idpedido)
+                                      ->where('status','approved')->first();
+
+        $articulos = Pedido_item::where('pedido_id',$idpedido)->get();
+
+
+        $pedido = Pedido::where('id',$idpedido)->first();
+
+
+       // dump($this->datos_pago);
+        if ($this->datos_pago !== null) {
+            $this->emit('mensajeNegativo', ['mensaje' => 'El pedido ya fue cobrado']);
+        }else{
+            if ($articulos) {
+                $items = [];
+                foreach ($articulos as $articulo) {
+                    $cantidad = $articulo->cantidad;
+
+                    $sku = Sku::where('id',$articulo->sku_id)->first();
+                    $talle_nombre = Talle::where('id', $sku->talle_id)->value('talle');
+                    $color_nombre = Color::where('id', $sku->color_id)->value('color');
+                    $talle_id = $sku->talle_id;
+                    $color_id = $sku->color_id;
+                    $producto_id =  $sku->producto_id;
+                    $producto_nombre = Producto::where('id',$sku->producto_id)->value('nombre');
+                    $precio = $articulo->precioUnitario;
+                    $item = [
+                        'cantidad' => $cantidad,
+                        'talle_id' => $talle_id,
+                        'talle_nombre' => $talle_nombre,
+                        'color_id' => $color_id,
+                        'color_nombre' => $color_nombre,
+                        'producto_id' => $producto_id,
+                        'producto_nombre' => $producto_nombre,
+                        'producto_precio' => $precio,
+                        'total_item' => $cantidad * $precio
+                    ];
+                    array_push($items, $item);
+                }
+
+
+
+                $opciones = [
+                    'items' => $items,
+                    'total' => $pedido->subTotal,
+                    'envio' => $pedido->del_costo,
+                    'cant_art' => $pedido->cantidadItems,
+                    'nro_pedido' => $idpedido
+                ];
+
+                redirect()->to('/mercadopago')->with([
+                                 'opciones' => $opciones,
+                             ]);
+            }else{
+                $this->emit('mensajeNegativo', ['mensaje' => 'No se encuentran productos a cobrar en el pedido']);
+            }
+        }
+    }
 }
+
+
+
+
 

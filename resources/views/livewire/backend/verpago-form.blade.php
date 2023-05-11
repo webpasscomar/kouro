@@ -14,7 +14,7 @@
 
 
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    @if ($datos_pago->pago_operacion !== null)
+                    @if ($datos_pago !== null)
                         <table class="table-auto w-full">
                             <thead>
                                 <th>Operacion</th>

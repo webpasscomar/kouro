@@ -13,7 +13,12 @@ use App\Models\Log_pago;
 class MpController extends Controller
 {
 
-    //este metodo habra que copiarlo al controller webhooks cuando pase a produccion
+    //este metodo recibe el pago de mercado pago cuando paga
+    //pero solo si en mp le da click al boton volver al sitio
+    //sino no manda nada
+    //si el pago se efectuo, mp envia una notificacion
+    //y lo recibinmos en el controller webhooks por post
+
     public function pago($datos, Request $request) {
             // return $request->all();
             $payment_id = $request->get('payment_id');

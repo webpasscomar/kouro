@@ -144,12 +144,16 @@
                                                 class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
 
                                                 <button wire:click="$emit('alertDelete',{{ $pedido->id }})"
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                                   class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
 
                                         @endif
 
                                         <button wire:click="verpago({{ $pedido->id }})"
-                                            class="bg-gray-200 hover:bg-green-400 text-black font-bold py-2 px-4">Ver Pago</button>
+                                            class="bg-gray-200 hover:bg-gray-400 text-black font-bold py-2 px-4">Ver Pago</button>
+
+                                        <button wire:click="cobrarmp({{ $pedido->id }})"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Cobrar con MP</button>
+
 
                                         </td>
                                 </tr>

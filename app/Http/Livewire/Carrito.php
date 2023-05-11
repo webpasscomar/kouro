@@ -203,6 +203,8 @@ class Carrito extends Component
 
 
 
+
+
     //borra items del carrito
     public function delete($idproducto, $idtalle, $idcolor)
     {
