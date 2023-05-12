@@ -17,10 +17,8 @@ use App\Models\Formadeentrega;
 use App\Models\Provincia;
 use App\Models\Localidad;
 use App\Models\Movimiento;
-
-
-
-
+use App\Models\Log_pago;
+use App\Models\Formasdepagos;
 
 
 class Pedidos extends Component
@@ -28,6 +26,8 @@ class Pedidos extends Component
 
     public $modal = false;
     public $modalitem = false;
+    public $modalpago = false;
+
     public $search;
     public $sort = 'id';
     public $order = 'desc';
@@ -63,6 +63,10 @@ class Pedidos extends Component
     public $cantidaditems=0;
     public $indice_productos,$producto_nombre,$color_nombre,$talle_nombre,$estado;
 
+
+
+    //campos del modal de verpago
+    public $datos_pago = null;
 
 
     //tablas usadas
@@ -154,6 +158,7 @@ class Pedidos extends Component
                          'muestra_detalle' => $this->muestra_detalle,
                          'cantidad_detalle' => $this->cantidad_detalle,
                          'pedidos_items' => $this->pedidos_items,
+                         'datos_pago' => $this->datos_pago,
                          'sku' => $this->sku,
                         ]);
     }
@@ -254,7 +259,6 @@ public function editar($id_pedido)
     $this->entrega_id    =   $ped['entrega_id'];
     $this->estado_id     =   $ped['estado_id'];
     $this->fecha         =   $ped['fecha'];
-    $this->formapago_id  =   $ped['formaPago_id'];
     $this->provincia_id  =   $ped['provincia_id'];
     $this->localidad_id  =   $ped['localidad_id'];
     $this->observaciones =   $ped['observaciones'];
@@ -328,17 +332,13 @@ public function finalizar()
             'entrega_id'    => $this->entrega_id,
             'estado_id'     => $this->estado_id,
             'fecha'         => $this->fecha,
-            'formaPago_id'  => $this->formapago_id,
             'provincia_id'  => $this->provincia_id,
             'localidad_id'  => $this->localidad_id,
             'observaciones' => $this->observaciones,
-            'status_mp'     => $this->status_mp,
             'subTotal'      => $costototal,
             'sucursal_id'   => 0,
             'telefono'      => $this->telefono,
             'total'         => $this->del_costo+$costototal,
-            'transac_mp'    => $this->transac_mp,
-            'detail_mp'    => $this->detail_mp
         ]);
 
 
@@ -652,4 +652,123 @@ public function limpiarCamposItem()
 
 
 
+//abre modal de verpago
+public function abrirModalVerpago()
+{
+    $this->modalpago = true;
 }
+
+//cierra modal verpago  sin grabar
+public function cerrarModalVerpago()
+{
+        $this->modalpago = false;
+}
+
+
+
+public function verpago($idpedido)
+{
+
+
+    $this->datos_pago = Log_pago::where('idpedido',$idpedido)
+                            ->where('status','approved')
+                            ->first();
+
+
+    if ($this->datos_pago) {
+
+        //hay que respetar el alias de los campos de pagos
+        //ya que es la misma pantalla para mostrar todas las
+        //formas de pago
+        switch ($this->datos_pago->formapago_id) {
+            case 1: //efectivo contra entrega
+                break;
+            case 2:  //mercado pago
+                $this->datos_pago = Log_pago::select(['log_pagos.id as pago_id',
+                'log_pagos.operacion_pago as pago_operacion',
+                'log_pagos.status as pago_estado',
+                'formasdepagos.nombre as formadepago',
+                 'log_pagos.created_at as pago_fecha'])
+                 ->join('formasdepagos', 'log_pagos.formapago_id', '=', 'formasdepagos.id')
+                 ->where('log_pagos.idpedido', '=', $idpedido)
+                 ->first();
+                break;
+            case 3: //modo
+                break;
+            default:
+        }
+
+    }
+    $this->abrirModalVerpago();
+}
+
+
+
+public function cobrarmp($idpedido)
+    {
+
+        //chequear que no este pago
+        $this->datos_pago = Log_pago::where('idpedido',$idpedido)
+                                      ->where('status','approved')->first();
+
+        $articulos = Pedido_item::where('pedido_id',$idpedido)->get();
+
+
+        $pedido = Pedido::where('id',$idpedido)->first();
+
+
+       // dump($this->datos_pago);
+        if ($this->datos_pago !== null) {
+            $this->emit('mensajeNegativo', ['mensaje' => 'El pedido ya fue cobrado']);
+        }else{
+            if ($articulos) {
+                $items = [];
+                foreach ($articulos as $articulo) {
+                    $cantidad = $articulo->cantidad;
+
+                    $sku = Sku::where('id',$articulo->sku_id)->first();
+                    $talle_nombre = Talle::where('id', $sku->talle_id)->value('talle');
+                    $color_nombre = Color::where('id', $sku->color_id)->value('color');
+                    $talle_id = $sku->talle_id;
+                    $color_id = $sku->color_id;
+                    $producto_id =  $sku->producto_id;
+                    $producto_nombre = Producto::where('id',$sku->producto_id)->value('nombre');
+                    $precio = $articulo->precioUnitario;
+                    $item = [
+                        'cantidad' => $cantidad,
+                        'talle_id' => $talle_id,
+                        'talle_nombre' => $talle_nombre,
+                        'color_id' => $color_id,
+                        'color_nombre' => $color_nombre,
+                        'producto_id' => $producto_id,
+                        'producto_nombre' => $producto_nombre,
+                        'producto_precio' => $precio,
+                        'total_item' => $cantidad * $precio
+                    ];
+                    array_push($items, $item);
+                }
+
+
+
+                $opciones = [
+                    'items' => $items,
+                    'total' => $pedido->subTotal,
+                    'envio' => $pedido->del_costo,
+                    'cant_art' => $pedido->cantidadItems,
+                    'nro_pedido' => $idpedido
+                ];
+
+                redirect()->to('/mercadopago')->with([
+                                 'opciones' => $opciones,
+                             ]);
+            }else{
+                $this->emit('mensajeNegativo', ['mensaje' => 'No se encuentran productos a cobrar en el pedido']);
+            }
+        }
+    }
+}
+
+
+
+
+

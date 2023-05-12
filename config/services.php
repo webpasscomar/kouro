@@ -30,4 +30,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-];
+    'mercadopago' => [
+        'key' => env('MP_KEY'),
+        'token' => env('MP_TOKEN'),
+        'url_success' => env('MP_URL_SUCCESS'),
+        'url_failure' => env('MP_URL_FAILURE'),
+        'url_pending' => env('MP_URL_PENDING'),
+        'url_getpago' => env('MP_URL_GETPAGO'),
+        'url_post' => env('MP_URL_POST'),
+    ]
+
+  ];

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogMercadoPagoTable extends Migration
+class CreateLogPagosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateLogMercadoPagoTable extends Migration
      */
     public function up()
     {
-        Schema::create('logMercadoPago', function (Blueprint $table) {
+        Schema::create('log_pagos', function (Blueprint $table) {
             $table->id();
-            $table->string('log');
+            $table->integer('idpedido');
+            $table->integer('operacion_pago');
+            $table->string('status');
+            $table->integer('formaPago_id');
+            $table->text('log');
             $table->timestamps();
         });
     }

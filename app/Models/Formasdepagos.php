@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Formasdepagos extends Model
 {
     use HasFactory;
+
+
+public function logpagos()
+{
+    return $this->belognsToMany(Log_pago::class);
 }
+
+
+
+
+}
+

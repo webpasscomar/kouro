@@ -8,6 +8,10 @@ use App\Models\Formadeentrega;
 use App\Models\Provincia;
 use App\Models\Localidad;
 use App\Models\Sku;
+use App\Models\Formasdepagos;
+use App\Models\Pedido;
+use App\Models\Movimiento;
+use App\Models\Pedido_item;
 
 
 
@@ -15,14 +19,24 @@ class Carrito extends Component
 {
 
     protected $listeners = ['delete'];
-    protected $formasdeentregas,$provincias,$localidades;
+    protected $formasdeentregas, $provincias, $localidades, $formasdepagos;
 
     public $entrega_id;
-    public $pidedirec=0;
+    public $pidedirec = 0;
     public $costoentrega;
 
-    public $cli_nombre, $cli_apellido, $cli_email, $cli_telefono,$cli_calle,$cli_nro,$cli_piso,$cli_dpto;
+    public $cli_nombre, $cli_apellido, $cli_email, $cli_telefono, $cli_calle, $cli_nro, $cli_piso, $cli_dpto;
     public $cli_prov_id, $cli_loc_id;
+    public $apagar = 0;
+    public $forma_pago_id = 0;
+    public $numero_pedido;
+
+
+    //estas publicas las usa ´para ir a pagar
+    //despues de eliminar los valores de las
+    //variables de session
+    public $articulos, $importe, $delivery, $cant_art;
+
 
 
     // public function mount()
@@ -34,26 +48,27 @@ class Carrito extends Component
     public function render()
     {
         $this->formasdeentregas = Formadeentrega::where('estado', 1)->get();
+        $this->formasdepagos = Formasdepagos::where('estado', 1)->get();
         $this->provincias = Provincia::where('estado', 1)->get();
 
-      // $this->tomarvalores();
+        // $this->tomarvalores();
 
 
         if ($this->cli_prov_id != 0) {
             $this->localidades = Localidad::where('estado', 1)
-                                ->where('provincia_id',$this->cli_prov_id)
-                                ->get();
-        }else{
-            $this-> cli_loc_id=0;
+                ->where('provincia_id', $this->cli_prov_id)
+                ->get();
+        } else {
+            $this->cli_loc_id = 0;
         }
 
         //si alguna vez comenzo a cargar el formulario lo guardo en session
 
 
 
-
         return view('livewire.carrito', [
             'formasdeentregas' => $this->formasdeentregas,
+            'formasdepagos' => $this->formasdepagos,
             'provincias' => $this->provincias,
             'localidades' => $this->localidades,
         ]);
@@ -63,28 +78,27 @@ class Carrito extends Component
     protected function rules()
     {
 
-      if ($this->pidedirec==1) { //valida pedido con direccion requerida
-                return [
-                    'cli_nombre'     => 'required|string',
-                    'cli_apellido'   => 'required|string',
-                    'cli_email'      => 'required|email',
-                    'cli_telefono'   => 'required',
-                    'entrega_id'     => 'required|not_in:0',
-                    'cli_calle'      => 'required',
-                    'cli_nro'        => 'required|numeric',
-                    'cli_prov_id' => 'required|not_in:0',
-                    'cli_loc_id' => 'required|not_in:0'
-                ];
-            }else{  //valida pedido sin direccion requerida
-                return [
-                    'cli_nombre'     => 'required',
-                    'cli_apellido'   => 'required',
-                    'cli_email'      => 'required|email',
-                    'cli_telefono'   => 'required',
-                    'entrega_id'     => 'required|not_in:0'
-                ];
-            }
-
+        if ($this->pidedirec == 1) { //valida pedido con direccion requerida
+            return [
+                'cli_nombre'     => 'required|string',
+                'cli_apellido'   => 'required|string',
+                'cli_email'      => 'required|email',
+                'cli_telefono'   => 'required',
+                'entrega_id'     => 'required|not_in:0',
+                'cli_calle'      => 'required',
+                'cli_nro'        => 'required|numeric',
+                'cli_prov_id'    => 'required|not_in:0',
+                'cli_loc_id'     => 'required|not_in:0'
+            ];
+        } else {  //valida pedido sin direccion requerida
+            return [
+                'cli_nombre'     => 'required',
+                'cli_apellido'   => 'required',
+                'cli_email'      => 'required|email',
+                'cli_telefono'   => 'required',
+                'entrega_id'     => 'required|not_in:0'
+            ];
+        }
     }
 
     protected function messages()
@@ -103,14 +117,17 @@ class Carrito extends Component
             'cli_nro.numeric'    => 'Debe ingresar un valor numerico.',
             'cli_piso.numeric'    => 'Debe ingresar un valor numerico.',
             'cli_prov_id.not_in' => 'Debe seleccionar una provincia',
+            'cli_prov_id.required' => 'Debe seleccionar una provincia',
             'cli_loc_id.not_in' => 'Debe seleccionar una localidad',
+            'cli_loc_id.required' => 'Debe seleccionar una localidad',
         ];
     }
 
 
 
     //grabamos el carrito
-    public function cerrarCarrito() {
+    public function cerrarCarrito()
+    {
 
         $this->validate();
 
@@ -119,32 +136,70 @@ class Carrito extends Component
 
             $items = session('items');
             $cantitems = count($items);
-            $ok=1;
+            $ok = 1;
             for ($i = 0; $i < $cantitems; $i++) {
-                    $producto =  $items[$i]['producto_id'];
-                    $talle    =   $items[$i]['talle_id'] ;
-                    $color    =   $items[$i]['color_id'];
-                    $cantidad =  $items[$i]['cantidad'];
-                    $dispo = Sku::where('producto_id', $producto)
+                $producto =  $items[$i]['producto_id'];
+                $talle    =   $items[$i]['talle_id'];
+                $color    =   $items[$i]['color_id'];
+                $cantidad =  $items[$i]['cantidad'];
+                $dispo = Sku::where('producto_id', $producto)
                     ->where('talle_id', $talle)
                     ->where('color_id', $color)
                     ->value('stock');
-                     if ($dispo < $cantidad  ) {
-                        $mensaje = 'La cantidad solicitada del producto ' . $items[$i]['producto_nombre'] .
-                                    ' talle ' .  $items[$i]['talle_nombre'] . ' color ' . $items[$i]['color_nombre'] .
-                        ' no se encuentra en stock, por favor verifique las cantidades en su pedido';
-                        $this->emit('mensajeNegativo', ['mensaje' => $mensaje]);
-                        $ok=0;
-                        break;
-                     }
+                if ($dispo < $cantidad) {
+                    $mensaje = 'La cantidad solicitada del producto ' . $items[$i]['producto_nombre'] .
+                        ' talle ' .  $items[$i]['talle_nombre'] . ' color ' . $items[$i]['color_nombre'] .
+                        ' no se encuentra en stock solo hay ' . $dispo . ',  por favor verifique las cantidades en su pedido';
+                    $this->emit('mensajeNegativo', ['mensaje' => $mensaje]);
+                    $ok = 0;
+                    break;
+                }
             }
 
-            if ($ok==1) {
-                $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra']);
-             }
+            if ($ok == 1) {
+                //grabar pedido
+                $this->numero_pedido = null;
+                $this->numero_pedido = $this->grabarPedido();
+                if ($this->numero_pedido) {
+                    $this->articulos = session('items');
+                    $this->importe = session('sub_total');
+                    $this->delivery = session('costoentrega');
+                    $this->cant_art = count(session('items'));
+                    session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
+                    $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
+                    $this->apagar = 1;
+                    $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $this->numero_pedido->id]);
+                    //$this->pagar($articulos, $importe, $delivery, $this->forma_pago_id);
 
+                }
+            }
         }
-}
+    }
+
+
+    public function pagar()
+    {
+        $opciones = [
+            'items' => $this->articulos,
+            'total' => $this->importe,
+            'envio' => $this->delivery,
+            'cant_art' => $this->cant_art,
+            'nro_pedido' => $this->numero_pedido->id
+        ];
+
+        switch ($this->forma_pago_id) {
+            case 1: //efectivo contra entrega
+                break;
+            case 2:  //mercado pago
+                redirect()->to('/mercadopago')->with([
+                    'opciones' => $opciones,
+                ]);
+                break;
+            case 3: //modo
+                break;
+            default:
+        }
+    }
 
 
 
@@ -195,17 +250,16 @@ class Carrito extends Component
         $forma = Formadeentrega::where('id', $this->entrega_id)->first();
         if ($forma) {
             $this->pidedirec =  $forma['pidedirec'];
-            if ($this->pidedirec==0) {
-                $this->cli_prov_id =0;
-                $this->cli_loc_id=0;
+            if ($this->pidedirec == 0) {
+                $this->cli_prov_id = 0;
+                $this->cli_loc_id = 0;
             }
             $this->costoentrega = $forma['costo'];
-        }else{
-            $this->cli_prov_id =0;
-            $this->cli_loc_id=0;
-            $this->pidedirec =0;
+        } else {
+            $this->cli_prov_id = 0;
+            $this->cli_loc_id = 0;
+            $this->pidedirec = 0;
             $this->costoentrega = 0;
-
         }
         session(['entrega_id' => $this->entrega_id, 'pidedirec' => $this->pidedirec, 'costoentrega' => $this->costoentrega]);
     }
@@ -214,35 +268,122 @@ class Carrito extends Component
 
 
 
-    // //guardo los valores del form en variables de session
-    // public function guardarvalores() {
-    //     session(['cli_nombre' =>  $this->cli_nombre]);
-    //     session(['cli_apellido' =>  $this->cli_apellido]);
-    //     session(['cli_email' =>  $this->cli_email]);
-    //     session(['cli_telefono' =>  $this->cli_telefono]);
-    //     session(['cli_calle' =>  $this->cli_calle]);
-    //     session(['cli_nro' =>  $this->cli_nro]);
-    //     session(['cli_piso' =>  $this->cli_piso]);
-    //     session(['cli_dpto' =>  $this->cli_dpto]);
-    //     session(['cli_prov_id' =>  $this->cli_prov_id]);
-    //     session(['cli_loc_id' =>  $this->cli_loc_id]);
-    // }
+    //graba el pedido
+    public function grabarPedido()
+    {
+
+        $items = session('items');
+        $indice_productos = count($items);
+        $costototal = 0;
+
+        for ($i = 0; $i < $indice_productos; $i++) {
+            $costototal = $costototal + ($items[$i]['cantidad'] * $items[$i]['producto_precio']);
+        }
+
+        if ($this->pidedirec == 0) {
+            $this->cli_calle = "";
+            $this->cli_nro = 0;
+            $this->cli_piso = "";
+            $this->cli_dpto = "";
+        } else {
+            if ($this->cli_piso == null) {
+                $this->cli_piso = '';
+            }
+            if ($this->cli_dpto == null) {
+                $this->cli_dpto = '';
+            }
+        }
+
+        //actualiza cabecera
+        $lastid = Pedido::Create(
+            [
+                'apellido'      => $this->cli_apellido,
+                'nombre'        => $this->cli_nombre,
+                'cantidadItems' => $indice_productos,
+                'cliente_id'    => 0,
+                'correo'        => $this->cli_email,
+                'del_calle'     => $this->cli_calle,
+                'del_nro'       => $this->cli_nro,
+                'del_piso'      => $this->cli_piso,
+                'del_dpto'      => $this->cli_dpto,
+                'del_costo'     => session('costoentrega'),
+                'entrega_id'    => $this->entrega_id,
+                'estado_id'     => 1,
+                'fecha'         => date('Y-m-d H:i:s'),
+                'provincia_id'  => $this->cli_prov_id,
+                'localidad_id'  => $this->cli_loc_id,
+                'observaciones' => '',
+                'subTotal'      => $costototal,
+                'sucursal_id'   => 0,
+                'telefono'      => $this->cli_telefono,
+                'total'         => session('sub_total') + session('costoentrega'),
+            ]
+        );
 
 
+        for ($i = 0; $i < $indice_productos; $i++) {
+            //la baja de stock la hacemos cuando paga el pedido a menos
+            //que el parametro de cobro electronico este apagado
+            //en ese caso lo hacemos aca si el parametro de maneja stock esta prendido
 
-    // //tomo los valores de session si fueron cargados alguna vez
-    // public function tomarvalores() {
-    //     $this->cli_nombre    = session('cli_nombre');
-    //     $this->cli_apellido  = session('cli_apellido');
-    //     $this->cli_email     = session('cli_email');
-    //     $this->cli_telefono  = session('cli_telefono');
-    //     $this->cli_calle     = session('cli_calle');
-    //     $this->cli_nro       = session('cli_nro');
-    //     $this->cli_piso      = session('cli_piso');
-    //     $this->cli_dpto      = session('cli_dpto');
-    //     $this->cli_prov_id   = session('cli_prov_id');
-    //     $this->cli_loc_id    = session('cli_loc_id');
-    // }
+            //obtengo el id del sku
+            $sku_id = Sku::where('producto_id', $items[$i]['producto_id'])
+                ->where('talle_id', $items[$i]['talle_id'])
+                ->where('color_id', $items[$i]['color_id'])
+                ->value('id');
 
 
+            if (parametro(10) === 'S') {   //control de stock
+                if (parametro(4) === 'N') {   //no utiliza pasarela de pago
+                    //// actualizamos stock sku
+
+                    ////obtenemos la cantidad original de stock
+                    $canti_ori = Sku::where('producto_id', $items[$i]['producto_id'])
+                        ->where('talle_id', $items[$i]['talle_id'])
+                        ->where('color_id', $items[$i]['color_id'])
+                        ->value('stock');
+
+                    if ($canti_ori === null) {
+                        $canti_ori = 0;
+                    }
+
+                    //actualizo stock
+                    $cantidad = $canti_ori - $items[$i]['cantidad'];
+                    Sku::updateOrCreate(
+                        [
+                            'producto_id' => $items[$i]['producto_id'],
+                            'talle_id'    => $items[$i]['talle_id'],
+                            'color_id'    => $items[$i]['color_id'],
+                        ],
+                        [
+                            'stock' => $cantidad,
+                            'estado' => 1
+                        ]
+                    );
+
+
+                    //// grabamos en historia en movimiento
+                    Movimiento::Create([
+                        'tipoMovimiento_id' => 2,
+                        'sku_id' => $sku_id,
+                        'cantidad' => $items[$i]['cantidad'],
+                        'pedido_id' => $lastid['id'],
+                        'estado' => 0,   //no se que es
+                        'user_id' => 0,
+                    ]);
+                }
+            }
+
+            Pedido_item::Create([
+                'cantidad' => $items[$i]['cantidad'],
+                'pedido_id' => $lastid['id'],
+                'precioItem' => $items[$i]['producto_precio'],
+                'precioUnitario' => $items[$i]['producto_precio'] * $items[$i]['cantidad'],
+                'sku_id' => $sku_id,
+                'vacio' => 0
+            ]);
+        }
+
+        return  $lastid;
+    }
 }
