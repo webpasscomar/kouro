@@ -236,8 +236,10 @@ class Productos extends Component
             'productos_imagenes.file_extension',
             'productos_imagenes.file_path',
             'productos_imagenes.estado',
-            'colores.color'])
+            'colores.color',
+            'productos.nombre'])
             ->join('colores', 'productos_imagenes.color_id', '=', 'colores.id')
+            ->join('productos', 'productos_imagenes.producto_id', '=', 'productos.id')
             ->where('productos_imagenes.producto_id', '=', $id)
             ->get();
 

@@ -15,6 +15,8 @@
                 <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
+                        <h2 class="text-black font-bold flex justify-center">{{$imagenes[0]->nombre}}</h2>
+
                         <div class="grid grid-cols-1 sm:grid-cols-3">
                             <div class="col-span-3">
                                 <button wire:click="addImagen"
