@@ -4,11 +4,22 @@ namespace App\Http\Livewire\Backend;
 
 use App\Models\Presentacion;
 use App\Models\Producto;
+use App\Models\Producto_imagen;
+use App\Models\Color;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use Livewire\WithFileUploads;
+
+
+
+
 class Productos extends Component
 {
+
+    use WithFileUploads;
+    use WithPagination;
+
     // Atributos
     public $nombre;
     public $desCorta;
@@ -40,17 +51,26 @@ class Productos extends Component
     public $color;
 
     // Parametros generales
-    public $modal = false;
     public $search;
     public $sort = 'id';
     public $order = 'desc';
+    public $modal = false;
     public $modal1 = false;
     public $modal2 = false;
     public $modal3 = false;
 
-    public $producto, $id_producto;
+    public $producto, $producto_id;
 
-    use WithPagination;
+    ///ruben
+    public $colores;
+    public $color_id;
+    public $producto_imagen;
+
+
+
+
+
+
 
     protected $productos, $presentaciones;
 
@@ -58,18 +78,35 @@ class Productos extends Component
     public $totalSteps = 4;
     public $currentStep = 1;
 
-    protected $rules = [
-        'nombre' => 'required|max:100',
-        'desCorta' => 'required|max:255',
-        'descLarga' => 'required|',
-        'precioLista' => 'required',
+
+
+    protected function rules() {
+      if ($this->modal === true) {
+        return [
+            'nombre' => 'required|max:100',
+            'desCorta' => 'required|max:255',
+            'descLarga' => 'required|',
+            'precioLista' => 'required',
+        ];
+      }
+      if ($this->modal3 === true) {
+        return [
+            'imagen' => ['required', 'mimes:png,jpg,jpeg'],
+            'color_id' => 'required|not_in:0',
     ];
+      }
+    }
+
+
+
+
+
 
 
     public function mount()
     {
-        // Defino en 1 el paso si es multistep
-        // $this->currentStep = 1;
+
+        $this->colores = Color::where('estado',1)->orderBy('color')->get();
     }
 
     public function render()
@@ -81,75 +118,17 @@ class Productos extends Component
         return view('livewire.backend.productos', [
             'productos' => $this->productos,
             'presentaciones' => $this->presentaciones,
-            'imagenes' => $this->imagenes
+            'imagenes' => $this->imagenes,
+            'colores' => $this->colores,
         ]);
     }
 
     public function crear()
     {
         $this->limpiarCampos();
-        $this->abrirModal();
+        $this->abrirModal(1);
     }
 
-    public function abrirModal($id = null)
-    {
-
-        switch ($id) {
-            case 1:
-                $this->modal1 = true;
-                break;
-            case 2:
-                $this->modal2 = true;
-                break;
-            case 3:
-                $this->modal3 = true;
-                break;
-            default:
-            case 1:
-                $this->modal = true;
-                break;
-        }
-    }
-
-    public function cerrarModal($id = null)
-    {
-        switch ($id) {
-            case 1:
-                $this->modal1 = false;
-                break;
-            case 2:
-                $this->modal2 = false;
-                break;
-            case 3:
-                $this->modal3 = false;
-                $this->modal2 = true;
-                break;
-            default:
-            case 1:
-                $this->modal = false;
-                break;
-        }
-    }
-
-    public function limpiarCampos()
-    {
-        $this->reset('nombre', 'desCorta', 'descLarga', 'codigo', 'precioLista', 'ofertaDesde', 'ofertaHasta', 'precioOferta', 'peso', 'tamano', 'link', 'orden', 'unidadVenta');
-    }
-
-    public function order($sort)
-    {
-        if ($this->sort == $sort) {
-
-            if ($this->order == 'desc') {
-                $this->order = 'asc';
-            } else {
-                $this->order = 'desc';
-            }
-        } else {
-            $this->sort = $sort;
-            $this->order = 'asc';
-        }
-    }
 
     public function editar($id)
     {
@@ -173,15 +152,9 @@ class Productos extends Component
         $this->unidadVenta = $producto->unidadVenta;
         $this->destacar = $producto->destacar;
 
-
-        $this->abrirModal();
+        $this->abrirModal(1);
     }
 
-    public function borrar($id)
-    {
-        Producto::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
-    }
 
     public function guardar()
     {
@@ -204,48 +177,141 @@ class Productos extends Component
                 'orden' => $this->orden,
                 'unidadVenta' => $this->unidadVenta,
                 'destacar' => $this->destacar
-            ]
-        );
+                ]
+            );
 
-        $this->emit('alertSave');
+            $this->emit('alertSave');
 
-        $this->cerrarModal();
-        $this->limpiarCampos();
+            $this->limpiarCampos();
+            $this->cerrarModal(1);
     }
 
 
 
+    public function abrirModal($id = null)
+    {
+
+        switch ($id) {
+            case 1:
+                $this->modal = true;
+                break;
+            case 2:
+                $this->modal2 = true;
+                break;
+            case 3:
+                $this->modal3 = true;
+                break;
+            default:
+        }
+    }
+
+    public function limpiarCampos()
+    {
+        $this->reset('nombre', 'desCorta', 'descLarga', 'codigo', 'precioLista', 'ofertaDesde', 'ofertaHasta', 'precioOferta', 'peso', 'tamano', 'link', 'orden', 'unidadVenta');
+    }
+
+    public function order($sort)
+    {
+        if ($this->sort == $sort) {
+
+            if ($this->order == 'desc') {
+                $this->order = 'asc';
+            } else {
+                $this->order = 'desc';
+            }
+        } else {
+            $this->sort = $sort;
+            $this->order = 'asc';
+        }
+    }
 
     public function imagenes($id)
     {
-        $this->imagenes = Producto::all();
-        // $this->imagenes = Producto::where('estado', 1)->paginate(5);
-        // $this->id_producto = $id;
-        // $this->nombre = $producto->nombre;
-        // $this->desCorta = $producto->desCorta;
-        // $this->descLarga = $producto->descLarga;
+        $this->producto_id = $id;
+        //$this->imagenes = Producto_imagen::where('producto_id',$id)->get();
+
+        $this->imagenes = Producto_imagen::select([
+            'productos_imagenes.id',
+            'productos_imagenes.file_name',
+            'productos_imagenes.file_extension',
+            'productos_imagenes.file_path',
+            'productos_imagenes.estado',
+            'colores.color'])
+            ->join('colores', 'productos_imagenes.color_id', '=', 'colores.id')
+            ->where('productos_imagenes.producto_id', '=', $id)
+            ->get();
 
         $this->abrirModal(2);
     }
 
-    public function addImagen($id)
+    public function addImagen()
     {
-        $id_producto = $id;
-        //$imagenes = Producto::all();
-        // $this->id_producto = $id;
-        // $this->nombre = $producto->nombre;
-        // $this->desCorta = $producto->desCorta;
-        // $this->descLarga = $producto->descLarga;
 
         $this->cerrarModal(2);
         $this->abrirModal(3);
     }
 
 
+     public function  deleteImagen($id) {
+        Producto_imagen::find($id)->delete();
+        $this->emit('mensajePositivo', ['mensaje' => 'Imagen eliminada correctamente']);
+        $this->imagenes($this->producto_id);
+
+     }
+
+
+    public function notsaveImagen()
+    {
+        $this->imagenes($this->producto_id);
+        $this->cerrarModal(3);
+        $this->abrirModal(2);
+
+    }
+
+
+    public function saveImagen()
+    {
+
+
+        $this->validate();
+
+        $filetosave = new Producto_imagen();
+        $filetosave->producto_id  = $this->producto_id;
+        $filetosave->color_id  = $this->color_id;
+        $filetosave->estado    = 1;
+        $filetosave->file_name = $this->imagen->getClientOriginalName();
+        $filetosave->file_extension = $this->imagen->extension();
+        $filetosave->file_path = 'storage/' . $this->imagen->store('productos','public');
+        $filetosave->save();
+        $this->cerrarModal(3);
+        $this->abrirModal(2);
+        $this->imagen=null;
+        $this->color_id=0;
+        $this->imagenes($this->producto_id);
+
+    }
 
 
 
 
+
+
+
+    public function cerrarModal($id = null)
+    {
+        switch ($id) {
+            case 1:
+                $this->modal = false;
+                break;
+            case 2:
+                $this->modal2 = false;
+                break;
+            case 3:
+                $this->modal3 = false;
+                break;
+            default:
+        }
+    }
 
     public function validateData()
     {
@@ -274,12 +340,12 @@ class Productos extends Component
 
     public function increaseStep()
     {
-        $this->resetErrorBag();
-        $this->validateData();
-        $this->currentStep++;
-        if ($this->currentStep > $this->totalSteps) {
-            $this->currentStep = $this->totalSteps;
-        }
+                $this->resetErrorBag();
+            $this->validateData();
+            $this->currentStep++;
+            if ($this->currentStep > $this->totalSteps) {
+                $this->currentStep = $this->totalSteps;
+            }
     }
 
     public function decreaseStep()
@@ -324,5 +390,11 @@ class Productos extends Component
             $data = ['name' => $this->first_name . ' ' . $this->last_name, 'email' => $this->email];
             return redirect()->route('productos.success', $data);
         }
+    }
+
+    public function borrar($id)
+    {
+        Producto::find($id)->delete();
+        session()->flash('message', 'Registro eliminado correctamente');
     }
 }
