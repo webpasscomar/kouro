@@ -1,11 +1,14 @@
 <div>
-    <x-header>
-        Nosotros
-    </x-header>
+
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Nosotros
+        </h2>
+    </x-slot>
 
     <!-- Sección Kouro Linea y ¿Que Ofrecemos? -->
-    <div class="container mx-auto py-12">
-        <div class="max-w-7xl mx-auto md:px-8">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- Sección Kouro Linea  -->
             <div class="grid md:grid-cols-2 gap-10 md:gap-y-32 gap-y-16">
                 <div class="md:bg-gray-600 rounded-lg md:max-w-lg md:m-auto">

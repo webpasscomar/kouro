@@ -15,3 +15,4 @@ botonIrArriba.addEventListener("click", () => {
         behavior: "smooth",
     });
 });
+

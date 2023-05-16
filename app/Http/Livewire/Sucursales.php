@@ -8,7 +8,7 @@ class Sucursales extends Component
 {
   public function render()
   {
-    return view('livewire.sucursales')
-      ->extends('layouts.app');
+    return view('livewire.sucursales');
+    // ->extends('layouts.app');
   }
 }

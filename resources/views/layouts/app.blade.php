@@ -15,6 +15,9 @@
     <!-- Styles -->
     <!-- styles tw-elements -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/tw-elements.min.css" />
+    <!-- Styles  flowbite -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <!-- ---------------- -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
     <!-- ---------------- -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -158,12 +161,12 @@
     @endif
     </main> --}}
 
+
+    </div>
     <!-- Footer del sitio  -->
     <footer>
         <x-footer></x-footer>
     </footer>
-
-    </div>
     {{-- @livewire('footer') --}}
     @stack('modals')
 
@@ -262,6 +265,8 @@
 
     <!-- Script de tw-elements -->
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    <!-- Script Flowbite -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 
 </body>
 
