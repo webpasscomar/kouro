@@ -65,6 +65,8 @@ class Productos extends Component
     public $colores;
     public $color_id;
     public $producto_imagen;
+    public $producto_nombre;
+
 
 
 
@@ -229,6 +231,8 @@ class Productos extends Component
     {
         $this->producto_id = $id;
         //$this->imagenes = Producto_imagen::where('producto_id',$id)->get();
+
+        $this->producto_nombre = Producto::where('id',$id)->value('nombre');
 
         $this->imagenes = Producto_imagen::select([
             'productos_imagenes.id',
