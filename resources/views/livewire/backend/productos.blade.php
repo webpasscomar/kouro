@@ -43,7 +43,16 @@
             @if ($modal3)
                 @include('livewire.backend.productos-imagenes-form')
             @endif
-            {{-- The best athlete wants his opponent at his best. --}}
+
+
+            @if ($modal4)
+                @include('livewire.backend.productos-categorias')
+            @endif
+
+
+            @if ($modal5)
+                @include('livewire.backend.productos-categorias-form')
+            @endif
 
 
             <table class="table-auto w-full">
@@ -116,6 +125,8 @@
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
                                 <button wire:click="imagenes({{ $item->id }})"
                                     class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4">Imagenes</button>
+                                <button wire:click="categorias({{ $item->id }})"
+                                        class="bg-yellow-100 hover:bg-yellow-200 text-black font-bold py-2 px-4">Categorias</button>
                                 <button wire:click="borrar({{ $item->id }})"
                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
                             </td>
