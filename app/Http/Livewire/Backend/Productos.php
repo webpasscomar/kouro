@@ -74,6 +74,8 @@ class Productos extends Component
     public $productos_categorias;
     public $categorias;
     public $categoria_id;
+    public $id_producto;
+    public $presentaciones;
 
 
 
@@ -82,8 +84,7 @@ class Productos extends Component
 
 
 
-
-    protected $productos, $presentaciones;
+    protected $productos;
 
     // Parametros para el multistep
     public $totalSteps = 4;
@@ -126,8 +127,7 @@ class Productos extends Component
 
         $this->colores = Color::where('estado', 1)->orderBy('color')->get();
         $this->categorias = Categoria::where('estado', 1)->orderBy('categoria')->get();
-        $this->presentaciones = Presentacion::all();
-
+        $this->presentaciones = Presentacion::where('estado', 1)->orderBy('presentacion')->get();
     }
 
     public function render()
@@ -135,6 +135,8 @@ class Productos extends Component
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
+
+
         return view('livewire.backend.productos', [
             'productos' => $this->productos,
             'presentaciones' => $this->presentaciones,

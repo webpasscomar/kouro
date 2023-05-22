@@ -66,11 +66,13 @@
                         <select
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             wire:model="presentacion_id">
+                            <option value="0">Elija una presentacion</option>
                             @foreach ($presentaciones as $item)
                                 <option value="{{ $item->id }}">{{ $item->presentacion }}</option>
                             @endforeach
                         </select>
                     </div>
+
 
 
                     <div class="mb-3">
