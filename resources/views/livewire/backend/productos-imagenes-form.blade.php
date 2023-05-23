@@ -37,7 +37,10 @@
                         <x-jet-input-error for="imagen" />
                         @if($imagen)
                             <h3>Visualizacion d Imagen</h3>
-                            <img src="{{$imagen->temporaryUrl()}}" width="150" heigth="150">
+                            @if($imagen->extension()=='png' || $imagen->extension()=='jpg' || $imagen->extension()=='jpeg')
+                                 <img src="{{$imagen->temporaryUrl()}}" width="150" heigth="150">
+                            @endif
+
                         @endif
 
 

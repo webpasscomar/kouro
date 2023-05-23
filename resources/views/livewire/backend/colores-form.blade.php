@@ -14,6 +14,8 @@
 
             <form>
 
+                @livewire('color-picker')
+
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
 
                     <div class="mb-4 col-span-3">

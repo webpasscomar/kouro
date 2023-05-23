@@ -46,8 +46,8 @@ class Categorias extends Component
     public function render()
     {
         $this->categoriasAnt = Categoria::where('estado', 1)->get();
-        $this->categorias = Categoria::where('id', '>', 1)
-            ->where(
+       // $this->categorias = Categoria::where('id', '>', 1)
+            $this->categorias = Categoria::where(
                 function ($q) {
                     $q->where('descripcion', 'like', '%' . $this->search . '%')
                         ->orWhere('categoria', 'like', '%' . $this->search . '%');
@@ -60,6 +60,7 @@ class Categorias extends Component
 
     public function crear()
     {
+
         $this->accion = 'crear';
         $this->limpiarCampos();
         $this->abrirModal();
@@ -78,16 +79,16 @@ class Categorias extends Component
 
     public function limpiarCampos()
     {
-        $this->categoriaPadre_id = '';
+        $this->categoriaPadre_id = 0;
         $this->categoria = '';
         $this->descripcion = '';
         $this->slug = '';
         $this->imagen = '';
 
-        $this->menu = '';
-        $this->orden = '';
-        $this->estado = '';
-        $this->id_categoria = '';
+        $this->menu =0;
+        $this->orden =0;
+        $this->estado = 0;
+        $this->id_categoria = 0;
     }
 
     public function editar($id)

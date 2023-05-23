@@ -48,15 +48,12 @@
                             <td class="border px-4 py-2">{{ $item->pregunta }}</td>
                             <td class="border px-4 py-2">{{ $item->respuesta }}</td>
                             <td class="border px-4 py-2">
-                                @if ($item->estado === 1)
-                                    <span class="text-green-500">Activo</span>
-                                @else
-                                    <span class="text-red-500">Inactivo</span>
-                                @endif
-                                {{-- @livewire('toggle-button', [
+                                @livewire('toggle-button', [
                                     'model' => $item,
                                     'field' => 'estado',
-                                ]) --}}
+                                ],
+                                key($item->id)
+                                )
                             </td>
 
                             <td class="border px-4 py-2 text-center">

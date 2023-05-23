@@ -18,16 +18,20 @@
 
                     <div class="mb-4 col-span-3">
                         <label for="pregunta" class="block text-gray-700 text-sm font-bold mb-2">Pregunta:</label>
-                        <input type="text"
+                        {{-- <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="pregunta" wire:model="pregunta">
+                            id="pregunta" wire:model="pregunta"> --}}
+                        <textarea name="pregunta" id="pregunta" cols="50" rows="5" wire:model="pregunta" class="block text-gray-700 text-sm font-bold mb-2"></textarea>
+
                     </div>
 
                     <div class="mb-4 col-span-3">
                         <label for="respuesta" class="block text-gray-700 text-sm font-bold mb-2">Respuesta:</label>
-                        <input type="text"
+                        {{-- <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="respuesta" wire:model="respuesta">
+                            id="respuesta" wire:model="respuesta"> --}}
+                        <textarea name="respuesta" id="respuesta" cols="50" rows="5" wire:model="respuesta" class="block text-gray-700 text-sm font-bold mb-2"></textarea>
+
                     </div>
 
 
