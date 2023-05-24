@@ -377,8 +377,8 @@ class Carrito extends Component
             Pedido_item::Create([
                 'cantidad' => $items[$i]['cantidad'],
                 'pedido_id' => $lastid['id'],
-                'precioItem' => $items[$i]['producto_precio'],
-                'precioUnitario' => $items[$i]['producto_precio'] * $items[$i]['cantidad'],
+                'precioItem' => $items[$i]['producto_precio'] * $items[$i]['cantidad'],
+                'precioUnitario' => $items[$i]['producto_precio'],
                 'sku_id' => $sku_id,
                 'vacio' => 0
             ]);
