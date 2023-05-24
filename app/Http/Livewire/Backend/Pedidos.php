@@ -703,13 +703,12 @@ class Pedidos extends Component
             ->where('status', 'approved')
             ->first();
 
-
-        if ($this->datos_pago) {
+            if ($this->datos_pago) {
 
             //hay que respetar el alias de los campos de pagos
             //ya que es la misma pantalla para mostrar todas las
             //formas de pago
-            switch ($this->datos_pago->formapago_id) {
+            switch ($this->datos_pago->formaPago_id) {
                 case 1: //efectivo contra entrega
                     break;
                 case 2:  //mercado pago
@@ -720,7 +719,7 @@ class Pedidos extends Component
                         'formasdepagos.nombre as formadepago',
                         'log_pagos.created_at as pago_fecha'
                     ])
-                        ->join('formasdepagos', 'log_pagos.formapago_id', '=', 'formasdepagos.id')
+                        ->join('formasdepagos', 'log_pagos.formaPago_id', '=', 'formasdepagos.id')
                         ->where('log_pagos.idpedido', '=', $idpedido)
                         ->first();
                     break;
