@@ -35,15 +35,17 @@ class MpController extends Controller
 
 
               //actualiza cabecera
-             Log_pago::Create(
-                [
-                    'idpedido'        => $response_json->external_reference,
-                    'operacion_pago'  => $payment_id,
-                    'status'          => $response_json->status,
-                    'log'             => $response,
-                    'formapago_id'    => '2',
-                ]);
-                //no tiene emit porque no es un controlador livewire
+            //vamos a grabar el pedido cuando viene por post unicamente
+            //  Log_pago::Create(
+            //     [
+            //         'idpedido'        => $response_json->external_reference,
+            //         'operacion_pago'  => $payment_id,
+            //         'status'          => $response_json->status,
+            //         'log'             => $response,
+            //         'formapago_id'    => '2',
+            //     ]);
+
+            //no tiene emit porque no es un controlador livewire
                 //$this->emit('mensajePositivo', ['mensaje' => 'El pago se realizo con exito']);
                 return redirect()->to('/shop');
 
