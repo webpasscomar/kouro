@@ -48,4 +48,12 @@ public function items()
     return $this->belongsToMany(Pedido_item::class);
 }
 
+
+
+public function pago()
+{
+    return $this->belongsTo(Log_pago::class);
+}
+
+
 }

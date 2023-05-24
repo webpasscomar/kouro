@@ -25,6 +25,12 @@ public function formasdepago()
 }
 
 
+public function pedido()
+{
+    return $this->hasMany(Pedido::class);
+}
+
+
 }
 
 

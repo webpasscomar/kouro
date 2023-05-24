@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 
+
 use App\Models\Pedido;
 use App\Models\Pedido_item;
 use App\Models\Estadospedido;
@@ -71,7 +72,7 @@ class Pedidos extends Component
 
     //tablas usadas
     protected $productos, $talles, $colores, $estados_pedidos;
-    protected $pedidos, $entregas, $provincias, $localidades, $sku;
+    protected $pedidos, $entregas, $provincias, $localidades, $sku,$log_pagos;
 
     protected $listeners = ['delete'];
 
@@ -121,10 +122,19 @@ class Pedidos extends Component
 
 
 
-        $this->pedidos = Pedido::where('apellido', 'like', '%' . $this->search . '%')
+        // $this->pedidos = Pedido::where('apellido', 'like', '%' . $this->search . '%')
+        //     ->orderBy($this->sort, $this->order)
+        //     ->paginate(5);
+         $this->pedidos = Pedido::select([
+            'pedidos.id', 'pedidos.fecha', 'pedidos.sucursal_id','pedidos.cliente_id','pedidos.apellido', 'pedidos.nombre',
+            'pedidos.correo', 'pedidos.telefono', 'pedidos.del_calle','pedidos.del_nro','pedidos.del_piso','pedidos.del_dpto','pedidos.localidad_id',
+            'pedidos.provincia_id','pedidos.observaciones','pedidos.cantidadItems','pedidos.subTotal','pedidos.total','pedidos.del_costo','pedidos.entrega_id',
+            'pedidos.estado_id','log_pagos.status'
+            ])
+            ->leftJoin('log_pagos', 'pedidos.id', '=', 'log_pagos.idpedido')
+            ->where('apellido', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
-
 
 
         $this->sku              = Sku::all();
@@ -135,6 +145,8 @@ class Pedidos extends Component
         $this->talles  = Talle::all();
         $this->entregas  = Formadeentrega::where('estado', '=', 1)->get();
         $this->provincias  = Provincia::where('estado', '=', 1)->get();
+        //$this->log_pagos = Log_pago::where('status','==','approved');
+
 
         $this->localidades  = Localidad::where('estado', '=', 1)
             ->where('provincia_id', '=', $this->provincia_id)

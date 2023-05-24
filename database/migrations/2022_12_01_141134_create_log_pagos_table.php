@@ -15,7 +15,11 @@ class CreateLogPagosTable extends Migration
     {
         Schema::create('log_pagos', function (Blueprint $table) {
             $table->id();
-            $table->integer('idpedido');
+            //$table->integer('idpedido');
+            $table->foreignId('idpedido')
+            ->nullable()
+            ->constrained('pedidos');
+
             $table->integer('operacion_pago');
             $table->string('status');
             $table->integer('formaPago_id');
@@ -31,6 +35,6 @@ class CreateLogPagosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logMercadoPago');
+        Schema::dropIfExists('log_pagos');
     }
 }
