@@ -39,7 +39,7 @@ class ParametroSeeder extends Seeder
         $parametro2->save();
 
         $parametro3 = new Parametro();
-        $parametro3->descripcion = 'Paralela de pago';
+        $parametro3->descripcion = 'Pasalela de pago';
         $parametro3->default = "S";
         $parametro3->detalle = "Utiliza Mercadopago para la cobra del pedido";
         $parametro3->relacionados = 1;
@@ -109,5 +109,9 @@ class ParametroSeeder extends Seeder
         $parametro11->relacionados = 7;
         $parametro11->valor = "S";
         $parametro11->save();
+
+
+
+
     }
 }

@@ -15,9 +15,11 @@
                 <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
+                        <h2 class="text-black font-bold flex justify-center">{{$producto_nombre}}</h2>
+
                         <div class="grid grid-cols-1 sm:grid-cols-3">
                             <div class="col-span-3">
-                                <button wire:click="addImagen(2)"
+                                <button wire:click="addImagen"
                                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
                                     Nueva imagen</button>
                             </div>
@@ -32,27 +34,31 @@
                         <table class="table-auto w-full">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-700">
-                                    <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Imagen</th>
-                                    <th class="cursor-pointer px-4 py-2" wire:click="order('nombre')">Color</th>
-                                    <th class="cursor-pointer px-4 py-2" wire:click="order('desCorta')">Talle</th>
+                                    <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Id</th>
+                                    <th class="cursor-pointer px-4 py-2" wire:click="order('color')">Color</th>
+                                    <th class="cursor-pointer px-4 py-2" wire:click="order('file_name')">Archivo</th>
+                                    <th class="cursor-pointer px-4 py-2" >Imagen</th>
                                     <th class="px-4 py-2">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($imagenes as $img)
-                                    <tr>
-                                        <td class="border px-4 py-2">{{ $img->id }}</td>
-                                        <td class="border px-4 py-2">{{ $img->id }}</td>
-                                        <td class="border px-4 py-2">{{ $img->id }}</td>
-                                        <td class="border px-4 py-2 text-center">
-                                            <button wire:click="editarImg({{ $img->id }})"
-                                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
-                                            <button wire:click="borrarImg({{ $img->id }})"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if ($imagenes)
+                                    @foreach ($imagenes as $img)
+                                        <tr>
+                                            <td class="border px-4 py-2">{{ $img->id }}</td>
+                                            <td class="border px-4 py-2">{{ $img->color }}</td>
+                                            <td class="border px-4 py-2">{{ $img->file_name }}</td>
+                                            <td class="border px-4 py-2">
+                                                <img src="{{asset($img->file_path)}}" width="150" heigth="150">
+                                            </td>
+                                            <td class="border px-4 py-2 text-center">
+                                                <button wire:click="deleteImagen({{ $img->id }})"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                             </tbody>
+                            @endif
                         </table>
 
                         <div class="py-3">

@@ -66,11 +66,13 @@
                         <select
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             wire:model="presentacion_id">
+                            <option value="0">Elija una presentacion</option>
                             @foreach ($presentaciones as $item)
                                 <option value="{{ $item->id }}">{{ $item->presentacion }}</option>
                             @endforeach
                         </select>
                     </div>
+
 
 
                     <div class="mb-3">
@@ -190,28 +192,6 @@
                     </div>
 
 
-
-                    {{-- <div class="mb-3 col-span-2">
-                        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
-                        <input type="file" id="imagen" wire:model="imagen" wire:change="cambioImagen">
-                        <x-jet-input-error for="imagen" />
-                    </div> --}}
-
-
-                    {{-- <div class="mb-3">
-                        @if ($cambioImg)
-                            @if (gettype($imagen) === 'object')
-                                <img class="h-20 w-20" src="{{ $imagen->temporaryUrl() }}">
-                            @endif
-                        @else
-                            @if ($accion === 'editar')
-                                <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}"
-                                    alt="">
-                            @endif
-                        @endif
-                    </div> --}}
-
-
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                             <button wire:click.prevent="guardar()" type="button"
@@ -219,7 +199,7 @@
                         </span>
 
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                            <button wire:click="cerrarModal()" type="button"
+                            <button wire:click="cerrarModal(1)" type="button"
                                 class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gray-200 text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">Cancelar</button>
                         </span>
                     </div>

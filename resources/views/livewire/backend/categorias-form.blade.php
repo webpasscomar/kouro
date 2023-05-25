@@ -1,4 +1,4 @@
-<div class="fixed z-10 inset-0 overflow-y-auto">
+{{-- <div class="fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center w-full">
         <!-- Fondo oscuro para el modal -->
         <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -31,9 +31,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
- <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
+<div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
     <div class="flex justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
         <div class="fixed inset-0 transition-opacity">
@@ -56,11 +56,10 @@
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             wire:model="categoriaPadre_id">
 
-                            @forelse ($categoriasAnt as $item)
+                            <option value="0">Sin categoría padre</option>
+                            @foreach ($categoriasAnt as $item)
                                 <option value="{{ $item->id }}">{{ $item->categoria }}</option>
-                            @empty
-                                <option value="1">Sin categoría padre</option>
-                            @endforelse
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
@@ -110,12 +109,14 @@
                     <div class="mb-3">
                         @if ($cambioImg)
                             @if (gettype($imagen) === 'object')
-                                <img class="h-20 w-20" src="{{ $imagen->temporaryUrl() }}">
+                                @if ($imagen->extension() == 'png' || $imagen->extension() == 'jpg' || $imagen->extension() == 'jpeg')
+                                    <img class="h-20 w-20" src="{{ $imagen->temporaryUrl() }}">
+                                @endif
                             @endif
                         @else
                             @if ($accion === 'editar')
-                                <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}"
-                                    alt="">
+                                    <img class="h-20 w-20" src="{{ asset('storage/categorias/' . $imagen) }}"
+                                        alt="">
                             @endif
                         @endif
                     </div>

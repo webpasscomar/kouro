@@ -45,9 +45,9 @@ class Movimientos extends Component
         //dd(auth()->user());
 
         $this->tipomovimientos = Tipomovimiento::all();
-        $this->productos  = Producto::all();
-        $this->colores  = Color::all();
-        $this->talles  = Talle::all();
+        $this->productos  = Producto::where('estado',1)->get();
+        $this->colores  = Color::where('estado',1)->get();
+        $this->talles  = Talle::where('estado',1)->get();;
 
 
         return view('livewire.backend.movimientos',

@@ -23,17 +23,19 @@
 
                     <div class="mb-4 col-span-3">
                         <label for="cliente" class="block text-gray-700 text-sm font-bold mb-2">Cliente:</label>
-                        <input type="text"
+                        {{-- <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cliente" wire:model="cliente">
+                            id="cliente" wire:model="cliente"> --}}
+                        <textarea name="cliente" id="cliente" cols="50" rows="5" wire:model="cliente" class="block text-gray-700 text-sm font-bold mb-2"></textarea>
                         <x-jet-input-error for="cliente" />
                     </div>
 
                     <div class="mb-4 col-span-3">
                         <label for="testimonio" class="block text-gray-700 text-sm font-bold mb-2">Testimonio:</label>
-                        <input type="text"
+                        {{-- <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="testimonio" wire:model="testimonio">
+                            id="testimonio" wire:model="testimonio"> --}}
+                            <textarea name="testimonio" id="testimonio" cols="50" rows="5" wire:model="testimonio" class="block text-gray-700 text-sm font-bold mb-2"></textarea>
                         <x-jet-input-error for="testimonio" />
                     </div>
 

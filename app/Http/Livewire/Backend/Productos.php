@@ -4,11 +4,25 @@ namespace App\Http\Livewire\Backend;
 
 use App\Models\Presentacion;
 use App\Models\Producto;
+use App\Models\Categoria;
+use App\Models\Producto_imagen;
+use App\Models\Producto_categoria;
+
+use App\Models\Color;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use Livewire\WithFileUploads;
+
+
+
+
 class Productos extends Component
 {
+
+    use WithFileUploads;
+    use WithPagination;
+
     // Atributos
     public $nombre;
     public $desCorta;
@@ -40,116 +54,105 @@ class Productos extends Component
     public $color;
 
     // Parametros generales
-    public $modal = false;
     public $search;
     public $sort = 'id';
     public $order = 'desc';
+    public $modal = false;
     public $modal1 = false;
     public $modal2 = false;
     public $modal3 = false;
+    public $modal4 = false;
+    public $modal5 = false;
 
-    public $producto, $id_producto;
+    public $producto, $producto_id;
 
-    use WithPagination;
+    ///ruben
+    public $colores;
+    public $color_id;
+    public $producto_imagen;
+    public $producto_nombre;
+    public $productos_categorias;
+    public $categorias;
+    public $categoria_id;
+    public $id_producto;
+    public $presentaciones;
 
-    protected $productos, $presentaciones;
+
+
+
+
+
+
+
+    protected $productos;
 
     // Parametros para el multistep
     public $totalSteps = 4;
     public $currentStep = 1;
 
-    protected $rules = [
-        'nombre' => 'required|max:100',
-        'desCorta' => 'required|max:255',
-        'descLarga' => 'required|',
-        'precioLista' => 'required',
-    ];
+
+
+    protected function rules()
+    {
+        if ($this->modal === true) {
+            return [
+                'nombre' => 'required|max:100',
+                'desCorta' => 'required|max:255',
+                'descLarga' => 'required|',
+                'precioLista' => 'required',
+            ];
+        }
+        if ($this->modal3 === true) {
+            return [
+                'imagen' => ['required', 'mimes:png,jpg,jpeg'],
+                'color_id' => 'required|not_in:0',
+            ];
+        }
+
+        if ($this->modal5 === true) {
+            return [
+                'categoria_id' => 'required|not_in:0',
+            ];
+        }
+    }
+
+
+
+
+
 
 
     public function mount()
     {
-        // Defino en 1 el paso si es multistep
-        // $this->currentStep = 1;
+
+        $this->colores = Color::where('estado', 1)->orderBy('color')->get();
+        $this->categorias = Categoria::where('estado', 1)->orderBy('categoria')->get();
+        $this->presentaciones = Presentacion::where('estado', 1)->orderBy('presentacion')->get();
     }
 
     public function render()
     {
-        $this->presentaciones = Presentacion::all();
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
+
+
         return view('livewire.backend.productos', [
             'productos' => $this->productos,
             'presentaciones' => $this->presentaciones,
-            'imagenes' => $this->imagenes
+            'imagenes' => $this->imagenes,
+            'colores' => $this->colores,
+            'productos_categorias' => $this->productos_categorias,
+            'categorias' => $this->categorias,
         ]);
     }
 
     public function crear()
     {
         $this->limpiarCampos();
-        $this->abrirModal();
+        $this->abrirModal(1);
     }
 
-    public function abrirModal($id = null)
-    {
-
-        switch ($id) {
-            case 1:
-                $this->modal1 = true;
-                break;
-            case 2:
-                $this->modal2 = true;
-                break;
-            case 3:
-                $this->modal3 = true;
-                break;
-            default:
-            case 1:
-                $this->modal = true;
-                break;
-        }
-    }
-
-    public function cerrarModal($id = null)
-    {
-        switch ($id) {
-            case 1:
-                $this->modal1 = false;
-                break;
-            case 2:
-                $this->modal2 = false;
-                break;
-            case 3:
-                $this->modal3 = false;
-                $this->modal2 = true;
-                break;
-            default:
-            case 1:
-                $this->modal = false;
-                break;
-        }
-    }
-
-    public function limpiarCampos()
-    {
-        $this->reset('nombre', 'desCorta', 'descLarga', 'codigo', 'precioLista', 'ofertaDesde', 'ofertaHasta', 'precioOferta', 'peso', 'tamano', 'link', 'orden', 'unidadVenta');
-    }
-
-    public function order($sort)
-    {
-        if ($this->sort == $sort) {
-
-            if ($this->order == 'desc') {
-                $this->order = 'asc';
-            } else {
-                $this->order = 'desc';
-            }
-        } else {
-            $this->sort = $sort;
-            $this->order = 'asc';
-        }
-    }
 
     public function editar($id)
     {
@@ -173,15 +176,9 @@ class Productos extends Component
         $this->unidadVenta = $producto->unidadVenta;
         $this->destacar = $producto->destacar;
 
-
-        $this->abrirModal();
+        $this->abrirModal(1);
     }
 
-    public function borrar($id)
-    {
-        Producto::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
-    }
 
     public function guardar()
     {
@@ -209,43 +206,223 @@ class Productos extends Component
 
         $this->emit('alertSave');
 
-        $this->cerrarModal();
         $this->limpiarCampos();
+        $this->cerrarModal(1);
     }
 
 
 
+    public function abrirModal($id = null)
+    {
+
+        switch ($id) {
+            case 1:
+                $this->modal = true;   //producto
+                break;
+            case 2:
+                $this->modal2 = true; //imagenes
+                break;
+            case 3:
+                $this->modal3 = true;  //alta de imagenes
+                break;
+            case 4:
+                $this->modal4 = true;  //categorias
+                break;
+            case 5:
+                $this->modal5 = true;  //categorias
+                break;
+            default:
+        }
+    }
+
+    public function limpiarCampos()
+    {
+        $this->reset('nombre', 'desCorta', 'descLarga', 'codigo', 'precioLista', 'ofertaDesde', 'ofertaHasta', 'precioOferta', 'peso', 'tamano', 'link', 'orden', 'unidadVenta');
+    }
+
+    public function order($sort)
+    {
+        if ($this->sort == $sort) {
+
+            if ($this->order == 'desc') {
+                $this->order = 'asc';
+            } else {
+                $this->order = 'desc';
+            }
+        } else {
+            $this->sort = $sort;
+            $this->order = 'asc';
+        }
+    }
 
     public function imagenes($id)
     {
-        $this->imagenes = Producto::all();
-        // $this->imagenes = Producto::where('estado', 1)->paginate(5);
-        // $this->id_producto = $id;
-        // $this->nombre = $producto->nombre;
-        // $this->desCorta = $producto->desCorta;
-        // $this->descLarga = $producto->descLarga;
+        $this->producto_id = $id;
+        //$this->imagenes = Producto_imagen::where('producto_id',$id)->get();
+
+        $this->producto_nombre = Producto::where('id', $id)->value('nombre');
+
+        $this->imagenes = Producto_imagen::select([
+            'productos_imagenes.id',
+            'productos_imagenes.file_name',
+            'productos_imagenes.file_extension',
+            'productos_imagenes.file_path',
+            'productos_imagenes.estado',
+            'colores.color',
+            'productos.nombre'
+        ])
+            ->join('colores', 'productos_imagenes.color_id', '=', 'colores.id')
+            ->join('productos', 'productos_imagenes.producto_id', '=', 'productos.id')
+            ->where('productos_imagenes.producto_id', '=', $id)
+            ->get();
 
         $this->abrirModal(2);
     }
 
-    public function addImagen($id)
+
+    public function categorias($id)
     {
-        $id_producto = $id;
-        //$imagenes = Producto::all();
-        // $this->id_producto = $id;
-        // $this->nombre = $producto->nombre;
-        // $this->desCorta = $producto->desCorta;
-        // $this->descLarga = $producto->descLarga;
+        $this->producto_id = $id;
+
+        $this->producto_nombre = Producto::where('id', $id)->value('nombre');
+
+        $this->productos_categorias = Producto_categoria::select([
+            'producto_categoria.id',
+            'producto_categoria.producto_id',
+            'producto_categoria.categoria_id',
+            'categorias.categoria',
+            'productos.nombre'
+        ])
+            ->join('categorias', 'producto_categoria.categoria_id', '=', 'categorias.id')
+            ->join('productos', 'producto_categoria.producto_id', '=', 'productos.id')
+            ->where('producto_categoria.producto_id', '=', $id)
+            ->get();
+
+        $this->abrirModal(4);
+    }
+
+
+
+
+    ///abre el formulario de alta o edicion de categorias
+    public function addCategoria()
+    {
+
+        $this->cerrarModal(4);
+        $this->abrirModal(5);
+    }
+
+    //sale sin grabar categoria
+    public function notsaveCategoria()
+    {
+        $this->categorias($this->producto_id);
+        $this->cerrarModal(5);
+        $this->abrirModal(4);
+    }
+
+    //sale y graba categoria
+    public function saveCategoria()
+    {
+
+
+        $this->validate();
+
+
+        Producto_categoria::updateOrCreate(
+            ['producto_id' => $this->producto_id, 'categoria_id' => $this->categoria_id],
+            [
+                'producto_id' => $this->producto_id,
+                'categoria_id' => $this->categoria_id
+            ]
+        );
+
+        $this->cerrarModal(5);
+        $this->abrirModal(4);
+        $this->categoria_id = 0;
+        $this->categorias($this->producto_id);
+    }
+
+    //elimina una categoria asignada al producto
+    public function  deleteCategoria($id)
+    {
+        Producto_categoria::find($id)->delete();
+        $this->emit('mensajePositivo', ['mensaje' => 'Categoria eliminada correctamente']);
+        $this->categorias($this->producto_id);
+    }
+
+
+
+
+
+    ///abre el formulario de alta o edicion de imagenes
+    public function addImagen()
+    {
 
         $this->cerrarModal(2);
         $this->abrirModal(3);
     }
 
 
+    public function  deleteImagen($id)
+    {
+        Producto_imagen::find($id)->delete();
+        $this->emit('mensajePositivo', ['mensaje' => 'Imagen eliminada correctamente']);
+        $this->imagenes($this->producto_id);
+    }
 
 
+    //sale sin grabar imagen
+    public function notsaveImagen()
+    {
+        $this->imagenes($this->producto_id);
+        $this->cerrarModal(3);
+        $this->abrirModal(2);
+    }
+
+    //sale y graba imagen
+    public function saveImagen()
+    {
 
 
+        $this->validate();
+
+        $filetosave = new Producto_imagen();
+        $filetosave->producto_id  = $this->producto_id;
+        $filetosave->color_id  = $this->color_id;
+        $filetosave->estado    = 1;
+        $filetosave->file_name = $this->imagen->getClientOriginalName();
+        $filetosave->file_extension = $this->imagen->extension();
+        $filetosave->file_path = 'storage/' . $this->imagen->store('productos', 'public');
+        $filetosave->save();
+        $this->cerrarModal(3);
+        $this->abrirModal(2);
+        $this->imagen = null;
+        $this->color_id = 0;
+        $this->imagenes($this->producto_id);
+    }
+
+
+    public function cerrarModal($id = null)
+    {
+        switch ($id) {
+            case 1:
+                $this->modal = false;
+                break;
+            case 2:
+                $this->modal2 = false;
+                break;
+            case 3:
+                $this->modal3 = false;
+                break;
+            case 4:
+                $this->modal4 = false;
+                break;
+            case 5:
+                $this->modal5 = false;
+                break;
+            default:
+        }
+    }
 
     public function validateData()
     {
@@ -324,5 +501,11 @@ class Productos extends Component
             $data = ['name' => $this->first_name . ' ' . $this->last_name, 'email' => $this->email];
             return redirect()->route('productos.success', $data);
         }
+    }
+
+    public function borrar($id)
+    {
+        Producto::find($id)->delete();
+        session()->flash('message', 'Registro eliminado correctamente');
     }
 }

@@ -31,10 +31,11 @@
                                 <td class="border px-4 py-2" style="text-align: right;">
                                     {{ number_format($item['cantidad'] * $item['producto_precio'], 2, ',', '.') }}</td>
                                 <td class="border px-4 py-2 text-center">
-                                    <button
-                                        wire:click.prevent="$emit('alertCarritoDelete','{{ $item['producto_id'] }}','{{ $item['talle_id'] }}','{{ $item['color_id'] }}')"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
-
+                                    @if ($apagar == 0)
+                                        <button
+                                            wire:click.prevent="$emit('alertCarritoDelete','{{ $item['producto_id'] }}','{{ $item['talle_id'] }}','{{ $item['color_id'] }}')"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                    @endif
 
                                 </td>
                             </tr>
@@ -46,34 +47,36 @@
             </table>
 
             <hr>
+            @if (session('items'))
+                <table class="table-auto">
+                    <thead>
+                        <th></th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2 ">Subtotal</td>
+                            <td class="border px-4 py-2 " style="text-align: right;">
+                                {{ number_format(session('sub_total'), 2, ',', '.') }}</td>
 
-            <table class="table-auto">
-                <thead>
-                    <th></th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2 ">Subtotal</td>
-                        <td class="border px-4 py-2 " style="text-align: right;">
-                            {{ number_format(session('sub_total'), 2, ',', '.') }}</td>
-
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Costo de envío</td>
-                        <td class="border px-4 py-2" style="text-align: right;">
-                            {{ number_format(session('costoentrega'), 2, ',', '.') }}</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Total</td>
-                        <td class="border px-4 py-2" style="text-align: right;">
-                            {{ number_format(session('sub_total') + session('costoentrega'), 2, ',', '.') }}</td>
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">Costo de envío</td>
+                            <td class="border px-4 py-2" style="text-align: right;">
+                                {{ number_format(session('costoentrega'), 2, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">Total</td>
+                            <td class="border px-4 py-2" style="text-align: right;">
+                                {{ number_format(session('sub_total') + session('costoentrega'), 2, ',', '.') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            @endif
 
             @if (session('items'))
                 <form>
+                    <!-- formulario de datos de comprador y entrega-->
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Datos del comprador</label>
                     </div>
@@ -191,14 +194,38 @@
 
                     @endif
                 </form>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
+                    <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                        <button wire:click.prevent="cerrarCarrito()" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">Continuar
+                            Compra</button>
+                    </span>
+                </div>
             @endif
-            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
-                <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                    <button wire:click.prevent="cerrarCarrito()" type="button"
-                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">Finalizar
-                        Compra</button>
-                </span>
-            </div>
+
+            @if ($apagar == 1)
+                <form>
+                    <!-- formulario de pago -->
+                    <div class="mt-4">
+                        <label class="block font-bold text-gray-700">Forma de Pago</label>
+                        <select class="form-select mt-1 block w-full" id="entrega_id" wire:model="forma_pago_id">
+                            <option value="0">Seleccione una Forma de Pago</option>
+                            @foreach ($formasdepagos as $formap)
+                                <option value="{{ $formap['id'] }}">{{ $formap['nombre'] }}</option>
+                            @endforeach
+                        </select>
+                        <x-jet-input-error for="forma_pago_id" />
+                    </div>
+
+                </form>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
+                    <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                        <button wire:click.prevent="pagar()" type="button"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">Pagar</button>
+                    </span>
+                </div>
+            @endif
+
 
 
 

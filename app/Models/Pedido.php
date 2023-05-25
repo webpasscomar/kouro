@@ -16,7 +16,7 @@ protected  $fillable = [
     'apellido',
     'nombre',
     'cantidadItems',
-    'cliente_id',    
+    'cliente_id',
     'correo',
     'del_calle',
     'del_nro',
@@ -26,17 +26,13 @@ protected  $fillable = [
     'entrega_id',
     'estado',
     'fecha',
-    'formaPago_id',
     'provincia_id',
     'localidad_id',
     'observaciones',
-    'status_mp',
     'subTotal',
     'sucursal_id',
     'telefono',
     'total',
-    'transac_mp',
-    'detail_mp',
     'estado_id'
 ];
 
@@ -53,6 +49,11 @@ public function items()
 }
 
 
+
+public function pago()
+{
+    return $this->belongsTo(Log_pago::class);
+}
 
 
 }

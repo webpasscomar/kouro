@@ -10,6 +10,8 @@ class Formasdeentregas extends Component
 {
     public $nombre, $id_formasdeentrega;
 
+    protected $listeners = ['delete'];
+
     public $modal = false;
     public $search;
     public $sort = 'id';
@@ -25,7 +27,7 @@ class Formasdeentregas extends Component
     public function render()
     {
         $this->formasdeentrega = Formadeentrega::where('nombre', 'like', '%' . $this->search . '%')
-            ->orderBy($this->sort, $this->order) 
+            ->orderBy($this->sort, $this->order)
             ->paginate(5);
 
         return view('livewire.backend.formasdeentrega', ['formasdeentrega' => $this->formasdeentrega]);
@@ -60,7 +62,7 @@ class Formasdeentregas extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
+    public function delete($id)
     {
         Formadeentrega::find($id)->delete();
         session()->flash('message', 'Registro eliminado correctamente');

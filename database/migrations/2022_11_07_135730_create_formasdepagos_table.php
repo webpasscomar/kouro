@@ -16,6 +16,7 @@ class CreateFormasdepagosTable extends Migration
         Schema::create('formasdepagos' , function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->tinyInteger('estado')->default(0);
             $table->string('logo');
             $table->timestamps();
         });
