@@ -51,7 +51,7 @@ class Historias extends Component
 
       return view('livewire.backend.historias',
                 ['sku' => $this->sku,
-                 'detalle' => $this->detalle,
+                'detalle' => $this->detalle,
             ]);
   }
 
@@ -66,10 +66,11 @@ class Historias extends Component
             'movimientos.pedido_id',
             'tipomovimientos.descripcion',
             'users.name'])
-            ->join('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
-            ->join('users', 'movimientos.user_id', '=', 'users.id')
+            ->leftJoin('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
+            ->leftJoin('users', 'movimientos.user_id', '=', 'users.id')
             ->where('movimientos.sku_id', '=', $id)
-            ->paginate(5);
+            ->get();
+
 
             $this->abrirModal();
   }
