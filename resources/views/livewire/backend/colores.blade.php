@@ -60,6 +60,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
+                        <th>Color<th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
@@ -76,6 +77,11 @@
                                 ],
                                 key($color->id)
                             )</td>
+                            <td class="border px-4 py-2">
+                                <!-- Vista de Blade -->
+                                    <div class="px-4 py-2" style="background-color: {{$color->pcolor}};"></div>
+
+                            </td>
                             <td class="border px-4 py-2 text-center">
                                 <button wire:click="editar({{ $color->id }})"
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>

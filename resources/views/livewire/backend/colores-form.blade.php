@@ -14,7 +14,7 @@
 
             <form>
 
-                @livewire('color-picker')
+
 
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
 
@@ -25,6 +25,12 @@
                             id="color" wire:model="color">
                             <x-jet-input-error for="color" />
                     </div>
+                    <div class="mb-4 col-span-3">
+                        <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Paleta de Colores </label>
+                        <input type="color" wire:model="pcolor" id="pcolor" name="pcolor"/>
+                        <x-jet-input-error for="pcolor" />
+                    </div>
+
 
 
 
@@ -49,3 +55,4 @@
 
     </div>
 </div>
+
