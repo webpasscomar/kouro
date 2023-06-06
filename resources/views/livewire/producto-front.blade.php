@@ -66,9 +66,9 @@
                                 class="py-2 px-4
                             {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0)
                                 ? 'bg-slate-100 hover:bg-slate-200 text-{212 212 216}'
-                                : ' bg-blue-500 hover:bg-blue-600 text-white' }}
+                                : ' bg-green-500 hover:bg-green-600 text-white' }}
                                                            font-bold rounded-md
-                            shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                            shadow-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
                             {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}
                             "
                                 wire:click.prevent="agregarcarrito()">
@@ -77,10 +77,14 @@
                             </button>
                         @else
                             <button
-                                class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
-                                         focus:ring-blue-500 focus:ring-offset-2 "
+                                class="py-2 px-4  bg-green-500 hover:bg-green-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                                         focus:ring-green-500 focus:ring-offset-2 "
                                 wire:click.prevent="agregarcarrito()">Agregar al carrito</button>
                         @endif
+
+                        <a href="/shop"
+                        class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                        focus:ring-blue-500 focus:ring-offset-2 ">Seguir comprando</a>
                         <div>
 
 

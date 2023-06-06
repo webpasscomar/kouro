@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class Formasdeentregas extends Component
 {
-    public $nombre, $id_formasdeentrega;
+    public $nombre, $id_formasdeentrega,$pidedirec,$costo;
 
     protected $listeners = ['delete'];
 
@@ -22,7 +22,18 @@ class Formasdeentregas extends Component
     protected $formasdeentrega;
     protected $rules = [
         'nombre' => 'required|max:30',
+        'costo' => 'numeric',
     ];
+
+
+    protected function messages()
+    {
+        return [
+            'nombre.required'        => 'Debe ingresar el nombre.',
+            'nombre.max'             => 'Solo puede ingresar 30 caracteres.',
+            'costo.numeric'    => 'Debe ingresar un valor numerico.',
+        ];
+    }
 
     public function render()
     {
@@ -59,6 +70,8 @@ class Formasdeentregas extends Component
         $formasdeentrega = Formadeentrega::findOrFail($id);
         $this->id_formasdeentrega = $id;
         $this->nombre = $formasdeentrega->nombre;
+        $this->costo = $formasdeentrega->costo;
+        $this->pidedirec = $formasdeentrega->pidedirec;
         $this->abrirModal();
     }
 
@@ -75,6 +88,8 @@ class Formasdeentregas extends Component
             ['id' => $this->id_formasdeentrega],
             [
                 'nombre' => $this->nombre,
+                'pidedirec' => $this->pidedirec,
+                'costo' => $this->costo,
             ]
         );
 

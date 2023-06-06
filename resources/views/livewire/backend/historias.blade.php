@@ -88,7 +88,7 @@
                 <tbody>
                     @foreach ($sku as $item)
                         <tr>
-                            <td class="border px-4 py-2">{{ $item->id }}</td>
+                            <td class="border px-4 py-2">{{ $item->producto_id }}</td>
                             <td class="border px-4 py-2">{{ $item->nombre }}</td>
                             <td class="border px-4 py-2">{{ $item->color }}</td>
                             <td class="border px-4 py-2">{{ $item->talle }}</td>

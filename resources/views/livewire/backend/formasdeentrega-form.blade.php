@@ -24,6 +24,25 @@
                             <x-jet-input-error for="nombre" />
                     </div>
 
+                    <div class="mb-4 col-span-3">
+                        <label for="costo" class="block text-gray-700 text-sm font-bold mb-2">Costo:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="costo" wire:model="costo">
+                            <x-jet-input-error for="costo" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pidedirec" class="block text-gray-700 text-sm font-bold mb-2">Pide direccion:</label>
+                        <select
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            wire:model="pidedirec">
+                            <option value="0">No</option>
+                            <option value="1">Si</option>
+                        </select>
+                    </div>
+
+
 
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3">
 

@@ -137,7 +137,7 @@
                                                 <tr class="border">
                                                     <td colspan=7>
                                                         <table class="table-auto w-full">
-                                                            <th>Codigo</th>
+                                                            <th>Id</th>
                                                             <th>Cantidad</th>
                                                             <th>Precio</th>
                                                             <th>Sub-Total</th>
