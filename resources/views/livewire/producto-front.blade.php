@@ -85,6 +85,22 @@
                         <a href="/shop"
                         class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
                         focus:ring-blue-500 focus:ring-offset-2 ">Seguir comprando</a>
+
+                        @if (($cantidad > $disponibles) && ($talle_id !== 0) && ($color_id !== 0))
+                            <div class="mt-4">
+                                <div class="mb-4 col-span-2">
+                                    <input type="text"
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        id="mailaviso" placeholder="Tu e-mail y te avisamos cuando haya stock" wire:model="mailaviso">
+                                        <x-jet-input-error for="mailaviso" />
+                                </div>
+
+                                <button
+                                class="py-2 px-4  bg-red-500 hover:bg-red-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                                        focus:ring-red-500 focus:ring-offset-2 "   wire:click.prevent="avisostock()">Enviar</button>
+                            </div>
+                        @endif
+
                         <div>
 
 

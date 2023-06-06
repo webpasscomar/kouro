@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Sku;
 use App\Models\Color;
 use App\Models\Talle;
+use App\Models\Stock_pendiente;
 
 use Livewire\Component;
 
@@ -21,6 +22,7 @@ class ProductoFront extends Component
     public $talles;
     public $disponibles;
     public $categorias;
+    public $mailaviso;
 
 
     public function mount($id)
@@ -175,6 +177,29 @@ class ProductoFront extends Component
 
         //envio al icono de cart
         $this->emit('carrito', ['mensaje' => 'Se agrego el producto al carrito', 'cantidad' => session('cantidad')]);
+    }
+
+    public function avisostock() {
+
+        if ($this->mailaviso === null) {
+            $this->emit('mensajeNegativo', ['mensaje' => 'Debe ingresar una direccion de correo']);
+        } else {
+
+            $sku_id = Sku::where('producto_id', $this->producto_id)
+                        ->where('talle_id', $this->talle_id)
+                        ->where('color_id', $this->color_id)
+                        ->value('id');
+
+            Stock_pendiente::Create(
+                        [
+                            'sku_id'            => $sku_id,
+                            'fechaSolicitud'    => date('Y-m-d H:i:s'),
+                            'cantidad'          => $this->cantidad,
+                            'email'             => $this->mailaviso
+                            ]
+                        );
+            $this->emit('mensajePositivo', ['mensaje' => 'Te avisamos cuando el producto ingrese']);
+        }
     }
 
     public function render()

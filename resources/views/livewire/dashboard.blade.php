@@ -42,6 +42,16 @@ $stock_count = 20;
                 <div class="text-gray-600 font-bold text-xl">{{ $stock_count }}</div>
             </a>
 
+            <a href="/admin/pendientes"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Stocks Pendientes</div>
+                    <i class="fas fa-box-open text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $stock_count }}</div>
+            </a>
+
+
             <a href="/admin/productos"
                 class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
                 <div class="flex justify-between items-center mb-4">
