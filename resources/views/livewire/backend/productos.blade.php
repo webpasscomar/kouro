@@ -113,10 +113,10 @@
                 <tbody>
                     @foreach ($productos as $item)
                         <tr>
-                            <td class="border px-4 py-2">{{ $item->id }}</td>
+                            <td class="border px-4 py-2">{{ $item->codigo }}</td>
                             <td class="border px-4 py-2">{{ $item->nombre }}</td>
                             <td class="border px-4 py-2">{{ $item->desCorta }}</td>
-                            <td class="border px-4 py-2">{{ $item->precioLista }}</td>
+                            <td class="border px-4 py-2 text-right">{{ number_format($item->precioLista,2) }}</td>
                             <td class="border px-4 py-2">
                                 <livewire:toggle-button :model="$item" field="estado" key="{{ $item->id }}" />
                             </td>

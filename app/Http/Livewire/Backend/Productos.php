@@ -84,6 +84,8 @@ class Productos extends Component
 
 
 
+
+
     protected $productos;
 
     // Parametros para el multistep
@@ -135,6 +137,7 @@ class Productos extends Component
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
+
 
 
         return view('livewire.backend.productos', [

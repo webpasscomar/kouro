@@ -20,11 +20,11 @@
                                             src="{{ asset('storage/productos/' . $producto->id . '.jpg') }}"
                                             alt="{{ $producto->titulo }}">
                                         <div class="p-4">
-                                            <h2 class="text-gray-900 font-bold text-xl mb-2">{{ $producto->nombre }}
+                                            <h2 class="text-gray-900 font-bold text-xl mb-2">XXX {{ $producto->nombre }}
                                             </h2>
                                             <p class="text-gray-700 text-base">{{ $producto->descripcion }}</p>
-                                            <p class="text-gray-700 text-base font-bold mt-2">{{ $producto->precio }}
-                                            </p>
+
+                                                <p class="text-gray-700 text-base font-bold mt-2">{{ $producto->precio }}</p>
                                         </div>
 
                                     </div>

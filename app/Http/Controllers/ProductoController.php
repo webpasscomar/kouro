@@ -21,10 +21,13 @@ class ProductoController extends Controller
 
     public function categoria($slugCategoria)
     {
+
+
+        $fechahoy  = date('Y-m-d H:i:s');
         $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
         $productos = $categoria->productos()->get();
         $categorias = Categoria::all();
-        return view('productos.categoria', compact('productos', 'categorias', 'categoria'));
+        return view('productos.categoria', compact('productos', 'categorias', 'categoria','fechahoy'));
     }
 
     public function show($slugCategoria, Producto $producto)
