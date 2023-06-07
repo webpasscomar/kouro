@@ -131,7 +131,8 @@
 
 
                                 </tr>
-                                @for ($i = 0; $i < $cantidad_detalle; $i++)
+
+                                {{-- @for ($i = 0; $i < $cantidad_detalle; $i++)
                                         @if ($muestra_detalle[$i]['id'] == $pedido->id)
                                             @if ($muestra_detalle[$i]['ver'] == 1)
                                                 <tr class="border">
@@ -158,12 +159,11 @@
                                                                 @endif
                                                             @endforeach
                                                         </table>
-
                                                     </td>
                                                 </tr>
                                             @endif
                                         @endif
-                                @endfor
+                                @endfor --}}
 
 
 
@@ -175,6 +175,9 @@
             @endif
             @if ($modalpago==1)
                 @include('livewire.backend.verpago-form')
+            @endif
+            @if ($verdeta_pedido==1)
+                @include('livewire.backend.verdeta-pedido-form')
             @endif
 
         </div>

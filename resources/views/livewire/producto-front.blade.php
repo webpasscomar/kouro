@@ -42,17 +42,19 @@
                     <div class="mt-4">
                         <button
                             class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
-                                       shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                            wire:click.prevent="incrementa()">
-                            +
-                        </button>
-                        <input class="py-2 px-2 " type="numeric" id="cantidad" wire:model="cantidad"
-                            wire:change="checkstock()" />
-                        <button
-                            class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
                                       shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             wire:click.prevent="decrementa()">
                             -
+                        </button>
+
+                        <input class="py-2 px-2 " type="numeric" id="cantidad" wire:model="cantidad"
+                        wire:change="checkstock()" />
+
+                        <button
+                        class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
+                                   shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        wire:click.prevent="incrementa()">
+                        +
                         </button>
                         @if (parametro(10) === 'S')
                             Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles"

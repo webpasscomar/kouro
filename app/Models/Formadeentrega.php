@@ -13,7 +13,8 @@ class Formadeentrega extends Model
         'nombre',
         'estado',
         'costo',
-        'pidedirec'
+        'pidedirec',
+        'cobra'
     ];
 
 }

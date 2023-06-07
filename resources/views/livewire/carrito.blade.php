@@ -4,8 +4,7 @@
 
             <h1 class="font-bold py-2 text-3xl">Carrito</h1>
 
-
-            <table class="table-auto w-full">
+             <table class="table-auto w-full">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">ID</th>

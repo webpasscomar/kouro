@@ -54,7 +54,9 @@ class Pedidos extends Component
 
     public $muestra_detalle = array();
     public $cantidad_detalle = 0;
-    public $pedidos_items  = array();
+    public $pedidos_items = array();
+    public $pedidos_items2 = array();
+
 
 
 
@@ -63,6 +65,8 @@ class Pedidos extends Component
     public $sucursal_id = 0;
     public $cantidaditems = 0;
     public $indice_productos, $producto_nombre, $color_nombre, $talle_nombre, $estado;
+    public $verdeta_pedido=0;
+
 
 
 
@@ -172,6 +176,7 @@ class Pedidos extends Component
                 'pedidos_items' => $this->pedidos_items,
                 'datos_pago' => $this->datos_pago,
                 'sku' => $this->sku,
+                'pedidos_items2' => $this->pedidos_items2,
             ]
         );
     }
@@ -428,34 +433,96 @@ class Pedidos extends Component
         $this->edicion = 0;
     }
 
+    //muestra detalle en un row
+    public function detalle_en_row($id)
+    {
 
+            //cuenta cuantos items se debe mostrar el detalle
+            $cantidad_det = count($this->muestra_detalle);
+            $encontro = 0;
+            //verifica si esta ya en detalle para apagarlo o encenderlo
+            if ($cantidad_det != 0) {
+                for ($i = 0; $i < count($this->muestra_detalle); $i++) {
+                    if ($this->muestra_detalle[$i]['id'] == $id) {
+                        if ($this->muestra_detalle[$i]['ver'] == 0) {
+                            $this->muestra_detalle[$i]['ver'] = 1;
+                        } else {
+                            $this->muestra_detalle[$i]['ver'] = 0;
+                        }
+                        $encontro = 1;
+                        break;
+                    }
+                }
+            }
+            //lo agrega a muestra detalle si no lo encontro
+            if ($encontro == 0) {
+                $indice = count($this->muestra_detalle);
+                $this->muestra_detalle[$indice] = ['id' => $id, 'ver' => 1];
+            }
+            $this->cantidad_detalle = count($this->muestra_detalle);
+
+
+    }
+
+
+
+    //muestra detalle en un popup
     public function detalle($id)
     {
 
-        //cuenta cuantos items se debe mostrar el detalle
-        $cantidad_det = count($this->muestra_detalle);
-        $encontro = 0;
-        //verifica si esta ya en detalle para apagarlo o encenderlo
-        if ($cantidad_det != 0) {
-            for ($i = 0; $i < count($this->muestra_detalle); $i++) {
-                if ($this->muestra_detalle[$i]['id'] == $id) {
-                    if ($this->muestra_detalle[$i]['ver'] == 0) {
-                        $this->muestra_detalle[$i]['ver'] = 1;
-                    } else {
-                        $this->muestra_detalle[$i]['ver'] = 0;
-                    }
-                    $encontro = 1;
-                    break;
-                }
-            }
+        if ($this->verdeta_pedido == 0)
+        {
+
+            $this->pedidos_items2 = Pedido_item::select(
+                ['pedido_item.pedido_id',
+                 'pedidos.fecha',
+                 'pedidos.apellido',
+                 'pedidos.nombre',
+                 'pedidos.correo',
+                 'pedidos.telefono',
+                 'pedidos.del_calle',
+                 'pedidos.del_nro',
+                 'pedidos.del_piso',
+                 'pedidos.del_dpto',
+                 'pedidos.observaciones',
+                 'pedidos.cantidadItems',
+                 'pedidos.subTotal',
+                 'pedidos.total',
+                 'pedidos.del_costo',
+                 'pedidos.localidad_id',
+                 'localidades.nombre as nomlocalidad',
+                 'pedidos.provincia_id',
+                 'provincias.nombre as nomprovincia',
+                 'pedidos.entrega_id',
+                 'formasdeentregas.nombre as nomformaent',
+                 'formasdeentregas.pidedirec',
+                 'pedidos.estado_id',
+                 'estados_pedidos.nombre as nomestado',
+                 'pedido_item.cantidad',
+                 'pedido_item.precioUnitario',
+                 'pedido_item.precioItem',
+                 'colores.color',
+                 'talles.talle',
+                 'productos.codigo',
+                 'productos.nombre as nomproduct'])
+                 ->leftJoin('sku','pedido_item.sku_id','=', 'sku.id')
+                 ->leftJoin('productos', 'sku.producto_id', '=', 'productos.id')
+                 ->leftJoin('talles', 'sku.talle_id', '=', 'talles.id')
+                 ->leftJoin('colores', 'sku.color_id', '=', 'colores.id')
+                 ->leftJoin('pedidos', 'pedidos.id', '=', 'pedido_item.pedido_id')
+                 ->leftJoin('localidades', 'pedidos.localidad_id', '=', 'localidades.id')
+                 ->leftJoin('provincias', 'pedidos.provincia_id', '=', 'provincias.id')
+                 ->leftJoin('formasdeentregas', 'pedidos.entrega_id', '=', 'formasdeentregas.id')
+                 ->leftJoin('estados_pedidos', 'pedidos.estado_id', '=', 'estados_pedidos.id')
+                 ->where('pedido_item.pedido_id','=',$id)
+                 ->get();
+            $this->verdeta_pedido = 1;
+        }else{
+            $this->verdeta_pedido = 0;
         }
-        //lo agrega a muestra detalle si no lo encontro
-        if ($encontro == 0) {
-            $indice = count($this->muestra_detalle);
-            $this->muestra_detalle[$indice] = ['id' => $id, 'ver' => 1];
-        }
-        $this->cantidad_detalle = count($this->muestra_detalle);
+
     }
+
 
 
     public function order($sort)
@@ -693,6 +760,12 @@ class Pedidos extends Component
         $this->modalpago = false;
     }
 
+
+     //cierra modal verpago  sin grabar
+     public function cerrarModalVerdeta()
+     {
+         $this->verdeta_pedido = 0;
+     }
 
 
     public function verpago($idpedido)
