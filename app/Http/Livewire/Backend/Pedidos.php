@@ -66,6 +66,7 @@ class Pedidos extends Component
     public $cantidaditems = 0;
     public $indice_productos, $producto_nombre, $color_nombre, $talle_nombre, $estado;
     public $verdeta_pedido=0;
+    public $modalEstado=0;
 
 
 
@@ -761,6 +762,47 @@ class Pedidos extends Component
     }
 
 
+
+  //abre modal de estado
+  public function abrirModalEstado()
+  {
+      $this->modalEstado = 1;
+  }
+
+  //cierra modal estado  sin grabar
+  public function cerrarModalEstado()
+  {
+      $this->modalEstado = 0;
+  }
+
+
+  public function cambiaestado($idpedido)
+  {
+      $this->id_pedido = $idpedido;
+      $this->estado_id = Pedido::where('id', $idpedido)
+                      ->value('estado_id');
+
+      $this->abrirModalEstado();
+  }
+
+  public function guardarestado()
+  {
+
+    Pedido::updateOrCreate(
+        [
+            'id' => $this->id_pedido
+        ],
+        [
+            'estado_id' => $this->estado_id
+        ]);
+      $this->id_pedido = 0;
+      $this->cerrarModalEstado();
+      $this->emit('mensajePositivo', ['mensaje' => 'Se ha cambiado el estado al pedido exitosamente']);
+
+  }
+
+
+
      //cierra modal verpago  sin grabar
      public function cerrarModalVerdeta()
      {
@@ -803,6 +845,7 @@ class Pedidos extends Component
         }
         $this->abrirModalVerpago();
     }
+
 
 
 
