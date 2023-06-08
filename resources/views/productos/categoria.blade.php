@@ -42,10 +42,10 @@
                                             <h3 class="mt-4 text-sm text-gray-700">{{ $producto->nombre }}</h3>
                                                 @if ($producto->ofertaDesde <= $fechahoy and $producto->ofertaHasta >= $fechahoy)
                                                 <img alt="Producto en oferta"  src="{{ asset('storage/oferta.png') }}"   class="object-cover object-center group-hover:opacity-75">
-                                                <p class="mt-1 text-lg font-medium text-gray-900 " style="text-decoration: line-through;">$ {{ $producto->precioLista }}</p>
-                                                <p class="mt-1 text-lg font-medium text-gray-900 ">$ {{ $producto->precioOferta }}</p>
+                                                <p class="mt-1 text-lg font-medium text-gray-900 " style="text-decoration: line-through;">$ {{ number_format($producto->precioLista,2) }}</p>
+                                                <p class="mt-1 text-lg font-medium text-gray-900 ">$ {{ number_format($producto->precioOferta,2) }}</p>
                                                 @else
-                                                <p class="mt-1 text-lg font-medium text-gray-900">$ {{ $producto->precioLista }}</p>
+                                                <p class="mt-1 text-lg font-medium text-gray-900">$ {{ number_format($producto->precioLista,2) }}</p>
                                                 @endif
 
 

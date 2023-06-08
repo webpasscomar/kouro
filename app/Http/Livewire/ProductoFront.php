@@ -23,6 +23,7 @@ class ProductoFront extends Component
     public $disponibles;
     public $categorias;
     public $mailaviso;
+    public $fechahoy;
 
 
     public function mount($id)
@@ -33,6 +34,7 @@ class ProductoFront extends Component
         $this->color_id = 0;
         $this->producto_id = $id;
         $this->producto = Producto::where('id', $id)->firstOrFail();
+        $this->fechahoy  = date('Y-m-d H:i:s');
 
 
 

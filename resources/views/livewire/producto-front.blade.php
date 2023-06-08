@@ -14,9 +14,20 @@
                         {{ $producto->id }}</h2>
                     <h2 class="text-gray-900 font-bold text-3xl mb-2"> Nombre {{ $producto->nombre }}</h2>
                     <p class="text-gray-700 text-base">Desc. Corta {{ $producto->descCorta }}</p>
-                    <p class="text-gray-700 text-base font-bold mt-2">Precio Lista {{ $producto->precioLista }}</p>
-                    <p class="text-gray-700 text-base font-bold mt-2">Precio Oferta {{ $producto->precioOferta }}</p>
                     <p class="text-gray-700 text-base font-bold mt-2">Codigo {{ $producto->codigo }}</p>
+
+                    @if ($producto->ofertaDesde <= $fechahoy and $producto->ofertaHasta >= $fechahoy)
+                        <img alt="Producto en oferta" src="{{ asset('storage/oferta.png') }}"
+                            class="object-cover object-center group-hover:opacity-75">
+                        <p class="mt-1 text-lg font-medium text-gray-900 " style="text-decoration: line-through;">$
+                            {{ number_format($producto->precioLista, 2) }}</p>
+                        <p class="mt-1 text-lg font-medium text-gray-900 ">$
+                            {{ number_format($producto->precioOferta, 2) }}</p>
+                    @else
+                        <p class="mt-1 text-lg font-medium text-gray-900">$
+                            {{ number_format($producto->precioLista, 2) }}</p>
+                    @endif
+
 
                     <div class="mt-4">
                         <label class="block font-bold text-gray-700">Talle:</label>
@@ -48,13 +59,13 @@
                         </button>
 
                         <input class="py-2 px-2 " type="numeric" id="cantidad" wire:model="cantidad"
-                        wire:change="checkstock()" />
+                            wire:change="checkstock()" />
 
                         <button
-                        class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
+                            class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
                                    shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                        wire:click.prevent="incrementa()">
-                        +
+                            wire:click.prevent="incrementa()">
+                            +
                         </button>
                         @if (parametro(10) === 'S')
                             Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles"
@@ -85,21 +96,24 @@
                         @endif
 
                         <a href="/shop"
-                        class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
-                        focus:ring-blue-500 focus:ring-offset-2 ">Seguir comprando</a>
+                            class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                        focus:ring-blue-500 focus:ring-offset-2 ">Seguir
+                            comprando</a>
 
-                        @if (($cantidad > $disponibles) && ($talle_id !== 0) && ($color_id !== 0))
+                        @if ($cantidad > $disponibles && $talle_id !== 0 && $color_id !== 0)
                             <div class="mt-4">
                                 <div class="mb-4 col-span-2">
                                     <input type="text"
                                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                        id="mailaviso" placeholder="Tu e-mail y te avisamos cuando haya stock" wire:model="mailaviso">
-                                        <x-jet-input-error for="mailaviso" />
+                                        id="mailaviso" placeholder="Tu e-mail y te avisamos cuando haya stock"
+                                        wire:model="mailaviso">
+                                    <x-jet-input-error for="mailaviso" />
                                 </div>
 
                                 <button
-                                class="py-2 px-4  bg-red-500 hover:bg-red-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
-                                        focus:ring-red-500 focus:ring-offset-2 "   wire:click.prevent="avisostock()">Enviar</button>
+                                    class="py-2 px-4  bg-red-500 hover:bg-red-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                                        focus:ring-red-500 focus:ring-offset-2 "
+                                    wire:click.prevent="avisostock()">Enviar</button>
                             </div>
                         @endif
 
