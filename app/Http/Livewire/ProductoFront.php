@@ -230,10 +230,10 @@ class ProductoFront extends Component
         if (is_null($this->producto->ofertaDesde) or is_null($this->producto->ofertaHasta)) {
             $this->oferta = 0;;
         } else {
-            if ($this->producto->ofertaDesde <= $ldate and $$this->producto->ofertaHasta >= $ldate) {
+            if ($this->producto->ofertaDesde <= $ldate and $this->producto->ofertaHasta >= $ldate) {
                 $this->oferta =  1;
             } else {
-                $this->precio =  0;
+                $this->oferta =  0;
             }
         }
 
