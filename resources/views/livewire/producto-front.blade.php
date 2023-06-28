@@ -269,8 +269,8 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
 
                                 {{-- <p class="text-xl text-center">1</p> --}}
 
-                                <input class="text-center w-10" type="numeric" id="cantidad"
-                                    wire:model="cantidad" wire:change="checkstock()" />
+                                <input class="text-center w-10" type="numeric" id="cantidad" wire:model="cantidad"
+                                    wire:change="checkstock()" />
 
                                 <button
                                     class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none"
@@ -280,8 +280,9 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                             <button type="submit"
                                 class="flex flex-1 ml-3 lg:ml-0 xl:ml-3 items-center justify-center rounded-md border border-transparent
                                  bg-red-500 px-8 py-2 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                                  {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}  wire:click.prevent="agregarcarrito()"
-                                 >   {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}</button>
+                                {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}
+                                wire:click.prevent="agregarcarrito()">
+                                {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}</button>
 
 
 
@@ -333,16 +334,22 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
             <!-- Categorias  -->
             <h3 class="text-xl font-bold mt-16">Categorias</h3>
             <div class="mt-5">
-                <div class="flex items-center">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                            viewBox="0 96 960 960" width="32">
-                            <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                        </svg>
-                    </span>
-                    <a href="#" class="text-xl text-red-700 hover:text-red-400">Bolsos y Valijas</a>
-                </div>
-                <div class="flex items-center mt-3">
+
+                @foreach ($categorias as $categoria)
+                    <div class="flex items-center mt-3">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
+                                viewBox="0 96 960 960" width="32">
+                                <path
+                                    d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
+                            </svg>
+                        </span>
+                        <a href="{{ route('productos.categoria', $categoria['slug']) }}" class="text-xl text-red-700 hover:text-red-400"> {{ $categoria['categoria'] }}</a>
+                    </div>
+                @endforeach
+
+
+                {{-- <div class="flex items-center mt-3">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
                             viewBox="0 96 960 960" width="32">
@@ -387,6 +394,6 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                     </span>
                     <a href="#" class="text-xl text-red-700 hover:text-red-400">Billeteras</a>
                 </div>
+            </div> --}}
             </div>
         </div>
-    </div>
