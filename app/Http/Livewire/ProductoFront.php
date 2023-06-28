@@ -43,10 +43,10 @@ class ProductoFront extends Component
 
 
 
-        $this->colores = Sku::select(['sku.color_id', 'colores.color'])
+        $this->colores = Sku::select(['sku.color_id', 'colores.color', 'colores.pcolor'])
             ->join('colores', 'sku.color_id', '=', 'colores.id')
             ->where('sku.producto_id', '=', $id)
-            ->groupBy('sku.color_id', 'colores.color')
+            ->groupBy('sku.color_id', 'colores.color','colores.pcolor')
             ->get()
             ->toArray();
 

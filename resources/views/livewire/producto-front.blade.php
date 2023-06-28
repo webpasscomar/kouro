@@ -119,11 +119,10 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
     {{-- Array con las imágenes de prueba del componente --}}
 
     <?php
-       //  $images = ['https://images.unsplash.com/photo-1520256862855-398228c41684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80', 'https://images.unsplash.com/photo-1463080197951-ea6abbd2bb9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80', 'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNhbHphZG8lMjBob21icmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60', 'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80', 'https://images.unsplash.com/photo-1546367564-ade1880f8921?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80'];
-     //  $images[0] = 'Hx96UqLNSIxeoBtF2CUcrDm2VrXDcJZ7HoTVRLOD.png';
-     //  $images[1] = '10VHHZvK0KWYcwTpP9MHT9fRKH2Ya3pD2fUEiEi5.png';
-     //  $images[2] = 'S4TCgADUGWpcdwnJeA9ZOk0xf8H5DRqUGIKoam4J.png';
-
+    //  $images = ['https://images.unsplash.com/photo-1520256862855-398228c41684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80', 'https://images.unsplash.com/photo-1463080197951-ea6abbd2bb9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80', 'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNhbHphZG8lMjBob21icmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60', 'https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80', 'https://images.unsplash.com/photo-1546367564-ade1880f8921?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80'];
+    //  $images[0] = 'Hx96UqLNSIxeoBtF2CUcrDm2VrXDcJZ7HoTVRLOD.png';
+    //  $images[1] = '10VHHZvK0KWYcwTpP9MHT9fRKH2Ya3pD2fUEiEi5.png';
+    //  $images[2] = 'S4TCgADUGWpcdwnJeA9ZOk0xf8H5DRqUGIKoam4J.png';
     ?>
 
     <div class="max-w-7xl grid grid-cols-1 lg:grid-cols-4 gap-12 mx-auto lg:px-8 py-12">
@@ -137,7 +136,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
             <!-- Nombre del producto  -->
             <div class="lg:max-w-7xl lg:grid-rows-[auto,auto,1fr] px-6 lg:px-0">
                 <div class="col-span-2">
-                    <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl"> {{ $producto->nombre}}</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl"> {{ $producto->nombre }}</h2>
                 </div>
 
                 <!-- Precio - Precio con descuento -->
@@ -145,10 +144,13 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                     {{-- <h2 class="sr-only">Product information</h2> --}}
                     <div>
                         @if ($oferta == 1)
-                            <p class="text-3xl tracking-tight text-gray-900 mt-5">$ {{ number_format($producto->precioOferta, 2, ',', '.') }}</p>
-                            <p class="text-gray-500 mt-2 line-through">$ {{  number_format($producto->precioLista, 2, ',', '.') }}</p>
+                            <p class="text-3xl tracking-tight text-gray-900 mt-5">$
+                                {{ number_format($producto->precioOferta, 2, ',', '.') }}</p>
+                            <p class="text-gray-500 mt-2 line-through">$
+                                {{ number_format($producto->precioLista, 2, ',', '.') }}</p>
                         @else
-                            <p class="text-3xl tracking-tight text-gray-900 mt-5">$ {{ number_format($producto->precioLista, 2, ',', '.') }}</p>
+                            <p class="text-3xl tracking-tight text-gray-900 mt-5">$
+                                {{ number_format($producto->precioLista, 2, ',', '.') }}</p>
                         @endif
                     </div>
 
@@ -202,30 +204,16 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                             <fieldset class="mt-4">
                                 {{-- <legend class="sr-only">Choose a color</legend> --}}
                                 <div class="flex items-center space-x-3">
-                                    <label
-                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                                        <input type="radio" name="color-choice" value="White"
-                                            class="sr-only peer/white" aria-labelledby="color-choice-0-label">
-                                        {{-- <span id="color-choice-0-label" class="sr-only">White</span> --}}
-                                        <span aria-hidden="true"
-                                            class="h-8 w-8 bg-white rounded-full border border-black border-opacity-10 peer-checked/white:ring-4 peer-checked/white:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
-                                    </label>
-                                    <label
-                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                                        <input type="radio" name="color-choice" value="Gray"
-                                            class="sr-only peer/gray" aria-labelledby="color-choice-1-label">
-                                        {{-- <span id="color-choice-1-label" class="sr-only">Gray</span> --}}
-                                        <span aria-hidden="true"
-                                            class="h-8 w-8 bg-gray-200 rounded-full border border-black border-opacity-10 peer-checked/gray:ring-4 peer-checked/gray:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
-                                    </label>
-                                    <label
-                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-900">
-                                        <input type="radio" name="color-choice" value="Black"
-                                            class="sr-only peer/black" aria-labelledby="color-choice-2-label">
-                                        {{-- <span id="color-choice-2-label" class="sr-only">Black</span> --}}
-                                        <span aria-hidden="true"
-                                            class="h-8 w-8 bg-gray-900 rounded-full border border-black border-opacity-10 peer-checked/black:ring-4 peer-checked/black:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
-                                    </label>
+                                    @foreach ($colores as $color)
+                                        <label
+                                            class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
+                                            <input type="radio" name="color-choice" value="{{ $color['color_id'] }}"
+                                                class="sr-only peer/white" aria-labelledby="color-choice-0-label">
+                                            {{-- <span id="color-choice-0-label" class="sr-only">White</span> --}}
+                                            <span style=" background-color: {{ $color['pcolor'] }};"  aria-hidden="true"
+                                                class="h-8 w-8 rounded-full border border-black border-opacity-10 peer-checked/white:ring-4 peer-checked/white:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
+                                        </label>
+                                    @endforeach
                                 </div>
                             </fieldset>
                         </div>
@@ -248,8 +236,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                         <span aria-hidden="true"
                                             class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
                                             <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                                viewBox="0 0 100 100" preserveAspectRatio="none"
-                                                stroke="currentColor">
+                                                viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
                                                 <line x1="0" y1="100" x2="100" y2="0"
                                                     vector-effect="non-scaling-stroke" />
                                             </svg>
