@@ -12,7 +12,12 @@ class ProductFrontImages extends Component
     public function mount($images)
     {
         $this->images = $images;
-        $this->selectedImages = $images[0];
+        if ($images) {
+            $this->selectedImages = $images[0];
+        }else{
+            $this->selectedImages = null;
+        }
+
     }
 
     public function selectImage($image)
