@@ -244,4 +244,18 @@ class ProductoFront extends Component
         $images = $this->images;
         return view('livewire.producto-front', $producto, $colores, $talles, $categorias,$images);
     }
+
+
+    public function asigna_talle($idtalle) {
+        $this->talle_id=$idtalle;
+        $this->checkstock();
+
+    }
+
+    public function asigna_color($idcolor) {
+        $this->color_id=$idcolor;
+        $this->checkstock();
+    }
+
+
 }

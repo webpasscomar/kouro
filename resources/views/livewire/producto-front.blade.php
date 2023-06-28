@@ -208,7 +208,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                         <label
                                             class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
                                             <input type="radio" name="color-choice" value="{{ $color['color_id'] }}"
-                                                class="sr-only peer/white" aria-labelledby="color-choice-0-label">
+                                                class="sr-only peer/white" aria-labelledby="color-choice-0-label"  wire:click.prevent="asigna_color({{ $color['color_id'] }})" >
                                             {{-- <span id="color-choice-0-label" class="sr-only">White</span> --}}
                                             <span style=" background-color: {{ $color['pcolor'] }};"  aria-hidden="true"
                                                 class="h-8 w-8 rounded-full border border-black border-opacity-10 peer-checked/white:ring-4 peer-checked/white:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
@@ -228,7 +228,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                             <fieldset class="mt-4">
                                 {{-- <legend class="sr-only">Talles</legend> --}}
                                 <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                                    <label
+                                    {{-- <label
                                         class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-not-allowed bg-gray-50 text-gray-200">
                                         <input type="radio" name="size-choice" value="XXS" disabled
                                             class="sr-only peer/xxs" aria-labelledby="size-choice-0-label">
@@ -241,70 +241,20 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                                     vector-effect="non-scaling-stroke" />
                                             </svg>
                                         </span>
-                                    </label>
+                                    </label> --}}
+                                    @foreach ($talles as $talle)
                                     <label
                                         class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="XS"
-                                            class="sr-only peer/xs" aria-labelledby="size-choice-1-label">
-                                        <span id="size-choice-1-label">XS</span>
+                                        <input type="radio" name="size-choice" wire:click.prevent="asigna_talle({{ $talle['talle_id'] }})"
+                                            class="sr-only peer/xs" aria-labelledby="size-choice-1-label" >
+
+
+                                        <span id="size-choice-1-label">{{ $talle['talle'] }}</span>
                                         <span
                                             class="pointer-events-none absolute -inset-px rounded-md peer-checked/xs:ring-4 peer-checked/xs:ring-red-500"
                                             aria-hidden="true"></span>
                                     </label>
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="S"
-                                            class="sr-only peer/s" aria-labelledby="size-choice-2-label">
-                                        <span id="size-choice-2-label">S</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/s:ring-4 peer-checked/s:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="M"
-                                            class="sr-only peer/m" aria-labelledby="size-choice-3-label">
-                                        <span id="size-choice-3-label">M</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/m:ring-4 peer-checked/m:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="L"
-                                            class="sr-only peer/l" aria-labelledby="size-choice-4-label">
-                                        <span id="size-choice-4-label">L</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/l:ring-4 peer-checked/l:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="XL"
-                                            class="sr-only peer/xl" aria-labelledby="size-choice-5-label">
-                                        <span id="size-choice-5-label">XL</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/xl:ring-4 peer-checked/xl:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="2XL"
-                                            class="sr-only peer/2xl" aria-labelledby="size-choice-6-label">
-                                        <span id="size-choice-6-label">2XL</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/2xl:ring-4 peer-checked/2xl:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" value="3XL"
-                                            class="sr-only peer/3xl" aria-labelledby="size-choice-7-label">
-                                        <span id="size-choice-7-label">3XL</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/3xl:ring-4 peer-checked/3xl:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
+                                    @endforeach
                                 </div>
                             </fieldset>
                         </div>
@@ -313,13 +263,32 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                             <div class="flex gap-2 items-center">
                                 <button
                                     class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none">-</button>
-                                <p class="text-xl text-center">5000</p>
+                                <p class="text-xl text-center">1</p>
                                 <button
                                     class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none">+</button>
                             </div>
                             <!-- Botón Agregar al Carrito  -->
                             <button type="submit"
                                 class="flex flex-1 ml-3 lg:ml-0 xl:ml-3 items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-2 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Agregar</button>
+
+                                @if ($cantidad > $disponibles && $talle_id !== 0 && $color_id !== 0)
+                                <div class="mt-4">
+                                    <div class="mb-4 col-span-2">
+                                        <input type="text"
+                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                            id="mailaviso" placeholder="Tu e-mail y te avisamos cuando haya stock"
+                                            wire:model="mailaviso">
+                                        <x-jet-input-error for="mailaviso" />
+                                    </div>
+
+                                    <button
+                                        class="py-2 px-4  bg-red-500 hover:bg-red-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
+                                            focus:ring-red-500 focus:ring-offset-2 "
+                                        wire:click.prevent="avisostock()">Enviar</button>
+                                </div>
+                            @endif
+
+
                         </div>
                     </form>
                     <p class="mt-4">Categorias: <strong class="text-red-700">Calzado caballeros</strong></p>
