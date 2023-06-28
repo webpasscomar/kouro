@@ -208,9 +208,10 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                         <label
                                             class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
                                             <input type="radio" name="color-choice" value="{{ $color['color_id'] }}"
-                                                class="sr-only peer/white" aria-labelledby="color-choice-0-label"  wire:click.prevent="asigna_color({{ $color['color_id'] }})" >
+                                                class="sr-only peer/white" aria-labelledby="color-choice-0-label"
+                                                wire:click.prevent="asigna_color({{ $color['color_id'] }})">
                                             {{-- <span id="color-choice-0-label" class="sr-only">White</span> --}}
-                                            <span style=" background-color: {{ $color['pcolor'] }};"  aria-hidden="true"
+                                            <span style=" background-color: {{ $color['pcolor'] }};" aria-hidden="true"
                                                 class="h-8 w-8 rounded-full border border-black border-opacity-10 peer-checked/white:ring-4 peer-checked/white:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
                                         </label>
                                     @endforeach
@@ -243,17 +244,18 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                         </span>
                                     </label> --}}
                                     @foreach ($talles as $talle)
-                                    <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
-                                        <input type="radio" name="size-choice" wire:click.prevent="asigna_talle({{ $talle['talle_id'] }})"
-                                            class="sr-only peer/xs" aria-labelledby="size-choice-1-label" >
+                                        <label
+                                            class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
+                                            <input type="radio" name="size-choice"
+                                                wire:click.prevent="asigna_talle({{ $talle['talle_id'] }})"
+                                                class="sr-only peer/xs" aria-labelledby="size-choice-1-label">
 
 
-                                        <span id="size-choice-1-label">{{ $talle['talle'] }}</span>
-                                        <span
-                                            class="pointer-events-none absolute -inset-px rounded-md peer-checked/xs:ring-4 peer-checked/xs:ring-red-500"
-                                            aria-hidden="true"></span>
-                                    </label>
+                                            <span id="size-choice-1-label">{{ $talle['talle'] }}</span>
+                                            <span
+                                                class="pointer-events-none absolute -inset-px rounded-md peer-checked/xs:ring-4 peer-checked/xs:ring-red-500"
+                                                aria-hidden="true"></span>
+                                        </label>
                                     @endforeach
                                 </div>
                             </fieldset>
@@ -262,16 +264,32 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                         <div class="flex flex-wrap items-center justify-between mt-14 lg:gap-4 xl:gap-0">
                             <div class="flex gap-2 items-center">
                                 <button
-                                    class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none">-</button>
-                                <p class="text-xl text-center">1</p>
+                                    class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none"
+                                    wire:click.prevent="decrementa()">-</button>
+
+                                {{-- <p class="text-xl text-center">1</p> --}}
+
+                                <input class="text-center w-10" type="numeric" id="cantidad"
+                                    wire:model="cantidad" wire:change="checkstock()" />
+
                                 <button
-                                    class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none">+</button>
+                                    class="w-8 h-10 border-2 border-red-400 text-red-400 rounded-md shadow-sm shadow-gray-400 hover:bg-red-500 hover:text-white hover:border-none"
+                                    wire:click.prevent="incrementa()">+</button>
                             </div>
                             <!-- Botón Agregar al Carrito  -->
                             <button type="submit"
-                                class="flex flex-1 ml-3 lg:ml-0 xl:ml-3 items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-2 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Agregar</button>
+                                class="flex flex-1 ml-3 lg:ml-0 xl:ml-3 items-center justify-center rounded-md border border-transparent
+                                 bg-red-500 px-8 py-2 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                  {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}  wire:click.prevent="agregarcarrito()"
+                                 >   {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}</button>
 
-                                @if ($cantidad > $disponibles && $talle_id !== 0 && $color_id !== 0)
+
+
+
+
+
+                            <!-- aviso de stocks -->
+                            @if ($cantidad > $disponibles && $talle_id !== 0 && $color_id !== 0)
                                 <div class="mt-4">
                                     <div class="mb-4 col-span-2">
                                         <input type="text"
