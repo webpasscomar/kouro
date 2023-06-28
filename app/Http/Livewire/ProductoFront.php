@@ -8,6 +8,8 @@ use App\Models\Sku;
 use App\Models\Color;
 use App\Models\Talle;
 use App\Models\Stock_pendiente;
+use App\Models\Producto_imagen;
+
 
 use Livewire\Component;
 
@@ -24,6 +26,8 @@ class ProductoFront extends Component
     public $categorias;
     public $mailaviso;
     public $fechahoy;
+    public $images=[];
+    public $oferta;
 
 
     public function mount($id)
@@ -33,6 +37,7 @@ class ProductoFront extends Component
         $this->talle_id = 0;
         $this->color_id = 0;
         $this->producto_id = $id;
+        $this->oferta = 0;
         $this->producto = Producto::where('id', $id)->firstOrFail();
         $this->fechahoy  = date('Y-m-d H:i:s');
 
@@ -58,6 +63,20 @@ class ProductoFront extends Component
             ->get()
             ->toArray();
         // $this->categorias = Categoria::where('estado', 1)->get();
+
+             $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
+             ->where('productos_imagenes.producto_id', '=', $id)
+             ->get()
+             ->toArray();
+
+
+             for ($i = 0; $i < count($datos_imagenes) ; $i++) {
+                $a=basename($datos_imagenes[$i]['file_path']);
+                $this->images[$i]=$a;
+             }
+            //  dd($datos_imagenes,$this->images);
+
+
     }
 
     public function incrementa()
@@ -207,11 +226,22 @@ class ProductoFront extends Component
     public function render()
     {
         // return view('livewire.producto-front')->layout('layouts.app');
+        $ldate = date('Y-m-d H:i:s');
+        if (is_null($this->producto->ofertaDesde) or is_null($this->producto->ofertaHasta)) {
+            $this->oferta = 0;;
+        } else {
+            if ($this->producto->ofertaDesde <= $ldate and $$this->producto->ofertaHasta >= $ldate) {
+                $this->oferta =  1;
+            } else {
+                $this->precio =  0;
+            }
+        }
+
         $producto = $this->producto;
         $colores  = $this->colores;
         $talles   = $this->talles;
         $categorias = $this->categorias;
-        // dd($categorias);
-        return view('livewire.producto-front', $producto, $colores, $talles, $this->categorias);
+        $images = $this->images;
+        return view('livewire.producto-front', $producto, $colores, $talles, $categorias,$images);
     }
 }
