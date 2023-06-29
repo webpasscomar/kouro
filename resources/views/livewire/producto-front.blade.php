@@ -137,6 +137,8 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
             <div class="lg:max-w-7xl lg:grid-rows-[auto,auto,1fr] px-6 lg:px-0">
                 <div class="col-span-2">
                     <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl"> {{ $producto->nombre }}</h2>
+                    <h4 class="text-gray-700 text-base">{{ $producto->codigo }}</h4>
+
                 </div>
 
                 <!-- Precio - Precio con descuento -->
@@ -310,7 +312,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
 
                         </div>
                     </form>
-                    <p class="mt-4">Categorias: <strong class="text-red-700">Calzado caballeros</strong></p>
+                    {{-- <p class="mt-4">Categorias: <strong class="text-red-700">Calzado caballeros</strong></p> --}}
                 </div>
             </div>
         </div>
