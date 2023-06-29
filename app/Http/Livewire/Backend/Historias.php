@@ -37,6 +37,7 @@ class Historias extends Component
                               'sku.stock',
                               'sku.producto_id',
                               'productos.nombre',
+                              'productos.codigo',
                               'colores.color',
                               'talles.talle'])
                        ->join('productos', 'sku.producto_id', '=', 'productos.id')

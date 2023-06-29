@@ -20,9 +20,9 @@
             <table class="table-auto w-full">
                 <thead>
                     <tr class="bg-gray-200 text-gray-700">
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('codigo')">Codigo
                             {{-- -- Ordenar -- --}}
-                            @if ($sort == 'id')
+                            @if ($sort == 'codigo')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
                                 @else
@@ -88,7 +88,7 @@
                 <tbody>
                     @foreach ($sku as $item)
                         <tr>
-                            <td class="border px-4 py-2">{{ $item->producto_id }}</td>
+                            <td class="border px-4 py-2">{{ $item->codigo }}</td>
                             <td class="border px-4 py-2">{{ $item->nombre }}</td>
                             <td class="border px-4 py-2">{{ $item->color }}</td>
                             <td class="border px-4 py-2">{{ $item->talle }}</td>
