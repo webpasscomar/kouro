@@ -78,7 +78,7 @@ class Formasdeentregas extends Component
         $this->nombre = $formasdeentrega->nombre;
         $this->costo = $formasdeentrega->costo;
         $this->pidedirec = $formasdeentrega->pidedirec;
-        $this->cobra = $formasdeentrega->cobra;
+       // $this->cobra = $formasdeentrega->cobra;
         $this->abrirModal();
     }
 
@@ -98,7 +98,7 @@ class Formasdeentregas extends Component
                 'nombre' => $this->nombre,
                 'pidedirec' => $this->pidedirec,
                 'costo' => $this->costo,
-                'cobra' => $this->cobra,
+              //  'cobra' => $this->cobra,
             ]
         );
 

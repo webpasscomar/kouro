@@ -19,6 +19,7 @@ class CreateFormasdepagosTable extends Migration
             $table->tinyInteger('estado')->default(0);
             $table->string('logo');
             $table->timestamps();
+            $table->tinyInteger('cobra')->default(1);
         });
     }
 

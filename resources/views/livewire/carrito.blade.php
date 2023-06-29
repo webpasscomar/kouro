@@ -226,8 +226,17 @@
 
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-2">
                     <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                        <button wire:click.prevent="pagar()" type="button"
-                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">Pagar</button>
+                        @if ($forma_pago_id != 0)
+                              @if ($cobra ==1)
+                                <button wire:click.prevent="pagar()" type="button"
+                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4">Pagar</button>
+                                @else
+                                    <a href="/shop"
+                                        class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold  shadow-md focus:outline-none focus:ring-2
+                                     focus:ring-blue-500 focus:ring-offset-2 mr-1">Finalizar</a>
+
+                                @endif
+                        @endif
                     </span>
                 </div>
             @endif
