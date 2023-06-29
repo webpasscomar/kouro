@@ -24,6 +24,7 @@
                                             </h2>
                                             <p class="text-gray-700 text-base">{{ $producto->descripcion }}</p>
 
+
                                                 <p class="text-gray-700 text-base font-bold mt-2">{{ $producto->precio }}</p>
                                         </div>
 

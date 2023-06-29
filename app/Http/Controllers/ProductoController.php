@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
+use App\Models\Producto_imagen;
 
 class ProductoController extends Controller
 {
@@ -29,13 +30,30 @@ class ProductoController extends Controller
 
         if($categoria) {
             $productos = $categoria->productos()->get();
+
+
         }else{
             $categoria = Categoria::first();
             // $categoria = new Categoria();
             // $categoria->id = 1;
             $categoria->categoria = 'Busqueda';
             $productos = Producto::where('nombre','LIKE','%' . $slugCategoria . '%')->get();
+
         }
+
+        for ($i = 0; $i < count($productos); $i++) {
+            $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
+            ->where('productos_imagenes.producto_id', '=',   $productos[$i]['id'])
+            ->get()
+            ->toArray();
+            if ($datos_imagenes) {
+                $productos[$i]->imagen = basename($datos_imagenes[0]['file_path']);
+            }else{
+                $productos[$i]->imagen = '';
+            }
+
+        }
+
         $categorias = Categoria::all();
         return view('productos.categoria', compact('productos', 'categorias', 'categoria','fechahoy'));
     }

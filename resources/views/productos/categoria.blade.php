@@ -29,12 +29,13 @@
                                             class="group">
                                             <div
                                                 class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+
                                                 <picture>
                                                     <source
-                                                        srcset="{{ asset('storage/productos/' . $producto->id . '.webp') }}"
+                                                        srcset="{{ asset('storage/productos/' . $producto->imagen ) }}"
                                                         type="image/webp">
                                                     <img alt="{{ $producto->nombre }}"
-                                                        src="{{ asset('storage/productos/' . $producto->id . '.jpg') }}"
+                                                        src="{{ asset('storage/productos/' . $producto->imagen ) }}"
                                                         class="object-cover object-center group-hover:opacity-75">
                                                 </picture>
 
