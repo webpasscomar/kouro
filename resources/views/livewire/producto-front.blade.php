@@ -320,8 +320,9 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
             <h3 class="text-xl font-bold mt-1">Buscador</h3>
             <div class="flex lg:justify-between mt-3">
                 <input type="search" name="" id="" placeholder="Buscar producto"
-                    class="rounded-lg border-2 border-gray-300 placeholder:text-gray-400 flex-1 lg:w-40 xl:flex-1 mr-3 focus:ring-red-400 focus:border-red-400">
-                <button class="bg-red-500 p-3 w-12 h-12 rounded-lg lg:ml-0 hover:bg-red-600">
+                    class="rounded-lg border-2 border-gray-300 placeholder:text-gray-400 flex-1 lg:w-40 xl:flex-1 mr-3 focus:ring-red-400 focus:border-red-400"
+                    wire:model="busqueda">
+                    <button class="bg-red-500 p-3 w-12 h-12 rounded-lg lg:ml-0 hover:bg-red-600" wire:click.prevent="buscar()">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" height="24" viewBox="0 96 960 960"
                             width="24">

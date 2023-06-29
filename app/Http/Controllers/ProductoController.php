@@ -11,6 +11,7 @@ class ProductoController extends Controller
 
     public function index()
     {
+
         $categorias = Categoria::where('estado', 1)
             ->where('id', '>', 1)
             ->orderBy('categoria', 'asc')
@@ -22,10 +23,19 @@ class ProductoController extends Controller
     public function categoria($slugCategoria)
     {
 
-
         $fechahoy  = date('Y-m-d H:i:s');
-        $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
-        $productos = $categoria->productos()->get();
+       // $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
+        $categoria = Categoria::where('slug', $slugCategoria)->first();
+
+        if($categoria) {
+            $productos = $categoria->productos()->get();
+        }else{
+            $categoria = Categoria::first();
+            // $categoria = new Categoria();
+            // $categoria->id = 1;
+            $categoria->categoria = 'Busqueda';
+            $productos = Producto::where('nombre','LIKE','%' . $slugCategoria . '%')->get();
+        }
         $categorias = Categoria::all();
         return view('productos.categoria', compact('productos', 'categorias', 'categoria','fechahoy'));
     }

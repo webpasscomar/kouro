@@ -28,7 +28,7 @@ class ProductoFront extends Component
     public $fechahoy;
     public $images=[];
     public $oferta;
-
+    public $busqueda="";
 
     public function mount($id)
     {
@@ -255,6 +255,14 @@ class ProductoFront extends Component
     public function asigna_color($idcolor) {
         $this->color_id=$idcolor;
         $this->checkstock();
+    }
+
+    public function buscar() {
+        //return redirect()->route('productos.categoria/' . $this->busqueda);
+       // return redirect()->route('productos.categoria/slugCategoria=' . $this->busqueda);
+      // return redirect()->route('productos.index');
+
+      return redirect()->route('productos.categoria', ['categoria' => $this->busqueda]);
     }
 
 

@@ -20,6 +20,7 @@ class ProductosFront extends Component
 
     public function render()
     {
+
         if ($this->categoriaSlug) {
             $categoria = Categoria::where('slug', $this->categoriaSlug)->firstOrFail();
             $productos = $categoria
