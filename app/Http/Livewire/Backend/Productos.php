@@ -100,7 +100,7 @@ class Productos extends Component
             return [
                 'nombre' => 'required|max:100',
                 'desCorta' => 'required|max:255',
-                'descLarga' => 'required|',
+                // 'descLarga' => 'required|',
                 'precioLista' => 'required',
             ];
         }

@@ -1,20 +1,3 @@
-<?php
-$categories_count = 5;
-$products_count = 5;
-$sizes_count = 5;
-$colors_count = 5;
-$orders_count = 5;
-$stock_count = 5;
-$testimonies_count = 5;
-$parameters_count = 5;
-$delivery_methods_count = 5;
-$faq_count = 5;
-$places_count = 5;
-$contact_messages_count = 5;
-$gallery_count = 5;
-$existencias_count = 10;
-$stock_count = 20;
-?>
 
 <x-header>
     Panel de administración
@@ -48,7 +31,7 @@ $stock_count = 20;
                     <div class="text-gray-600 font-bold text-xl">Stocks Pendientes</div>
                     <i class="fas fa-box-open text-gray-600 text-2xl"></i>
                 </div>
-                <div class="text-gray-600 font-bold text-xl">{{ $stock_count }}</div>
+                <div class="text-gray-600 font-bold text-xl">{{ $stock_pend }}</div>
             </a>
 
 
@@ -155,6 +138,15 @@ $stock_count = 20;
                     <i class="fas fa-map-marker-alt text-gray-600 text-2xl"></i>
                 </div>
                 <div class="text-gray-600 font-bold text-xl">{{ $places_count }}</div>
+            </a>
+
+            <a href="/admin/presentaciones"
+                class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-600 font-bold text-xl">Presentaciones</div>
+                    <i class="fas fa-bookmark text-gray-600 text-2xl"></i>
+                </div>
+                <div class="text-gray-600 font-bold text-xl">{{ $show_count }}</div>
             </a>
 
         </div>
