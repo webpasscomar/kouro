@@ -38,9 +38,9 @@
 
                 <div class="flex flex-shrink-0 items-center">
                     <img class="block h-8 w-auto lg:hidden"
-                        src="https://kouro.webpass.online/assets/uploads/7/logo_kouro_6001.png" alt="Your Company">
+                        src="{{ asset('storage/logo.png') }}" alt="Your Company">
                     <img class="hidden h-8 w-auto lg:block"
-                        src="https://kouro.webpass.online/assets/uploads/7/logo_kouro_6001.png" alt="Your Company">
+                        src="{{ asset('storage/logo2.png') }}" alt="Your Company">
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
