@@ -5,6 +5,21 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Sku;
 use App\Models\Stock_pendiente;
+use App\Models\Producto;
+use App\Models\Categoria;
+use App\Models\Talle;
+use App\Models\Color;
+use App\Models\Pedido;
+use App\Models\Testimonio;
+use App\Models\Parametro;
+use App\Models\Formadeentrega;
+use App\Models\Faq;
+use App\Models\Producto_imagen;
+use App\Models\Presentacion;
+use App\Models\Contacto;
+
+
+
 
 
 
@@ -25,25 +40,22 @@ class Dashboard extends Component
     $this->existencias_count = Sku::count();
     $this->stock_count       = Sku::sum('stock');
     $this->stock_pend        = Stock_pendiente::where('fechaRespuesta',  '=', null)->count();
+    $this->products_count    = Producto::count();
 
+    $this->categories_count  = Categoria::count();
+    $this->sizes_count       = Talle::count();
+    $this->colors_count      = Color::count();
+    $this->orders_count      = Pedido::where('estado_id', '=', 0)->count();
 
+    $this->testimonies_count = Testimonio::count();
+    $this->parameters_count  = Parametro::count();
+    $this->delivery_methods_count = Formadeentrega::count();
+    $this->faq_count         = Faq::count();
 
-
-
-    $this->products_count = 5;
-
-    $this->categories_count = 5;
-    $this->sizes_count = 5;
-    $this->colors_count = 5;
-    $this->orders_count = 5;
-    $this->testimonies_count = 5;
-    $this->parameters_count = 5;
-    $this->delivery_methods_count = 5;
-    $this->faq_count = 5;
-    $this->contact_messages_count = 5;
-    $this->gallery_count = 5;
-    $this->places_count = 5;
-    $this->show_count = 5;
+    $this->contact_messages_count = contacto::count();
+    $this->gallery_count = Producto_imagen::count();
+    $this->places_count = 0;
+    $this->show_count = Presentacion::count();
 
 
 

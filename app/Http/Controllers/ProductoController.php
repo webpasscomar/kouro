@@ -29,7 +29,7 @@ class ProductoController extends Controller
         $categoria = Categoria::where('slug', $slugCategoria)->first();
 
         if($categoria) {
-            $productos = $categoria->productos()->get();
+            $productos = $categoria->productos()->where('estado','=',1)->get();
 
 
         }else{
@@ -37,7 +37,7 @@ class ProductoController extends Controller
             // $categoria = new Categoria();
             // $categoria->id = 1;
             $categoria->categoria = 'Busqueda';
-            $productos = Producto::where('nombre','LIKE','%' . $slugCategoria . '%')->get();
+            $productos = Producto::where('nombre','LIKE','%' . $slugCategoria . '%')->where('estado','=',1)->get();
 
         }
 
@@ -54,7 +54,8 @@ class ProductoController extends Controller
 
         }
 
-        $categorias = Categoria::all();
+        // $categorias = Categoria::all();
+        $categorias = Categoria::where('estado','=',1)->get();
         return view('productos.categoria', compact('productos', 'categorias', 'categoria','fechahoy'));
     }
 

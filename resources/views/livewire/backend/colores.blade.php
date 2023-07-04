@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Colores</h1>
+    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Colores</h4>
 </x-slot>
 
 <div class="py-12">
