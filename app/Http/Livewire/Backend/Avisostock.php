@@ -2,9 +2,16 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Models\Stock_pendiente;
+
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+
+use App\Models\Stock_pendiente;
+use App\Mail\StockPendiente;
+
 
 class Avisostock extends Component
 {
@@ -101,6 +108,15 @@ class Avisostock extends Component
             ]
         );
         $this->emit('mensajePositivo', ['mensaje' => 'Respuesta registrada, no olvides enviarla!!!']);
+
+
+        $correo = new StockPendiente();
+
+        Mail::to('rrufino71@gmail.com')->send($correo);
+
+        return 'Correo de prueba enviado';
+
+
 
         $this->cerrarModal();
         $this->limpiarCampos();
