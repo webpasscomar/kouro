@@ -45,7 +45,7 @@ class Movimientos extends Component
         //dd(auth()->user());
 
         $this->tipomovimientos = Tipomovimiento::all();
-        $this->productos  = Producto::where('estado',1)->get();
+        $this->productos  = Producto::where('estado',1)->orderBy('nombre')->get();
         $this->colores  = Color::where('estado',1)->get();
         $this->talles  = Talle::where('estado',1)->get();;
 
@@ -100,6 +100,8 @@ class Movimientos extends Component
 
     public function finalizar()
     {
+      $resta  = Tipomovimiento::where('id',$this->tipomove_id)->value('resta');
+
       $this->indice_productos = count($this->movimientos);
       if ($this->indice_productos > 0)
       {
@@ -112,8 +114,15 @@ class Movimientos extends Component
             if($canti_ori===null) {
                 $canti_ori=0;
             }
+
+
             //// actualizamos stock sku
-            $cantidad = $this->movimientos[$i]['cantidad']+$canti_ori;
+            if ($resta == 0) {
+                $cantidad = $this->movimientos[$i]['cantidad']+$canti_ori;
+            }else{
+                $cantidad = $canti_ori-$this->movimientos[$i]['cantidad'];
+            }
+
             Sku::updateOrCreate(
                 ['producto_id' => $this->movimientos[$i]['producto_id'],
                  'talle_id'    => $this->movimientos[$i]['talle_id'],

@@ -52,7 +52,7 @@
 
                     <button wire:click="guardar()"
                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                    Nuevo Ingreso</button>
+                    Nuevo Movimiento</button>
             </div>
         {{-- </form> --}}
 
