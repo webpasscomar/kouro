@@ -121,6 +121,14 @@ class Productos extends Component
     }
 
 
+    protected $messages = [
+        'nombre.required'      => 'El nombre es requerido',
+        'nombre.max'           => 'El nombre debe tener como maximo 100 caracteres',
+        'desCorta.required'    => 'La descripcion corta es requerida',
+        'precioLista.required' => 'El precio de lista es requerido',
+        'unidadVenta.required' => 'La unidad de venta es requerida',
+        'orden.required'       => 'El orden es requerido',
+    ];
 
 
 
