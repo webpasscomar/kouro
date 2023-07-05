@@ -137,7 +137,8 @@
                             <td class="border px-4 py-2 text-center">
                                 <button wire:click="editar({{ $pendientes->id }})"
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Respuesta</button>
-                                <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4">Enviar Mail</button>
+                                <button wire:click="enviar({{ $pendientes->id }})"
+                                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4">Enviar Mail</button>
                                     <button wire:click="$emit('alertDelete',{{ $pendientes->id }})"
                                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
                             </td>

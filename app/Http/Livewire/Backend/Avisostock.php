@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 
 use App\Models\Stock_pendiente;
-use App\Mail\StockPendiente;
+use App\Mail\StockPendienteMail;
 
 
 class Avisostock extends Component
@@ -23,6 +23,7 @@ class Avisostock extends Component
     public $search;
     public $sort = 'id';
     public $order = 'desc';
+    public $pendiente;
 
     use WithPagination;
 
@@ -107,20 +108,54 @@ class Avisostock extends Component
                 'respuesta' => $this->respuesta,
             ]
         );
+        $this->cerrarModal();
+        $this->limpiarCampos();
         $this->emit('mensajePositivo', ['mensaje' => 'Respuesta registrada, no olvides enviarla!!!']);
 
 
-        $correo = new StockPendiente();
+    }
+
+
+
+    public function enviar($id)
+    {
+        // $this->pendiente = Stock_pendiente::findOrFail($id);
+        // $this->pendiente = Stock_pendiente::where('id','=',$id)->First();
+
+        Stock_pendiente::updateOrCreate(
+            ['id' => $id],
+            [
+                'fechaRespuesta' => date('Y-m-d H:i:s'),
+            ]
+        );
+
+        $this->pendiente = Stock_pendiente::select(
+            ['stocks_pend.id',
+             'stocks_pend.fechaSolicitud',
+             'stocks_pend.fechaRespuesta',
+             'stocks_pend.respuesta',
+             'stocks_pend.cantidad',
+             'stocks_pend.email',
+             'productos.nombre',
+             'colores.color',
+             'talles.talle'])
+             ->leftJoin('sku','stocks_pend.sku_id','=', 'sku.id')
+             ->leftJoin('productos', 'sku.producto_id', '=', 'productos.id')
+             ->leftJoin('talles', 'sku.talle_id', '=', 'talles.id')
+             ->leftJoin('colores', 'sku.color_id', '=', 'colores.id')
+             ->where('stocks_pend.id', '=', $id )
+             ->First();
+
+
+        $correo = new StockPendienteMail($this->pendiente);
+
 
         Mail::to('rrufino71@gmail.com')->send($correo);
 
-        return 'Correo de prueba enviado';
+        $this->emit('mensajePositivo', ['mensaje' => 'La respuesta ha sido enviada!!!']);
 
-
-
-        $this->cerrarModal();
-        $this->limpiarCampos();
     }
+
 
     public function order($sort)
     {

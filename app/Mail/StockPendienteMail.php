@@ -7,18 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class StockPendiente extends Mailable
+class StockPendienteMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct()
+    public $data;
+
+    public function __construct($data)
     {
-        //
+        $this->data=$data;
     }
 
     public function build()
     {
         return $this->view('emails.stockpendiente')
-            ->subject('Correo de prueba STK');
+            ->subject(env('APP_NAME'));
     }
 }
