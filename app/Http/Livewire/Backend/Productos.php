@@ -25,8 +25,8 @@ class Productos extends Component
 
     // Atributos
     public $nombre;
-    public $desCorta;
-    public $descLarga;
+    public $desCorta='';
+    public $descLarga='';
 
     public $codigo;
     public $presentacion_id;
@@ -40,9 +40,9 @@ class Productos extends Component
     public $tamano;
     public $link;
 
-    public $orden;
+    public $orden=1;
     public $unidadVenta;
-    public $destacar;
+    public $destacar=0;
 
     public $estado;
 
@@ -102,6 +102,8 @@ class Productos extends Component
                 'desCorta' => 'required|max:255',
                 // 'descLarga' => 'required|',
                 'precioLista' => 'required',
+                'unidadVenta' => 'required',
+                'orden' => 'required',
             ];
         }
         if ($this->modal3 === true) {
@@ -186,6 +188,11 @@ class Productos extends Component
     public function guardar()
     {
         $this->validate();
+
+        if ($this->descLarga == null) {
+            $this->descLarga='';
+        }
+
         Producto::updateOrCreate(
             ['id' => $this->id_producto],
             [
