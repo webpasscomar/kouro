@@ -149,6 +149,16 @@
                 <div class="text-gray-600 font-bold text-xl">{{ $show_count }}</div>
             </a>
 
+            <a href="/admin/galerias"
+            class="flex flex-col justify-between w-full h-32 p-4 rounded-lg shadow-md bg-white">
+            <div class="flex justify-between items-center mb-4">
+                <div class="text-gray-600 font-bold text-xl">Imagenes Galeria</div>
+                <i class="fas fa-camera-retro text-gray-600 text-2xl"></i>
+            </div>
+            <div class="text-gray-600 font-bold text-xl">{{ $galeria_imagenes }}</div>
+        </a>
+
+
         </div>
     </div>
 </div>

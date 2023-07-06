@@ -17,6 +17,7 @@ use App\Models\Faq;
 use App\Models\Producto_imagen;
 use App\Models\Presentacion;
 use App\Models\Contacto;
+use App\Models\Galeria;
 
 
 
@@ -31,7 +32,7 @@ class Dashboard extends Component
   public  $existencias_count;
   public $stock_count,$products_count, $products_pend,$categories_count,$sizes_count,$colors_count;
   public  $orders_count, $testimonies_count, $parameters_count, $delivery_methods_count, $faq_count, $contact_messages_count;
-  public  $gallery_count, $places_count, $show_count,$stock_pend;
+  public  $gallery_count, $places_count, $show_count,$stock_pend,$galeria_imagenes;
 
 
   public function render()
@@ -56,6 +57,9 @@ class Dashboard extends Component
     $this->gallery_count = Producto_imagen::count();
     $this->places_count = 0;
     $this->show_count = Presentacion::count();
+
+    $this->galeria_imagenes = Galeria::count();
+
 
 
 

@@ -19,6 +19,7 @@ use App\Http\Livewire\Backend\Historias;
 use App\Http\Livewire\Backend\Parametros;
 use App\Http\Livewire\Backend\Categorias;
 use App\Http\Livewire\Backend\Avisostock;
+use App\Http\Livewire\Backend\Galerias;
 
 
 Route::middleware([
@@ -40,6 +41,7 @@ Route::middleware([
   Route::get('/historias', Historias::class)->name('historias');
   Route::get('/pedidos', Pedidos::class)->name('pedidos');
   Route::get('/pendientes', Avisostock::class)->name('pendientes');
+  Route::get('/galerias', Galerias::class)->name('galerias');
   // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
   // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
   // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');
