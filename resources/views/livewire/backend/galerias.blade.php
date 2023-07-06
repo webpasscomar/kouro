@@ -82,6 +82,33 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
+
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('usuario')">Usuario
+                            @if ($sort == 'usuario')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+                        </th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('create_at')">Fecha
+                            @if ($sort == 'create_at')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+                        </th>
+
+
+
+
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
@@ -109,6 +136,8 @@
                                         key($galeria->id)
                                     )
                                 </td>
+                                <td class="border px-4 py-2">{{ $galeria->usuario }}</td>
+                                <td class="border px-4 py-2">{{ $galeria->created_at }}</td>
                                 <td class="border px-4 py-2 text-center">
                                     <button wire:click="editar({{ $galeria->id }})"
                                         class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
