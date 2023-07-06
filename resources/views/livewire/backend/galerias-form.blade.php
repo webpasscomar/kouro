@@ -39,8 +39,11 @@
 
 
                     <div class="mb-3 col-span-2">
-                        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
-                        <input type="file" id="imagen" wire:model="imagen" wire:change="cambioImagen">
+                        <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2"></label>
+                        <input type="file" id="imagen" wire:model="imagen" wire:change="cambioImagen" style="display: none">
+                        <button type="button" onclick="document.getElementById('imagen').click()"
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 my-3"
+                        >Seleccionar imagen</button>
                         <x-jet-input-error for="imagen" />
                     </div>
 
