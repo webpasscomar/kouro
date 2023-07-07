@@ -12,16 +12,30 @@
         <!-- Carousel indicators -->
         <div class="absolute inset-x-0 bottom-0 z-[2] mx-[15%] mb-4 flex list-none justify-center p-0"
             data-te-carousel-indicators>
-            <button data-te-target="#carouselDarkVariant" data-te-slide-to="0" data-te-carousel-active
-                class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none hover:bg-blue-700"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button data-te-target="#carouselDarkVariant"
-                class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none hover:bg-blue-700"
-                data-te-slide-to="1" aria-label="Slide 1"></button>
-            <button data-te-target="#carouselDarkVariant"
-                class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none hover:bg-blue-700"
-                data-te-slide-to="2" aria-label="Slide 1"></button>
+            @if ($slider)
+                @foreach ($slider as $foto)
+                    @if ($loop->first)
+                        <button data-te-target="#carouselDarkVariant" data-te-slide-to="{{ $loop->index }}"
+                            data-te-carousel-active
+                            class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none hover:bg-blue-700"
+                            aria-current="true" aria-label="{{ $foto->nombre }}"></button>
+                    @else
+                        <button data-te-target="#carouselDarkVariant"
+                            class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none hover:bg-blue-700"
+                            data-te-slide-to="{{ $loop->index }}" aria-label=" {{ $foto->nombre}}"></button>
+                    @endif
+                @endforeach
+
+            @endif
+
+
+
+
         </div>
+
+
+
+
 
         <!-- Carousel items -->
         <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
