@@ -13,8 +13,9 @@ use App\Http\Livewire\ProductoFront;
 use App\Http\Livewire\Sucursales;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\MpController;
-
 use App\Models\Galeria;
+use App\Models\Producto_imagen;
+
 
 Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
@@ -37,5 +38,14 @@ Route::post('/webhooks',  WebhooksController::class);
 Route::get('/', function () {
 
     $fotos_slider = Galeria::where('estado','=',1)->get();
-    return view('welcome',['slider' => $fotos_slider]);
+    $destacados = Producto_imagen::select(['productos_imagenes.producto_id','productos.nombre','productos.desCorta','productos_imagenes.file_path'])
+    ->join('productos', 'productos_imagenes.producto_id', '=', 'productos.id')
+    ->where('productos.destacar', '=', 1)
+    ->groupBy('productos_imagenes.producto_id','productos.nombre','productos.desCorta','productos_imagenes.file_path')
+    ->get();
+    for ($i = 0; $i < count($destacados); $i++) {
+            $destacados[$i]->file_path = basename($destacados[$i]->file_path);
+    }
+
+    return view('welcome',['slider' => $fotos_slider,'destacados' => $destacados]);
 })->name('welcome');

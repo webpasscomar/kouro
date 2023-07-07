@@ -22,7 +22,7 @@
                     @else
                         <button data-te-target="#carouselDarkVariant"
                             class="mx-[3px] box-content h-[3px] w-[30px] flex-initial cursor-pointer border-0 border-y-[10px] border-solid border-transparent bg-black bg-clip-padding p-0 -indent-[999px] opacity-50 transition-opacity duration-[600ms] ease-[cubic-bezier(0.25,0.1,0.25,1.0)] motion-reduce:transition-none hover:bg-blue-700"
-                            data-te-slide-to="{{ $loop->index }}" aria-label=" {{ $foto->nombre}}"></button>
+                            data-te-slide-to="{{ $loop->index }}" aria-label=" {{ $foto->nombre }}"></button>
                     @endif
                 @endforeach
 
@@ -32,9 +32,6 @@
 
 
         </div>
-
-
-
 
 
         <!-- Carousel items -->
@@ -89,8 +86,28 @@
         </button>
     </div>
 
+
+
     <!-- Lista elegi productos  -->
 
+    <div class="flex overflow-x-auto space-x-8 w-full ">
+
+        @if($destacados)
+            @foreach ( $destacados as $destacado)
+                <section class="flex-shrink-0 border-1 border-purple-300 p-4">
+                    <img src="{{ asset('storage/productos/' . $destacado->file_path) }}" class=" h-60 w-60 rounded-md"
+                        alt="">
+                    <p class="text-2xl font-bold   m-2 p-2">{{ $destacado->nombre}}</p>
+                    <p class="m-2 p-2">{{ $destacado->desCorta}}</p>
+                </section>
+            @endforeach
+        @endif
+    </div>
+
+
+
+
+    <!-- Lista elegi productos  -->
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -136,18 +153,6 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -168,7 +173,8 @@
                     <div class="grid md:grid-cols-3 gap-6 text-center">
                         <div>
                             <div class="block rounded-lg shadow-lg bg-white">
-                                <div class="overflow-hidden rounded-t-lg h-28" style="background-color: #9d789b;"></div>
+                                <div class="overflow-hidden rounded-t-lg h-28" style="background-color: #9d789b;">
+                                </div>
                                 <div
                                     class="w-24 -mt-12 overflow-hidden border border-2 border-white rounded-full mx-auto bg-white">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" />
@@ -248,6 +254,23 @@
             </div>
         </div>
     </div>
+
+
+    <style>
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 0.5rem;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 9999px;
+        }
+
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 9999px;
+        }
+    </style>
 
 
 </x-app-layout>
