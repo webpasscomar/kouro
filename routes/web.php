@@ -14,6 +14,8 @@ use App\Http\Livewire\Sucursales;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\MpController;
 
+use App\Models\Galeria;
+
 Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
 Route::get('/shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
 Route::get('/shop/{categoria}/{id}', ProductoFront::class)->name('productos.show');
@@ -33,5 +35,7 @@ Route::post('/webhooks',  WebhooksController::class);
 
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $fotos_slider = Galeria::where('estado','=',1)->get();
+    return view('welcome',['slider' => $fotos_slider]);
 })->name('welcome');
