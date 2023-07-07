@@ -15,6 +15,9 @@ use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\MpController;
 use App\Models\Galeria;
 use App\Models\Producto_imagen;
+use App\Models\Producto;
+use Illuminate\Support\Facades\DB;
+
 
 
 Route::get('/shop', [ProductoController::class, 'index'])->name('productos.index');
@@ -38,14 +41,43 @@ Route::post('/webhooks',  WebhooksController::class);
 Route::get('/', function () {
 
     $fotos_slider = Galeria::where('estado','=',1)->get();
-    $destacados = Producto_imagen::select(['productos_imagenes.producto_id','productos.nombre','productos.desCorta','productos_imagenes.file_path'])
-    ->join('productos', 'productos_imagenes.producto_id', '=', 'productos.id')
-    ->where('productos.destacar', '=', 1)
-    ->groupBy('productos_imagenes.producto_id','productos.nombre','productos.desCorta','productos_imagenes.file_path')
-    ->get();
-    for ($i = 0; $i < count($destacados); $i++) {
-            $destacados[$i]->file_path = basename($destacados[$i]->file_path);
+
+    //  $destacados = Producto::rightJoin('productos_imagenes', 'productos.id', '=', 'productos_imagenes.producto_id')
+    //     ->select(['productos.id','productos.nombre','productos.desCorta','productos_imagenes.file_path'])
+    //     ->where('productos.destacar', '=', 1)
+    //     ->get();
+
+
+    $destacados = Producto::select('productos.id','productos.nombre','productos.desCorta')
+                ->where('productos.destacar', '=', 1)
+                ->get();
+
+                dd($destacados[0]->imagen()->file_name);
+
+                //>leftJoin('productos','productos.id', '=','productos_imagenes.producto_id')
+                // ->where('productos.destacar', '=', 1)
+
+
+
+
+
+    // ->select(['productos.id','productos.nombre','productos.desCorta','productos_imagenes.file_path'])
+    // ->where('productos.destacar', '=', 1)
+    // ->get();
+
+
+
+    //   dd($destacados);
+
+
+    foreach ($destacados as $destacado) {
+         if ($destacado->imagenes[0]->isNotEmpty()) {
+            $destacado->imagenes[0]->file_path = basename($destacado->imagenes[0]->file_path);
+         }else{
+            $destacado->imagenes[0]->file_path = 'xx.jpg';
+         }
     }
+
 
     return view('welcome',['slider' => $fotos_slider,'destacados' => $destacados]);
 })->name('welcome');

@@ -21,4 +21,10 @@ class Producto_imagen extends Model
         'file_path',
     ];
 
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id');
+    }
+
 }
