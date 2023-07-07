@@ -26,16 +26,24 @@
         <!-- Carousel items -->
         <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
 
-            {{-- @if ($slider)
+            @if ($slider)
                 @foreach ($slider as $foto)
-                    <div class="relative float-left -mr-[100%] w-full !transform-none opacity-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none"
-                        data-te-carousel-fade data-te-carousel-item data-te-carousel-active>
-                        <img src="{{ asset('storage/galeria/' . $foto->imagen) }}" class="block w-full"
-                            alt="{{ $foto->nombre }}" />
-                    </div>
+                    @if ($loop->first)
+                        <div class="relative float-left -mr-[100%] w-full !transform-none opacity-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none"
+                            data-te-carousel-fade data-te-carousel-item data-te-carousel-active>
+                            <img src="{{ asset('storage/galeria/' . $foto->imagen) }}" class="block w-full"
+                                alt="{{ $foto->nombre }}" />
+                        </div>
+                    @else
+                        <div class="relative float-left -mr-[100%] hidden w-full !transform-none opacity-0 transition-opacity duration-[600ms] ease-in-out motion-reduce:transition-none"
+                            data-te-carousel-fade data-te-carousel-item>
+                            <img src="{{ asset('storage/galeria/' . $foto->imagen) }}" class="block w-full"
+                                alt="{{ $foto->nombre }}" />
+                        </div>
+                    @endif
                 @endforeach
 
-            @endif --}}
+            @endif
 
         </div>
 
@@ -169,7 +177,8 @@
                         </div>
                         <div>
                             <div class="block rounded-lg shadow-lg bg-white">
-                                <div class="overflow-hidden rounded-t-lg h-28" style="background-color: #7a81a8;"></div>
+                                <div class="overflow-hidden rounded-t-lg h-28" style="background-color: #7a81a8;">
+                                </div>
                                 <div
                                     class="w-24 -mt-12 overflow-hidden border border-2 border-white rounded-full mx-auto bg-white">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp" />
