@@ -42,39 +42,18 @@ Route::get('/', function () {
 
     $fotos_slider = Galeria::where('estado','=',1)->get();
 
-    //  $destacados = Producto::rightJoin('productos_imagenes', 'productos.id', '=', 'productos_imagenes.producto_id')
-    //     ->select(['productos.id','productos.nombre','productos.desCorta','productos_imagenes.file_path'])
-    //     ->where('productos.destacar', '=', 1)
-    //     ->get();
 
-
-    $destacados = Producto::select('productos.id','productos.nombre','productos.desCorta')
-                ->where('productos.destacar', '=', 1)
-                ->get();
-
-                dd($destacados[0]->imagen()->file_name);
-
-                //>leftJoin('productos','productos.id', '=','productos_imagenes.producto_id')
-                // ->where('productos.destacar', '=', 1)
-
-
-
-
-
-    // ->select(['productos.id','productos.nombre','productos.desCorta','productos_imagenes.file_path'])
-    // ->where('productos.destacar', '=', 1)
-    // ->get();
-
-
-
-    //   dd($destacados);
-
+    $destacados =  Producto_imagen::select('productos_imagenes.producto_id','productos_imagenes.file_path','productos.nombre','productos.desCorta')
+        ->leftJoin('productos','productos.id','productos_imagenes.producto_id')
+        ->where('destacar',1)
+        ->groupBy('productos_imagenes.producto_id')
+        ->get();
 
     foreach ($destacados as $destacado) {
-         if ($destacado->imagenes[0]->isNotEmpty()) {
-            $destacado->imagenes[0]->file_path = basename($destacado->imagenes[0]->file_path);
+         if ($destacado->file_path) {
+            $destacado->file_path = basename($destacado->file_path);
          }else{
-            $destacado->imagenes[0]->file_path = 'xx.jpg';
+            $destacado->file_path = 'sin_imagen.jpg';
          }
     }
 
