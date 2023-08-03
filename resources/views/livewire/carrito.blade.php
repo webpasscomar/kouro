@@ -133,26 +133,26 @@
         @if (session('items'))
             <form class="mt-12">
                 <h2 class="block mt-4 mb-10 font-bold text-2xl text-gray-700">Datos del comprador</h1>
-                    <div class="grid grid-cols-5 gap-8 gap-y-10 content-center">
+                    <div class="grid grid-cols-5 gap-8 gap-y-16 content-center">
                         <!-- formulario de datos de comprador y entrega-->
-                        <div>
+                        <div class="h-11">
                             <label for="cli_nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre
                                 <span class="text-red-500">*</span></label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_nombre" wire:model="cli_nombre" placeholder="Ingrese el nombre">
-                            <x-jet-input-error for="cli_nombre" />
+                            <x-jet-input-error for="cli_nombre" class="mt-2 ms-1" />
                         </div>
 
-                        <div>
+                        <div class="h-11">
                             <label for="cli_apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido
                                 <span class="text-red-500">*</span></label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_apellido" wire:model="cli_apellido" placeholder="Ingrese el apellido">
-                            <x-jet-input-error for="cli_apellido" />
+                            <x-jet-input-error for="cli_apellido" class="mt-2 ms-1" />
                         </div>
-                        <div>
+                        <div class="h-11">
                             <label for="cli_email" class="block text-gray-700 text-sm font-bold mb-2">E-mail
                                 <span class="text-red-500">*</span></label>
                             <input type="text"
@@ -161,15 +161,15 @@
                             <x-jet-input-error for="cli_email" class="mt-2 ms-1" />
                         </div>
 
-                        <div>
+                        <div class="h-11">
                             <label for="cli_telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono
                                 <span class="text-red-500">*</span></label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_telefono" wire:model="cli_telefono" placeholder="Ingrese el teléfono">
-                            <x-jet-input-error for="cli_telefono" />
+                            <x-jet-input-error for="cli_telefono" class="mt-2 ms-1" />
                         </div>
-                        <div>
+                        <div class="h-11">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Forma de Entrega</label>
                             <select
                                 class="bg-white shadow-md shadow-gray-300 mt-1 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-400 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 focus:border-slate-400 focus:border-2"
@@ -183,46 +183,45 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <x-jet-input-error for="entrega_id" />
+                            <x-jet-input-error for="entrega_id" class="mt-2 ms-1" />
                         </div>
 
-                        {{-- @if ($pidedirec == '1') --}}
+                        {{-- @if ($pidedirec == '1')  TODO:Revisar si funciona bien sin esta funcionalidad --}}
 
-                        <div class="col-span-2">
+                        <div class="col-span-2 h-11">
                             <label for="cli_calle" class="block text-gray-700 text-sm font-bold mb-2">Calle</label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 w-full border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_calle" wire:model="cli_calle" placeholder="Ingrese la dirección">
-                            <x-jet-input-error for="cli_calle" />
+                            <x-jet-input-error for="cli_calle" class="mt-2 ms-1" />
                         </div>
 
-                        <div>
+                        <div class="h-11">
                             <label for="cli_nro" class="block text-gray-700 text-sm font-bold mb-2">Nro</label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_nro" wire:model="cli_nro" placeholder="Ingrese el número">
-                            <x-jet-input-error for="cli_nro" />
+                            <x-jet-input-error for="cli_nro" class="mt-2 ms-1" />
                         </div>
 
-                        <div>
+                        <div class="h-11">
                             <label for="cli_piso" class="block text-gray-700 text-sm font-bold mb-2">Piso</label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_piso" wire:model="cli_piso" placeholder="Ingrese el piso">
-                            <x-jet-input-error for="cli_piso" />
+                            <x-jet-input-error for="cli_piso" class="mt-2 ms-1" />
                         </div>
 
 
-                        <div>
+                        <div class="h-11">
                             <label for="cli_dpto" class="block text-gray-700 text-sm font-bold mb-2">Dpto</label>
                             <input type="text"
                                 class="bg-white shadow-md shadow-gray-300 rounded-lg h-11 border-[#a5a7a7] px-3 py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 placeholder:text-gray-400 focus:border-slate-400 focus:border-2"
                                 id="cli_dpto" wire:model="cli_dpto" placeholder="Ingrese el Dpto">
-                            <x-jet-input-error for="cli_dpto" />
+                            <x-jet-input-error for="cli_dpto" class="mt-2 ms-1" />
                         </div>
 
-
-                        <div class="col-span-2">
+                        <div class="col-span-2 h-11">
                             <label class="block font-bold text-gray-700 text-sm mb-1">Provincia</label>
                             <select
                                 class="bg-white shadow-md shadow-gray-300 mt-1 rounded-lg h-11 w-full border-[#a5a7a7] px-3 py-2 text-gray-400 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 focus:border-slate-400 focus:border-2"
@@ -236,10 +235,10 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <x-jet-input-error for="cli_prov_id" />
+                            <x-jet-input-error for="cli_prov_id" class="mt-2 ms-1" />
                         </div>
 
-                        <div class="col-span-2">
+                        <div class="col-span-2 h-11">
                             <label class="block font-bold text-gray-700 text-sm mb-1">Localidad</label>
                             <select
                                 class="bg-white shadow-md shadow-gray-300 mt-1 rounded-lg h-11 w-full border-[#a5a7a7] px-3 py-2 text-gray-400 leading-tight focus:outline-none focus:shadow-outline focus:ring-0 focus:border-slate-400 focus:border-2"
@@ -255,7 +254,7 @@
                                     @endforeach
                                 @endif
                             </select>
-                            <x-jet-input-error for="cli_loc_id" />
+                            <x-jet-input-error for="cli_loc_id" class="mt-2 ms-1" />
                         </div>
 
                         {{-- @endif --}}
