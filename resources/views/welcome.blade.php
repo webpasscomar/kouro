@@ -86,29 +86,71 @@
         </button>
     </div>
 
-
-
+    {{-- ========================================================== --}}
+    {{-- TODO:Eliminar si funciona lista elegi productos nueva --}}
     <!-- Lista elegi productos  -->
 
-    <div class="flex overflow-x-auto space-x-8 w-full ">
+    {{-- <div class="flex overflow-x-auto space-x-8 w-full ">
 
-        @if($destacados)
-            @foreach ( $destacados as $destacado)
+        @if ($destacados)
+            @foreach ($destacados as $destacado)
                 <section class="flex-shrink-0 border-1 border-purple-300 p-4">
                     <img src="{{ asset('storage/productos/' . $destacado->file_path) }}" class=" h-60 w-60 rounded-md"
                         alt="">
-                    <p class="text-2xl font-bold   m-2 p-2">{{ $destacado->nombre}}</p>
-                    <p class="m-2 p-2">{{ $destacado->desCorta}}</p>
+                    <p class="text-2xl font-bold   m-2 p-2">{{ $destacado->nombre }}</p>
+                    <p class="m-2 p-2">{{ $destacado->desCorta }}</p>
                 </section>
             @endforeach
         @endif
-    </div>
+    </div> --}}
 
+    {{-- ======================================================== --}}
+
+    <!-- Lista elegi productos  -->
+
+    <section id="seccion-slice" class="flex relative items-center mt-10 mb-10">
+        {{-- icono flecha izquiera --}}
+        <button id="btn-slice-destacados-prev" class="absolute left-1 z-10" role="button">
+            <span class="inline-block h-10 w-8 dark:grayscale">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="h-10 w-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </span>
+        </button>
+        {{-- icono flecha derecha --}}
+        <button id="btn-slice-destacados-next" role="button" class="absolute hidden z-10 right-1 self-center">
+            <span class="inline-block h-10 w-8 dark:grayscale rotate-180">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="h-10 w-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </span>
+        </button>
+        {{-- Contenedor de slice de imágenes --}}
+        <div id="contenedor-slice-destacados" class="flex w-full gap-y-3 p-2 overflow-x-hidden gap-x-9 scroll-smooth">
+            {{-- items imágenes --}}
+            @if ($destacados)
+                @foreach ($destacados as $destacado)
+                    <section class="bg-[#e4e4e4] min-w-[310px] max-w-[310px] rounded-md shadow-gray-400 shadow-md">
+                        <div class="w-full box-border p-5 drop-shadow-md">
+                            <img src="{{ asset('storage/productos/' . $destacado->file_path) }}"
+                                class="w-auto object-contain" alt="productos">
+                        </div>
+                        <div class="w-auto -mt-2 p-3 box-border">
+                            <p class="text-2xl font-bold mb-2">{{ $destacado->nombre }}</p>
+                            <p>{{ $destacado->desCorta }}</p>
+                        </div>
+                    </section>
+                @endforeach
+            @endif
+        </div>
+    </section>
 
 
 
     <!-- Lista elegi productos  -->
-    <div class="py-12">
+    {{-- <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
@@ -150,15 +192,14 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
 
+    {{-- =====================================================================================  --}}
+    {{-- TODO: Eliminar si esta bien la sucursal en el inicio  --}}
 
-    <div class="py-12">
+    {{-- <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-
-
-
 
                 <section class="mb-20 text-gray-700">
                     <div class="text-center md:max-w-xl lg:max-w-3xl mx-auto">
@@ -176,7 +217,7 @@
                                 <div class="overflow-hidden rounded-t-lg h-28" style="background-color: #9d789b;">
                                 </div>
                                 <div
-                                    class="w-24 -mt-12 overflow-hidden border border-2 border-white rounded-full mx-auto bg-white">
+                                    class="w-24 -mt-12 overflow-hidden border-2 border-white rounded-full mx-auto bg-white">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" />
                                 </div>
                                 <div class="p-6">
@@ -253,9 +294,17 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
+    {{-- ==========================================================================================   --}}
+
+    {{-- Sección Sucursal   --}}
+    <section class="container mx-auto mt-20">
+        <x-sucursal background="bg-[#e4e4e4]" color="text-slate-600" />
+    </section>
 
 
+
+    {{-- Estilos   --}}
     <style>
         .overflow-x-auto::-webkit-scrollbar {
             height: 0.5rem;
