@@ -1,8 +1,11 @@
 <div class="grid grid-cols-5 bg-white overflow-hidden shadow-xl sm:rounded-lg mb-7 px-4 max-w-4xl py-4 items-center">
     <div>
         {{-- TODO: Reemplazar por imágen dinámica --}}
-        <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&   auto=format&fit=crop&w=870&q=80"
-            alt="imagen producto" class="w-28 rounded-md">
+        @if ($imagen_producto)
+                <img src="{{ asset('storage/productos/' . $imagen_producto) }}" alt="imagen producto" class="w-28 rounded-md">
+            @else
+            <img src="" alt="imagen producto" class="w-28 rounded-md">
+        @endif
     </div>
     <div>
         <div>
