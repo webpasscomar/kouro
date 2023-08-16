@@ -1350,10 +1350,6 @@ input:checked + .toggle-bg {
 .mb-9 {
     margin-bottom: 2.25rem;
 }
-.me-2 {
-    -webkit-margin-end: 0.5rem;
-            margin-inline-end: 0.5rem;
-}
 .ml-1 {
     margin-left: 0.25rem;
 }
@@ -1822,9 +1818,6 @@ input:checked + .toggle-bg {
 }
 .items-center {
     align-items: center;
-}
-.items-stretch {
-    align-items: stretch;
 }
 .justify-start {
     justify-content: flex-start;
