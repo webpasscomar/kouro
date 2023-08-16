@@ -2,116 +2,116 @@
 
     <!-- <h1>Detalle del producto</h1>
 
-    <div class="grid grid-cols-12 gap-6 pt-8">
-        <div class="col-span-9">
-            <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-6">
-                    <img class="w-full h-96 object-cover object-center" src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
-                </div>
-                <div class="col-span-6">
-                    <h2 class="text-gray-900 font-bold text-3xl mb-2" id="producto_id" wire:model="producto_id"> Id
-                        {{ $producto->id }}
-                    </h2>
-                    <h2 class="text-gray-900 font-bold text-3xl mb-2"> Nombre {{ $producto->nombre }}</h2>
-                    <p class="text-gray-700 text-base">Desc. Corta {{ $producto->descCorta }}</p>
-                    <p class="text-gray-700 text-base font-bold mt-2">Precio Lista {{ $producto->precioLista }}</p>
-                    <p class="text-gray-700 text-base font-bold mt-2">Precio Oferta {{ $producto->precioOferta }}</p>
-                    <p class="text-gray-700 text-base font-bold mt-2">Codigo {{ $producto->codigo }}</p>
+<div class="grid grid-cols-12 gap-6 pt-8">
+    <div class="col-span-9">
+        <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-6">
+                <img class="w-full h-96 object-cover object-center" src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}">
+            </div>
+            <div class="col-span-6">
+                <h2 class="text-gray-900 font-bold text-3xl mb-2" id="producto_id" wire:model="producto_id"> Id
+                    {{ $producto->id }}
+                </h2>
+                <h2 class="text-gray-900 font-bold text-3xl mb-2"> Nombre {{ $producto->nombre }}</h2>
+                <p class="text-gray-700 text-base">Desc. Corta {{ $producto->descCorta }}</p>
+                <p class="text-gray-700 text-base font-bold mt-2">Precio Lista {{ $producto->precioLista }}</p>
+                <p class="text-gray-700 text-base font-bold mt-2">Precio Oferta {{ $producto->precioOferta }}</p>
+                <p class="text-gray-700 text-base font-bold mt-2">Codigo {{ $producto->codigo }}</p>
 
-                    <div class="mt-4">
-                        <label class="block font-bold text-gray-700">Talle:</label>
-                        <select class="form-select mt-1 block w-full" id="talle_id" wire:model="talle_id" wire:change="checkstock()">
-                            <option value="0">Seleccione un Talle</option>
-                            @foreach ($talles as $talle)
+                <div class="mt-4">
+                    <label class="block font-bold text-gray-700">Talle:</label>
+                    <select class="form-select mt-1 block w-full" id="talle_id" wire:model="talle_id" wire:change="checkstock()">
+                        <option value="0">Seleccione un Talle</option>
+                        @foreach ($talles as $talle)
 <option value="{{ $talle['talle_id'] }}">{{ $talle['talle'] }}</option>
 @endforeach
-                        </select>
-                    </div>
+                    </select>
+                </div>
 
-                    <div class="mt-4">
-                        <label class="block font-bold text-gray-700">Color:</label>
-                        <select class="form-select mt-1 block w-full" id="color_id" wire:model="color_id" wire:change="checkstock()">
-                            <option value="0">Seleccione un Color</option>
-                            @foreach ($colores as $color)
+                <div class="mt-4">
+                    <label class="block font-bold text-gray-700">Color:</label>
+                    <select class="form-select mt-1 block w-full" id="color_id" wire:model="color_id" wire:change="checkstock()">
+                        <option value="0">Seleccione un Color</option>
+                        @foreach ($colores as $color)
 <option value="{{ $color['color_id'] }}">{{ $color['color'] }}</option>
 @endforeach
-                        </select>
-                    </div>
-                    <div class="mt-4">
-                        <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
-                                       shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" wire:click.prevent="incrementa()">
-                            +
-                        </button>
-                        <input class="py-2 px-2 " type="numeric" id="cantidad" wire:model="cantidad" wire:change="checkstock()" />
-                        <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
-                                      shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" wire:click.prevent="decrementa()">
-                            -
-                        </button>
-                        @if (parametro(10) === 'S')
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
+                                    shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" wire:click.prevent="incrementa()">
+                        +
+                    </button>
+                    <input class="py-2 px-2 " type="numeric" id="cantidad" wire:model="cantidad" wire:change="checkstock()" />
+                    <button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-md
+                                    shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" wire:click.prevent="decrementa()">
+                        -
+                    </button>
+                    @if (parametro(10) === 'S')
 Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model="disponibles" disabled></input>
 @endif
-                    </div>
+                </div>
 
-                    <div class="mt-4">
-                        @if (parametro(10) === 'S')
+                <div class="mt-4">
+                    @if (parametro(10) === 'S')
 <button class="py-2 px-4
-                            {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0)
-                                ? 'bg-slate-100 hover:bg-slate-200 text-{212 212 216}'
-                                : ' bg-blue-500 hover:bg-blue-600 text-white' }}
-                                                           font-bold rounded-md
-                            shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                            {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}
-                            " wire:click.prevent="agregarcarrito()">
-                            {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}
+                        {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0)
+                            ? 'bg-slate-100 hover:bg-slate-200 text-{212 212 216}'
+                            : ' bg-blue-500 hover:bg-blue-600 text-white' }}
+                                                        font-bold rounded-md
+                        shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                        {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}
+                        " wire:click.prevent="agregarcarrito()">
+                        {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}
 
-                        </button>
+                    </button>
 @else
 <button class="py-2 px-4  bg-blue-500 hover:bg-blue-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
-                                         focus:ring-blue-500 focus:ring-offset-2 " wire:click.prevent="agregarcarrito()">Agregar al carrito</button>
+                                        focus:ring-blue-500 focus:ring-offset-2 " wire:click.prevent="agregarcarrito()">Agregar al carrito</button>
 @endif
-                        <div>
+                    <div>
 
 
-                            {{-- @if (session('items'))
-                                @foreach (session('items') as $item)
-                                    {{ $item['producto_id'] }}
-                            {{ $item['producto_nombre'] }}
-                            {{ $item['producto_precio'] }}
-                            {{ $item['color_id'] }}
-                            {{ $item['color_nombre'] }}
-                            {{ $item['talle_id'] }}
-                            {{ $item['talle_nombre'] }}
-                            {{ $item['cantidad'] }}
-                            @endforeach
-                            @else
-                            @endif --}}
-
-                        </div>
-
-
-
+                        {{-- @if (session('items'))
+                            @foreach (session('items') as $item)
+                                {{ $item['producto_id'] }}
+                        {{ $item['producto_nombre'] }}
+                        {{ $item['producto_precio'] }}
+                        {{ $item['color_id'] }}
+                        {{ $item['color_nombre'] }}
+                        {{ $item['talle_id'] }}
+                        {{ $item['talle_nombre'] }}
+                        {{ $item['cantidad'] }}
+                        @endforeach
+                        @else
+                        @endif --}}
 
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-span-3">
-            {{-- @livewire('categorias-front') --}}
-            <div class="grid grid-cols-1">
-                <h3 class="block px-2 py-3 bg-gray-300">Otras categorias</h3>
-                <ul role="list" class="px-2 py-3 font-medium text-gray-900">
-                    @foreach ($categorias as $categoria)
+    <div class="col-span-3">
+        {{-- @livewire('categorias-front') --}}
+        <div class="grid grid-cols-1">
+            <h3 class="block px-2 py-3 bg-gray-300">Otras categorias</h3>
+            <ul role="list" class="px-2 py-3 font-medium text-gray-900">
+                @foreach ($categorias as $categoria)
 <li class="block px-2 py-3 border-b">
-                        <a href="{{ route('productos.categoria', $categoria['slug']) }}">
-                            {{ $categoria['categoria'] }}</a>
-                    </li>
+                    <a href="{{ route('productos.categoria', $categoria['slug']) }}">
+                        {{ $categoria['categoria'] }}</a>
+                </li>
 @endforeach
-                </ul>
-            </div>
+            </ul>
         </div>
+    </div>
 
-    </div> -->
+</div> -->
 
     <!-- lO ANTERIOR QUEDO COMENTADO HATA PROBAR QUE FUNCIONE BIEN EL DETALLE DEL PRODUCTO  -->
     <!-- DETALLE DEL PRODUCTO -->
@@ -159,44 +159,44 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                     <!-- Reviews -->
                     <div class="mt-6">
                         {{-- <h3 class="sr-only">Reviews</h3>
+                    <div class="flex items-center">
                         <div class="flex items-center">
-                            <div class="flex items-center">
-                                <!-- Active: "text-gray-900", Default: "text-gray-200" -->
-                                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                    aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <p class="sr-only">4 out of 5 stars</p>
-                            <a href="#" class="ml-3 text-sm font-medium text-red-400 hover:text-red-600">117
-                                reviews</a>
-                        </div> --}}
+                            <!-- Active: "text-gray-900", Default: "text-gray-200" -->
+                            <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg class="text-gray-900 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
+                                aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <p class="sr-only">4 out of 5 stars</p>
+                        <a href="#" class="ml-3 text-sm font-medium text-red-400 hover:text-red-600">117
+                            reviews</a>
+                    </div> --}}
                     </div>
 
                     <!-- Selección de Colores -->
@@ -206,17 +206,17 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                             <fieldset class="mt-4">
                                 {{-- <legend class="sr-only">Choose a color</legend> --}}
                                 <div class="flex items-center space-x-3">
-                                    @foreach ($colores as $color)
-                                        <label
-                                            class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
-                                            <input type="radio" name="color-choice" value="{{ $color['color_id'] }}"
-                                                class="sr-only peer/white" aria-labelledby="color-choice-0-label"
-                                                wire:click.prevent="asigna_color({{ $color['color_id'] }})">
-                                            {{-- <span id="color-choice-0-label" class="sr-only">White</span> --}}
-                                            <span style=" background-color: {{ $color['pcolor'] }};" aria-hidden="true"
-                                                class="h-8 w-8 rounded-full border border-black border-opacity-10 peer-checked/white:ring-4 peer-checked/white:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
-                                        </label>
-                                    @endforeach
+                                    {{-- @foreach ($colores as $color) --}}
+                                    <label
+                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none ring-gray-400">
+                                        <input type="radio" name="color-choice" value="{{ $color['color_id'] }}"
+                                            class="sr-only peer" aria-labelledby="color-choice-0-label"
+                                            wire:click.prevent="asigna_color({{ $color['color_id'] }})">
+                                        {{-- <span id="color-choice-0-label" class="sr-only">White</span> --}}
+                                        <span style=" background-color: {{ $color['pcolor'] }};" aria-hidden="true"
+                                            class="h-8 w-8 rounded-full border border-black border-opacity-10 peer-checked:ring-4 peer-checked:ring-red-500 hover:ring-4 hover:ring-red-400"></span>
+                                    </label>
+                                    {{-- @endforeach --}}
                                 </div>
                             </fieldset>
                         </div>
@@ -232,19 +232,19 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                 {{-- <legend class="sr-only">Talles</legend> --}}
                                 <div class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                                     {{-- <label
-                                        class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-not-allowed bg-gray-50 text-gray-200">
-                                        <input type="radio" name="size-choice" value="XXS" disabled
-                                            class="sr-only peer/xxs" aria-labelledby="size-choice-0-label">
-                                        <span id="size-choice-0-label">XXS</span>
-                                        <span aria-hidden="true"
-                                            class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
-                                            <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                                viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
-                                                <line x1="0" y1="100" x2="100" y2="0"
-                                                    vector-effect="non-scaling-stroke" />
-                                            </svg>
-                                        </span>
-                                    </label> --}}
+                                    class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-not-allowed bg-gray-50 text-gray-200">
+                                    <input type="radio" name="size-choice" value="XXS" disabled
+                                        class="sr-only peer/xxs" aria-labelledby="size-choice-0-label">
+                                    <span id="size-choice-0-label">XXS</span>
+                                    <span aria-hidden="true"
+                                        class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
+                                        <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                            viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
+                                            <line x1="0" y1="100" x2="100" y2="0"
+                                                vector-effect="non-scaling-stroke" />
+                                        </svg>
+                                    </span>
+                                </label> --}}
                                     @foreach ($talles as $talle)
                                         <label
                                             class="group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer bg-white text-gray-900 shadow-sm hover:ring-4 hover:ring-red-400">
@@ -281,7 +281,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                             <!-- Botón Agregar al Carrito  -->
                             <button type="submit"
                                 class="flex flex-1 ml-3 lg:ml-0 xl:ml-3 items-center justify-center rounded-md border border-transparent
-                                 bg-red-500 px-8 py-2 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                bg-red-500 px-8 py-2 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                                 {{ ($cantidad > $disponibles) | ($talle_id == 0) | ($color_id == 0) ? 'disabled' : '' }}
                                 wire:click.prevent="agregarcarrito()">
                                 {{ $cantidad > $disponibles && $talle_id > 0 && $color_id > 0 ? 'Sin stock disponible' : ' Agregar al carrito' }}</button>
@@ -304,7 +304,7 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
 
                                     <button
                                         class="py-2 px-4  bg-red-500 hover:bg-red-600 text-white  font-bold rounded-md shadow-md focus:outline-none focus:ring-2
-                                            focus:ring-red-500 focus:ring-offset-2 "
+                                        focus:ring-red-500 focus:ring-offset-2 "
                                         wire:click.prevent="avisostock()">Enviar</button>
                                 </div>
                             @endif
@@ -324,7 +324,8 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                 <input type="search" name="" id="" placeholder="Buscar producto"
                     class="rounded-lg border-2 border-gray-300 placeholder:text-gray-400 flex-1 lg:w-40 xl:flex-1 mr-3 focus:ring-red-400 focus:border-red-400"
                     wire:model="busqueda">
-                    <button class="bg-red-500 p-3 w-12 h-12 rounded-lg lg:ml-0 hover:bg-red-600" wire:click.prevent="buscar()">
+                <button class="bg-red-500 p-3 w-12 h-12 rounded-lg lg:ml-0 hover:bg-red-600"
+                    wire:click.prevent="buscar()">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" height="24" viewBox="0 96 960 960"
                             width="24">
@@ -347,56 +348,57 @@ Disponibles<input class="py-2 px-2 " type="numeric" id="disponibles" wire:model=
                                     d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
                             </svg>
                         </span>
-                        <a href="{{ route('productos.categoria', $categoria['slug']) }}" class="text-xl text-red-700 hover:text-red-400"> {{ $categoria['categoria'] }}</a>
+                        <a href="{{ route('productos.categoria', $categoria['slug']) }}"
+                            class="text-xl text-red-700 hover:text-red-400"> {{ $categoria['categoria'] }}</a>
                     </div>
                 @endforeach
 
 
                 {{-- <div class="flex items-center mt-3">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                            viewBox="0 96 960 960" width="32">
-                            <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                        </svg>
-                    </span>
-                    <a href="#" class="text-xl text-red-700 hover:text-red-400">Calzados caballeros</a>
-                </div>
-                <div class="flex items-center mt-3">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                            viewBox="0 96 960 960" width="32">
-                            <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                        </svg>
-                    </span>
-                    <a href="#" class="text-xl text-red-700 hover:text-red-400">Calzado damas</a>
-                </div>
-                <div class="flex items-center mt-3">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                            viewBox="0 96 960 960" width="32">
-                            <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                        </svg>
-                    </span>
-                    <a href="#" class="text-xl text-red-700 hover:text-red-400">Accesorios</a>
-                </div>
-                <div class="flex items-center mt-3">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                            viewBox="0 96 960 960" width="32">
-                            <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                        </svg>
-                    </span>
-                    <a href="#" class="text-xl text-red-700 hover:text-red-400">Carteras</a>
-                </div>
-                <div class="flex items-center mt-3">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                            viewBox="0 96 960 960" width="32">
-                            <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                        </svg>
-                    </span>
-                    <a href="#" class="text-xl text-red-700 hover:text-red-400">Billeteras</a>
-                </div>
-            </div> --}}
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
+                        viewBox="0 96 960 960" width="32">
+                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
+                    </svg>
+                </span>
+                <a href="#" class="text-xl text-red-700 hover:text-red-400">Calzados caballeros</a>
+            </div>
+            <div class="flex items-center mt-3">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
+                        viewBox="0 96 960 960" width="32">
+                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
+                    </svg>
+                </span>
+                <a href="#" class="text-xl text-red-700 hover:text-red-400">Calzado damas</a>
+            </div>
+            <div class="flex items-center mt-3">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
+                        viewBox="0 96 960 960" width="32">
+                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
+                    </svg>
+                </span>
+                <a href="#" class="text-xl text-red-700 hover:text-red-400">Accesorios</a>
+            </div>
+            <div class="flex items-center mt-3">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
+                        viewBox="0 96 960 960" width="32">
+                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
+                    </svg>
+                </span>
+                <a href="#" class="text-xl text-red-700 hover:text-red-400">Carteras</a>
+            </div>
+            <div class="flex items-center mt-3">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
+                        viewBox="0 96 960 960" width="32">
+                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
+                    </svg>
+                </span>
+                <a href="#" class="text-xl text-red-700 hover:text-red-400">Billeteras</a>
+            </div>
+        </div> --}}
             </div>
         </div>
