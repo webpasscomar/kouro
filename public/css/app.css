@@ -1873,10 +1873,6 @@ input:checked + .toggle-bg {
     -moz-column-gap: 0.5rem;
          column-gap: 0.5rem;
 }
-.gap-x-24 {
-    -moz-column-gap: 6rem;
-         column-gap: 6rem;
-}
 .gap-x-3 {
     -moz-column-gap: 0.75rem;
          column-gap: 0.75rem;

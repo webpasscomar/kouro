@@ -2,11 +2,9 @@
     <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Productos</h4>
 </x-slot>
 
-
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-
 
             @if (session()->has('message'))
                 <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-4 shadow-md my-3" role="alert">
@@ -18,14 +16,13 @@
                 </div>
             @endif
 
-
-            <div class="grid grid-cols-1 sm:grid-cols-3">
+            <div class="grid grid-cols-1 sm:grid-cols-3 mb-4">
                 <div>
                     <button wire:click="crear()"
                         class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-                        <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Nuevo</button>
+                        <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Agregar</button>
                 </div>
-                <div class="py-3">
+                <div>
                     <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
                 </div>
             </div>

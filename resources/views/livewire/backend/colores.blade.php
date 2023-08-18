@@ -9,8 +9,8 @@
             <div class="grid grid-cols-1 sm:grid-cols-3">
                 <div>
                     <button wire:click="crear()"
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                        Nuevo color</button>
+                        class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
+                        <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Nuevo color</button>
                 </div>
                 <div class="py-3">
                     <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
@@ -60,7 +60,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
-                        <th>Color<th>
+                        <th>Color</th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
@@ -79,14 +79,16 @@
                             )</td>
                             <td class="border px-4 py-2">
                                 <!-- Vista de Blade -->
-                                    <div class="px-4 py-2" style="background-color: {{$color->pcolor}};"></div>
+                                <div class="px-4 py-2" style="background-color: {{ $color->pcolor }};"></div>
 
                             </td>
-                            <td class="border px-4 py-2 text-center">
-                                <button wire:click="editar({{ $color->id }})"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
+                            <td class="border px-4 py-2 text-right">
+                                <button wire:click="editar({{ $color->id }})" class="w-5 hover:scale-125"
+                                    title="Editar"><img src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
+
                                 <button wire:click="$emit('alertDelete',{{ $color->id }})"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                    class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}" alt="borrar"
+                                        title="Eliminar"></button>
                             </td>
                         </tr>
                     @endforeach

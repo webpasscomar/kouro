@@ -228,27 +228,41 @@
             {{-- =======================================================================   --}}
             {{-- TODO: Revisar si queda o no el botón de acceso user profile  --}}
             {{-- Profile User --}}
-            <div class="relative hidden" x-data="{ open: false }">
-                <button x-on:click="open = true" type="button"
-                    class="mr-3 w-8 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button"
-                    aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                    <img class="w-8 h-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt="user photo">
-                </button>
-                <!-- Menú desplegable user -->
-                <div x-show="open" x-on:click.away="open = false"
-                    class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                    role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                    <!-- Active: "bg-gray-100", Not Active: "" -->
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                        id="user-menu-item-0">Your Profile</a>
-                    <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                        tabindex="-1" id="user-menu-item-1">Dashboard</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                        id="user-menu-item-2">Sign out</a>
+            @auth
+                <div class="relative " x-data="{ open: false }">
+                    <button x-on:click="open = true" type="button"
+                        class="mr-3 w-8 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button"
+                        aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt="user photo">
+                    </button>
+                    <!-- Menú desplegable user -->
+                    <div x-show="open" x-on:click.away="open = false"
+                        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                        <!-- Active: "bg-gray-100", Not Active: "" -->
+                        {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                        id="user-menu-item-0">Your Profile</a> --}}
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                            tabindex="-1" id="user-menu-item-1">Ir al panel</a>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+
+                            <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                {{ __('Log Out') }}
+                            </x-jet-dropdown-link>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endauth
+
+            @guest
+                <a href="/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="user-menu-item-2">Login</a>
+            @endguest
             {{-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
                 id="user-dropdown">
                 <div class="px-4 py-3">
@@ -292,45 +306,49 @@
                     </svg>
                 </button>
             </div>
-            <div class="items-center justify-evenly hidden w-full md:flex md:order-1" id="navbar-user">
-                <ul
-                    class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
-                    <li>
-                        <a href="/"
-                            class="@if (request()->is('/')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 bg-blue-700 rounded md:bg-transparent md:hover-blue-700 md:p-0"
-                            aria-current="page">Inicio
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('productos.index') }}"
-                            class="@if (request()->is('shop')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Productos
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/nosotros"
-                            class="@if (request()->is('nosotros')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sobre
-                            nosotros
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/sucursales"
-                            class="@if (request()->is('sucursales')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
-                            Sucursales
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('faqs.index') }}"
-                            class="@if (request()->is('preguntas-frecuentes')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Preguntas
-                            frecuentes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/contacto"
-                            class="@if (request()->is('contacto')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Contacto
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            @unless (request()->is('admin/*'))
+                <!-- Coloca aquí el código HTML del menú que quieres mostrar -->
+
+                <div class="justify-evenly hidden w-full md:flex md:order-1" id="navbar-user">
+                    <ul
+                        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
+                        <li>
+                            <a href="/"
+                                class="@if (request()->is('/')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 bg-blue-700 rounded md:bg-transparent md:hover-blue-700 md:p-0"
+                                aria-current="page">Inicio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('productos.index') }}"
+                                class="@if (request()->is('shop')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Productos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/nosotros"
+                                class="@if (request()->is('nosotros')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sobre
+                                nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sucursales"
+                                class="@if (request()->is('sucursales')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
+                                Sucursales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('faqs.index') }}"
+                                class="@if (request()->is('preguntas-frecuentes')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Preguntas
+                                frecuentes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contacto"
+                                class="@if (request()->is('contacto')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Contacto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            @endunless
         </div>
 
     </section>
