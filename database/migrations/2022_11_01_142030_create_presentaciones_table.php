@@ -15,7 +15,6 @@ class CreatePresentacionesTable extends Migration
     {
         Schema::create('presentaciones', function (Blueprint $table) {
             $table->id();
-
             $table->string('presentacion');
             $table->string('sigla');
             $table->tinyInteger('estado')->default(1);
