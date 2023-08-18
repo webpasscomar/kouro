@@ -17,24 +17,28 @@
                         formulario
                         de contacto y enviarnos tu consulta.</p>
                 </div>
-                <div class="accordion" id="accordionExample">
 
+                <div id="accordion-collapse" data-accordion="collapse">
                     @foreach ($faqs as $item)
-                    <div class="accordion-item bg-white border border-gray-200">
-                        <h2 class="accordion-header mb-0" id="heading{{ $item->id }}">
-                            <button class="accordion-button relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $item->id }}" aria-expanded="true" aria-controls="collapse{{ $item->id }}">
-                                {{ $item->pregunta }}
-                            </button>
-                        </h2>
-                        <div id="collapse{{ $item->id }}" class="collapse" aria-labelledby="heading{{ $item->id }}" data-bs-parent="#accordionExample">
-                            <div class="accordion-body py-4 px-5">
-                                {{ $item->respuesta }}
+                        <div class="bg-white border border-gray-200">
+                            <h2 class="mb-0" id="accordion-collapse-heading-{{ $item->id }}">
+                                <button
+                                    class="accordion-button relative flex items-center w-full py-4 px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none"
+                                    type="button" data-accordion-target="#accordion-collapse-ask-{{ $item->id }}"
+                                    aria-expanded="false" aria-controls="accordion-collapse-ask-{{ $item->id }}">
+                                    {{ $item->pregunta }}
+                                </button>
+                            </h2>
+                            <div id="accordion-collapse-ask-{{ $item->id }}" class="hidden"
+                                aria-labelledby="accordion-collapse-heading-{{ $item->id }}">
+                                <div class="py-4 px-5">
+                                    {{ $item->respuesta }}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
-
                 </div>
+
             </div>
         </div>
     </div>
