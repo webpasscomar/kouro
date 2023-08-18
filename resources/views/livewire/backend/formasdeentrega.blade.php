@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Formas de Entrega de los pedidos</h1>
+    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Formas de Entrega de los pedidos</h4>
 </x-slot>
 
 <div class="py-12">
@@ -45,7 +45,7 @@
                             @else
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
-                        </th>    
+                        </th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('nombre')">Forma de entrega
                             {{-- -- Ordenar -- --}}
                             @if ($sort == 'nombre')
@@ -70,6 +70,18 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('costo')">Costo
+                            {{-- -- Ordenar -- --}}
+                            @if ($sort == 'costo')
+                                @if ($order == 'asc')
+                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @else
+                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                @endif
+                            @else
+                                <i class="fas fa-sort float-right mt-1"></i>
+                            @endif
+                        </th>
                         <th class="px-4 py-2">Acciones</th>
                     </tr>
                 </thead>
@@ -78,7 +90,7 @@
                         <tr>
                             <td class="border px-4 py-2">{{ $formadeentrega->id }}</td>
                             <td class="border px-4 py-2">{{ $formadeentrega->nombre }}</td>
-                            <td class="border px-4 py-2">
+                            <td class="border px-4 py-2 text-center">
                                 @livewire('toggle-button', [
                                     'model' => $formadeentrega,
                                     'field' => 'estado',
@@ -86,6 +98,7 @@
                                 key($formadeentrega->id)
                                 )
                             </td>
+                            <td class="border px-4 py-2 text-right">{{ number_format($formadeentrega->costo,2) }}</td>
                             <td class="border px-4 py-2 text-center">
                                 <button wire:click="editar({{ $formadeentrega->id }})"
                                     class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>

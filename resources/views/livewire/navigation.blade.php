@@ -1,6 +1,6 @@
-<nav class="bg-gray-800" x-data="{ open = false }">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div class="relative flex h-16 items-center justify-between">
+{{-- <nav class="bg-gray-800/80 h-32" x-data="{ open = false }">
+    <div class="mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="relative flex items-center justify-between">
 
             <!-- Mobile menu button-->
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -29,28 +29,43 @@
                 </button>
             </div>
 
-            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
 
+                <div class="flex items-center">
+                    <img class="block h-8 w-auto lg:hidden" src="{{ asset('storage/logo.png') }}" alt="Your Company">
+                    <img class="hidden w-56 lg:block" src="{{ asset('storage/logo2.png') }}" alt="Your Company">
                 <div class="flex flex-shrink-0 items-center">
                     <img class="block h-8 w-auto lg:hidden" src="https://kouro.webpass.online/assets/uploads/7/logo_kouro_6001.png" alt="Your Company">
                     <img class="hidden h-8 w-auto lg:block" src="https://kouro.webpass.online/assets/uploads/7/logo_kouro_6001.png" alt="Your Company">
                 </div>
-                <div class="hidden sm:ml-6 sm:block">
-                    <div class="flex space-x-4">
+                <div class="hidden sm:ml-6 sm:block justify-center">
+                    <div class="flex">
 
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Inicio</a>
 
+                        <a href="{{ route('productos.index') }}"
+                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Productos</a>
                         <a href="{{ route('productos.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</a>
 
+                        <a href="/nosotros"
+                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sobre
+                            nosotros</a>
                         <a href="/nosotros" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Nosotros</a>
 
-                        <a href="/sucursales" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sucursales</a>
+                        <a href="/sucursales"
+                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Sucursales</a>
 
                         <a href="/contacto" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacto</a>
 
                         <a href="{{ route('faqs.index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Preguntas
+                        <a href="{{ route('faqs.index') }}"
+                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Preguntas
                             frecuentes</a>
+
+                        <a href="/contacto"
+                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contacto</a>
+
 
                         @auth
                         <!-- Authentication -->
@@ -103,9 +118,12 @@
 
                     <div x-show="open" x-on:click.away="open = false" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                         <!-- Active: "bg-gray-100", Not Active: "" -->
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Dashboard</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            id="user-menu-item-0">Your Profile</a>
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700"
+                            role="menuitem" tabindex="-1" id="user-menu-item-1">Dashboard</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                            tabindex="-1" id="user-menu-item-2">Sign out</a>
                     </div>
                 </div>
 
@@ -120,17 +138,205 @@
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Inicio</a>
 
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Shop</a>
+                    <a href="#"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Productos</a>
 
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Nosotros</a>
+                    <a href="#"
+                        class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Sobre
+                        nosotros</a>
 
                     <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Sucursales</a>
 
                     <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contacto</a>
                 </div>
 
-
-            </div>
+</nav> --}}
+<nav class="w-full bg-slate-100 items-center gap-y-3 pt-2">
+    {{-- Redes sociales y contacto --}}
+    <section class="flex items-center px-4">
+        {{-- <div class="flex gap-x-4 items-center ml-2 flex-1">
+            <img src="{{ asset('./storage/contacto/phone.svg') }}" alt="teléfono">
+            <span class="-ms-2 text-sm" title="teléfono">
+                <strong>011 4627-5723</strong>
+            </span>
+            <a href="https://wa.me/5491122222222" class="flex" target="_blank" title="whatsapp">
+                <img src="{{ asset('./storage/contacto/whatsapp.svg') }}" alt="whatsapp">
+                <span class="ms-2 text-sm">
+                    <strong>011 4627-5723</strong>
+                </span>
+            </a>
+            <img src="{{ asset('./storage/contacto/mail.svg') }}" alt="correo">
+            <span class="-ml-2" title="email">
+                <strong>kouroarg@gmail.com</strong>
+            </span>
+        </div> --}}
+        {{-- <div class="flex gap-x-3">
+            <img src="{{ asset('./storage/contacto/facebook.svg') }}" alt="facebook" title="facebook">
+            <img src="{{ asset('./storage/contacto/instagram.svg') }}" alt="instagram" title="instagram">
+            <img src="{{ asset('./storage/contacto/linkedin.svg') }}" alt="linkedin" title="linkedin">
+        </div> --}}
+    </section>
+    {{-- Logo - Icono carrito - Profile --}}
+    <section class="flex items-center justify-between px-4">
+        {{-- Logo  --}}
+        <div class="w-44 -ms-2">
+            <a href="/">
+                <img src="{{ asset('./img/logo2.png') }}" alt="Logo Kouro" width="200">
+            </a>
         </div>
-    </div>
+        {{-- contacto - carrito - Profile --}}
+        <div class="flex gap-x-5">
+            {{-- Correo  --}}
+            <a href="mailto:kouroarg@gmail.com" class="flex items-center" title="email">
+                <img src="{{ asset('./img/mail.svg') }}" alt="correo" class="w-6">
+                <span class="ms-1">
+                    <strong class="text-base">kouroarg@gmail.com</strong>
+                </span>
+            </a>
+            {{-- Whatsapp --}}
+            <a href="https://wa.me/5491146275723" class="flex items-center mr-3" target="_blank" title="whatsapp">
+                <img src="{{ asset('./img/whatsapp.svg') }}" alt="whatsapp" class="w-7">
+                <span class="ms-1">
+                    <strong class="text-base">011 4627-5723</strong>
+                </span>
+            </a>
+            {{-- carrito --}}
+            <a href="{{ route('carrito') }}" class="relative" role="button">
+                <img src="{{ asset('./img/carrito.svg') }}" alt="carrito" class="w-8">
+                @if ($carrito > 0)
+                    <span
+                        class="flex absolute right-0 -top-1 rounded-full w-4 h-4 -p-2 bg-red-600 m-0 text-white font-mono text-sm text-center">
+                        <span class="self-center w-full">
+                            {{ $carrito }}
+                        </span>
+                    </span>
+                @endif
+            </a>
+            {{-- =======================================================================   --}}
+            {{-- TODO: Revisar si queda o no el botón de acceso user profile  --}}
+            {{-- Profile User --}}
+            @auth
+                <div class="relative " x-data="{ open: false }">
+                    <button x-on:click="open = true" type="button"
+                        class="mr-3 w-8 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button"
+                        aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                        <img class="w-8 h-8 rounded-full"
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt="user photo">
+                    </button>
+                    <!-- Menú desplegable user -->
+                    <div x-show="open" x-on:click.away="open = false"
+                        class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                        role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                        <!-- Active: "bg-gray-100", Not Active: "" -->
+                        {{-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                        id="user-menu-item-0">Your Profile</a> --}}
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
+                            tabindex="-1" id="user-menu-item-1">Ir al panel</a>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+
+                            <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                {{ __('Log Out') }}
+                            </x-jet-dropdown-link>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+
+            @guest
+                <a href="/login" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                    id="user-menu-item-2">Login</a>
+            @endguest
+            {{-- <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
+                id="user-dropdown">
+                <div class="px-4 py-3">
+                    <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                </div>
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                            out</a>
+                    </li>
+                </ul>
+            </div> --}}
+            {{-- =======================================================================   --}}
+        </div>
+    </section>
+    {{-- Links de Navegación --}}
+    <section class="mt-2">
+        <div class="flex items-center bg-slate-200 p-3">
+            <div class="flex items-center md:order-2">
+                <button data-collapse-toggle="navbar-user" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    aria-controls="navbar-user" aria-expanded="false">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+            @unless (request()->is('admin/*'))
+                <!-- Coloca aquí el código HTML del menú que quieres mostrar -->
+
+                <div class="justify-evenly hidden w-full md:flex md:order-1" id="navbar-user">
+                    <ul
+                        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
+                        <li>
+                            <a href="/"
+                                class="@if (request()->is('/')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 bg-blue-700 rounded md:bg-transparent md:hover-blue-700 md:p-0"
+                                aria-current="page">Inicio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('productos.index') }}"
+                                class="@if (request()->is('shop')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Productos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/nosotros"
+                                class="@if (request()->is('nosotros')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sobre
+                                nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sucursales"
+                                class="@if (request()->is('sucursales')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
+                                Sucursales
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('faqs.index') }}"
+                                class="@if (request()->is('preguntas-frecuentes')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Preguntas
+                                frecuentes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contacto"
+                                class="@if (request()->is('contacto')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Contacto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            @endunless
+        </div>
+
+    </section>
 </nav>

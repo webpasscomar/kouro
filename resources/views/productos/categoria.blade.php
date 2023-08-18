@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Productos de {{ $categoria->categoria }}
+            {{ $categoria->categoria }}
         </h2>
     </x-slot>
 
@@ -29,19 +29,29 @@
                                             class="group">
                                             <div
                                                 class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+
                                                 <picture>
                                                     <source
-                                                        srcset="{{ asset('storage/productos/' . $producto->id . '.webp') }}"
+                                                        srcset="{{ asset('storage/productos/' . $producto->imagen ) }}"
                                                         type="image/webp">
                                                     <img alt="{{ $producto->nombre }}"
-                                                        src="{{ asset('storage/productos/' . $producto->id . '.jpg') }}"
+                                                        src="{{ asset('storage/productos/' . $producto->imagen ) }}"
                                                         class="object-cover object-center group-hover:opacity-75">
                                                 </picture>
 
                                             </div>
                                             <h3 class="mt-4 text-sm text-gray-700">{{ $producto->nombre }}</h3>
-                                            <p class="mt-1 text-lg font-medium text-gray-900">$
-                                                {{ $producto->precioLista }}</p>
+                                                @if ($producto->ofertaDesde <= $fechahoy and $producto->ofertaHasta >= $fechahoy)
+                                                <img alt="Producto en oferta"  src="{{ asset('storage/oferta.png') }}"   class="object-cover object-center group-hover:opacity-75">
+                                                <p class="mt-1 text-lg font-medium text-gray-900 " style="text-decoration: line-through;">$ {{ number_format($producto->precioLista,2) }}</p>
+                                                <p class="mt-1 text-lg font-medium text-gray-900 ">$ {{ number_format($producto->precioOferta,2) }}</p>
+                                                @else
+                                                <p class="mt-1 text-lg font-medium text-gray-900">$ {{ number_format($producto->precioLista,2) }}</p>
+                                                @endif
+
+
+
+
                                         </a>
                                     @endforeach
 

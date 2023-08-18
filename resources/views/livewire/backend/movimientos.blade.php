@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Manejo de Existencias</h1>
+    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Manejo de Existencias</h4>
 </x-slot>
 
 <div class="py-12">
@@ -52,7 +52,7 @@
 
                     <button wire:click="guardar()"
                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                    Nuevo Ingreso</button>
+                    Nuevo Movimiento</button>
             </div>
         {{-- </form> --}}
 

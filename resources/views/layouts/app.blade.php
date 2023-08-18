@@ -11,6 +11,8 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
+    {{-- Icono --}}
+    <link rel="shortcut icon" href="{{ asset('./img/logo_ico.ico') }}" type="image/x-icon">
 
     <!-- Styles -->
     <!-- styles tw-elements -->
@@ -23,46 +25,50 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
 
-
     @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
 </head>
 
 <body class="font-sans antialiased">
     @php
-    use Illuminate\Support\Str;
-    use Livewire\Livewire;
+        use Illuminate\Support\Str;
+        use Livewire\Livewire;
     @endphp
     <x-jet-banner />
 
-    <div class="min-h-screen bg-gray-100">
+    <div class="bg-gray-100">
+
         @livewire('navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="min-h-screen">
             <div>
                 @isset($slot)
-                {{ $slot }}
+                    {{ $slot }}
                 @else
-                @yield('content')
-                @endif
-            </div>
-        </main>
+                    @yield('content')
+                    @endif
+                </div>
+            </main>
 
-        {{-- <main>
+            {{-- <main>
             @switch(Route::currentRouteName())
                 @case('productos')
                 @case('productos.categoria')
@@ -107,7 +113,7 @@
             @endswitch
         </main> --}}
 
-        {{-- <main>
+            {{-- <main>
             @if (request()->is('productos'))
                 @livewire('productos-front')
             @elseif(request()->is('contacto'))
@@ -118,8 +124,8 @@
         </main> --}}
 
 
-        <!-- Page Content -->
-        {{-- <main>
+            <!-- Page Content -->
+            {{-- <main>
             <h1>{{ request()->route()->getName() }}</h1>
         @switch(request()->route()->getName())
         @case('livewire.productos.index')
@@ -143,7 +149,7 @@
         @endswitch
         </main> --}}
 
-        {{-- <main>
+            {{-- <main>
             @if (Str::contains(view()->getName(), 'livewire'))
                 <div>
                     @livewire(
@@ -161,113 +167,110 @@
     @endif
     </main> --}}
 
+            <!-- Footer del sitio  -->
+            <footer>
+                <x-footer />
+            </footer>
 
-    </div>
-    <!-- Footer del sitio  -->
-    <footer>
-        <x-footer></x-footer>
-    </footer>
-    {{-- @livewire('footer') --}}
-    @stack('modals')
+        </div>
+        {{-- @livewire('footer') --}}
+        @stack('modals')
 
-    @livewireScripts
+        @livewireScripts
 
-    <script>
-        Livewire.on('alertSave', function() {
-            Swal.fire(
-                'Excelente!',
-                'Ha sido guardado correctamente!',
-                'success'
-            )
-        });
+        <script>
+            Livewire.on('alertSave', function() {
+                Swal.fire(
+                    'Excelente!',
+                    'Ha sido guardado correctamente!',
+                    'success'
+                )
+            });
 
-        Livewire.on('alertDelete', id => {
-            Swal.fire({
-                title: '¿Está seguro /a?',
-                text: "La acción no podrá ser revertida!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, borrar!'
-            }).then((result) => {
+            Livewire.on('alertDelete', id => {
+                Swal.fire({
+                    title: '¿Está seguro /a?',
+                    text: "La acción no podrá ser revertida!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrar!'
+                }).then((result) => {
 
 
-                if (result.isConfirmed) {
-                    // alert('Borrar el id: ' + id);
-                    Livewire.emit('delete', id);
+                    if (result.isConfirmed) {
+                        // alert('Borrar el id: ' + id);
+                        Livewire.emit('delete', id);
 
-                    Swal.fire(
-                        'Borrado!',
-                        'Ha sido eliminado con éxito.',
-                        'success'
-                    )
-                }
+                        Swal.fire(
+                            'Borrado!',
+                            'Ha sido eliminado con éxito.',
+                            'success'
+                        )
+                    }
+                })
             })
-        })
 
 
-        Livewire.on('alertCarritoDelete', (idproducto, idtalle, idcolor) => {
-            Swal.fire({
-                title: '¿Está seguro /a?',
-                text: "La acción no podrá ser revertida!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, borrar!'
-            }).then((result) => {
+            Livewire.on('alertCarritoDelete', (idproducto, idtalle, idcolor) => {
+                Swal.fire({
+                    title: '¿Está seguro /a?',
+                    text: "La acción no podrá ser revertida!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, borrar!'
+                }).then((result) => {
 
 
-                if (result.isConfirmed) {
-                    Livewire.emit('delete', idproducto, idtalle, idcolor);
+                    if (result.isConfirmed) {
+                        Livewire.emit('delete', idproducto, idtalle, idcolor);
 
-                    // Swal.fire(
-                    //     'Borrado!',
-                    //     'Ha sido eliminado con éxito.',
-                    //     'success'
-                    // )
-                }
+                        // Swal.fire(
+                        //     'Borrado!',
+                        //     'Ha sido eliminado con éxito.',
+                        //     'success'
+                        // )
+                    }
+                })
             })
-        })
 
-        //emit del cambio de cantidades en  carrito
-        Livewire.on('carrito', function(mensaje) {
-            Swal.fire(
-                'Excelente!',
-                mensaje['mensaje'],
-                'success'
-            )
-        });
-
-
-        //emit mensaje negativo
-        Livewire.on('mensajeNegativo', function(mensaje) {
-            Swal.fire({
-                title: 'Atencion',
-                text: mensaje['mensaje'],
-                icon: 'warning',
-                showCloseButton: true
-            })
-        });
+            //emit del cambio de cantidades en  carrito
+            Livewire.on('carrito', function(mensaje) {
+                Swal.fire(
+                    'Excelente!',
+                    mensaje['mensaje'],
+                    'success'
+                )
+            });
 
 
-        //emit mensaje positivo
-        Livewire.on('mensajePositivo', function(mensaje) {
-            Swal.fire({
-                title: 'Excelente!',
-                text: mensaje['mensaje'],
-                icon: 'success',
-                showCloseButton: true
-            })
-        });
-    </script>
+            //emit mensaje negativo
+            Livewire.on('mensajeNegativo', function(mensaje) {
+                Swal.fire({
+                    title: 'Atencion',
+                    text: mensaje['mensaje'],
+                    icon: 'warning',
+                    showCloseButton: true
+                })
+            });
 
-    <!-- Script de tw-elements -->
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-    <!-- Script Flowbite -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 
-</body>
+            //emit mensaje positivo
+            Livewire.on('mensajePositivo', function(mensaje) {
+                Swal.fire({
+                    title: 'Excelente!',
+                    text: mensaje['mensaje'],
+                    icon: 'success',
+                    showCloseButton: true
+                })
+            });
+        </script>
 
-</html>
+        <!-- Script de tw-elements -->
+        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    </body>
+
+    </html>

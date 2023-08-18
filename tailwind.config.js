@@ -8,9 +8,7 @@ module.exports = {
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
         "./src/**/*.{html,js}",
-        "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
         // "./node_modules/tw-elements/dist/js/**/*.js",
     ],
 
@@ -28,6 +26,7 @@ module.exports = {
     plugins: [
         require("@tailwindcss/forms"),
         require("@tailwindcss/typography"),
+        require("flowbite/plugin"),
         // require("tw-elements/dist/plugin.cjs"),
         require("@tailwindcss/aspect-ratio"),
     ],

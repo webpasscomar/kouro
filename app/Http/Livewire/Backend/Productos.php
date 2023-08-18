@@ -25,8 +25,8 @@ class Productos extends Component
 
     // Atributos
     public $nombre;
-    public $desCorta;
-    public $descLarga;
+    public $desCorta='';
+    public $descLarga='';
 
     public $codigo;
     public $presentacion_id;
@@ -40,9 +40,9 @@ class Productos extends Component
     public $tamano;
     public $link;
 
-    public $orden;
+    public $orden=1;
     public $unidadVenta;
-    public $destacar;
+    public $destacar=0;
 
     public $estado;
 
@@ -84,6 +84,8 @@ class Productos extends Component
 
 
 
+
+
     protected $productos;
 
     // Parametros para el multistep
@@ -98,8 +100,10 @@ class Productos extends Component
             return [
                 'nombre' => 'required|max:100',
                 'desCorta' => 'required|max:255',
-                'descLarga' => 'required|',
+                // 'descLarga' => 'required|',
                 'precioLista' => 'required',
+                'unidadVenta' => 'required',
+                'orden' => 'required',
             ];
         }
         if ($this->modal3 === true) {
@@ -117,6 +121,14 @@ class Productos extends Component
     }
 
 
+    protected $messages = [
+        'nombre.required'      => 'El nombre es requerido',
+        'nombre.max'           => 'El nombre debe tener como maximo 100 caracteres',
+        'desCorta.required'    => 'La descripcion corta es requerida',
+        'precioLista.required' => 'El precio de lista es requerido',
+        'unidadVenta.required' => 'La unidad de venta es requerida',
+        'orden.required'       => 'El orden es requerido',
+    ];
 
 
 
@@ -135,6 +147,7 @@ class Productos extends Component
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
+
 
 
         return view('livewire.backend.productos', [
@@ -183,6 +196,11 @@ class Productos extends Component
     public function guardar()
     {
         $this->validate();
+
+        if ($this->descLarga == null) {
+            $this->descLarga='';
+        }
+
         Producto::updateOrCreate(
             ['id' => $this->id_producto],
             [

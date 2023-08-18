@@ -91,10 +91,10 @@ class WebhooksController extends Controller
                          'user_id' => 0,
                      ]);
 
-                     return 'procesado';
+                     //return 'procesado';
              }
              } else {
-                return 'procesado con anterioridad';
+                //return 'procesado con anterioridad';
         }
 
         //no tiene emit porque no es un controlador livewire

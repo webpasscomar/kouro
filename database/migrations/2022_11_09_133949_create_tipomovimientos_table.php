@@ -16,9 +16,8 @@ class CreateTipomovimientosTable extends Migration
         Schema::create('tipomovimientos', function (Blueprint $table) {
             // $table->int('id');
             $table->id();
-
             $table->string('descripcion');
-
+            $table->tinyInteger('resta')->default(0);
             $table->timestamps();
         });
     }

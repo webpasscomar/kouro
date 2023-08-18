@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Talles</h1>
+    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Talles</h4>
 </x-slot>
 
 <div class="py-12">
@@ -45,7 +45,7 @@
                             @else
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
-                        </th>    
+                        </th>
                         <th class="cursor-pointer px-4 py-2" wire:click="order('talle')">Talle
                             {{-- -- Ordenar -- --}}
                             @if ($sort == 'talle')

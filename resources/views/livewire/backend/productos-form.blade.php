@@ -168,6 +168,7 @@
                         <input type="number"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="orden" wire:model="orden">
+                            <x-jet-input-error for="orden" />
                     </div>
 
                     <div class="mb-3">
@@ -176,6 +177,7 @@
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="unidadVenta" wire:model="unidadVenta">
+                            <x-jet-input-error for="unidadVenta" />
                     </div>
 
 
@@ -189,6 +191,7 @@
                             <option value="1">Si</option>
 
                         </select>
+                        <x-jet-input-error for="destacar" />
                     </div>
 
 

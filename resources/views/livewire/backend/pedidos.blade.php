@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h1 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Pedidos</h1>
+    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Pedidos</h4>
 </x-slot>
 
 
@@ -126,18 +126,23 @@
 
                                         <button wire:click="cobrarmp({{ $pedido->id }})"  {{ $pedido->status == 'approved' ? 'disabled' : '' }}
                                                 class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-1">Cobrar con MP</button>
+
+                                        <button wire:click="cambiaestado({{ $pedido->id }})"
+                                                    class="bg-yellow-200 hover:bg-yellow-400 text-black font-bold py-2 px-4">Cambia Estado</button>
+
                                         </td>
 
 
 
                                 </tr>
-                                @for ($i = 0; $i < $cantidad_detalle; $i++)
+
+                                {{-- @for ($i = 0; $i < $cantidad_detalle; $i++)
                                         @if ($muestra_detalle[$i]['id'] == $pedido->id)
                                             @if ($muestra_detalle[$i]['ver'] == 1)
                                                 <tr class="border">
                                                     <td colspan=7>
                                                         <table class="table-auto w-full">
-                                                            <th>Codigo</th>
+                                                            <th>Id</th>
                                                             <th>Cantidad</th>
                                                             <th>Precio</th>
                                                             <th>Sub-Total</th>
@@ -158,12 +163,11 @@
                                                                 @endif
                                                             @endforeach
                                                         </table>
-
                                                     </td>
                                                 </tr>
                                             @endif
                                         @endif
-                                @endfor
+                                @endfor --}}
 
 
 
@@ -175,6 +179,12 @@
             @endif
             @if ($modalpago==1)
                 @include('livewire.backend.verpago-form')
+            @endif
+            @if ($verdeta_pedido==1)
+                @include('livewire.backend.verdeta-pedido-form')
+            @endif
+            @if ($modalEstado==1)
+                @include('livewire.backend.cambiaestado-form')
             @endif
 
         </div>

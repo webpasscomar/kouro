@@ -7,6 +7,9 @@ use App\Models\Producto;
 use App\Models\Sku;
 use App\Models\Color;
 use App\Models\Talle;
+use App\Models\Stock_pendiente;
+use App\Models\Producto_imagen;
+
 
 use Livewire\Component;
 
@@ -21,7 +24,11 @@ class ProductoFront extends Component
     public $talles;
     public $disponibles;
     public $categorias;
-
+    public $mailaviso;
+    public $fechahoy;
+    public $images = [];
+    public $oferta;
+    public $busqueda = "";
 
     public function mount($id)
     {
@@ -30,14 +37,16 @@ class ProductoFront extends Component
         $this->talle_id = 0;
         $this->color_id = 0;
         $this->producto_id = $id;
+        $this->oferta = 0;
         $this->producto = Producto::where('id', $id)->firstOrFail();
+        $this->fechahoy  = date('Y-m-d H:i:s');
 
 
 
-        $this->colores = Sku::select(['sku.color_id', 'colores.color'])
+        $this->colores = Sku::select(['sku.color_id', 'colores.color', 'colores.pcolor'])
             ->join('colores', 'sku.color_id', '=', 'colores.id')
             ->where('sku.producto_id', '=', $id)
-            ->groupBy('sku.color_id', 'colores.color')
+            ->groupBy('sku.color_id', 'colores.color', 'colores.pcolor')
             ->get()
             ->toArray();
 
@@ -54,6 +63,20 @@ class ProductoFront extends Component
             ->get()
             ->toArray();
         // $this->categorias = Categoria::where('estado', 1)->get();
+
+        $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
+            ->where('productos_imagenes.producto_id', '=', $id)
+            ->get()
+            ->toArray();
+
+
+        for ($i = 0; $i < count($datos_imagenes); $i++) {
+            $a = basename($datos_imagenes[$i]['file_path']);
+            $this->images[$i] = $a;
+        }
+        //  dd($datos_imagenes,$this->images);
+
+
     }
 
     public function incrementa()
@@ -129,8 +152,7 @@ class ProductoFront extends Component
             'producto_id' => $this->producto_id,
             'producto_nombre' => $this->producto->nombre,
             'producto_precio' => $precio,
-            'total_item' => $this->cantidad * $precio
-
+            'total_item' => $this->cantidad * $precio,
         ];
         //tomo en items lo que tiene la sesion
         $items = session('items');
@@ -177,14 +199,71 @@ class ProductoFront extends Component
         $this->emit('carrito', ['mensaje' => 'Se agrego el producto al carrito', 'cantidad' => session('cantidad')]);
     }
 
+    public function avisostock()
+    {
+
+        if ($this->mailaviso === null) {
+            $this->emit('mensajeNegativo', ['mensaje' => 'Debe ingresar una direccion de correo']);
+        } else {
+
+            $sku_id = Sku::where('producto_id', $this->producto_id)
+                ->where('talle_id', $this->talle_id)
+                ->where('color_id', $this->color_id)
+                ->value('id');
+
+            Stock_pendiente::Create(
+                [
+                    'sku_id'            => $sku_id,
+                    'fechaSolicitud'    => date('Y-m-d H:i:s'),
+                    'cantidad'          => $this->cantidad,
+                    'email'             => $this->mailaviso
+                ]
+            );
+            $this->emit('mensajePositivo', ['mensaje' => 'Te avisamos cuando el producto ingrese']);
+        }
+    }
+
     public function render()
     {
         // return view('livewire.producto-front')->layout('layouts.app');
+        $ldate = date('Y-m-d H:i:s');
+        if (is_null($this->producto->ofertaDesde) or is_null($this->producto->ofertaHasta)) {
+            $this->oferta = 0;;
+        } else {
+            if ($this->producto->ofertaDesde <= $ldate and $this->producto->ofertaHasta >= $ldate) {
+                $this->oferta =  1;
+            } else {
+                $this->oferta =  0;
+            }
+        }
+
         $producto = $this->producto;
         $colores  = $this->colores;
         $talles   = $this->talles;
         $categorias = $this->categorias;
-        // dd($categorias);
-        return view('livewire.producto-front', $producto, $colores, $talles, $this->categorias);
+        $images = $this->images;
+        return view('livewire.producto-front', $producto, $colores, $talles, $categorias, $images);
+    }
+
+
+    public function asigna_talle($idtalle)
+    {
+        $this->talle_id = $idtalle;
+        $this->checkstock();
+    }
+
+    public function asigna_color($idcolor)
+    {
+        $this->color_id = $idcolor;
+        $this->checkstock();
+    }
+
+    public function buscar()
+    {
+        //return redirect()->route('productos.categoria/' . $this->busqueda);
+        // return redirect()->route('productos.categoria/slugCategoria=' . $this->busqueda);
+        // return redirect()->route('productos.index');
+
+        return redirect()->route('productos.categoria', ['categoria' => $this->busqueda]);
     }
 }

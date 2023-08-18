@@ -19,7 +19,7 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('productos') }}" :active="request()->routeIs('productos')">
-                        Shop
+                        Productos
                     </x-jet-nav-link>
                 </div>
 
@@ -31,21 +31,20 @@
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('nosotros') }}" :active="request()->routeIs('nosotros')">
-                        Nosotros
+                        Sobre nosotros
                     </x-jet-nav-link>
                 </div>
 
-
-
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('contacto') }}" :active="request()->routeIs('contacto')">
-                        Contacto
-                    </x-jet-nav-link>
-                </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('carrito') }}" :active="request()->routeIs('carrito')">
                         Carrito
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('contacto') }}" :active="request()->routeIs('contacto')">
+                        Contacto
                     </x-jet-nav-link>
                 </div>
 
@@ -159,7 +158,6 @@
                             <x-jet-dropdown-link href="{{ route('productos') }}">
                                 Productos
                             </x-jet-dropdown-link>
-
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}

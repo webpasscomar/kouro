@@ -34,12 +34,18 @@ class Producto extends Model
         return $this->belongsToMany(Categoria::class, 'producto_categoria');
     }
 
-    
+
     public function sku_productos()
     {
         return $this->belongsToMany(Sku::class);
     }
-  
- 
-    
+
+
+    public function imagenes()
+    {
+        return $this->belongsToMany(Producto_imagen::class,'producto_id');
+    }
+
+
+
 }

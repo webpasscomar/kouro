@@ -14,11 +14,15 @@ class Colores extends Component
     public $search;
     public $sort = 'id';
     public $order = 'desc';
+    public $pcolor = '';
+
+
 
     use WithPagination;
 
     protected $colores;
     protected $listeners = ['delete'];
+
 
     protected $rules = [
         'color' => 'required|max:30',
@@ -53,6 +57,7 @@ class Colores extends Component
     {
         $this->color = '';
         $this->id_color = '';
+        $this->pcolor = '';
     }
 
     public function editar($id)
@@ -60,6 +65,7 @@ class Colores extends Component
         $color = Color::findOrFail($id);
         $this->id_color = $id;
         $this->color = $color->color;
+        $this->pcolor = $color->pcolor;
         $this->abrirModal();
     }
 
@@ -75,6 +81,7 @@ class Colores extends Component
             ['id' => $this->id_color],
             [
                 'color' => $this->color,
+                'pcolor' => $this->pcolor,
             ]
         );
 

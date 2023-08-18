@@ -30,6 +30,7 @@ class Carrito extends Component
     public $apagar = 0;
     public $forma_pago_id = 0;
     public $numero_pedido;
+    public $cobra = 0;
 
 
     //estas publicas las usa ´para ir a pagar
@@ -38,12 +39,10 @@ class Carrito extends Component
     public $articulos, $importe, $delivery, $cant_art;
 
 
-
     // public function mount()
     // {
     //     $this->tomarvalores();
     // }
-
 
     public function render()
     {
@@ -64,6 +63,9 @@ class Carrito extends Component
 
         //si alguna vez comenzo a cargar el formulario lo guardo en session
 
+        if ($this->forma_pago_id != 0) {
+            $this->cobra = Formasdepagos::where('id', $this->forma_pago_id)->value('cobra');
+        }
 
 
         return view('livewire.carrito', [
@@ -72,6 +74,12 @@ class Carrito extends Component
             'provincias' => $this->provincias,
             'localidades' => $this->localidades,
         ]);
+    }
+
+
+    public function  vamosashop()
+    {
+        return redirect()->route('productos.index');
     }
 
 
@@ -168,7 +176,19 @@ class Carrito extends Component
                     session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
                     $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
                     $this->apagar = 1;
+
+
+                    //si la forma de entrega requiere cobro
+                    //$this->cobra = Formadeentrega::where('id', $this->entrega_id)->value('cobra');
+                    //if ($this->cobra  == '1') {
+
                     $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $this->numero_pedido->id]);
+                    // }else{
+                    //     $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, pedido ' . $this->numero_pedido->id]);
+                    // return redirect()->route('productos.index');
+                    //   redirect()->to('/shop');
+
+                    //}
                     //$this->pagar($articulos, $importe, $delivery, $this->forma_pago_id);
 
                 }

@@ -38,14 +38,14 @@ CREATE TABLE `provincias` (
   `nombre` varchar(255) DEFAULT NULL,
   `nombre_completo` varchar(255) DEFAULT NULL,
   `estado` tinyint(4) DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `provincias`
 --
 
 INSERT INTO `provincias` (`categoria`, `centroide_lat`, `centroide_lon`, `fuente`, `id`, `iso_id`, `iso_nombre`, `nombre`, `nombre_completo`) VALUES
-('Ciudad Autónoma', -34.6145, -58.4459, 'IG', 2, 'AR-C', 'Ciudad Autóma de Buenos Aires', 'Ciudad Autóma de Buenos Aires', 'Ciudad Autónoma de Buenos Aires'),
+('Ciudad Autónoma', -34.6145, -58.4459, 'IG', 2, 'AR-C', 'Ciudad Autónoma de Buenos Aires', 'Ciudad Autónoma de Buenos Aires', 'Ciudad Autónoma de Buenos Aires'),
 ('Provincia', -36.6769, -60.5588, 'IG', 6, 'AR-B', 'Buenos Aires', 'Buenos Aires', 'Provincia de Buenos Aires'),
 ('Provincia', -27.3358, -66.9477, 'IG', 10, 'AR-K', 'Catamarca', 'Catamarca', 'Provincia de Catamarca'),
 ('Provincia', -32.1429, -63.8018, 'IG', 14, 'AR-X', 'Córdoba', 'Córdoba', 'Provincia de Córdoba'),
@@ -59,10 +59,10 @@ INSERT INTO `provincias` (`categoria`, `centroide_lat`, `centroide_lon`, `fuente
 ('Provincia', -29.6858, -67.1817, 'IG', 46, 'AR-F', 'La Rioja', 'La Rioja', 'Provincia de La Rioja'),
 ('Provincia', -34.6299, -68.5831, 'IG', 50, 'AR-M', 'Mendoza', 'Mendoza', 'Provincia de Mendoza'),
 ('Provincia', -26.8754, -54.6517, 'IGN', 54, 'AR-N', 'Misiones', 'Misiones', 'Provincia de Misiones'),
-('Provincia', -38.6418, -70.1186, 'IG', 58, 'AR-Q', 'Neuqué', 'Neuqué', 'Provincia del Neuquén'),
+('Provincia', -38.6418, -70.1186, 'IG', 58, 'AR-Q', 'Neuquén', 'Neuquén', 'Provincia del Neuquén'),
 ('Provincia', -40.4058, -67.2293, 'IG', 62, 'AR-R', 'Río Negro', 'Río Negro', 'Provincia de Río Negro'),
 ('Provincia', -24.2991, -64.8145, 'IG', 66, 'AR-A', 'Salta', 'Salta', 'Provincia de Salta'),
-('Provincia', -30.8654, -68.8895, 'IG', 70, 'AR-J', 'San Jua', 'San Jua', 'Provincia de San Juan'),
+('Provincia', -30.8654, -68.8895, 'IG', 70, 'AR-J', 'San Juan', 'San Juan', 'Provincia de San Juan'),
 ('Provincia', -33.7577, -66.0281, 'IG', 74, 'AR-D', 'San Luis', 'San Luis', 'Provincia de San Luis'),
 ('Provincia', -48.8155, -69.9558, 'IG', 78, 'AR-Z', 'Santa Cruz', 'Santa Cruz', 'Provincia de Santa Cruz'),
 ('Provincia', -30.7069, -60.9498, 'IG', 82, 'AR-S', 'Santa Fe', 'Santa Fe', 'Provincia de Santa Fe'),

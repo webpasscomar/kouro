@@ -11,7 +11,10 @@ class Formadeentrega extends Model
     protected $table="formasdeentregas";
     protected $fillable = [
         'nombre',
-        'estado'
+        'estado',
+        'costo',
+        'pidedirec',
+        'cobra'
     ];
-    
+
 }
