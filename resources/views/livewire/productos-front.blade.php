@@ -5,7 +5,7 @@
     </x-header>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             {{-- Because she competes with no one, no one can compete with her. --}}
             <div class="flex flex-wrap">
@@ -25,7 +25,8 @@
                                             <p class="text-gray-700 text-base">{{ $producto->descripcion }}</p>
 
 
-                                                <p class="text-gray-700 text-base font-bold mt-2">{{ $producto->precio }}</p>
+                                            <p class="text-gray-700 text-base font-bold mt-2">{{ $producto->precio }}
+                                            </p>
                                         </div>
 
                                     </div>

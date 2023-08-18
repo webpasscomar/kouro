@@ -17,6 +17,9 @@ module.exports = {
             fontFamily: {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
+            gridTemplateRows: {
+                "[auto,auto,1fr]": "auto auto 1fr",
+            },
         },
     },
 
@@ -29,5 +32,6 @@ module.exports = {
     ],
     corePlugins: {
         preflight: false,
+        aspectRatio: false,
     },
 };
