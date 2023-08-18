@@ -1,155 +1,209 @@
-{{-- <x-slot name="header">
-    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Categorías</h4>
-</x-slot> --}}
+<div class="grid grid-cols-12 sm:grid-cols-none sm:grid-cols-12">
 
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-
-            <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Categorías</h4>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3">
-
-                <div>
-                    <button wire:click="crear()"
-                        class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
-                        <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Agregar</button>
-                </div>
-                <div class="py-3">
-                    <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
-                </div>
+    <!-- Columna de 3 en pantallas md y más grandes -->
+    <div class="col-span-2 sm:col-span-2">
+        <!-- Contenido de la columna 3 -->
+        <div class="flex h-screen bg-gray-90">
+            <!-- Contenido principal -->
+            <div class="flex-1 bg-white p-8">
+                <!-- Aquí iría el contenido principal del backend -->
             </div>
 
-            @if ($modal)
-                @include('livewire.backend.categorias-form')
-            @endif
+            <!-- Sidebar a la derecha -->
+            <aside class="w-64 bg-gray-800 text-white p-4  rounded-lg">
+                <!-- Logo o título del sidebar -->
+                <div class="text-xl font-semibold mb-6">
+                    Adminisración
+                </div>
+
+                <!-- Enlaces del sidebar -->
+                <ul>
+                    <li class="mb-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            Usuarios
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            Configuración
+                        </a>
+                    </li>
+                    <!-- Agrega más enlaces según tus necesidades -->
+                </ul>
+            </aside>
+        </div>
+
+    </div>
+
+    <!-- Columna de 9 en pantallas md y más grandes -->
+    <div class="col-span-10 sm:col-span-10">
+
+        <!-- Contenido de la columna 9 -->
+        <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
+
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
 
-            <table class="table-auto w-full">
-                <thead>
-                    <tr class="bg-gray-200 text-gray-700">
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Id
 
-                            @if ($sort == 'id')
-                                @if ($order == 'asc')
-                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                <div class="grid grid-cols-1 sm:grid-cols-3 mb-2">
+
+                    <div class="py-3 my-2">
+
+                        <h4 class="text-xl text-gray-900 font-bold"><a href="{{ route('dashboard') }}"><i
+                                    class="fas fa-home"></i></a> - Gestión de
+                            Categorías
+                        </h4>
+                    </div>
+
+                    <div class="py-3">
+                        <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button wire:click="crear()"
+                            class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
+                            <img src="{{ asset('./img/add.svg') }}" alt="agregar producto"
+                                class="w-6">Agregar</button>
+                    </div>
+
+                </div>
+
+                @if ($modal)
+                    @include('livewire.backend.categorias-form')
+                @endif
+
+
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-700">
+                            <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Id
+
+                                @if ($sort == 'id')
+                                    @if ($order == 'asc')
+                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                    @else
+                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    <i class="fas fa-sort float-right mt-1"></i>
                                 @endif
-                            @else
-                                <i class="fas fa-sort float-right mt-1"></i>
-                            @endif
-                        </th>
-                        <th class="cursor-pointer px-4 py-2">Imagen</th>
+                            </th>
+                            <th class="cursor-pointer px-4 py-2">Imagen</th>
 
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('categoriaPadre_id')">Padre
+                            <th class="cursor-pointer px-4 py-2" wire:click="order('categoriaPadre_id')">Padre
 
-                            @if ($sort == 'categoriaPadre_id')
-                                @if ($order == 'asc')
-                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @if ($sort == 'categoriaPadre_id')
+                                    @if ($order == 'asc')
+                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                    @else
+                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    <i class="fas fa-sort float-right mt-1"></i>
                                 @endif
-                            @else
-                                <i class="fas fa-sort float-right mt-1"></i>
-                            @endif
-                        </th>
+                            </th>
 
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('categoria')">Nombre
+                            <th class="cursor-pointer px-4 py-2" wire:click="order('categoria')">Nombre
 
-                            @if ($sort == 'categoria')
-                                @if ($order == 'asc')
-                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @if ($sort == 'categoria')
+                                    @if ($order == 'asc')
+                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                    @else
+                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    <i class="fas fa-sort float-right mt-1"></i>
                                 @endif
-                            @else
-                                <i class="fas fa-sort float-right mt-1"></i>
-                            @endif
-                        </th>
+                            </th>
 
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('slug')">Slug
+                            <th class="cursor-pointer px-4 py-2" wire:click="order('slug')">Slug
 
-                            @if ($sort == 'slug')
-                                @if ($order == 'asc')
-                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @if ($sort == 'slug')
+                                    @if ($order == 'asc')
+                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                    @else
+                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    <i class="fas fa-sort float-right mt-1"></i>
                                 @endif
-                            @else
-                                <i class="fas fa-sort float-right mt-1"></i>
-                            @endif
-                        </th>
+                            </th>
 
-                        </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('orden')">Orden
+                            </th>
+                            <th class="cursor-pointer px-4 py-2" wire:click="order('orden')">Orden
 
-                            @if ($sort == 'orden')
-                                @if ($order == 'asc')
-                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @if ($sort == 'orden')
+                                    @if ($order == 'asc')
+                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                    @else
+                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    <i class="fas fa-sort float-right mt-1"></i>
                                 @endif
-                            @else
-                                <i class="fas fa-sort float-right mt-1"></i>
-                            @endif
-                        </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado
+                            </th>
+                            <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado
 
-                            @if ($sort == 'estado')
-                                @if ($order == 'asc')
-                                    <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                @if ($sort == 'estado')
+                                    @if ($order == 'asc')
+                                        <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                    @else
+                                        <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    @endif
                                 @else
-                                    <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                    <i class="fas fa-sort float-right mt-1"></i>
                                 @endif
-                            @else
-                                <i class="fas fa-sort float-right mt-1"></i>
-                            @endif
-                        </th>
-                        <th class="px-4 py-2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($categorias as $categoria)
-                        <tr>
-                            <td class="border px-4 py-2">{{ $categoria->id }}</td>
-                            <td class="border px-4 py-2">
-                                <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full"
-                                        src="{{ asset('storage/categorias/' . $categoria->imagen) }}" alt="">
-                                </div>
-                            </td>
-                            <td class="border px-4 py-2">{{ $categoria->categoriaPadre_id }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->categoria }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->slug }}</td>
-                            <td class="border px-4 py-2">{{ $categoria->orden }}</td>
-                            <td class="border px-4 py-2 text-center">
-                                @livewire(
-                                    'toggle-button',
-                                    [
-                                        'model' => $categoria,
-                                        'field' => 'estado',
-                                    ],
-                                    key($categoria->id)
-                                )
-                            </td>
-                            <td class="border px-4 py-2 text-right">
-                                <button wire:click="editar({{ $categoria->id }})" class="w-5 hover:scale-125"
-                                    title="Editar"><img src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
-
-                                <button wire:click="$emit('alertDelete',{{ $categoria->id }})"
-                                    class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}"
-                                        alt="borrar" title="Eliminar"></button>
-                            </td>
+                            </th>
+                            <th class="px-4 py-2">Acciones</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($categorias as $categoria)
+                            <tr>
+                                <td class="border px-4 py-2">{{ $categoria->id }}</td>
+                                <td class="border px-4 py-2">
+                                    <div class="flex-shrink-0 h-10 w-10">
+                                        <img class="h-10 w-10 rounded-full"
+                                            src="{{ asset('storage/categorias/' . $categoria->imagen) }}"
+                                            alt="">
+                                    </div>
+                                </td>
+                                <td class="border px-4 py-2">{{ $categoria->categoriaPadre_id }}</td>
+                                <td class="border px-4 py-2">{{ $categoria->categoria }}</td>
+                                <td class="border px-4 py-2">{{ $categoria->slug }}</td>
+                                <td class="border px-4 py-2">{{ $categoria->orden }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    @livewire(
+                                        'toggle-button',
+                                        [
+                                            'model' => $categoria,
+                                            'field' => 'estado',
+                                        ],
+                                        key($categoria->id)
+                                    )
+                                </td>
+                                <td class="border px-4 py-2 text-right">
+                                    <button wire:click="editar({{ $categoria->id }})" class="w-5 hover:scale-125"
+                                        title="Editar"><img src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
+
+                                    <button wire:click="$emit('alertDelete',{{ $categoria->id }})"
+                                        class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}"
+                                            alt="borrar" title="Eliminar"></button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
 
-            {{ $categorias->links() }}
+                {{ $categorias->links() }}
 
 
+            </div>
         </div>
     </div>
-</div>

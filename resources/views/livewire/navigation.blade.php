@@ -164,10 +164,10 @@
             </div>
 
 </nav> --}}
-<nav class="w-full bg-slate-100 items-center gap-y-3 pt-2">
+<nav class="w-full bg-slate-100 items-center gap-y-3 py-2">
     {{-- Redes sociales y contacto --}}
-    <section class="flex items-center px-4">
-        {{-- <div class="flex gap-x-4 items-center ml-2 flex-1">
+    {{-- <section class="flex items-center px-4"> --}}
+    {{-- <div class="flex gap-x-4 items-center ml-2 flex-1">
             <img src="{{ asset('./storage/contacto/phone.svg') }}" alt="teléfono">
             <span class="-ms-2 text-sm" title="teléfono">
                 <strong>011 4627-5723</strong>
@@ -183,12 +183,12 @@
                 <strong>kouroarg@gmail.com</strong>
             </span>
         </div> --}}
-        {{-- <div class="flex gap-x-3">
+    {{-- <div class="flex gap-x-3">
             <img src="{{ asset('./storage/contacto/facebook.svg') }}" alt="facebook" title="facebook">
             <img src="{{ asset('./storage/contacto/instagram.svg') }}" alt="instagram" title="instagram">
             <img src="{{ asset('./storage/contacto/linkedin.svg') }}" alt="linkedin" title="linkedin">
         </div> --}}
-    </section>
+    {{-- </section> --}}
     {{-- Logo - Icono carrito - Profile --}}
     <section class="flex items-center justify-between px-4">
         {{-- Logo  --}}
@@ -292,21 +292,23 @@
             {{-- =======================================================================   --}}
         </div>
     </section>
+
     {{-- Links de Navegación --}}
-    <section class="mt-2">
-        <div class="flex items-center bg-slate-200 p-3">
-            <div class="flex items-center md:order-2">
-                <button data-collapse-toggle="navbar-user" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                    aria-controls="navbar-user" aria-expanded="false">
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M1 1h15M1 7h15M1 13h15" />
-                    </svg>
-                </button>
-            </div>
-            @unless (request()->is('admin/*'))
+    @unless (request()->is('admin/*'))
+        <section class="mt-2">
+            <div class="flex items-center bg-slate-200 p-3">
+                <div class="flex items-center md:order-2">
+                    <button data-collapse-toggle="navbar-user" type="button"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        aria-controls="navbar-user" aria-expanded="false">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M1 1h15M1 7h15M1 13h15" />
+                        </svg>
+                    </button>
+                </div>
+
                 <!-- Coloca aquí el código HTML del menú que quieres mostrar -->
 
                 <div class="justify-evenly hidden w-full md:flex md:order-1" id="navbar-user">
@@ -348,8 +350,9 @@
                         </li>
                     </ul>
                 </div>
-            @endunless
-        </div>
 
-    </section>
+            </div>
+
+        </section>
+    @endunless
 </nav>
