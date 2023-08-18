@@ -56,120 +56,33 @@
 
         <!-- Page Content -->
         <main class="min-h-screen">
-            <div>
-                @isset($slot)
-                    {{ $slot }}
-                @else
-                    @yield('content')
-                    @endif
-                </div>
-            </main>
 
-            {{-- <main>
-            @switch(Route::currentRouteName())
-                @case('productos')
-                @case('productos.categoria')
-                    @livewire('productos-front')
-                @break
-
-                @case('producto')
-                    @livewire('producto-front')
-                @break
-
-                @case('nosotros')
-                    @livewire('nosotrosFront')
-                @break
-
-                @case('contacto')
-                    @livewire('contactoFront')
-                @break
-
-                @case('colores')
-                    @livewire('backend.colores')
-                @break
-
-                @case('dashboard')
-                    @livewire('dashboard')
-                @break
-
-                @case('historias')
-                    @livewire('backend.historias')
-                @break
-
-                @case('pedidos')
-                    @livewire('backend.pedidos')
-                @break
-
-                @case('carrito')
-                    @livewire('carrito')
-                @break
-
-                @default
-
-                    <h1>Error 404</h1>
-            @endswitch
-        </main> --}}
-
-            {{-- <main>
-            @if (request()->is('productos'))
-                @livewire('productos-front')
-            @elseif(request()->is('contacto'))
-                @livewire('contacto-front')
-            @elseif(request()->is('nosotros'))
-                @livewire('nosotros-front')
-            @endif
-        </main> --}}
-
-
-            <!-- Page Content -->
-            {{-- <main>
-            <h1>{{ request()->route()->getName() }}</h1>
-        @switch(request()->route()->getName())
-        @case('livewire.productos.index')
-        @livewire('productos')
-        @break
-
-        @case('contacto.index')
-        @livewire('contacto.index')
-        @break
-
-        @case('nosotros.index')
-        @livewire('nosotros.index')
-        @break
-
-        @case('servicios.index')
-        @livewire('servicios.index')
-        @break
-
-        @default
-        @livewire('default.index')
-        @endswitch
-        </main> --}}
-
-            {{-- <main>
-            @if (Str::contains(view()->getName(), 'livewire'))
-                <div>
-                    @livewire(
-                        request()->route()->getActionMethod()
-                    )
-                </div>
+            @unless (request()->is('admin/*'))
+                @yield('content')
             @else
-                <div>
-                    @isset($slot)
+                <div class="grid grid-cols-12 sm:grid-cols-none sm:grid-cols-12">
+
+                    <!-- Columna de 3 en pantallas md y más grandes -->
+                    <div class="col-span-2 sm:col-span-2">
+                        @yield('sidebar')
+                        @include('sidebar')
+                    </div>
+
+                    <!-- Columna de 9 en pantallas md y más grandes -->
+                    <div class="col-span-10 sm:col-span-10">
                         {{ $slot }}
-        @else
-        @yield('content')
-        @endif
-    </div>
-    @endif
-    </main> --}}
+                    </div>
+                </div>
+            @endunless
 
-            <!-- Footer del sitio  -->
-            <footer>
-                <x-footer />
-            </footer>
+        </main>
 
-        </div>
+        <!-- Footer del sitio  -->
+        <footer>
+            <x-footer />
+        </footer>
+
+
         {{-- @livewire('footer') --}}
         @stack('modals')
 
@@ -268,6 +181,6 @@
 
         <!-- Script de tw-elements -->
         <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-    </body>
+</body>
 
-    </html>
+</html>
