@@ -2,12 +2,13 @@
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
         <div class="grid grid-cols-1 sm:grid-cols-3 mb-2">
-            <div class="py-3 my-2">
 
+            <div class="py-3 my-2">
                 <h4 class="text-xl text-gray-900 font-bold"><a href="{{ route('dashboard') }}"><i
                             class="fas fa-home"></i></a> - Colores
                 </h4>
             </div>
+
             <div class="py-3">
                 <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
             </div>

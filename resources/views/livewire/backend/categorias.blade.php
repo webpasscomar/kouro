@@ -5,7 +5,6 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 mb-2">
 
             <div class="py-3 my-2">
-
                 <h4 class="text-xl text-gray-900 font-bold"><a href="{{ route('dashboard') }}"><i
                             class="fas fa-home"></i></a> - Categorías
                 </h4>
@@ -26,7 +25,6 @@
         @if ($modal)
             @include('livewire.backend.categorias-form')
         @endif
-
 
         <table class="table-auto w-full">
             <thead>
@@ -152,7 +150,7 @@
         <div class="py-2">
 
             {{ $categorias->links() }}
-            
+
         </div>
 
 
