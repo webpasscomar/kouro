@@ -1,24 +1,3 @@
-
-CREATE TABLE `localidades` (
-  `id` INT(11) NOT NULL,
-  `nombre` VARCHAR(255) DEFAULT NULL,
-  `provincia_id` INT(11) DEFAULT NULL,
-  `provincia_nombre` VARCHAR(255) DEFAULT NULL,
-  `categoria` VARCHAR(255) DEFAULT NULL,
-  `centroide_lat` FLOAT DEFAULT NULL,
-  `centroide_lon` FLOAT DEFAULT NULL,
-  `departamento_id` FLOAT DEFAULT NULL,
-  `departamento_nombre` VARCHAR(255) DEFAULT NULL,
-  `fuente` VARCHAR(255) DEFAULT NULL,
-  `id2` FLOAT NOT NULL,
-  `localidad_censal_id` FLOAT DEFAULT NULL,
-  `localidad_censal_nombre` VARCHAR(255) DEFAULT NULL,
-  `municipio_id` FLOAT DEFAULT NULL,
-  `municipio_nombre` VARCHAR(255) DEFAULT NULL,
-  `estado` TINYINT(4) DEFAULT 1
-) ENGINE=INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 INSERT INTO `localidades` (`id`, `nombre`, `provincia_id`, `provincia_nombre`, `categoria`, `centroide_lat`, `centroide_lon`, `departamento_id`, `departamento_nombre`, `fuente`, `id2`, `localidad_censal_id`, `localidad_censal_nombre`, `municipio_id`, `municipio_nombre`) VALUES
 (1, 'CIUDAD DE BUENOS AIRES', 2, 'Ciudad Autonoma de Buenos Aires', 'Componente de localidad compuesta', -34.6133, -58.3888, NULL, NULL, 'INDEC', 2000010000, 2000010, 'Ciudad Autonoma de Buenos Aires', NULL, NULL),
 (2, 'CONSTITUCION', 2, 'Ciudad Autonoma de Buenos Aires', 'Entidad', -34.625, -58.3844, 2007, 'Comuna 1', 'INDEC', 2007010000, 2000010, 'Ciudad Autonoma de Buenos Aires', NULL, NULL),
