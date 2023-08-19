@@ -1,74 +1,102 @@
-<x-slot name="header">
-    <h4 class="text-gray-900"><a href="{{ route('dashboard') }}">Dashboard</a> | Gestión de Parámetros</h4>
-</x-slot>
+<div class="max-w-7xl mx-auto sm:px6 lg:px-8">
+    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
-<div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
-
-            @if (session()->has('message'))
-                <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-4 shadow-md my-3" role="alert">
-                    <div class="flex">
-                        <div>
-                            <h4>{{ session('message') }}</h4>
-                        </div>
+        @if (session()->has('message'))
+            <div class="bg-teal-100 rounded-b text-teal-900 px-4 py-4 shadow-md my-3" role="alert">
+                <div class="flex">
+                    <div>
+                        <h4>{{ session('message') }}</h4>
                     </div>
                 </div>
-            @endif
+            </div>
+        @endif
 
-            <div class="grid grid-cols-1 sm:grid-cols-3">
-                <div>
-                    <button wire:click="crear()"
-                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                        Nueva Pregunta frecuente</button>
-                </div>
-                <div class="py-3">
-                    <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
-                </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 mb-2">
+
+            <div class="py-3 my-2">
+
+                <h4 class="text-xl text-gray-900 font-bold"><a href="{{ route('dashboard') }}"><i
+                            class="fas fa-home"></i></a> - Preguntas frecuentes
+                </h4>
             </div>
 
-            @if ($modal)
-                @include('livewire.backend.faqs-form')
-            @endif
+            <div class="py-3">
+                <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
+            </div>
 
-            <table class="table-auto w-full">
-                <thead>
-                    <tr class="bg-indigo-600 text-white">
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('pregunta')">Pregunta</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('respuesta')">Respuesta</th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado</th>
-                        <th class="px-4 py-2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($faqs as $item)
-                        <tr>
-                            <td class="border px-4 py-2">{{ $item->id }}</td>
-                            <td class="border px-4 py-2">{{ $item->pregunta }}</td>
-                            <td class="border px-4 py-2">{{ $item->respuesta }}</td>
-                            <td class="border px-4 py-2">
-                                @livewire('toggle-button', [
+            <div class="flex justify-end">
+                <button wire:click="crear()"
+                    class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
+                    <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Agregar</button>
+            </div>
+
+        </div>
+
+        @if ($modal)
+            @include('livewire.backend.faqs-form')
+        @endif
+
+        <table class="table-auto w-full">
+            <thead>
+                <tr class="bg-gray-200 text-gray-700">
+                    <th class="cursor-pointer px-4 py-2" wire:click="order('id')">ID</th>
+                    <th class="cursor-pointer px-4 py-2" wire:click="order('pregunta')">Pregunta
+                        @if ($sort == 'pregunta')
+                            @if ($order == 'asc')
+                                <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                            @endif
+                        @else
+                            <i class="fas fa-sort float-right mt-1"></i>
+                        @endif
+                    </th>
+                    <th class="cursor-pointer px-4 py-2" wire:click="order('respuesta')">Respuesta
+                        @if ($sort == 'respuesta')
+                            @if ($order == 'asc')
+                                <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                            @else
+                                <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                            @endif
+                        @else
+                            <i class="fas fa-sort float-right mt-1"></i>
+                        @endif
+                    </th>
+                    <th class="cursor-pointer px-4 py-2" wire:click="order('estado')">Estado</th>
+                    <th class="px-4 py-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($faqs as $item)
+                    <tr>
+                        <td class="border px-4 py-2">{{ $item->id }}</td>
+                        <td class="border px-4 py-2">{{ $item->pregunta }}</td>
+                        <td class="border px-4 py-2">{{ $item->respuesta }}</td>
+                        <td class="border px-4 py-2">
+                            @livewire(
+                                'toggle-button',
+                                [
                                     'model' => $item,
                                     'field' => 'estado',
                                 ],
                                 key($item->id)
-                                )
-                            </td>
+                            )
+                        </td>
 
-                            <td class="border px-4 py-2 text-center">
-                                <button wire:click="editar({{ $item->id }})"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
-                                <button wire:click="borrar({{ $item->id }})"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        <td class="border px-4 py-2 text-right">
+                            <button wire:click="editar({{ $item->id }})" class="w-5 hover:scale-125"
+                                title="Editar"><img src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
 
-            {{ $faqs->links() }}
+                            <button wire:click="$emit('alertDelete',{{ $item->id }})"
+                                class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}" alt="borrar"
+                                    title="Eliminar"></button>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-        </div>
+        {{ $faqs->links() }}
+
     </div>
 </div>
