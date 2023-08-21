@@ -46,13 +46,13 @@ class Categorias extends Component
     public function render()
     {
         $this->categoriasAnt = Categoria::where('estado', 1)->get();
-       // $this->categorias = Categoria::where('id', '>', 1)
-            $this->categorias = Categoria::where(
-                function ($q) {
-                    $q->where('descripcion', 'like', '%' . $this->search . '%')
-                        ->orWhere('categoria', 'like', '%' . $this->search . '%');
-                }
-            )
+        // $this->categorias = Categoria::where('id', '>', 1)
+        $this->categorias = Categoria::where(
+            function ($q) {
+                $q->where('descripcion', 'like', '%' . $this->search . '%')
+                    ->orWhere('categoria', 'like', '%' . $this->search . '%');
+            }
+        )
             ->orderBy($this->sort, $this->order)
             ->paginate(5);
         return view('livewire.backend.categorias', ['categorias' => $this->categorias]);
@@ -60,7 +60,6 @@ class Categorias extends Component
 
     public function crear()
     {
-
         $this->accion = 'crear';
         $this->limpiarCampos();
         $this->abrirModal();
@@ -85,8 +84,8 @@ class Categorias extends Component
         $this->slug = '';
         $this->imagen = '';
 
-        $this->menu =0;
-        $this->orden =0;
+        $this->menu = 0;
+        $this->orden = 0;
         $this->estado = 0;
         $this->id_categoria = 0;
     }

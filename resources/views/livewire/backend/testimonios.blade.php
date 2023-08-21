@@ -107,10 +107,10 @@
                         </td>
 
                         <td class="border px-4 py-2 text-right">
-                            <button wire:click="editar({{ $categoria->id }})" class="w-5 hover:scale-125"
+                            <button wire:click="editar({{ $item->id }})" class="w-5 hover:scale-125"
                                 title="Editar"><img src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
 
-                            <button wire:click="$emit('alertDelete',{{ $categoria->id }})"
+                            <button wire:click="$emit('alertDelete',{{ $item->id }})"
                                 class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}" alt="borrar"
                                     title="Eliminar"></button>
                         </td>

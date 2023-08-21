@@ -17,9 +17,11 @@
                         <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search" class="w-full" />
                     </div>
 
-                    <div>
+                    <div class="flex justify-end">
                         <button wire:click="crear()"
-                            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">Agregar</button>
+                            class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
+                            <img src="{{ asset('./img/add.svg') }}" alt="agregar producto"
+                                class="w-6">Agregar</button>
                     </div>
                 </div>
                 <table class="table-auto w-full">
