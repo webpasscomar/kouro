@@ -61,129 +61,133 @@
         <main class="min-h-screen">
 
             @unless (request()->is('admin/*'))
-                @yield('content')
-            @else
-                <div class="grid grid-cols-12 sm:grid-cols-none sm:grid-cols-12">
+                @isset($slot)
+                    {{ $slot }}
+                @else
+                    @yield('content')
+                    @endif
+                @else
+                    <div class="grid grid-cols-12 sm:grid-cols-none sm:grid-cols-12">
 
-                    <!-- Columna de 3 en pantallas md y más grandes -->
-                    <div class="col-span-2 sm:col-span-2">
-                        @yield('sidebar')
-                        @include('sidebar')
+                        <!-- Columna de 3 en pantallas md y más grandes -->
+                        <div class="col-span-2 sm:col-span-2">
+                            @yield('sidebar')
+                            @include('sidebar')
+                        </div>
+
+                        <!-- Columna de 9 en pantallas md y más grandes -->
+                        <div class="col-span-10 sm:col-span-10">
+                            {{ $slot }}
+                        </div>
                     </div>
+                @endunless
 
-                    <!-- Columna de 9 en pantallas md y más grandes -->
-                    <div class="col-span-10 sm:col-span-10">
-                        {{ $slot }}
-                    </div>
-                </div>
-            @endunless
+            </main>
 
-        </main>
-
-        <!-- Footer del sitio  -->
-        <footer>
-            <x-footer />
-        </footer>
+            <!-- Footer del sitio  -->
+            <footer>
+                <x-footer />
+            </footer>
 
 
-        {{-- @livewire('footer') --}}
-        @stack('modals')
+            {{-- @livewire('footer') --}}
+            @stack('modals')
 
-        @livewireScripts
+            @livewireScripts
 
-        <script>
-            Livewire.on('alertSave', function() {
-                Swal.fire(
-                    'Excelente!',
-                    'Ha sido guardado correctamente!',
-                    'success'
-                )
-            });
+            <script>
+                Livewire.on('alertSave', function() {
+                    Swal.fire(
+                        'Excelente!',
+                        'Ha sido guardado correctamente!',
+                        'success'
+                    )
+                });
 
-            Livewire.on('alertDelete', id => {
-                Swal.fire({
-                    title: '¿Está seguro /a?',
-                    text: "La acción no podrá ser revertida!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, borrar!'
-                }).then((result) => {
+                Livewire.on('alertDelete', id => {
+                    Swal.fire({
+                        title: '¿Está seguro /a?',
+                        text: "La acción no podrá ser revertida!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, borrar!'
+                    }).then((result) => {
 
 
-                    if (result.isConfirmed) {
-                        // alert('Borrar el id: ' + id);
-                        Livewire.emit('delete', id);
+                        if (result.isConfirmed) {
+                            // alert('Borrar el id: ' + id);
+                            Livewire.emit('delete', id);
 
-                        Swal.fire(
-                            'Borrado!',
-                            'Ha sido eliminado con éxito.',
-                            'success'
-                        )
-                    }
+                            Swal.fire(
+                                'Borrado!',
+                                'Ha sido eliminado con éxito.',
+                                'success'
+                            )
+                        }
+                    })
                 })
-            })
 
 
-            Livewire.on('alertCarritoDelete', (idproducto, idtalle, idcolor) => {
-                Swal.fire({
-                    title: '¿Está seguro /a?',
-                    text: "La acción no podrá ser revertida!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, borrar!'
-                }).then((result) => {
+                Livewire.on('alertCarritoDelete', (idproducto, idtalle, idcolor) => {
+                    Swal.fire({
+                        title: '¿Está seguro /a?',
+                        text: "La acción no podrá ser revertida!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, borrar!'
+                    }).then((result) => {
 
 
-                    if (result.isConfirmed) {
-                        Livewire.emit('delete', idproducto, idtalle, idcolor);
+                        if (result.isConfirmed) {
+                            Livewire.emit('delete', idproducto, idtalle, idcolor);
 
-                        // Swal.fire(
-                        //     'Borrado!',
-                        //     'Ha sido eliminado con éxito.',
-                        //     'success'
-                        // )
-                    }
+                            // Swal.fire(
+                            //     'Borrado!',
+                            //     'Ha sido eliminado con éxito.',
+                            //     'success'
+                            // )
+                        }
+                    })
                 })
-            })
 
-            //emit del cambio de cantidades en  carrito
-            Livewire.on('carrito', function(mensaje) {
-                Swal.fire(
-                    'Excelente!',
-                    mensaje['mensaje'],
-                    'success'
-                )
-            });
-
-
-            //emit mensaje negativo
-            Livewire.on('mensajeNegativo', function(mensaje) {
-                Swal.fire({
-                    title: 'Atencion',
-                    text: mensaje['mensaje'],
-                    icon: 'warning',
-                    showCloseButton: true
-                })
-            });
+                //emit del cambio de cantidades en  carrito
+                Livewire.on('carrito', function(mensaje) {
+                    Swal.fire(
+                        'Excelente!',
+                        mensaje['mensaje'],
+                        'success'
+                    )
+                });
 
 
-            //emit mensaje positivo
-            Livewire.on('mensajePositivo', function(mensaje) {
-                Swal.fire({
-                    title: 'Excelente!',
-                    text: mensaje['mensaje'],
-                    icon: 'success',
-                    showCloseButton: true
-                })
-            });
-        </script>
+                //emit mensaje negativo
+                Livewire.on('mensajeNegativo', function(mensaje) {
+                    Swal.fire({
+                        title: 'Atencion',
+                        text: mensaje['mensaje'],
+                        icon: 'warning',
+                        showCloseButton: true
+                    })
+                });
 
-        <!-- Script de tw-elements -->
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
-</body>
 
-</html>
+                //emit mensaje positivo
+                Livewire.on('mensajePositivo', function(mensaje) {
+                    Swal.fire({
+                        title: 'Excelente!',
+                        text: mensaje['mensaje'],
+                        icon: 'success',
+                        showCloseButton: true
+                    })
+                });
+            </script>
+
+            <!-- Script de tw-elements -->
+            <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+    </body>
+
+    </html>
