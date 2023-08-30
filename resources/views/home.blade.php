@@ -1,11 +1,5 @@
 <x-app-layout>
 
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-    </h2>
-    </x-slot> --}}
-
     <!-- Carousel tw-elements -->
 
     <div id="carouselDarkVariant" class="relative" data-te-carousel-init data-te-carousel-slide>
@@ -86,23 +80,6 @@
         </button>
     </div>
 
-    {{-- ========================================================== --}}
-    {{-- TODO:Eliminar si funciona lista elegi productos nueva --}}
-    <!-- Lista elegi productos  -->
-
-    {{-- <div class="flex overflow-x-auto space-x-8 w-full ">
-
-        @if ($destacados)
-            @foreach ($destacados as $destacado)
-                <section class="flex-shrink-0 border-1 border-purple-300 p-4">
-                    <img src="{{ asset('storage/productos/' . $destacado->file_path) }}" class=" h-60 w-60 rounded-md"
-                        alt="">
-                    <p class="text-2xl font-bold   m-2 p-2">{{ $destacado->nombre }}</p>
-                    <p class="m-2 p-2">{{ $destacado->desCorta }}</p>
-                </section>
-            @endforeach
-        @endif
-    </div> --}}
 
     {{-- ======================================================== --}}
 
@@ -148,7 +125,26 @@
     </section>
 
 
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                @foreach ($categorias as $category)
+                    <a href="{{ route('productos.categoria', $category->slug) }}">
+                        <div class="relative overflow-hidden rounded-lg shadow-lg">
+                            <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                src="{{ asset('storage/categorias/' . $category->imagen) }}"
+                                alt="{{ $category->categoria }}">
+                            <div class="absolute bottom-0 left-0 right-0 px-4 py-2 bg-white bg-opacity-75">
+                                <h2 class="text-lg font-bold">{{ $category->categoria }}</h2>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+
+        </div>
+    </div>
 
 
     {{-- Estilos   --}}

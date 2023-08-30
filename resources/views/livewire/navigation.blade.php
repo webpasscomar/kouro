@@ -283,10 +283,10 @@
     {{-- Links de Navegación --}}
     @unless (request()->is('admin/*'))
         <section class="mt-2">
-            <div class="flex items-center bg-slate-200 p-3">
-                <div class="flex items-center md:order-2">
+            <div class="flex bg-slate-200 p-3">
+                <div class="flex md:order-2">
                     <button data-collapse-toggle="navbar-user" type="button"
-                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        class="inline-flex p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                         aria-controls="navbar-user" aria-expanded="false">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 17 14">
@@ -307,11 +307,7 @@
                                 aria-current="page">Inicio
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('productos.index') }}"
-                                class="@if (request()->is('shop')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Productos
-                            </a>
-                        </li>
+
                         <li>
                             <a href="/nosotros"
                                 class="@if (request()->is('nosotros')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sobre

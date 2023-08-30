@@ -113,33 +113,47 @@
                                 <td class="border px-4 py-2">{{ $pedido->estado->nombre }}</td>
                                 <td class="border px-4 py-2">
                                     {{ $pedido->status == 'approved' ? 'Cobrado' : 'Pendiente' }}</td>
-                                <td class="border px-4 py-2 text-center">
-                                    <button wire:click="detalle({{ $pedido->id }})"
-                                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4">Detalle</button>
+                                <td class="border px-4 py-2  text-right">
+
+                                    <a wire:click="detalle({{ $pedido->id }})"><i
+                                            class="w-5 fas fa-eye hover:scale-125  text-green-500"></i></a>
 
                                     <!-- solo se puede editar en pendiente o en preparacion -->
                                     @if ($pedido->estado_id == 1 || $pedido->estado_id == 2)
-                                        <button wire:click="editar({{ $pedido->id }})"
+                                        {{-- <button wire:click="editar({{ $pedido->id }})"
                                             {{ $pedido->status == 'approved' ? 'disabled' : '' }}
                                             class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Editar</button>
 
                                         <button wire:click="$emit('alertDelete',{{ $pedido->id }})"
                                             {{ $pedido->status == 'approved' ? 'disabled' : '' }}
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button> --}}
+
+                                        <button wire:click="editar({{ $pedido->id }})"
+                                            {{ $pedido->status == 'approved' ? 'disabled' : '' }}
+                                            class="w-5 hover:scale-125" title="Editar"><img
+                                                src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
+
+                                        <button wire:click="$emit('alertDelete',{{ $pedido->id }})"
+                                            {{ $pedido->status == 'approved' ? 'disabled' : '' }}
+                                            class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}"
+                                                alt="borrar" title="Eliminar"></button>
                                     @endif
 
-                                    <button wire:click="verpago({{ $pedido->id }})"
-                                        class="bg-gray-200 hover:bg-gray-400 text-black font-bold py-2 px-4">Ver
-                                        Pago</button>
+                                    <a wire:click="verpago({{ $pedido->id }})"><i
+                                            class="w-5 fas fa-search  hover:scale-125  text-orange-500"
+                                            title="Ver pago"></i></a>
 
-                                    <button wire:click="cobrarmp({{ $pedido->id }})"
-                                        {{ $pedido->status == 'approved' ? 'disabled' : '' }}
-                                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 mt-1">Cobrar
-                                        con MP</button>
+                                    <a wire:click="cobrarmp({{ $pedido->id }})"
+                                        {{ $pedido->status == 'approved' ? 'disabled' : '' }}><i
+                                            class="w-5 fas fa-cogs  hover:scale-125  text-blue-500"title="Cobrar MP"></i></a>
 
-                                    <button wire:click="cambiaestado({{ $pedido->id }})"
+                                    {{-- <button wire:click="cambiaestado({{ $pedido->id }})"
                                         class="bg-yellow-200 hover:bg-yellow-400 text-black font-bold py-2 px-4">Cambia
-                                        Estado</button>
+                                        Estado</button> --}}
+
+                                    <a wire:click="cambiaestado({{ $pedido->id }})"><i
+                                            class="w-5 fas fa-retweet  hover:scale-125 text-yellow-500"
+                                            title="Cambiar estado"></i></a>
 
                                 </td>
 
@@ -182,8 +196,9 @@
                         @endforeach
                     </tbody>
                 </table>
-
-                {{ $pedidos->links() }}
+                <div class="py-2">
+                    {{ $pedidos->links() }}
+                </div>
             @endif
             @if ($modalpago == 1)
                 @include('livewire.backend.verpago-form')

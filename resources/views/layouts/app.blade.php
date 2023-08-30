@@ -67,16 +67,16 @@
                     @yield('content')
                     @endif
                 @else
-                    <div class="grid grid-cols-12 sm:grid-cols-none sm:grid-cols-12">
+                    <div class="grid grid-cols-12">
 
                         <!-- Columna de 3 en pantallas md y más grandes -->
-                        <div class="col-span-2 sm:col-span-2">
+                        <div class="col-span-2 ">
                             @yield('sidebar')
                             @include('sidebar')
                         </div>
 
                         <!-- Columna de 9 en pantallas md y más grandes -->
-                        <div class="col-span-10 sm:col-span-10">
+                        <div class="col-span-10 ">
                             {{ $slot }}
                         </div>
                     </div>
