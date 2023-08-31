@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $fotos_slider = Galeria::where('estado', '=', 1)->get();
+        $fotos_slider = Galeria::where('estado', '=', 1)->orderBy('orden', 'asc')->get();
 
         $destacados =  Producto_imagen::select('productos_imagenes.producto_id', 'productos_imagenes.file_path', 'productos.nombre', 'productos.desCorta')
             ->leftJoin('productos', 'productos.id', 'productos_imagenes.producto_id')
