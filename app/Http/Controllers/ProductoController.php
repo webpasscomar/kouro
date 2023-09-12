@@ -23,6 +23,17 @@ class ProductoController extends Controller
     public function destacados()
     {
         $productos = Producto::where('estado', '=', 1)->get();
+        for ($i = 0; $i < count($productos); $i++) {
+            $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
+                ->where('productos_imagenes.producto_id', '=',   $productos[$i]['id'])
+                ->get()
+                ->toArray();
+            if ($datos_imagenes) {
+                $productos[$i]->imagen = basename($datos_imagenes[0]['file_path']);
+            } else {
+                $productos[$i]->imagen = '';
+            }
+        }
         $categorias = Categoria::where('estado', 1)
             ->where('id', '>', 1)
             ->orderBy('categoria', 'asc')
