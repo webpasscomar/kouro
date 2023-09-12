@@ -303,32 +303,37 @@
                         class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
                         <li>
                             <a href="/"
-                                class="@if (request()->is('/')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 bg-blue-700 rounded md:bg-transparent md:hover-blue-700 md:p-0"
+                                class="@if (request()->is('/')) { text-red-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 bg-blue-700 rounded md:bg-transparent md:hover-blue-700 md:p-0"
                                 aria-current="page">Inicio
                             </a>
                         </li>
 
+                        <a href="{{ route('productos.destacados') }}"
+                            class="@if (request()->is('destacados')) { text-red-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">Destacados
+                        </a>
+                        </li>
+
                         <li>
                             <a href="/nosotros"
-                                class="@if (request()->is('nosotros')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Sobre
+                                class="@if (request()->is('nosotros')) { text-red-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">Sobre
                                 nosotros
                             </a>
                         </li>
                         <li>
                             <a href="/sucursales"
-                                class="@if (request()->is('sucursales')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">
+                                class="@if (request()->is('sucursales')) { text-red-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">
                                 Sucursales
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('faqs.index') }}"
-                                class="@if (request()->is('preguntas-frecuentes')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Preguntas
+                                class="@if (request()->is('preguntas-frecuentes')) { text-red-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">Preguntas
                                 frecuentes
                             </a>
                         </li>
                         <li>
                             <a href="/contacto"
-                                class="@if (request()->is('contacto')) { text-blue-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Contacto
+                                class="@if (request()->is('contacto')) { text-red-700 font-bold } @else text-gray-900 @endif block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0">Contacto
                             </a>
                         </li>
                     </ul>
