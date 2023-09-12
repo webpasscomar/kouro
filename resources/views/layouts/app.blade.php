@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
 
+
     @livewireStyles
 
     <!-- Scripts -->
@@ -47,6 +48,7 @@
     <div class="bg-gray-100">
 
         @livewire('navigation')
+        {{-- @include('nav-front') --}}
 
         <!-- Page Heading -->
         @if (isset($header))
@@ -184,6 +186,24 @@
                         showCloseButton: true
                     })
                 });
+
+                // // Obtén una referencia al elemento header
+                // const header = document.querySelector('#header');
+
+                // // Obtén la posición inicial del elemento header
+                // const headerOffsetTop = header.offsetTop;
+
+                // // Función para hacer que el elemento sea pegajoso
+                // function makeHeaderSticky() {
+                //     if (window.pageYOffset > headerOffsetTop) {
+                //         header.classList.add('sticky'); // Agrega una clase CSS para aplicar estilos pegajosos
+                //     } else {
+                //         header.classList.remove('sticky'); // Remueve la clase CSS si el usuario ha vuelto a la parte superior
+                //     }
+                // }
+
+                // // Agrega un evento de scroll para invocar la función makeHeaderSticky
+                // window.addEventListener('scroll', makeHeaderSticky);
             </script>
 
             <!-- Script de tw-elements -->

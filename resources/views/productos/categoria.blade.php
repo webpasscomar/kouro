@@ -25,7 +25,8 @@
                                     class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
                                     @foreach ($productos as $producto)
-                                        <a href="{{ route('productos.show', [$categoria->slug, $producto]) }}"
+                                        <?php $primeraCategoria = $producto->categorias->first(); ?>
+                                        <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}"
                                             class="group">
                                             <div
                                                 class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
@@ -114,72 +115,9 @@
                                         @endforeach
 
 
-                                        {{-- <div class="flex items-center mt-3">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                        viewBox="0 96 960 960" width="32">
-                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                    </svg>
-                </span>
-                <a href="#" class="text-xl text-red-700 hover:text-red-400">Calzados caballeros</a>
-            </div>
-            <div class="flex items-center mt-3">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                        viewBox="0 96 960 960" width="32">
-                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                    </svg>
-                </span>
-                <a href="#" class="text-xl text-red-700 hover:text-red-400">Calzado damas</a>
-            </div>
-            <div class="flex items-center mt-3">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                        viewBox="0 96 960 960" width="32">
-                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                    </svg>
-                </span>
-                <a href="#" class="text-xl text-red-700 hover:text-red-400">Accesorios</a>
-            </div>
-            <div class="flex items-center mt-3">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                        viewBox="0 96 960 960" width="32">
-                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                    </svg>
-                </span>
-                <a href="#" class="text-xl text-red-700 hover:text-red-400">Carteras</a>
-            </div>
-            <div class="flex items-center mt-3">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)" height="24"
-                        viewBox="0 96 960 960" width="32">
-                        <path d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                    </svg>
-                </span>
-                <a href="#" class="text-xl text-red-700 hover:text-red-400">Billeteras</a>
-            </div>
-        </div> --}}
                                     </div>
 
 
-
-
-
-
-
-
-
-
-                                    <h3 class="block px-2 py-3 bg-gray-300">Otras categorias</h3>
-                                    <ul role="list" class="px-2 py-3 font-medium text-gray-900">
-                                        @foreach ($categorias as $categoria)
-                                            <li class="block px-2 py-3 border-b">
-                                                <a href="{{ route('productos.categoria', $categoria->slug) }}">
-                                                    {{ $categoria->categoria }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
                                 </div>
 
                             </div>
