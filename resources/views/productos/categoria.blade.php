@@ -26,6 +26,12 @@
 
                                     @foreach ($productos as $producto)
                                         <?php $primeraCategoria = $producto->categorias->first(); ?>
+                                        <x-producto :producto="$producto" />
+                                    @endforeach
+
+                                    {{-- @foreach ($productos as $producto)
+                                        <?php // $primeraCategoria = $producto->categorias->first();
+                                        ?>
                                         <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}"
                                             class="group">
                                             <div
@@ -59,7 +65,7 @@
 
 
                                         </a>
-                                    @endforeach
+                                    @endforeach --}}
 
                                     <!-- More products... -->
                                 </div>

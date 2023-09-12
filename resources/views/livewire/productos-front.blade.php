@@ -14,6 +14,10 @@
                         <div class="grid grid-cols-3 gap-4">
 
                             @foreach ($productos as $producto)
+                                <x-producto :producto="$producto" />
+                            @endforeach
+
+                            {{-- @foreach ($productos as $producto)
                                 <a href="{{ route('producto', $producto->id) }}">
                                     <div class="bg-white rounded-lg overflow-hidden shadow-md">
                                         <img class="w-full h-56 object-cover object-center"
@@ -31,7 +35,8 @@
 
                                     </div>
                                 </a>
-                            @endforeach
+                            @endforeach --}}
+
                         </div>
                         <div class="mt-4">
                             {{ $productos->links() }}
