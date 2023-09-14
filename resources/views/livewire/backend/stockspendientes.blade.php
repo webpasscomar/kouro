@@ -51,7 +51,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('fechaSolicitud')">Fecha Solicitud
+                        <th class="cursor-pointer px-2 py-2 box-border" wire:click="order('fechaSolicitud')">Solicitado
                             {{-- -- Ordenar -- --}}
                             @if ($sort == 'fechaSolicitud')
                                 @if ($order == 'asc')
@@ -63,7 +63,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('fechaRespuesta')">Fecha Envio Respuesta
+                        <th class="cursor-pointer px-2 py-2 box-border" wire:click="order('fechaRespuesta')">Respondido
                             {{-- -- Ordenar -- --}}
                             @if ($sort == 'fechaRespuesta')
                                 @if ($order == 'asc')
@@ -112,7 +112,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('talle')">Talle
+                        <th class="cursor-pointer -px-2 py-2 box-border" wire:click="order('talle')">Talle
                             {{-- -- Ordenar -- --}}
                             @if ($sort == 'talle')
                                 @if ($order == 'asc')
@@ -139,14 +139,19 @@
                             <td class="border px-4 py-2">{{ $pendientes->color }}</td>
                             <td class="border px-4 py-2">{{ $pendientes->talle }}</td>
 
-                            <td class="border px-4 py-2 text-center">
-                                <button wire:click="editar({{ $pendientes->id }})"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Respuesta</button>
-                                <button wire:click="enviar({{ $pendientes->id }})"
-                                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4">Enviar
-                                    Mail</button>
-                                <button wire:click="$emit('alertDelete',{{ $pendientes->id }})"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                            <td class="border py-2">
+                                <div class="flex justify-around items-center">
+                                    <button wire:click="editar({{ $pendientes->id }})" class="w-6"
+                                        title="Respuesta"><img src="{{ asset('/img/comments.svg') }}"
+                                            alt="respuesta"></button>
+                                    <button wire:click="enviar({{ $pendientes->id }})" class="w-6"
+                                        title="Enviar Mail"><img src="{{ asset('/img/mail-send.svg') }}"
+                                            alt="Enviar mail">
+                                    </button>
+                                    <button wire:click="$emit('alertDelete',{{ $pendientes->id }})" class="w-5"
+                                        title="Eliminar"><img src="{{ asset('/img/trash.svg') }}"
+                                            alt="Eliminar"></button>
+                                </div>
                             </td>
 
                         </tr>
