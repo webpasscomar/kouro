@@ -72,7 +72,7 @@
                         <td class="border px-4 py-2">{{ $item->id }}</td>
                         <td class="border px-4 py-2">{{ $item->pregunta }}</td>
                         <td class="border px-4 py-2">{{ $item->respuesta }}</td>
-                        <td class="border px-4 py-2">
+                        <td class="border text-center">
                             @livewire(
                                 'toggle-button',
                                 [

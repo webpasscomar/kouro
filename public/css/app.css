@@ -1256,6 +1256,12 @@ input:checked + .toggle-bg {
 .col-span-9 {
   grid-column: span 9 / span 9;
 }
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
 .float-right {
   float: right;
 }
@@ -3868,6 +3874,12 @@ input:checked + .toggle-bg {
   .sm\:col-span-6 {
     grid-column: span 6 / span 6;
   }
+  .sm\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
   .sm\:-mx-6 {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
@@ -3979,6 +3991,9 @@ input:checked + .toggle-bg {
   }
   .sm\:grid-cols-8 {
     grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  .sm\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
   .sm\:flex-row-reverse {
     flex-direction: row-reverse;

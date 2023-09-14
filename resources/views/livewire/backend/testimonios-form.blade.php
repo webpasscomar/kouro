@@ -9,35 +9,39 @@
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle lg:max-w-5xl md:max-w-2xl sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
             <form>
 
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-4 gap-2">
 
-                    <div class="mb-4 col-span-3" wire:loading wire:target="imagen">
+                    <div class="mb-4 sm:col-span-4" wire:loading wire:target="imagen">
                         <x-alert type='warning' title='Imagen subiendo'></x-alert>
                     </div>
 
 
-                    <div class="mb-4 col-span-3">
-                        <label for="cliente" class="block text-gray-700 text-sm font-bold mb-2">Cliente:</label>
-                        {{-- <input type="text"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="cliente" wire:model="cliente"> --}}
-                        <textarea name="cliente" id="cliente" cols="50" rows="5" wire:model="cliente" class="block text-gray-700 text-sm font-bold mb-2"></textarea>
-                        <x-jet-input-error for="cliente" />
-                    </div>
-
-                    <div class="mb-4 col-span-3">
+                    <div class="mb-4 sm:col-span-4">
                         <label for="testimonio" class="block text-gray-700 text-sm font-bold mb-2">Testimonio:</label>
                         {{-- <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="testimonio" wire:model="testimonio"> --}}
-                            <textarea name="testimonio" id="testimonio" cols="50" rows="5" wire:model="testimonio" class="block text-gray-700 text-sm font-bold mb-2"></textarea>
+                        <textarea name="testimonio" id="testimonio" cols="50" rows="5" wire:model="testimonio"
+                            class="block text-gray-700 text-sm font-bold mb-2 w-full"></textarea>
                         <x-jet-input-error for="testimonio" />
                     </div>
+
+
+                    <div class="mb-4">
+                        <label for="cliente" class="block text-gray-700 text-sm font-bold mb-2">Cliente:</label>
+                        {{-- <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="cliente" wire:model="cliente"> --}}
+                        <input name="cliente" id="cliente" cols="50" rows="5" wire:model="cliente"
+                            class="block text-gray-700 text-sm p-2 font-bold mb-2 border border-gray-500 w-full" />
+                        <x-jet-input-error for="cliente" />
+                    </div>
+
 
                     <div class="mb-3">
                         @if ($cambioImg)
@@ -52,14 +56,14 @@
                         @endif
                     </div>
 
-                    <div class="mb-3 col-span-2">
+                    <div class="mb-3 sm:col-span-2">
                         <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
                         <input type="file" id="imagen" wire:change="cambioImagen" wire:model="imagen">
                         <x-jet-input-error for="imagen" />
                     </div>
 
 
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-3 w-full">
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse col-span-4 w-full">
 
                         <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                             <button wire:click.prevent="guardar()" wire:target="save, imagen" type="button"
