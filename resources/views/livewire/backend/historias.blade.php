@@ -28,7 +28,7 @@
         <table class="table-auto w-full">
             <thead>
                 <tr class="bg-gray-200 text-gray-700">
-                    <th class="cursor-pointer px-4 py-2" wire:click="order('codigo')">Codigo
+                    <th class="cursor-pointer px-4 py-2" wire:click="order('codigo')">Código
                         {{-- -- Ordenar -- --}}
                         @if ($sort == 'codigo')
                             @if ($order == 'asc')
@@ -102,8 +102,8 @@
                         <td class="border px-4 py-2">{{ $item->talle }}</td>
                         <td class="border px-4 py-2">{{ $item->stock }}</td>
                         <td class="border px-4 py-2 text-center">
-                            <button wire:click="detalle({{ $item->id }})"
-                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4">Detalle</button>
+                            <button wire:click="detalle({{ $item->id }})" class="w-16 py-2 px-4 hover:scale-110"
+                                title="Detalle"><img src="{{ asset('/img/search.svg') }}" alt="Detalle"></button>
                         </td>
                     </tr>
                 @endforeach

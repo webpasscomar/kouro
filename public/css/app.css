@@ -1668,6 +1668,9 @@ input:checked + .toggle-bg {
 .w-screen {
   width: 100vw;
 }
+.w-\[16\%\] {
+  width: 16%;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -3062,6 +3065,18 @@ input:checked + .toggle-bg {
 }
 
 
+.hover\:scale-110:hover {
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+
+.hover\:rounded-full:hover {
+  border-radius: 9999px;
+}
+
+
 .hover\:border-4:hover {
   border-width: 4px;
 }
@@ -3207,6 +3222,12 @@ input:checked + .toggle-bg {
 .hover\:bg-yellow-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(227 160 8 / var(--tw-bg-opacity));
+}
+
+
+.hover\:bg-slate-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 
 
@@ -4016,6 +4037,12 @@ input:checked + .toggle-bg {
   .sm\:justify-between {
     justify-content: space-between;
   }
+  .sm\:gap-2 {
+    gap: 0.5rem;
+  }
+  .sm\:gap-3 {
+    gap: 0.75rem;
+  }
   .sm\:overflow-hidden {
     overflow: hidden;
   }
@@ -4173,6 +4200,9 @@ input:checked + .toggle-bg {
   }
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .md\:grid-cols-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
   .md\:flex-row {
     flex-direction: row;
