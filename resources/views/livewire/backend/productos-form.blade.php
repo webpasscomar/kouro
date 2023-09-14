@@ -7,7 +7,7 @@
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle lg:max-w-5xl md:max-w-2xl sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
             <form>
@@ -168,7 +168,7 @@
                         <input type="number"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="orden" wire:model="orden">
-                            <x-jet-input-error for="orden" />
+                        <x-jet-input-error for="orden" />
                     </div>
 
                     <div class="mb-3">
@@ -177,7 +177,7 @@
                         <input type="text"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="unidadVenta" wire:model="unidadVenta">
-                            <x-jet-input-error for="unidadVenta" />
+                        <x-jet-input-error for="unidadVenta" />
                     </div>
 
 
