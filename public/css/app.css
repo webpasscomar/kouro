@@ -1668,9 +1668,6 @@ input:checked + .toggle-bg {
 .w-screen {
   width: 100vw;
 }
-.w-11 {
-  width: 2.75rem;
-}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1757,10 +1754,6 @@ input:checked + .toggle-bg {
 }
 .translate-y-full {
   --tw-translate-y: 100%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.-rotate-90 {
-  --tw-rotate: -90deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .rotate-180 {
@@ -3653,11 +3646,6 @@ input:checked + .toggle-bg {
 }
 
 
-.group:hover .group-hover\:opacity-100 {
-  opacity: 1;
-}
-
-
 .group:hover .group-hover\:opacity-75 {
   opacity: 0.75;
 }
@@ -3954,9 +3942,6 @@ input:checked + .toggle-bg {
   }
   .sm\:max-w-2xl {
     max-width: 42rem;
-  }
-  .sm\:max-w-5xl {
-    max-width: 64rem;
   }
   .sm\:max-w-lg {
     max-width: 32rem;
