@@ -7,21 +7,25 @@
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all"
+        <div class="inline-block self-center h-96 bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
 
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+            <div class="py-3 px-4">
+                <div class="max-w-7xl mx-auto sm:px-2 lg:px-8">
+                    <div class="bg-white overflow-hidden sm:rounded-lg px-2 py-4">
 
-                        <h2 class="text-black font-bold flex justify-center">{{$producto_nombre}}</h2>
+                        <h2 class="text-black font-bold flex justify-center">{{ $producto_nombre }}</h2>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 mt-5">
                             <div class="col-span-3">
-                                <button wire:click="addCategoria"
+                                {{-- <button wire:click="addCategoria"
                                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                                    Nueva categoria</button>
+                                    Nueva categoria</button> --}}
+                                <button wire:click="addCategoria"
+                                    class="font-bold bg-gray-100 p-1 w-28 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
+                                    <img src="{{ asset('./img/add.svg') }}" alt="agregar producto"
+                                        class="w-4">Agregar</button>
                             </div>
                             {{-- <div class="py-3">
                                 <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search"
@@ -31,7 +35,7 @@
 
 
 
-                        <table class="table-auto w-full">
+                        <table class="table-auto w-full mt-5">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-700">
                                     <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Id</th>
@@ -46,8 +50,11 @@
                                             <td class="border px-4 py-2">{{ $prodcat->id }}</td>
                                             <td class="border px-4 py-2">{{ $prodcat->categoria }}</td>
                                             <td class="border px-4 py-2 text-center">
-                                                <button wire:click="deleteCategoria({{ $prodcat->id }})"
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                                {{-- <button wire:click="deleteCategoria({{ $prodcat->id }})"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button> --}}
+                                                <button wire:click="deleteCategoria({{ $prodcat->id }})" class="w-5"
+                                                    title="Eliminar"><img src="{{ asset('/img/trash.svg') }}"
+                                                        alt="Eliminar categoria"></button>
                                             </td>
                                         </tr>
                                     @endforeach

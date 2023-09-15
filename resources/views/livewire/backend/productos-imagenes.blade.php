@@ -11,17 +11,21 @@
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
 
-            <div class="py-12">
+            <div class="py-5">
                 <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+                    <div class="bg-white overflow-hidden sm:rounded-lg px-4 py-4">
 
-                        <h2 class="text-black font-bold flex justify-center">{{$producto_nombre}}</h2>
+                        <h2 class="text-black font-bold flex justify-center">{{ $producto_nombre }}</h2>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3">
-                            <div class="col-span-3">
-                                <button wire:click="addImagen"
+                            <div class="col-span-3 mt-5">
+                                {{-- <button wire:click="addImagen"
                                     class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 my-3">+
-                                    Nueva imagen</button>
+                                    Nueva imagen 500</button> --}}
+                                <button wire:click="addImagen"
+                                    class="font-bold bg-gray-100 p-2 rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 hover:translate-x-1 hover:translate-y-1 hover:shadow-none py-2 px-4 my-3">
+                                    <img src="{{ asset('./img/add.svg') }}" alt="agregar producto"
+                                        class="w-6">Agregar</button>
                             </div>
                             {{-- <div class="py-3">
                                 <x-jet-input type="text" placeholder="Texto a buscar" wire:model="search"
@@ -31,13 +35,13 @@
 
 
 
-                        <table class="table-auto w-full">
+                        <table class="table-auto w-full mt-5">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-700">
                                     <th class="cursor-pointer px-4 py-2" wire:click="order('id')">Id</th>
                                     <th class="cursor-pointer px-4 py-2" wire:click="order('color')">Color</th>
                                     <th class="cursor-pointer px-4 py-2" wire:click="order('file_name')">Archivo</th>
-                                    <th class="cursor-pointer px-4 py-2" >Imagen</th>
+                                    <th class="cursor-pointer px-4 py-2">Imagen</th>
                                     <th class="px-4 py-2">Acciones</th>
                                 </tr>
                             </thead>
@@ -49,11 +53,14 @@
                                             <td class="border px-4 py-2">{{ $img->color }}</td>
                                             <td class="border px-4 py-2">{{ $img->file_name }}</td>
                                             <td class="border px-4 py-2">
-                                                <img src="{{asset($img->file_path)}}" width="150" heigth="150">
+                                                <img src="{{ asset($img->file_path) }}" class="w-20 object-contain">
                                             </td>
                                             <td class="border px-4 py-2 text-center">
-                                                <button wire:click="deleteImagen({{ $img->id }})"
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button>
+                                                {{-- <button wire:click="deleteImagen({{ $img->id }})"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4">Borrar</button> --}}
+                                                <button wire:click="deleteImagen({{ $img->id }})" class="w-5"
+                                                    title="Eliminar"><img src="{{ asset('/img/trash.svg') }}"
+                                                        alt="Eliminar imágen"></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -61,7 +68,7 @@
                             @endif
                         </table>
 
-                        <div class="py-3">
+                        <div class="py-0">
 
                             {{-- {{ $imagenes->links() }} --}}
 
