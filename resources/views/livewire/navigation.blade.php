@@ -220,9 +220,7 @@
                     <button x-on:click="open = true" type="button"
                         class="mr-3 w-8 text-sm rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button"
                         aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                        <img class="w-8 h-8 rounded-full"
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt="user photo">
+                        <img class="w-8 h-8 rounded-full" src="{{ asset('img/user.png') }}" alt="user photo">
                     </button>
                     <!-- Menú desplegable user -->
                     <div x-show="open" x-on:click.away="open = false"

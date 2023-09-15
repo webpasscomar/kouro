@@ -1283,6 +1283,12 @@ input:checked + .toggle-bg {
 .m-auto {
   margin: auto;
 }
+.m-10 {
+  margin: 2.5rem;
+}
+.m-5 {
+  margin: 1.25rem;
+}
 .-my-2 {
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
@@ -1449,6 +1455,15 @@ input:checked + .toggle-bg {
 .mt-8 {
   margin-top: 2rem;
 }
+.mt-\[calc\(100vh-384px\)\] {
+  margin-top: calc(100vh - 384px);
+}
+.mt-\[calc\(100vh-192px\)\] {
+  margin-top: calc(100vh - 192px);
+}
+.mt-\[calc\(100vh\+192px\)\] {
+  margin-top: calc(100vh + 192px);
+}
 .box-border {
   box-sizing: border-box;
 }
@@ -1560,6 +1575,9 @@ input:checked + .toggle-bg {
 .h-screen {
   height: 100vh;
 }
+.h-80 {
+  height: 20rem;
+}
 .max-h-44 {
   max-height: 11rem;
 }
@@ -1667,6 +1685,9 @@ input:checked + .toggle-bg {
 }
 .w-screen {
   width: 100vw;
+}
+.w-11 {
+  width: 2.75rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -2477,6 +2498,10 @@ input:checked + .toggle-bg {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -2554,6 +2579,9 @@ input:checked + .toggle-bg {
 }
 .align-bottom {
   vertical-align: bottom;
+}
+.align-\[calc\(100vh-384px\)\] {
+  vertical-align: calc(100vh - 384px);
 }
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -4054,6 +4082,10 @@ input:checked + .toggle-bg {
   .sm\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+  .sm\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   .sm\:pb-4 {
     padding-bottom: 1rem;
