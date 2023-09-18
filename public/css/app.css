@@ -1283,12 +1283,6 @@ input:checked + .toggle-bg {
 .m-auto {
   margin: auto;
 }
-.m-10 {
-  margin: 2.5rem;
-}
-.m-5 {
-  margin: 1.25rem;
-}
 .-my-2 {
   margin-top: -0.5rem;
   margin-bottom: -0.5rem;
@@ -1455,15 +1449,6 @@ input:checked + .toggle-bg {
 .mt-8 {
   margin-top: 2rem;
 }
-.mt-\[calc\(100vh-384px\)\] {
-  margin-top: calc(100vh - 384px);
-}
-.mt-\[calc\(100vh-192px\)\] {
-  margin-top: calc(100vh - 192px);
-}
-.mt-\[calc\(100vh\+192px\)\] {
-  margin-top: calc(100vh + 192px);
-}
 .box-border {
   box-sizing: border-box;
 }
@@ -1575,9 +1560,6 @@ input:checked + .toggle-bg {
 .h-screen {
   height: 100vh;
 }
-.h-80 {
-  height: 20rem;
-}
 .max-h-44 {
   max-height: 11rem;
 }
@@ -1686,12 +1668,6 @@ input:checked + .toggle-bg {
 .w-screen {
   width: 100vw;
 }
-.w-72 {
-  width: 18rem;
-}
-.w-32 {
-  width: 8rem;
-}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1790,6 +1766,14 @@ input:checked + .toggle-bg {
 }
 .rotate-90 {
   --tw-rotate: 90deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.rotate-45 {
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-rotate-180 {
+  --tw-rotate: -180deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .scale-100 {
@@ -2465,6 +2449,10 @@ input:checked + .toggle-bg {
   padding-left: 2rem;
   padding-right: 2rem;
 }
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -2504,10 +2492,6 @@ input:checked + .toggle-bg {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-.py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 .pb-1 {
   padding-bottom: 0.25rem;
@@ -2586,9 +2570,6 @@ input:checked + .toggle-bg {
 }
 .align-bottom {
   vertical-align: bottom;
-}
-.align-\[calc\(100vh-384px\)\] {
-  vertical-align: calc(100vh - 384px);
 }
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -3681,11 +3662,6 @@ input:checked + .toggle-bg {
 }
 
 
-.group:hover .group-hover\:opacity-100 {
-  opacity: 1;
-}
-
-
 .group:hover .group-hover\:opacity-75 {
   opacity: 0.75;
 }
@@ -4082,6 +4058,10 @@ input:checked + .toggle-bg {
     padding-left: 0px;
     padding-right: 0px;
   }
+  .sm\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
   .sm\:px-20 {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -4097,10 +4077,6 @@ input:checked + .toggle-bg {
   .sm\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
-  }
-  .sm\:px-2 {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
   }
   .sm\:pb-4 {
     padding-bottom: 1rem;

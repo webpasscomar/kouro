@@ -8007,79 +8007,88 @@ botonIrArriba.addEventListener("click", function () {
 });
 
 // Slice productos destacados
-document.addEventListener("DOMContentLoaded", function () {
-  var productosDestacados = document.querySelector(
-  // contenedor slice
-  "#contenedor-slice-destacados");
-  var btnSliceDestacadosNext = document.querySelector(
-  // Botón avanzar
-  "#btn-slice-destacados-next");
-  var btnSliceDestacadosPrev = document.querySelector(
-  // Botón retroceder
-  "#btn-slice-destacados-prev");
+// document.addEventListener("DOMContentLoaded", () => {
+//     const productosDestacados = document.querySelector(
+//         // contenedor slice
+//         "#contenedor-slice-destacados"
+//     );
 
-  // Contenedor sección slice
-  var seccionSlice = document.querySelector("#seccion-slice");
+//     const btnSliceDestacadosNext = document.querySelector(
+//         // Botón avanzar
+//         "#btn-slice-destacados-next"
+//     );
 
-  // Ocultar flecha izquierda cuando no se hizo scroll hacia la derecha
-  if (productosDestacados.scrollLeft <= 0) {
-    btnSliceDestacadosPrev.style.display = "none"; // ocultar flecha para deslizar hacia la izquierda
-  } else {
-    btnSliceDestacadosPrev.style.display = "block"; // mostrar flecha para deslizar hacia la izquierda
-  }
+//     const btnSliceDestacadosPrev = document.querySelector(
+//         // Botón retroceder
+//         "#btn-slice-destacados-prev"
+//     );
 
-  // Mover slice hacia la derecha
-  btnSliceDestacadosNext.addEventListener("click", function () {
-    productosDestacados.scrollBy({
-      left: productosDestacados.offsetWidth,
-      behavior: "smooth"
-    });
-  });
-  // Mover slice hacia la izquierda
-  btnSliceDestacadosPrev.addEventListener("click", function () {
-    productosDestacados.scrollBy({
-      left: -productosDestacados.offsetWidth,
-      behavior: "smooth"
-    });
-  });
+// Contenedor sección slice
+// const seccionSlice = document.querySelector("#seccion-slice");
 
-  // Escuchar el evento scroll del slice
-  productosDestacados.addEventListener("scroll", function () {
-    var limitContenedor = productosDestacados.scrollWidth - productosDestacados.clientWidth;
-    if (productosDestacados.scrollLeft <= 0) {
-      btnSliceDestacadosPrev.style.display = "none"; // ocultar flecha para deslizar hacia la izquierda
-    } else {
-      btnSliceDestacadosPrev.style.display = "block"; // mostrar flecha para deslizar hacia la izquierda
-    }
+// // Ocultar flecha izquierda cuando no se hizo scroll hacia la derecha
+// if (productosDestacados.scrollLeft <= 0) {
+//     btnSliceDestacadosPrev.style.display = "none"; // ocultar flecha para deslizar hacia la izquierda
+// } else {
+//     btnSliceDestacadosPrev.style.display = "block"; // mostrar flecha para deslizar hacia la izquierda
+// }
 
-    if (productosDestacados.scrollLeft >= limitContenedor) {
-      btnSliceDestacadosNext.style.display = "none"; // ocultar flecha para deslizar hacia la derecha
-    } else {
-      btnSliceDestacadosNext.style.display = "block"; // mostrar flecha para deslizar hacia la derecha
-    }
-  });
+// Mover slice hacia la derecha
+// btnSliceDestacadosNext.addEventListener("click", () => {
+//     productosDestacados.scrollBy({
+//         left: productosDestacados.offsetWidth,
+//         behavior: "smooth",
+//     });
+// });
+// // Mover slice hacia la izquierda
+// btnSliceDestacadosPrev.addEventListener("click", () => {
+//     productosDestacados.scrollBy({
+//         left: -productosDestacados.offsetWidth,
+//         behavior: "smooth",
+//     });
+// });
 
-  // Mostrar las flechas (next -prev) si el cursor del mouse esta dentro del contenedor del slice
-  seccionSlice.addEventListener("mouseenter", function () {
-    var limitContenedor = productosDestacados.scrollWidth - productosDestacados.clientWidth;
-    if (productosDestacados.scrollLeft <= 0) {
-      btnSliceDestacadosPrev.style.display = "none"; // ocultar flecha para deslizar hacia la izquierda
-    } else {
-      btnSliceDestacadosPrev.style.display = "block"; // mostrar flecha para deslizar hacia la izquierda
-    }
+// Escuchar el evento scroll del slice
+// productosDestacados.addEventListener("scroll", () => {
+//     const limitContenedor =
+//         productosDestacados.scrollWidth - productosDestacados.clientWidth;
 
-    if (productosDestacados.scrollLeft >= limitContenedor) {
-      btnSliceDestacadosNext.style.display = "none"; // ocultar flecha para deslizar hacia la derecha
-    } else {
-      btnSliceDestacadosNext.style.display = "block"; // mostrar flecha para deslizar hacia la derecha
-    }
-  });
-  // ocultar las flechas (next -prev) si el cursor del mouse esta dentro del contenedor del slice
-  seccionSlice.addEventListener("mouseleave", function () {
-    btnSliceDestacadosNext.style.display = "none";
-    btnSliceDestacadosPrev.style.display = "none";
-  });
-});
+//     if (productosDestacados.scrollLeft <= 0) {
+//         btnSliceDestacadosPrev.style.display = "none"; // ocultar flecha para deslizar hacia la izquierda
+//     } else {
+//         btnSliceDestacadosPrev.style.display = "block"; // mostrar flecha para deslizar hacia la izquierda
+//     }
+
+//     if (productosDestacados.scrollLeft >= limitContenedor) {
+//         btnSliceDestacadosNext.style.display = "none"; // ocultar flecha para deslizar hacia la derecha
+//     } else {
+//         btnSliceDestacadosNext.style.display = "block"; // mostrar flecha para deslizar hacia la derecha
+//     }
+// });
+
+// Mostrar las flechas (next -prev) si el cursor del mouse esta dentro del contenedor del slice
+// seccionSlice.addEventListener("mouseenter", () => {
+//     const limitContenedor =
+//         productosDestacados.scrollWidth - productosDestacados.clientWidth;
+
+//     if (productosDestacados.scrollLeft <= 0) {
+//         btnSliceDestacadosPrev.style.display = "none"; // ocultar flecha para deslizar hacia la izquierda
+//     } else {
+//         btnSliceDestacadosPrev.style.display = "block"; // mostrar flecha para deslizar hacia la izquierda
+//     }
+
+//     if (productosDestacados.scrollLeft >= limitContenedor) {
+//         btnSliceDestacadosNext.style.display = "none"; // ocultar flecha para deslizar hacia la derecha
+//     } else {
+//         btnSliceDestacadosNext.style.display = "block"; // mostrar flecha para deslizar hacia la derecha
+//     }
+// });
+// ocultar las flechas (next -prev) si el cursor del mouse esta dentro del contenedor del slice
+//     seccionSlice.addEventListener("mouseleave", () => {
+//         btnSliceDestacadosNext.style.display = "none";
+//         btnSliceDestacadosPrev.style.display = "none";
+//     });
+// });
 
 /***/ }),
 
