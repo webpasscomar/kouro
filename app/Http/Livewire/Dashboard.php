@@ -10,6 +10,7 @@ use App\Models\Categoria;
 use App\Models\Talle;
 use App\Models\Color;
 use App\Models\Pedido;
+use App\Models\Movimiento;
 use App\Models\Testimonio;
 use App\Models\Parametro;
 use App\Models\Formadeentrega;
@@ -30,9 +31,9 @@ class Dashboard extends Component
 {
 
   public  $existencias_count;
-  public $stock_count,$products_count, $products_pend,$categories_count,$sizes_count,$colors_count;
+  public $stock_count, $products_count, $products_pend, $categories_count, $sizes_count, $colors_count;
   public  $orders_count, $testimonies_count, $parameters_count, $delivery_methods_count, $faq_count, $contact_messages_count;
-  public  $gallery_count, $places_count, $show_count,$stock_pend,$galeria_imagenes;
+  public  $gallery_count, $places_count, $show_count, $stock_pend, $galeria_imagenes;
 
 
   public function render()
@@ -40,13 +41,16 @@ class Dashboard extends Component
 
     $this->existencias_count = Sku::count();
     $this->stock_count       = Sku::sum('stock');
-    $this->stock_pend        = Stock_pendiente::where('fechaRespuesta',  '=', null)->count();
+    // $this->stock_pend        = Stock_pendiente::where('fechaRespuesta',  '=', null)->count();
+    $this->stock_pend        = Stock_pendiente::count();
     $this->products_count    = Producto::count();
+    // $this->products_count    = 23;
 
     $this->categories_count  = Categoria::count();
     $this->sizes_count       = Talle::count();
     $this->colors_count      = Color::count();
-    $this->orders_count      = Pedido::where('estado_id', '=', 0)->count();
+    // $this->orders_count      = Pedido::where('estado_id', '=', 0)->count();
+    $this->orders_count      = Pedido::count();
 
     $this->testimonies_count = Testimonio::count();
     $this->parameters_count  = Parametro::count();

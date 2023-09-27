@@ -6,7 +6,7 @@
     </div> --}}
 
 <!-- Sidebar a la derecha -->
-<aside class="w-auto bg-gray-800 text-white p-4 rounded-lg ml-4 pl-4 overflow-hidden mt-11">
+<aside class="w-auto bg-gray-800 text-white p-4 rounded-lg ml-4 pl-4 overflow-hidden">
     <!-- Logo o título del sidebar -->
     {{-- <div class="text-xl font-semibold mb-6">
         Mi panel

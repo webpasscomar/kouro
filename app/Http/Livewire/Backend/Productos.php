@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Http\Livewire\Product;
 use App\Models\Presentacion;
 use App\Models\Producto;
 use App\Models\Categoria;
@@ -25,8 +26,8 @@ class Productos extends Component
 
     // Atributos
     public $nombre;
-    public $desCorta='';
-    public $descLarga='';
+    public $desCorta = '';
+    public $descLarga = '';
 
     public $codigo;
     public $presentacion_id;
@@ -40,9 +41,9 @@ class Productos extends Component
     public $tamano;
     public $link;
 
-    public $orden=1;
+    public $orden = 1;
     public $unidadVenta;
-    public $destacar=0;
+    public $destacar = 0;
 
     public $estado;
 
@@ -198,7 +199,7 @@ class Productos extends Component
         $this->validate();
 
         if ($this->descLarga == null) {
-            $this->descLarga='';
+            $this->descLarga = '';
         }
 
         Producto::updateOrCreate(
