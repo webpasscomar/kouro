@@ -42,7 +42,7 @@
                 <p class="flex gap-x-2 mt-5 font-bold items-center border-2 p-2 border-gray-500 rounded-md hover:bg-slate-200 shadow-sm shadow-gray-400"
                     role="button">
                     <img src="{{ asset('./img/hand.svg') }}" alt="elegir productos" class="w-5">
-                    <a href="{{ route('productos.index') }}" class="inline-block">
+                    <a href="{{ route('productos.destacados') }}" class="inline-block">
                         <em>
                             Mira nuestros productos
                         </em>
