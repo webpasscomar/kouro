@@ -21,12 +21,6 @@ use App\Models\Contacto;
 use App\Models\Galeria;
 
 
-
-
-
-
-
-
 class Dashboard extends Component
 {
 
@@ -40,16 +34,12 @@ class Dashboard extends Component
   {
 
     $this->existencias_count = Sku::count();
-    $this->stock_count       = Sku::sum('stock');
-    // $this->stock_pend        = Stock_pendiente::where('fechaRespuesta',  '=', null)->count();
     $this->stock_pend        = Stock_pendiente::count();
     $this->products_count    = Producto::count();
-    // $this->products_count    = 23;
 
     $this->categories_count  = Categoria::count();
     $this->sizes_count       = Talle::count();
     $this->colors_count      = Color::count();
-    // $this->orders_count      = Pedido::where('estado_id', '=', 0)->count();
     $this->orders_count      = Pedido::count();
 
     $this->testimonies_count = Testimonio::count();
@@ -63,9 +53,6 @@ class Dashboard extends Component
     $this->show_count = Presentacion::count();
 
     $this->galeria_imagenes = Galeria::count();
-
-
-
 
     return view('livewire.dashboard');
   }

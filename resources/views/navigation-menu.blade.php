@@ -143,9 +143,9 @@
                                 Dashboard
                             </x-jet-dropdown-link>
 
-                            <x-jet-dropdown-link href="{{ route('parametros') }}">
+                            {{-- <x-jet-dropdown-link href="{{ route('parametros') }}">
                                 Parametros
-                            </x-jet-dropdown-link>
+                            </x-jet-dropdown-link> --}}
 
 
                             <x-jet-dropdown-link href="{{ route('talles') }}">

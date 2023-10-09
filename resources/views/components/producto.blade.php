@@ -2,8 +2,18 @@
 <div
     class="bg-[#E4E4E4] overflow-hidden py-2 px-3 h-full shadow-md shadow-gray-400 rounded-md relative hover:bg-gray-300">
     <div class="w-full drop-shadow-md">
-        <img src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
-            class="w-auto object-contain">
+
+        @if (Storage::disk('public')->exists('productos/' . $producto->imagen))
+            <img src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
+                class="w-auto object-contain">
+        @else
+            <img src="{{ asset('storage/productos/no_disponible.jpg') }}" alt="Imagen no disponible"
+                class="w-auto object-contain">
+        @endif
+
+
+        {{-- <img src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
+            class="w-auto object-contain"> --}}
         {{-- <img alt="{{ $producto->nombre }}" src="{{ asset('storage/productos/' . $producto->imagen) }}"
             class="object-cover object-center group-hover:opacity-75"> --}}
     </div>

@@ -1,5 +1,5 @@
 <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
-    <div class="flex justify-center min-h-screen pt-4 px-4 pb-20 text-center w-full">
+    <div class="flex justify-center pt-4 px-4 pb-4 text-center w-full">
 
         <div class="fixed inset-0 transition-opacity">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -7,13 +7,16 @@
 
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
 
-        <div class="inline-block self-center h-96 bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all"
+        <div class="inline-block self-center h-96 bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all lg:max-w-4xl md:max-w-2xl sm:w-full"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
 
+            {{-- <div class="inline-block bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-4 sm:align-middle lg:max-w-4xl md:max-w-2xl sm:w-full"
+            role="dialog" aria-modal="true" aria-labelledby="modal-headline"> --}}
 
-            <div class="py-3 px-4">
-                <div class="max-w-7xl mx-auto sm:px-2 lg:px-8">
-                    <div class="bg-white overflow-hidden sm:rounded-lg px-2 py-4">
+
+            <div class="py-3">
+                <div class="max-w-7xl mx-auto sm:px-2 lg:px-2">
+                    <div class="bg-white overflow-hidden sm:rounded-lg py-4">
 
                         <h2 class="text-black font-bold flex justify-center">{{ $producto_nombre }}</h2>
 

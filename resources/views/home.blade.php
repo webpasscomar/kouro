@@ -93,9 +93,18 @@
                 @foreach ($categorias as $category)
                     <a href="{{ route('productos.categoria', $category->slug) }}">
                         <div class="relative overflow-hidden rounded-lg shadow-lg">
-                            <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
-                                src="{{ asset('storage/categorias/' . $category->imagen) }}"
-                                alt="{{ $category->categoria }}">
+
+                            @if (Storage::disk('public')->exists('categorias/' . $category->imagen))
+                                <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                    src="{{ asset('storage/categorias/' . $category->imagen) }}"
+                                    alt="{{ $category->categoria }}">
+                            @else
+                                <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                    src="{{ asset('storage/categorias/no_disponible.jpg') }}"
+                                    alt="Imagen no disponible">
+                            @endif
+
+
                             <div class="absolute bottom-0 left-0 right-0 px-4 py-2 bg-white bg-opacity-75">
                                 <h2 class="text-lg font-bold">{{ $category->categoria }}</h2>
                             </div>

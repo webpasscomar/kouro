@@ -6,7 +6,7 @@
                 <div class="py-3 my-2">
 
                     <h4 class="text-xl text-gray-900 font-bold"><a href="{{ route('dashboard') }}"><i
-                                class="fas fa-home"></i></a> - Galerias
+                                class="fas fa-home"></i></a> - Galería
                     </h4>
                 </div>
 
@@ -53,7 +53,7 @@
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
                         </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripcion
+                        <th class="cursor-pointer px-4 py-2" wire:click="order('descripcion')">Descripción
                             @if ($sort == 'descripcion')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -88,7 +88,7 @@
                             @endif
                         </th>
 
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('usuario')">Usuario
+                        {{-- <th class="cursor-pointer px-4 py-2" wire:click="order('usuario')">Usuario
                             @if ($sort == 'usuario')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -98,8 +98,9 @@
                             @else
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
-                        </th>
-                        <th class="cursor-pointer px-4 py-2" wire:click="order('create_at')">Fecha
+                        </th> --}}
+
+                        {{-- <th class="cursor-pointer px-4 py-2" wire:click="order('create_at')">Fecha
                             @if ($sort == 'create_at')
                                 @if ($order == 'asc')
                                     <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
@@ -109,7 +110,7 @@
                             @else
                                 <i class="fas fa-sort float-right mt-1"></i>
                             @endif
-                        </th>
+                        </th> --}}
 
 
 
@@ -141,12 +142,11 @@
                                         key($galeria->id)
                                     )
                                 </td>
-                                <td class="border px-4 py-2">{{ $galeria->usuario }}</td>
-                                <td class="border px-4 py-2">{{ $galeria->created_at }}</td>
+                                {{-- <td class="border px-4 py-2">{{ $galeria->usuario }}</td> --}}
+                                {{-- <td class="border px-4 py-2">{{ $galeria->created_at }}</td> --}}
                                 <td class="border px-4 py-2 text-right">
                                     <button wire:click="editar({{ $galeria->id }})" class="w-5 hover:scale-125"
-                                        title="Editar"><img src="{{ asset('./img/edit.svg') }}"
-                                            alt="editar"></button>
+                                        title="Editar"><img src="{{ asset('./img/edit.svg') }}" alt="editar"></button>
 
                                     <button wire:click="$emit('alertDelete',{{ $galeria->id }})"
                                         class="w-5 hover:scale-125"><img src="{{ asset('./img/trash.svg') }}"

@@ -37,11 +37,11 @@
                 Presentaciones
             </a>
         </li>
-        <li class="mb-2">
+        {{-- <li class="mb-2">
             <a href="{{ route('parametros') }}" class="text-gray-300 hover:text-white">
                 Parametros
             </a>
-        </li>
+        </li> --}}
         <li class="mb-2">
             <a href="{{ route('talles') }}" class="text-gray-300 hover:text-white">
                 Talles
