@@ -6,27 +6,6 @@
         </h2>
     </x-slot>
 
-    <!--
-    This example requires some changes to your config:
-    
-    ```
-    // tailwind.config.js
-    module.exports = {
-        // ...
-        theme: {
-        extend: {
-            gridTemplateRows: {
-            '[auto,auto,1fr]': 'auto auto 1fr',
-            },
-        },
-        },
-        plugins: [
-        // ...
-        require('@tailwindcss/aspect-ratio'),
-        ],
-    }
-    ```
-    -->
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
@@ -73,33 +52,6 @@
                             <div class="grid col-span-3">
 
 
-                                <!-- Image gallery -->
-                                {{-- <div
-                                    class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-                                    <div class="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
-                                        <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
-                                            alt="Two each of gray, white, and black shirts laying flat."
-                                            class="h-full w-full object-cover object-center">
-                                    </div>
-                                    <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-                                        <div class="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg"
-                                                alt="Model wearing plain black basic tee."
-                                                class="h-full w-full object-cover object-center">
-                                        </div>
-                                        <div class="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-                                            <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg"
-                                                alt="Model wearing plain gray basic tee."
-                                                class="h-full w-full object-cover object-center">
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-                                        <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg"
-                                            alt="Model wearing plain white basic tee."
-                                            class="h-full w-full object-cover object-center">
-                                    </div>
-                                </div> --}}
 
                                 <!-- Product info -->
 
@@ -201,8 +153,7 @@
                                                         <label
                                                             class="-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none ring-gray-400">
                                                             <input type="radio" name="color-choice" value="White"
-                                                                class="sr-only"
-                                                                aria-labelledby="color-choice-0-label">
+                                                                class="sr-only" aria-labelledby="color-choice-0-label">
                                                             <span id="color-choice-0-label" class="sr-only"> White
                                                             </span>
                                                             <span aria-hidden="true"
@@ -406,33 +357,6 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="mt-10">
-                                            <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
-
-                                            <div class="mt-4">
-                                                <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                                                    <li class="text-gray-400"><span class="text-gray-600">Hand cut and
-                                                            sewn
-                                                            locally</span>
-                                                    </li>
-
-                                                    <li class="text-gray-400"><span class="text-gray-600">Dyed with
-                                                            our
-                                                            proprietary
-                                                            colors</span></li>
-
-                                                    <li class="text-gray-400"><span class="text-gray-600">Pre-washed
-                                                            &amp;
-                                                            pre-shrunk</span>
-                                                    </li>
-
-                                                    <li class="text-gray-400"><span class="text-gray-600">Ultra-soft
-                                                            100%
-                                                            cotton</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="mt-10">
                                             <h2 class="text-sm font-medium text-gray-900">Detalles</h2>
@@ -452,15 +376,25 @@
 
 
                             <div class="grid grid-cols-1">
-                                <h3 class="block px-2 py-3 bg-gray-300">Otras categorias</h3>
-                                <ul role="list" class="px-2 py-3 font-medium text-gray-900">
+                                <h3 class="block px-2 py-3 bg-gray-300">JAJA Otras categorias</h3>
+
+                                <ul>
                                     @foreach ($categorias as $categoria)
-                                        <li class="block px-2 py-3 border-b">
-                                            <a href="{{ route('productos.categoria', $categoria) }}">
-                                                {{ $categoria->categoria }}</a>
+                                        <li class="mb-2">
+                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            <a href="{{ route('productos.categoria', $categoria['slug']) }}"
+                                                class="text-red-700 hover:text-red-400">
+                                                {{ $categoria['categoria'] }}</a>
+                                            @if ($categoria->hijas->count() > 0)
+                                                @include('productos.partials_categorias', [
+                                                    'categorias' => $categoria->hijas,
+                                                ])
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>
+
+
                             </div>
 
 

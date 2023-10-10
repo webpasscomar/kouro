@@ -26,4 +26,18 @@ class Categoria extends Model
     {
         return $this->belongsToMany(Producto::class, 'producto_categoria');
     }
+
+    public function hijas()
+    {
+        return $this->hasMany(Categoria::class, 'categoriaPadre_id')->with('hijas');
+    }
+
+    public static function obtenerArbolCategoriasActivas()
+    {
+        return Categoria::where('estado', true)
+            ->where('categoriaPadre_id', 0) // Categorías de nivel superior (raíz)
+            ->with('hijas')
+            ->orderBy('categoria')
+            ->get();
+    }
 }

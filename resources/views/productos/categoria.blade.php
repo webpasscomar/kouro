@@ -14,65 +14,32 @@
 
                 <div class="mx-auto max-w-2xl py-4 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
 
-                    {{-- <h2 class="sr-only">Productos</h2> --}}
-
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
 
                         <div class="grid col-span-3 border-r border-gray-300 pr-4">
                             {{-- <h1>Productos</h1> --}}
+                            @if (count($productos) > 0)
+                                <!-- Mostrar los productos aquí -->
+                                <div
+                                    class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 pr-8">
 
-                            <div
-                                class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 pr-8">
-
-                                @foreach ($productos as $producto)
-                                    <?php $primeraCategoria = $producto->categorias->first(); ?>
-                                    <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}"
-                                        class="group">
-                                        <x-producto :producto="$producto" />
-                                    </a>
-                                @endforeach
-
-                                {{-- @foreach ($productos as $producto)
-                                        <?php // $primeraCategoria = $producto->categorias->first();
-                                        ?>
+                                    @foreach ($productos as $producto)
+                                        <?php $primeraCategoria = $producto->categorias->first(); ?>
                                         <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}"
                                             class="group">
-                                            <div
-                                                class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-
-                                                <picture>
-                                                    <source
-                                                        srcset="{{ asset('storage/productos/' . $producto->imagen) }}"
-                                                        type="image/webp">
-                                                    <img alt="{{ $producto->nombre }}"
-                                                        src="{{ asset('storage/productos/' . $producto->imagen) }}"
-                                                        class="object-cover object-center group-hover:opacity-75">
-                                                </picture>
-
-                                            </div>
-                                            <h3 class="mt-4 text-sm text-gray-700">{{ $producto->nombre }}</h3>
-                                            @if ($producto->ofertaDesde <= $fechahoy and $producto->ofertaHasta >= $fechahoy)
-                                                <img alt="Producto en oferta" src="{{ asset('storage/oferta.png') }}"
-                                                    class="object-cover object-center group-hover:opacity-75">
-                                                <p class="mt-1 text-lg font-medium text-gray-900 "
-                                                    style="text-decoration: line-through;">$
-                                                    {{ number_format($producto->precioLista, 2) }}</p>
-                                                <p class="mt-1 text-lg font-medium text-gray-900 ">$
-                                                    {{ number_format($producto->precioOferta, 2) }}</p>
-                                            @else
-                                                <p class="mt-1 text-lg font-medium text-gray-900">$
-                                                    {{ number_format($producto->precioLista, 2) }}</p>
-                                            @endif
-
-
-
-
+                                            <x-producto :producto="$producto" />
                                         </a>
-                                    @endforeach --}}
+                                    @endforeach
 
-                                <!-- More products... -->
-                            </div>
-
+                                    <!-- More products... -->
+                                </div>
+                            @else
+                                <!-- Mostrar el mensaje de alerta -->
+                                <div
+                                    class="bg-gray-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative">
+                                    <span class="block sm:inline">La categoría no posee aún productos.</span>
+                                </div>
+                            @endif
 
                         </div>
 
@@ -104,23 +71,23 @@
                                 <h3 class="text-xl font-bold mt-16">Categorias</h3>
                                 <div class="mt-5">
 
-                                    @foreach ($categorias as $categoria)
-                                        <div class="flex items-center mt-3">
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(185,28,28)"
-                                                    height="24" viewBox="0 96 960 960" width="32">
-                                                    <path
-                                                        d="M375 829.566 318.434 773l198-198-198-198L375 320.434 629.566 575 375 829.566Z" />
-                                                </svg>
-                                            </span>
-                                            <a href="{{ route('productos.categoria', $categoria['slug']) }}"
-                                                class="text-xl text-red-700 hover:text-red-400">
-                                                {{ $categoria['categoria'] }}</a>
-                                        </div>
-                                    @endforeach
+                                    <ul>
+                                        @foreach ($categorias as $categoria)
+                                            <li class="mb-2">
+                                                <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                <a href="{{ route('productos.categoria', $categoria['slug']) }}"
+                                                    class="text-red-700 hover:text-red-400">
+                                                    {{ $categoria['categoria'] }}</a>
+                                                @if ($categoria->hijas->count() > 0)
+                                                    @include('productos.partials_categorias', [
+                                                        'categorias' => $categoria->hijas,
+                                                    ])
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
 
                                 </div>
-
 
                             </div>
 

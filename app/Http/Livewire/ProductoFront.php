@@ -58,11 +58,11 @@ class ProductoFront extends Component
             ->get()
             ->toArray();
 
-        $this->categorias = Categoria::where('estado', 1)
-            ->orderBy('categoria')
-            ->get()
-            ->toArray();
-        // $this->categorias = Categoria::where('estado', 1)->get();
+        // $this->categorias = Categoria::where('estado', 1)
+        //     ->orderBy('categoria')
+        //     ->get()
+        //     ->toArray();
+        $this->categorias = Categoria::obtenerArbolCategoriasActivas();
 
         $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
             ->where('productos_imagenes.producto_id', '=', $id)
