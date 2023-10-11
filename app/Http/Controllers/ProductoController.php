@@ -39,9 +39,10 @@ class ProductoController extends Controller
 
         $categoria = new Categoria();
         $categoria->categoria = 'Destacados';
+        $hijas = $categoria->hijas;
 
 
-        return view('productos.categoria', compact('productos', 'categorias', 'categoria', 'fechahoy'));
+        return view('productos.categoria', compact('productos', 'categorias', 'hijas', 'categoria', 'fechahoy'));
     }
 
 
