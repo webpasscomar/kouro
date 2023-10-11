@@ -30,6 +30,7 @@ class HomeController extends Controller
         }
 
         $categorias = Categoria::where('estado', 1)
+            ->where('categoriaPadre_id', 0)
             ->where('id', '>', 1)
             ->orderBy('categoria', 'asc')
             ->get();

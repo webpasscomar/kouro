@@ -12,15 +12,11 @@ class ProductoController extends Controller
 
     public function index()
     {
-        // $categorias = Categoria::where('estado', 1)
-        //     ->where('id', '>', 1)
-        //     ->orderBy('categoria', 'asc')
-        //     ->get();
-
         $categorias = Categoria::obtenerArbolCategoriasActivas();
 
         return view('productos.index', compact('categorias'));
     }
+
 
     public function destacados()
     {
@@ -37,13 +33,7 @@ class ProductoController extends Controller
             }
         }
 
-
         $categorias = Categoria::obtenerArbolCategoriasActivas();
-
-        // $categorias = Categoria::where('estado', 1)
-        //     ->where('id', '>', 1)
-        //     ->orderBy('categoria', 'asc')
-        //     ->get();
 
         $fechahoy  = date('Y-m-d H:i:s');
 
@@ -54,19 +44,18 @@ class ProductoController extends Controller
         return view('productos.categoria', compact('productos', 'categorias', 'categoria', 'fechahoy'));
     }
 
+
     public function categoria($slugCategoria)
     {
 
         $fechahoy  = date('Y-m-d H:i:s');
-        // $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
         $categoria = Categoria::where('slug', $slugCategoria)->first();
+        $hijas = $categoria->hijas;
 
         if ($categoria) {
             $productos = $categoria->productos()->where('estado', '=', 1)->get();
         } else {
             $categoria = Categoria::first();
-            // $categoria = new Categoria();
-            // $categoria->id = 1;
             $categoria->categoria = 'Busqueda';
             $productos = Producto::where('nombre', 'LIKE', '%' . $slugCategoria . '%')->where('estado', '=', 1)->get();
         }
@@ -83,23 +72,15 @@ class ProductoController extends Controller
             }
         }
 
-
-        // $categorias = Categoria::where('estado', 1)
-        //     ->where('id', '>', 1)
-        //     ->orderBy('categoria', 'asc')
-        //     ->get();
         $categorias = Categoria::obtenerArbolCategoriasActivas();
-        return view('productos.categoria', compact('productos', 'categorias', 'categoria', 'fechahoy'));
+        return view('productos.categoria', compact('productos', 'categorias', 'hijas', 'categoria', 'fechahoy'));
     }
+
 
     public function show($slugCategoria, Producto $producto)
     {
         $producto = $producto;
         $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
-        // $categorias = Categoria::where('estado', 1)
-        //     ->where('id', '>', 1)
-        //     ->orderBy('categoria', 'asc')
-        //     ->get();
 
         $categorias = Categoria::obtenerArbolCategoriasActivas();
         return view('productos.show', compact('producto', 'categorias', 'categoria'));

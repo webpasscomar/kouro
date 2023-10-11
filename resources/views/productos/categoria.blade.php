@@ -17,11 +17,41 @@
                     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
 
                         <div class="grid col-span-3 border-r border-gray-300 pr-4">
+
+                            @if (count($hijas) > 0)
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+                                    @foreach ($hijas as $category)
+                                        <a href="{{ route('productos.categoria', $category->slug) }}">
+                                            <div class="relative overflow-hidden rounded-lg shadow-lg">
+
+                                                @if (Storage::disk('public')->exists('categorias/' . $category->imagen))
+                                                    <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                                        src="{{ asset('storage/categorias/' . $category->imagen) }}"
+                                                        alt="{{ $category->categoria }}">
+                                                @else
+                                                    <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                                        src="{{ asset('storage/categorias/no_disponible.jpg') }}"
+                                                        alt="Imagen no disponible">
+                                                @endif
+
+
+                                                <div
+                                                    class="absolute bottom-0 left-0 right-0 px-4 py-2 bg-white bg-opacity-75">
+                                                    <h2 class="text-lg font-bold">{{ $category->categoria }}</h2>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+
+
                             {{-- <h1>Productos</h1> --}}
                             @if (count($productos) > 0)
                                 <!-- Mostrar los productos aquí -->
                                 <div
-                                    class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 pr-8">
+                                    class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 pr-8 pt-8">
 
                                     @foreach ($productos as $producto)
                                         <?php $primeraCategoria = $producto->categorias->first(); ?>
