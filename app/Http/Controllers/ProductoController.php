@@ -39,6 +39,8 @@ class ProductoController extends Controller
 
         $categoria = new Categoria();
         $categoria->categoria = 'Destacados';
+        $categoria->slug = 'destacados';
+        $categoria->categoriaPadre_id = 0;
         $hijas = $categoria->hijas;
 
 
