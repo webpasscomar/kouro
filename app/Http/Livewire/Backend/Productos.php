@@ -79,7 +79,7 @@ class Productos extends Component
     public $presentaciones;
 
 
-
+    public $categoriasSeleccionadas;
 
 
 
@@ -190,6 +190,9 @@ class Productos extends Component
         $this->unidadVenta = $producto->unidadVenta;
         $this->destacar = $producto->destacar;
 
+        // Otros campos del producto
+        $this->categoriasSeleccionadas = $producto->categorias->pluck('id')->toArray();
+
         $this->abrirModal(1);
     }
 
@@ -202,7 +205,7 @@ class Productos extends Component
             $this->descLarga = '';
         }
 
-        Producto::updateOrCreate(
+        $producto = Producto::updateOrCreate(
             ['id' => $this->id_producto],
             [
                 'nombre' => $this->nombre,
@@ -222,6 +225,9 @@ class Productos extends Component
                 'destacar' => $this->destacar
             ]
         );
+
+        // Asociar categorías
+        $producto->categorias()->sync($this->categoriasSeleccionadas);
 
         $this->emit('alertSave');
 

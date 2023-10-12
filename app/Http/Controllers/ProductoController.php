@@ -43,7 +43,6 @@ class ProductoController extends Controller
         $categoria->categoriaPadre_id = 0;
         $hijas = $categoria->hijas;
 
-
         return view('productos.categoria', compact('productos', 'categorias', 'hijas', 'categoria', 'fechahoy'));
     }
 

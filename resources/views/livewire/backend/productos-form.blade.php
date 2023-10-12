@@ -13,28 +13,42 @@
             <form>
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 grid grid-cols-1 sm:grid-cols-6 gap-2">
 
+
+
                     <div class="mb-2 col-span-3">
-
-                        <div class="mb-2">
-                            <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
-                            <input type="text"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="nombre" wire:model="nombre">
-                            <x-jet-input-error for="nombre" />
-                        </div>
-
-                        <div class="mb-2 col-span-2">
-                            <label for="desCorta" class="block text-gray-700 text-sm font-bold mb-2">Descripción
-                                Corta:</label>
-                            <input type="text"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="desCorta" wire:model="desCorta">
-                            <x-jet-input-error for="desCorta" />
-                        </div>
-
+                        <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="nombre" wire:model="nombre">
+                        <x-jet-input-error for="nombre" />
                     </div>
 
+
+
+
                     <div class="mb-2 col-span-3">
+                        <label for="desCorta" class="block text-gray-700 text-sm font-bold mb-2">Descripción
+                            Corta:</label>
+                        <input type="text"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="desCorta" wire:model="desCorta">
+                        <x-jet-input-error for="desCorta" />
+                    </div>
+
+                    <div class="mb-2  col-span-2">
+                        <label for="categorias" class="block text-gray-700 text-sm font-bold mb-2">Categorias:</label>
+                        <select
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            wire:model="categoriasSeleccionadas" multiple>
+                            <option value="0">Elija una presentacion</option>
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+                    <div class="mb-2 col-span-4">
                         <label for="descLarga" class="block text-gray-700 text-sm font-bold mb-2">Descripción
                             larga:</label>
                         <textarea rows="5"
