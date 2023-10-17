@@ -30,6 +30,9 @@ class ProductoFront extends Component
     public $oferta;
     public $busqueda = "";
 
+    public $colorSeleccionado = null;
+    public $talleSeleccionado = null;
+
     public function mount($id)
     {
         $this->cantidad = 1;
@@ -249,12 +252,14 @@ class ProductoFront extends Component
     public function asigna_talle($idtalle)
     {
         $this->talle_id = $idtalle;
+        $this->talleSeleccionado  = $idtalle;
         $this->checkstock();
     }
 
     public function asigna_color($idcolor)
     {
         $this->color_id = $idcolor;
+        $this->colorSeleccionado  = $idcolor;
         $this->checkstock();
     }
 
