@@ -1,10 +1,16 @@
 /node_modules
 /public/hot
 /public/storage
+/public/default.php
 /storage/*.key
 /vendor
+/database_local
 .env
+composer.lock
+.env.dev
 .env.backup
+Dockerfile
+docker-compose.yml
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
