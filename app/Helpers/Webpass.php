@@ -1,18 +1,20 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+
 function hola()
 {
-  echo "Hola mundo";
+    echo "Hola mundo";
 }
 
 function parametro($id)
 {
-  $parametro = DB::table('parametros')->find($id);
-  return $parametro->valor;
+    $parametro = DB::table('parametros')->find($id);
+    return $parametro->valor;
 }
 
 function setting()
 {
-  $setting = DB::table('sitio')->get();
-  return $setting;
+    $setting = DB::table('sitio')->get();
+    return $setting;
 }
