@@ -14,37 +14,37 @@
 
         <table class="table-auto w-full">
             <thead>
-                <tr class="bg-gray-200 text-gray-700">
-                    <th class="cursor-pointer py-2 w-[16%]">Id</th>
-                    <th class="cursor-pointer py-2 w-[16%]">Producto</th>
-                    <th class="cursor-pointer py-2 w-[16%]">Color</th>
-                    <th class="cursor-pointer py-2 w-[16%]">Talle</th>
-                    <th class="cursor-pointer py-2 w-[16%]">Cantidad</th>
-                    <th class="py-2">Acciones</th>
-                </tr>
+            <tr class="bg-gray-200 text-gray-700">
+                <th class="cursor-pointer py-2 w-[16%]">Id</th>
+                <th class="cursor-pointer py-2 w-[16%]">Producto</th>
+                <th class="cursor-pointer py-2 w-[16%]">Color</th>
+                <th class="cursor-pointer py-2 w-[16%]">Talle</th>
+                <th class="cursor-pointer py-2 w-[16%]">Cantidad</th>
+                <th class="py-2">Acciones</th>
+            </tr>
             </thead>
             <tbody>
-                @if ($movimientos)
-                    @for ($i = 0; $i < count($movimientos); $i++)
-                        <tr>
-                            <td class="border px-4 py-2">{{ $movimientos[$i]['producto_id'] }}</td>
-                            <td class="border px-4 py-2">{{ $movimientos[$i]['producto_descripcion'] }}</td>
-                            <td class="border px-4 py-2">{{ $movimientos[$i]['color'] }}</td>
-                            <td class="border px-4 py-2">{{ $movimientos[$i]['talle'] }}</td>
-                            <td class="border px-4 py-2">{{ $movimientos[$i]['cantidad'] }}</td>
+
+            @if ($movimientos)
+                @for ($i = 0; $i < count($movimientos); $i++)
+                    <tr>
+                        <td class="border px-4 py-2">{{ $movimientos[$i]['producto_id'] }}</td>
+                        <td class="border px-4 py-2">{{ $movimientos[$i]['producto_descripcion'] }}</td>
+                        <td class="border px-4 py-2">{{ $movimientos[$i]['color'] }}</td>
+                        <td class="border px-4 py-2">{{ $movimientos[$i]['talle'] }}</td>
+                        <td class="border px-4 py-2">{{ $movimientos[$i]['cantidad'] }}</td>
 
 
-                            <td class="border px-4 py-2 text-center">
-                                <button wire:click="$emit('alertDelete',{{ $i }})" class="w-6"
+                        <td class="border px-4 py-2 text-center">
+                            <button wire:click="$emit('alertDelete',{{ $i }})" class="w-6"
                                     title="Eliminar"><img src="{{ asset('/img/trash.svg') }}" alt="eliminar">
-                                </button>
-                            </td>
-                        </tr>
-                    @endfor
-                @endif
+                            </button>
+                        </td>
+                    </tr>
+                @endfor
+            @endif
             </tbody>
         </table>
-
 
         <div class="mb-5 grid grid-cols-1 md:grid-cols-6 mt-10 gap-4">
             <div class="">
@@ -57,7 +57,7 @@
                         <option value="{{ $t->id }}">{{ $t->descripcion }}</option>
                     @endforeach
                 </select>
-                <x-jet-input-error for="tipomove_id" />
+                <x-jet-input-error for="tipomove_id"/>
             </div>
 
             <div class="">
@@ -69,7 +69,7 @@
                         <option value="{{ $p->id }}">{{ $p->nombre }}</option>
                     @endforeach
                 </select>
-                <x-jet-input-error for="producto_id" />
+                <x-jet-input-error for="producto_id"/>
             </div>
             <div class="">
                 <select
@@ -80,7 +80,7 @@
                         <option value="{{ $c->id }}">{{ $c->color }}</option>
                     @endforeach
                 </select>
-                <x-jet-input-error for="color_id" />
+                <x-jet-input-error for="color_id"/>
             </div>
             <div class="">
 
@@ -92,20 +92,21 @@
                         <option value="{{ $c->id }}">{{ $c->talle }}</option>
                     @endforeach
                 </select>
-                <x-jet-input-error for="talle_id" />
+                <x-jet-input-error for="talle_id"/>
             </div>
             <div class="">
 
                 <input type="text"
-                    class="shadow appearance-none border rounded py-2 w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="cantidad" wire:model="cantidad" placeholder="Cantidad">
-                <x-jet-input-error for="cantidad" />
+                       class="shadow appearance-none border rounded py-2 w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                       id="cantidad" wire:model="cantidad" placeholder="Cantidad">
+                <x-jet-input-error for="cantidad"/>
             </div>
 
             <div class="">
                 <button wire:click="guardar()"
-                    class="font-bold bg-gray-100 p-2 box-border w-full rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 h-9 px-8">
-                    <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Agregar</button>
+                        class="font-bold bg-gray-100 p-2 box-border w-full rounded-md shadow shadow-gray-500 flex items-center text-gray-500 gap-x-1 hover:bg-gray-300 h-9 px-8">
+                    <img src="{{ asset('./img/add.svg') }}" alt="agregar producto" class="w-6">Agregar
+                </button>
             </div>
 
         </div>
@@ -145,18 +146,14 @@
         </table> --}}
         <div class="w-full flex justify-end">
             <button wire:click="finalizar()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 my-3">
-                Grabar {{ count($movimientos) }} Movimientos</button>
+                Grabar {{ count($movimientos) }} Movimientos
+            </button>
         </div>
 
 
         <div class="py-3">
-
-            {{-- {{ $movimientos->links() }} --}}
-
+            {{-- {{ $movimientos -> links() }}--}}
         </div>
-
-
-
 
 
     </div>
