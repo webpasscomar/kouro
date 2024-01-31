@@ -16,8 +16,6 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 
 
-
-
 class Productos extends Component
 {
 
@@ -81,18 +79,11 @@ class Productos extends Component
 
     public $categoriasSeleccionadas;
 
-
-
-
-
-
-
     protected $productos;
 
     // Parametros para el multistep
     public $totalSteps = 4;
     public $currentStep = 1;
-
 
 
     protected function rules()
@@ -123,16 +114,13 @@ class Productos extends Component
 
 
     protected $messages = [
-        'nombre.required'      => 'El nombre es requerido',
-        'nombre.max'           => 'El nombre debe tener como maximo 100 caracteres',
-        'desCorta.required'    => 'La descripcion corta es requerida',
+        'nombre.required' => 'El nombre es requerido',
+        'nombre.max' => 'El nombre debe tener como maximo 100 caracteres',
+        'desCorta.required' => 'La descripcion corta es requerida',
         'precioLista.required' => 'El precio de lista es requerido',
         'unidadVenta.required' => 'La unidad de venta es requerida',
-        'orden.required'       => 'El orden es requerido',
+        'orden.required' => 'El orden es requerido',
     ];
-
-
-
 
 
     public function mount()
@@ -147,9 +135,7 @@ class Productos extends Component
     {
         $this->productos = Producto::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
-
-
+            ->paginate(10);
 
         return view('livewire.backend.productos', [
             'productos' => $this->productos,
@@ -215,8 +201,8 @@ class Productos extends Component
                 'presentacion_id' => $this->presentacion_id,
                 'precioLista' => $this->precioLista,
                 'precioOferta' => $this->precioOferta,
-                'ofertaDesde'  => $this->ofertaDesde,
-                'ofertaHasta'  => $this->ofertaHasta,
+                'ofertaDesde' => $this->ofertaDesde,
+                'ofertaHasta' => $this->ofertaHasta,
                 'peso' => $this->peso,
                 'tamano' => $this->tamano,
                 'link' => $this->link,
@@ -234,7 +220,6 @@ class Productos extends Component
         $this->limpiarCampos();
         $this->cerrarModal(1);
     }
-
 
 
     public function abrirModal($id = null)
@@ -327,8 +312,6 @@ class Productos extends Component
     }
 
 
-
-
     ///abre el formulario de alta o edicion de categorias
     public function addCategoria()
     {
@@ -368,15 +351,12 @@ class Productos extends Component
     }
 
     //elimina una categoria asignada al producto
-    public function  deleteCategoria($id)
+    public function deleteCategoria($id)
     {
         Producto_categoria::find($id)->delete();
         $this->emit('mensajePositivo', ['mensaje' => 'Categoria eliminada correctamente']);
         $this->categorias($this->producto_id);
     }
-
-
-
 
 
     ///abre el formulario de alta o edicion de imagenes
@@ -388,7 +368,7 @@ class Productos extends Component
     }
 
 
-    public function  deleteImagen($id)
+    public function deleteImagen($id)
     {
         Producto_imagen::find($id)->delete();
         $this->emit('mensajePositivo', ['mensaje' => 'Imagen eliminada correctamente']);
@@ -412,9 +392,9 @@ class Productos extends Component
         $this->validate();
 
         $filetosave = new Producto_imagen();
-        $filetosave->producto_id  = $this->producto_id;
-        $filetosave->color_id  = $this->color_id;
-        $filetosave->estado    = 1;
+        $filetosave->producto_id = $this->producto_id;
+        $filetosave->color_id = $this->color_id;
+        $filetosave->estado = 1;
         $filetosave->file_name = $this->imagen->getClientOriginalName();
         $filetosave->file_extension = $this->imagen->extension();
         $filetosave->file_path = 'storage/' . $this->imagen->store('productos', 'public');

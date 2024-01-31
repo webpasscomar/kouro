@@ -12,55 +12,52 @@ class Historias extends Component
 {
 
 
+    public $modal = false;
+    public $search;
+    public $sort = 'id';
+    public $order = 'desc';
 
-  public $modal = false;
-  public $search;
-  public $sort = 'id';
-  public $order = 'desc';
-
-  //se usa para armar el detalle del articulo
-  //es el codigo de id sku
-  public $ver_detalle = 0;
-
-
-  use WithPagination;
-  use WithFileUploads;
+    //se usa para armar el detalle del articulo
+    //es el codigo de id sku
+    public $ver_detalle = 0;
 
 
-  protected $sku ;
-  protected $detalle;
-
-  public function render()
-  {
-
-     $this->sku = Sku::select(['sku.id',
-                              'sku.stock',
-                              'sku.producto_id',
-                              'productos.nombre',
-                              'productos.codigo',
-                              'colores.color',
-                              'talles.talle'])
-                       ->join('productos', 'sku.producto_id', '=', 'productos.id')
-                       ->join('talles', 'sku.talle_id', '=', 'talles.id')
-                       ->join('colores', 'sku.color_id', '=', 'colores.id')
-                       ->where('productos.nombre', 'like', '%' . $this->search . '%')
-                       ->orderBy($this->sort, $this->order)
-                       ->paginate(5);
+    use WithPagination;
+    use WithFileUploads;
 
 
+    protected $sku;
+    protected $detalle;
+
+    public function render()
+    {
+
+        $this->sku = Sku::select(['sku.id',
+            'sku.stock',
+            'sku.producto_id',
+            'productos.nombre',
+            'productos.codigo',
+            'colores.color',
+            'talles.talle'])
+            ->join('productos', 'sku.producto_id', '=', 'productos.id')
+            ->join('talles', 'sku.talle_id', '=', 'talles.id')
+            ->join('colores', 'sku.color_id', '=', 'colores.id')
+            ->where('productos.nombre', 'like', '%' . $this->search . '%')
+            ->orderBy($this->sort, $this->order)
+            ->paginate(10);
 
 
-      return view('livewire.backend.historias',
-                ['sku' => $this->sku,
+        return view('livewire.backend.historias',
+            ['sku' => $this->sku,
                 'detalle' => $this->detalle,
             ]);
-  }
+    }
 
 
-  public function detalle($id)
-  {
+    public function detalle($id)
+    {
 
-       $this->detalle = Movimiento::select([
+        $this->detalle = Movimiento::select([
             'movimientos.tipomovimiento_id',
             'movimientos.cantidad',
             'movimientos.fecha',
@@ -73,34 +70,33 @@ class Historias extends Component
             ->get();
 
 
-            $this->abrirModal();
-  }
-
-  public function abrirModal()
-  {
-    $this->modal = true;
-  }
-
-  public function cerrarModal()
-  {
-    $this->modal = false;
-
-  }
-
-
-
-  public function order($sort)
-  {
-    if ($this->sort == $sort) {
-
-      if ($this->order == 'desc') {
-        $this->order = 'asc';
-      } else {
-        $this->order = 'desc';
-      }
-    } else {
-      $this->sort = $sort;
-      $this->order = 'asc';
+        $this->abrirModal();
     }
-  }
+
+    public function abrirModal()
+    {
+        $this->modal = true;
+    }
+
+    public function cerrarModal()
+    {
+        $this->modal = false;
+
+    }
+
+
+    public function order($sort)
+    {
+        if ($this->sort == $sort) {
+
+            if ($this->order == 'desc') {
+                $this->order = 'asc';
+            } else {
+                $this->order = 'desc';
+            }
+        } else {
+            $this->sort = $sort;
+            $this->order = 'asc';
+        }
+    }
 }

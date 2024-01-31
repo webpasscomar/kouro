@@ -24,7 +24,7 @@ class Faqs extends Component
     {
         $this->faqs = Faq::where('pregunta', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.backend.faqs', ['faqs' => $this->faqs]);
     }

@@ -25,14 +25,8 @@
                             data-te-slide-to="{{ $loop->index }}" aria-label=" {{ $foto->nombre }}"></button>
                     @endif
                 @endforeach
-
             @endif
-
-
-
-
         </div>
-
 
         <!-- Carousel items -->
         <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">

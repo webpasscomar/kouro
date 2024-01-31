@@ -2,15 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 #header {
-  position: sticky;
-  top: 0;
-  /* Esto fija el elemento en la parte superior de la ventana */
-  z-index: 100;
-  /* Opcional: ajusta el valor de acuerdo a tus necesidades */
-  background-color: white;
-  /* Opcional: ajusta el color de fondo según tu diseño */
-  /* Agrega otros estilos según tus necesidades */
-  border: 0 0 20px 0 solid #fff;
+    position: sticky;
+    top: 0;
+    /* Esto fija el elemento en la parte superior de la ventana */
+    z-index: 100;
+    /* Opcional: ajusta el valor de acuerdo a tus necesidades */
+    background-color: white;
+    /* Opcional: ajusta el color de fondo según tu diseño */
+    /* Agrega otros estilos según tus necesidades */
+    border: 0 0 20px 0 solid #fff;
 }

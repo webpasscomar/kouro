@@ -17,7 +17,6 @@ class Colores extends Component
     public $pcolor = '';
 
 
-
     use WithPagination;
 
     protected $colores;
@@ -32,7 +31,7 @@ class Colores extends Component
     {
         $this->colores = Color::where('color', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.backend.colores', ['colores' => $this->colores]);
     }

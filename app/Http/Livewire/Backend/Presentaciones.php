@@ -30,7 +30,7 @@ class Presentaciones extends Component
         $this->presentaciones = Presentacion::where('presentacion', 'like', '%' . $this->search . '%')
             ->orWhere('sigla', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.backend.presentaciones', ['presentaciones' => $this->presentaciones]);
     }

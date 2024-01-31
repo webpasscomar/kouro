@@ -9,6 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
+
+    /**
+     * @var int|mixed
+     */
+    public $categoriaPadre_id;
+    /**
+     * @var mixed|string
+     */
+    public $categoria;
     protected $table = 'categorias';
 
     protected $fillable = [

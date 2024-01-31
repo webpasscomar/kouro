@@ -3,13 +3,11 @@
 namespace App\Http\Livewire\Backend;
 
 
-
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-
 
 
 use App\Models\Galeria;
@@ -18,8 +16,8 @@ use App\Models\Galeria;
 class Galerias extends Component
 {
     public $nombre, $descripcion, $imagen, $id_galeria;
-    public $orden=1;
-    public $estado =1;
+    public $orden = 1;
+    public $estado = 1;
     public $user;
 
 
@@ -60,14 +58,14 @@ class Galerias extends Component
 
         $this->user = Auth::user();
         $this->galeriaAnt = Galeria::where('estado', 1)->get();
-            $this->galeriaImagenes = Galeria::where(
-                function ($q) {
-                    $q->where('descripcion', 'like', '%' . $this->search . '%')
-                        ->orWhere('nombre', 'like', '%' . $this->search . '%');
-                }
-            )
+        $this->galeriaImagenes = Galeria::where(
+            function ($q) {
+                $q->where('descripcion', 'like', '%' . $this->search . '%')
+                    ->orWhere('nombre', 'like', '%' . $this->search . '%');
+            }
+        )
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.backend.galerias', ['galerias' => $this->galeriaImagenes]);
     }
@@ -97,7 +95,7 @@ class Galerias extends Component
         $this->nombre = '';
         $this->descripcion = '';
         $this->imagen = '';
-        $this->orden =0;
+        $this->orden = 0;
         $this->estado = 0;
         $this->id_galeria = 0;
     }

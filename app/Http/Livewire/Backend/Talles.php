@@ -28,7 +28,7 @@ class Talles extends Component
     {
         $this->talles = Talle::where('talle', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.backend.talles', ['talles' => $this->talles]);
     }

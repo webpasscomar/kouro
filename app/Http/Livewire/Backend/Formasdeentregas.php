@@ -8,9 +8,9 @@ use Livewire\WithPagination;
 
 class Formasdeentregas extends Component
 {
-    public $nombre, $id_formasdeentrega,$pidedirec;
-    public $costo=0;
-    public $cobra=1;
+    public $nombre, $id_formasdeentrega, $pidedirec;
+    public $costo = 0;
+    public $cobra = 1;
 
     protected $listeners = ['delete'];
 
@@ -31,9 +31,9 @@ class Formasdeentregas extends Component
     protected function messages()
     {
         return [
-            'nombre.required'        => 'Debe ingresar el nombre.',
-            'nombre.max'             => 'Solo puede ingresar 30 caracteres.',
-            'costo.numeric'          => 'Debe ingresar un valor numerico.',
+            'nombre.required' => 'Debe ingresar el nombre.',
+            'nombre.max' => 'Solo puede ingresar 30 caracteres.',
+            'costo.numeric' => 'Debe ingresar un valor numerico.',
         ];
     }
 
@@ -41,7 +41,7 @@ class Formasdeentregas extends Component
     {
         $this->formasdeentrega = Formadeentrega::where('nombre', 'like', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->order)
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.backend.formasdeentrega', ['formasdeentrega' => $this->formasdeentrega]);
     }
@@ -64,11 +64,11 @@ class Formasdeentregas extends Component
 
     public function limpiarCampos()
     {
-        $this->id_formasdeentrega=0;
-        $this->pidedirec=0;
+        $this->id_formasdeentrega = 0;
+        $this->pidedirec = 0;
         $this->nombre = '';
-        $this->costo=0;
-        $this->cobra=1;
+        $this->costo = 0;
+        $this->cobra = 1;
     }
 
     public function editar($id)
@@ -78,7 +78,7 @@ class Formasdeentregas extends Component
         $this->nombre = $formasdeentrega->nombre;
         $this->costo = $formasdeentrega->costo;
         $this->pidedirec = $formasdeentrega->pidedirec;
-       // $this->cobra = $formasdeentrega->cobra;
+        // $this->cobra = $formasdeentrega->cobra;
         $this->abrirModal();
     }
 
@@ -98,7 +98,7 @@ class Formasdeentregas extends Component
                 'nombre' => $this->nombre,
                 'pidedirec' => $this->pidedirec,
                 'costo' => $this->costo,
-              //  'cobra' => $this->cobra,
+                //  'cobra' => $this->cobra,
             ]
         );
 
