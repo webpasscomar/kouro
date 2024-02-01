@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Producto_imagen;
-use Illuminate\Support\Carbon;
 
 class ProductoController extends Controller
 {

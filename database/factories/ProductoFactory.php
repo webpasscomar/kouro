@@ -21,27 +21,28 @@ class ProductoFactory extends Factory
 
         return [
             'nombre' => $nombre,
-			'desCorta' => $this->faker->text(120),
+            'desCorta' => $this->faker->text(120),
             'descLarga' => $this->faker->text(240),
-			'codigo' => 0,
+            'codigo' => 0,
 
-			'presentacion_id' => 0,
-			'impuesto_id' => 0,
+            'presentacion_id' => 0,
+            'impuesto_id' => 0,
 
             'precioLista' => $this->faker->randomElement([100, 1000]),
 
             'precioOferta' => $this->faker->randomElement([100, 1000]),
-			'ofertaDesde' => $this->faker->date(),
+            'ofertaDesde' => $this->faker->date(),
             'ofertaHasta' => $this->faker->date(),
 
-			'peso' => 0,
-			'tamano' => 0,
-			'link' => 0,
-			'etiquetas' => 0,
+            'peso' => 0,
+            'tamano' => 0,
+            'link' => 0,
+            'etiquetas' => 0,
 
-			'orden' => 0,
-			'unidadVenta' => 0,
+            'orden' => 0,
+            'unidadVenta' => 0,
             'estado' => $this->faker->randomElement([0, 1])
 
         ];
+    }
 }
