@@ -1787,6 +1787,9 @@ input:checked + .toggle-bg {
 .resize {
     resize: both;
 }
+.scroll-m-1 {
+    scroll-margin: 0.25rem;
+}
 .list-inside {
     list-style-position: inside;
 }
