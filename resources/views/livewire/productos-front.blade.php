@@ -12,9 +12,9 @@
                 <div class="w-3/4 p-4">
                     @if ($productos->count() > 0)
                         <div class="grid grid-cols-3 gap-4">
-
+                            {{ dd($fechahoy) }}
                             @foreach ($productos as $producto)
-                                <x-producto :producto="$producto" />
+                                <x-producto :producto="$producto" :fechahoy="$fechahoy" />
                             @endforeach
 
                             {{-- @foreach ($productos as $producto)

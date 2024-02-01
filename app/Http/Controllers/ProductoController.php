@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
 use App\Models\Producto_imagen;
+use Illuminate\Support\Carbon;
 
 class ProductoController extends Controller
 {
@@ -35,7 +36,9 @@ class ProductoController extends Controller
 
         $categorias = Categoria::obtenerArbolCategoriasActivas();
 
-        $fechahoy  = date('Y-m-d H:i:s');
+        // $fechahoy  = date('Y-m-d H:i:s');
+        $fechahoy  = date('Y-m-d');
+        // $fechahoy  = Carbon::now()->toDateString();
 
         $categoria = new Categoria();
         $categoria->categoria = 'Destacados';

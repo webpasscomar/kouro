@@ -50,6 +50,7 @@
                             {{-- <h1>Productos</h1> --}}
                             @if (count($productos) > 0)
                                 <!-- Mostrar los productos aquí -->
+
                                 <div
                                     class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 pr-8 pt-8">
 
@@ -57,7 +58,7 @@
                                         <?php $primeraCategoria = $producto->categorias->first(); ?>
                                         <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}"
                                             class="group">
-                                            <x-producto :producto="$producto" />
+                                            <x-producto :producto="$producto" :fechahoy="$fechahoy" />
                                         </a>
                                     @endforeach
 
