@@ -59,7 +59,7 @@
         <div class="md:relative md:pl-10 md:m-auto md:mt-14">
           <img src="{{ asset('img/localH.jpg') }}" alt="productos"
             class="md:w-72 w-full mb-10 md:mb-0 border-white border-8 rounded-lg shadow-xl md:absolute md:-translate-x-10 md:-translate-y-14">
-          <img src="{{ asset('img/loca21.jpg') }}" alt="productos"
+          <img src="{{ asset('img/local2.jpg') }}" alt="productos"
             class="w-full border-white border-8 rounded-lg shadow-xl">
         </div>
       </div>
