@@ -11,6 +11,7 @@ use App\Models\Stock_pendiente;
 use App\Models\Producto_imagen;
 
 
+use Carbon\Carbon;
 use Livewire\Component;
 
 class ProductoFront extends Component
@@ -42,10 +43,8 @@ class ProductoFront extends Component
         $this->producto_id = $id;
         $this->oferta = 0;
         $this->producto = Producto::where('id', $id)->firstOrFail();
-        $this->fechahoy  = date('Y-m-d H:i:s');
-
-
-
+        $this->fechahoy = date('Y-m-d H:i:s');
+        
         $this->colores = Sku::select(['sku.color_id', 'colores.color', 'colores.pcolor'])
             ->join('colores', 'sku.color_id', '=', 'colores.id')
             ->where('sku.producto_id', '=', $id)
@@ -131,12 +130,12 @@ class ProductoFront extends Component
         $ldate = date('Y-m-d H:i:s');
         $precio = 0;
         if (is_null($this->producto->ofertaDesde) or is_null($this->producto->ofertaHasta)) {
-            $precio =  $this->producto->precioLista;
+            $precio = $this->producto->precioLista;
         } else {
             if ($this->producto->ofertaDesde <= $ldate and $this->producto->ofertaHasta >= $ldate) {
-                $precio =  $this->producto->precioOferta;
+                $precio = $this->producto->precioOferta;
             } else {
-                $precio =  $this->producto->precioLista;
+                $precio = $this->producto->precioLista;
             }
         }
 
@@ -216,10 +215,10 @@ class ProductoFront extends Component
 
             Stock_pendiente::Create(
                 [
-                    'sku_id'            => $sku_id,
-                    'fechaSolicitud'    => date('Y-m-d H:i:s'),
-                    'cantidad'          => $this->cantidad,
-                    'email'             => $this->mailaviso
+                    'sku_id' => $sku_id,
+                    'fechaSolicitud' => date('Y-m-d H:i:s'),
+                    'cantidad' => $this->cantidad,
+                    'email' => $this->mailaviso
                 ]
             );
             $this->emit('mensajePositivo', ['mensaje' => 'Te avisamos cuando el producto ingrese']);
@@ -234,15 +233,15 @@ class ProductoFront extends Component
             $this->oferta = 0;;
         } else {
             if ($this->producto->ofertaDesde <= $ldate and $this->producto->ofertaHasta >= $ldate) {
-                $this->oferta =  1;
+                $this->oferta = 1;
             } else {
-                $this->oferta =  0;
+                $this->oferta = 0;
             }
         }
 
         $producto = $this->producto;
-        $colores  = $this->colores;
-        $talles   = $this->talles;
+        $colores = $this->colores;
+        $talles = $this->talles;
         $categorias = $this->categorias;
         $images = $this->images;
         return view('livewire.producto-front', $producto, $colores, $talles, $categorias, $images);
@@ -252,14 +251,14 @@ class ProductoFront extends Component
     public function asigna_talle($idtalle)
     {
         $this->talle_id = $idtalle;
-        $this->talleSeleccionado  = $idtalle;
+        $this->talleSeleccionado = $idtalle;
         $this->checkstock();
     }
 
     public function asigna_color($idcolor)
     {
         $this->color_id = $idcolor;
-        $this->colorSeleccionado  = $idcolor;
+        $this->colorSeleccionado = $idcolor;
         $this->checkstock();
     }
 

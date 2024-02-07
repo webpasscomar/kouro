@@ -13,11 +13,11 @@ class Categoria extends Model
     /**
      * @var int|mixed
      */
-    public $categoriaPadre_id;
+    // public $categoriaPadre_id;
     /**
      * @var mixed|string
      */
-    public $categoria;
+    // public $categoria;
     protected $table = 'categorias';
 
     protected $fillable = [

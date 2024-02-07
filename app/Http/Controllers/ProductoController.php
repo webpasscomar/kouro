@@ -35,7 +35,9 @@ class ProductoController extends Controller
 
         $categorias = Categoria::obtenerArbolCategoriasActivas();
 
-        $fechahoy  = date('Y-m-d H:i:s');
+        // $fechahoy  = date('Y-m-d H:i:s');
+        $fechahoy  = date('Y-m-d');
+        // $fechahoy  = Carbon::now()->toDateString();
 
         $categoria = new Categoria();
         $categoria->categoria = 'Destacados';

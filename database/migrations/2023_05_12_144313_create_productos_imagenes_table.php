@@ -34,6 +34,7 @@ class CreateProductosImagenesTable extends Migration
                 ->nullOnDelete();
 
             $table->foreignId('color_id')
+                ->nullable()
                 ->constrained('colores')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();

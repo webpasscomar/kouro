@@ -26,11 +26,13 @@
                                             <div class="relative overflow-hidden rounded-lg shadow-lg">
 
                                                 @if (Storage::disk('public')->exists('categorias/' . $category->imagen))
-                                                    <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                                    <img
+                                                        class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
                                                         src="{{ asset('storage/categorias/' . $category->imagen) }}"
                                                         alt="{{ $category->categoria }}">
                                                 @else
-                                                    <img class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
+                                                    <img
+                                                        class="w-full h-64 object-cover transform hover:scale-105 transition duration-500 ease-in-out"
                                                         src="{{ asset('storage/categorias/no_disponible.jpg') }}"
                                                         alt="Imagen no disponible">
                                                 @endif
@@ -50,14 +52,15 @@
                             {{-- <h1>Productos</h1> --}}
                             @if (count($productos) > 0)
                                 <!-- Mostrar los productos aquí -->
+
                                 <div
                                     class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 pr-8 pt-8">
 
                                     @foreach ($productos as $producto)
-                                        <?php $primeraCategoria = $producto->categorias->first(); ?>
+                                            <?php $primeraCategoria = $producto->categorias->first(); ?>
                                         <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}"
-                                            class="group">
-                                            <x-producto :producto="$producto" />
+                                           class="group">
+                                            <x-producto :producto="$producto" :fechahoy="$fechahoy"/>
                                         </a>
                                     @endforeach
 
@@ -82,15 +85,15 @@
                                 <h3 class="text-xl font-bold mt-1">Buscador</h3>
                                 <div class="flex lg:justify-between mt-3">
                                     <input type="search" name="" id="" placeholder="Buscar producto"
-                                        class="rounded-lg border-2 border-gray-300 placeholder:text-gray-400 flex-1 lg:w-40 xl:flex-1 mr-3 focus:ring-red-400 focus:border-red-400"
-                                        wire:model="busqueda">
+                                           class="rounded-lg border-2 border-gray-300 placeholder:text-gray-400 flex-1 lg:w-40 xl:flex-1 mr-3 focus:ring-red-400 focus:border-red-400"
+                                           wire:model="busqueda">
                                     <button class="bg-red-500 p-3 w-12 h-12 rounded-lg lg:ml-0 hover:bg-red-600"
-                                        wire:click.prevent="buscar()">
+                                            wire:click.prevent="buscar()">
                                         <span>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" height="24"
-                                                viewBox="0 96 960 960" width="24">
+                                                 viewBox="0 96 960 960" width="24">
                                                 <path
-                                                    d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Z" />
+                                                    d="M796 935 533 672q-30 26-69.959 40.5T378 727q-108.162 0-183.081-75Q120 577 120 471t75-181q75-75 181.5-75t181 75Q632 365 632 471.15 632 514 618 554q-14 40-42 75l264 262-44 44ZM377 667q81.25 0 138.125-57.5T572 471q0-81-56.875-138.5T377 275q-82.083 0-139.542 57.5Q180 390 180 471t57.458 138.5Q294.917 667 377 667Z"/>
                                             </svg>
                                         </span>
                                     </button>
@@ -106,7 +109,7 @@
                                             <li class="mb-2">
                                                 <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                 <a href="{{ route('productos.categoria', $categoria['slug']) }}"
-                                                    class="text-red-700 hover:text-red-400">
+                                                   class="text-red-700 hover:text-red-400">
                                                     {{ $categoria['categoria'] }}</a>
                                                 @if ($categoria->hijas->count() > 0)
                                                     @include('productos.partials_categorias', [
