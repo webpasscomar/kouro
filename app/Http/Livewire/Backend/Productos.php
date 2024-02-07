@@ -247,7 +247,23 @@ class Productos extends Component
 
     public function limpiarCampos()
     {
-        $this->reset('nombre', 'desCorta', 'descLarga', 'codigo', 'precioLista', 'ofertaDesde', 'ofertaHasta', 'precioOferta', 'peso', 'tamano', 'link', 'orden', 'unidadVenta');
+        $this->reset([
+            'nombre',
+            'desCorta',
+            'descLarga',
+            'codigo',
+            'presentacion_id',
+            'precioLista',
+            'ofertaDesde',
+            'ofertaHasta',
+            'precioOferta',
+            'peso',
+            'tamano',
+            'link',
+            'orden',
+            'unidadVenta',
+            'categoriasSeleccionadas',
+        ]);
     }
 
     public function order($sort)

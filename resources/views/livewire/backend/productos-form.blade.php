@@ -40,7 +40,7 @@
                             <option class="text-gray-400" value="0">Elija una presentacion</option>
                             @foreach ($categorias as $categoria)
                                 <option class="mt-1" value="{{ $categoria->id }}">
-                                    {{ $categoria['categoria'] }}
+                                    {{ $categoria->categoria }}
                                 </option>
                             @endforeach
                         </select>

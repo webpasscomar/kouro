@@ -12,7 +12,6 @@ use Illuminate\Support\Str;
 class Categorias extends Component
 {
     public $categoriaPadre_id, $categoria, $descripcion, $slug, $imagen, $menu, $orden, $estado, $id_categoria, $categoriasAnt;
-
     public $modal = false;
     public $search;
     public $sort = 'id';
@@ -45,7 +44,10 @@ class Categorias extends Component
 
     public function render()
     {
-        $this->categoriasAnt = Categoria::where('estado', 1)->get();
+        $this->categoriasAnt = Categoria::where('categoriaPadre_id', 0)
+            ->orWhere('categoriaPadre_id', '>=', 1)
+            ->Where('estado', 1)
+            ->get();
         // $this->categorias = Categoria::where('id', '>', 1)
         $this->categorias = Categoria::where(
             function ($q) {
@@ -55,7 +57,7 @@ class Categorias extends Component
         )
             ->orderBy($this->sort, $this->order)
             ->paginate(10);
-        return view('livewire.backend.categorias', ['categorias' => $this->categorias]);
+        return view('livewire.backend.categorias', ['categorias' => $this->categorias, 'categoriasAnt' => $this->categoriasAnt]);
     }
 
     public function crear()
