@@ -23,31 +23,35 @@ use App\Http\Livewire\Backend\Galerias;
 
 
 Route::middleware([
-  'auth:sanctum',
-  config('jetstream.auth_session'),
-  'verified'
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
 ])->group(function () {
-  Route::get('/parametros', Parametros::class)->name('parametros');
-  Route::get('/categorias', Categorias::class)->name('categorias');
-  Route::get('/productos', Productos::class)->name('productos');
-  Route::get('/presentaciones', Presentaciones::class)->name('presentaciones');
-  Route::get('/faqs', Faqs::class)->name('faqs');
-  Route::get('/testimonios', Testimonios::class)->name('testimonios');
-  Route::get('/formasdeentrega', Formasdeentregas::class)->name('formasdeentrega');
-  Route::get('/colores', Colores::class)->name('colores');
-  Route::get('/talles', Talles::class)->name('talles');
-  Route::get('/sitio', Sitios::class)->name('sitio');
-  Route::get('/movimientos', Movimientos::class)->name('movimientos');
-  Route::get('/historias', Historias::class)->name('historias');
-  Route::get('/pedidos', Pedidos::class)->name('pedidos');
-  Route::get('/pendientes', Avisostock::class)->name('pendientes');
-  Route::get('/galerias', Galerias::class)->name('galerias');
-  // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
-  // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
-  // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');
+    Route::get('/parametros', Parametros::class)->name('parametros');
+    Route::get('/categorias', Categorias::class)->name('categorias');
+    Route::get('/productos', Productos::class)->name('productos');
+    Route::get('/presentaciones', Presentaciones::class)->name('presentaciones');
+    Route::get('/faqs', Faqs::class)->name('faqs');
+    Route::get('/testimonios', Testimonios::class)->name('testimonios');
+    Route::get('/formasdeentrega', Formasdeentregas::class)->name('formasdeentrega');
+    Route::get('/colores', Colores::class)->name('colores');
+    Route::get('/talles', Talles::class)->name('talles');
+    Route::get('/sitio', Sitios::class)->name('sitio');
+    Route::get('/movimientos', Movimientos::class)->name('movimientos');
+    Route::get('/historias', Historias::class)->name('historias');
+    Route::get('/pedidos', Pedidos::class)->name('pedidos');
+    Route::get('/pendientes', Avisostock::class)->name('pendientes');
+    Route::get('/galerias', Galerias::class)->name('galerias');
+    // Route::get('/mipanel/impuestos', Impuestos::class)->name('impuestos');
+    // Route::get('/mipanel/formasdepago', Formasdepago::class)->name('formasdepago');
+    // Route::get('/mipanel/estadosdelenvio', Estadosdelenvio::class)->name('estadosdelenvio');
 
-  // Route::get('/dashboard', function () {
-  //     return view('dashboard');
-  // })->name('dashboard');
-  Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
 });

@@ -46,7 +46,6 @@ Route::post('/webhooks',  WebhooksController::class);
 
 //     $fotos_slider = Galeria::where('estado', '=', 1)->get();
 
-
 //     $destacados =  Producto_imagen::select('productos_imagenes.producto_id', 'productos_imagenes.file_path', 'productos.nombre', 'productos.desCorta')
 //         ->leftJoin('productos', 'productos.id', 'productos_imagenes.producto_id')
 //         ->where('destacar', 1)

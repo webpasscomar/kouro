@@ -301,10 +301,8 @@ input[type=file]::file-selector-button {
     padding-bottom: 0.625rem;
     padding-left: 2rem;
     padding-right: 1rem;
-    -webkit-margin-start: -1rem;
-            margin-inline-start: -1rem;
-    -webkit-margin-end: 1rem;
-            margin-inline-end: 1rem;
+    margin-inline-start: -1rem;
+    margin-inline-end: 1rem;
 }
 input[type=file]::file-selector-button:hover {
     background: #374151;
@@ -1326,14 +1324,10 @@ input:checked + .toggle-bg {
     margin-right: -100%;
 }
 .-ms-2 {
-    -webkit-margin-start: -0.5rem;
-            margin-inline-start: -0.5rem;
+    margin-inline-start: -0.5rem;
 }
 .-mt-2 {
     margin-top: -0.5rem;
-}
-.-mt-px {
-    margin-top: -1px;
 }
 .mb-0 {
     margin-bottom: 0px;
@@ -1399,8 +1393,7 @@ input:checked + .toggle-bg {
     margin-right: 2.25rem;
 }
 .ms-1 {
-    -webkit-margin-start: 0.25rem;
-            margin-inline-start: 0.25rem;
+    margin-inline-start: 0.25rem;
 }
 .mt-1 {
     margin-top: 0.25rem;
@@ -1437,6 +1430,9 @@ input:checked + .toggle-bg {
 }
 .mt-8 {
     margin-top: 2rem;
+}
+.-mt-px {
+    margin-top: -1px;
 }
 .box-border {
     box-sizing: border-box;
@@ -1666,9 +1662,6 @@ input:checked + .toggle-bg {
 .max-w-4xl {
     max-width: 56rem;
 }
-.max-w-6xl {
-    max-width: 72rem;
-}
 .max-w-7xl {
     max-width: 80rem;
 }
@@ -1683,6 +1676,9 @@ input:checked + .toggle-bg {
 }
 .max-w-xl {
     max-width: 36rem;
+}
+.max-w-6xl {
+    max-width: 72rem;
 }
 .flex-1 {
     flex: 1 1 0%;
@@ -1778,11 +1774,6 @@ input:checked + .toggle-bg {
 }
 .cursor-pointer {
     cursor: pointer;
-}
-.select-none {
-    -webkit-user-select: none;
-       -moz-user-select: none;
-            user-select: none;
 }
 .resize {
     resize: both;
@@ -2118,10 +2109,6 @@ input:checked + .toggle-bg {
     --tw-border-opacity: 1;
     border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
-.border-gray-400 {
-    --tw-border-opacity: 1;
-    border-color: rgb(156 163 175 / var(--tw-border-opacity));
-}
 .border-gray-500 {
     --tw-border-opacity: 1;
     border-color: rgb(107 114 128 / var(--tw-border-opacity));
@@ -2164,6 +2151,10 @@ input:checked + .toggle-bg {
 .border-yellow-400 {
     --tw-border-opacity: 1;
     border-color: rgb(227 160 8 / var(--tw-border-opacity));
+}
+.border-gray-400 {
+    --tw-border-opacity: 1;
+    border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 .border-opacity-10 {
     --tw-border-opacity: 0.1;
