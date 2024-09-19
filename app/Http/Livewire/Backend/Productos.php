@@ -40,7 +40,7 @@ class Productos extends Component
     public $link;
 
     public $orden = 1;
-    public $unidadVenta;
+    public $unidadVenta = 1;
     public $destacar = 0;
 
     public $estado;

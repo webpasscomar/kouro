@@ -20,7 +20,16 @@ class ProductoController extends Controller
 
     public function destacados()
     {
-        $productos = Producto::where('estado', '=', 1)->get();
+
+        // $productos = Producto::where('estado', 1)
+        //     ->where('destacar', 1)
+        //     ->get();
+
+        $productos = Producto::with(['categorias']) // Usamos Eager Loading
+            ->where('estado', 1)
+            ->where('destacar', 1)
+            ->get();
+
         for ($i = 0; $i < count($productos); $i++) {
             $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
                 ->where('productos_imagenes.producto_id', '=',   $productos[$i]['id'])
@@ -44,7 +53,7 @@ class ProductoController extends Controller
         $categoria->slug = 'destacados';
         $categoria->categoriaPadre_id = 0;
         $hijas = $categoria->hijas;
-
+        // dd($productos);
         return view('productos.categoria', compact('productos', 'categorias', 'hijas', 'categoria', 'fechahoy'));
     }
 

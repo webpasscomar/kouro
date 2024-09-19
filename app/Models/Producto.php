@@ -43,9 +43,6 @@ class Producto extends Model
 
     public function imagenes()
     {
-        return $this->belongsToMany(Producto_imagen::class,'producto_id');
+        return $this->belongsToMany(Producto_imagen::class, 'producto_id');
     }
-
-
-
 }

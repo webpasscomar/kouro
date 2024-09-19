@@ -38,14 +38,16 @@ class Categoria extends Model
 
     public function hijas()
     {
-        return $this->hasMany(Categoria::class, 'categoriaPadre_id')->with('hijas');
+        return $this->hasMany(Categoria::class, 'categoriaPadre_id')
+            ->where('estado', 1)  // Solo categorías activas
+            ->with('hijas');       // Recursivamente traer las hijas activas
     }
 
     public static function obtenerArbolCategoriasActivas()
     {
-        return Categoria::where('estado', true)
-            ->where('categoriaPadre_id', 0) // Categorías de nivel superior (raíz)
-            ->with('hijas')
+        return Categoria::where('estado', 1)  // Solo categorías activas
+            ->where('categoriaPadre_id', 0) // Categorías raíz
+            ->with('hijas')  // Recursivamente traer las hijas activas
             ->orderBy('categoria')
             ->get();
     }

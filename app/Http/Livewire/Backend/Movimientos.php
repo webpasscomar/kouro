@@ -46,17 +46,19 @@ class Movimientos extends Component
 
         $this->tipomovimientos = Tipomovimiento::all();
         $this->productos = Producto::where('estado', 1)->orderBy('nombre')->get();
-        $this->colores = Color::where('estado', 1)->get();
-        $this->talles = Talle::where('estado', 1)->get();;
+        $this->colores = Color::where('estado', 1)->orderBy('color')->get();
+        $this->talles = Talle::where('estado', 1)->orderBy('talle')->get();;
 
-        return view('livewire.backend.movimientos',
+        return view(
+            'livewire.backend.movimientos',
             [
                 'movimientos' => $this->movimientos,
                 'productos' => $this->productos,
                 'colores' => $this->colores,
                 'talles' => $this->talles,
                 'tipomove' => $this->tipomovimientos,
-            ]);
+            ]
+        );
     }
 
     protected function rules()
@@ -68,6 +70,15 @@ class Movimientos extends Component
             'cantidad' => 'required|not_in:0',
         ];
     }
+
+    protected $messages = [
+        'producto_id.required' => 'El producto es requerido',
+        'color_id.required' => 'El color es requerido',
+        'talle_id.required' => 'El talle es requerido',
+        'cantidad.required' => 'La cantidad es requerida',
+        // 'unidadVenta.required' => 'La unidad de venta es requerida',
+        // 'orden.required' => 'El orden es requerido',
+    ];
 
     //guarda item
     public function guardar()
@@ -91,7 +102,8 @@ class Movimientos extends Component
             'color' => $this->color_nombre,
             'talle_id' => $this->talle_id,
             'talle' => $this->talle_nombre,
-            'cantidad' => $this->cantidad];
+            'cantidad' => $this->cantidad
+        ];
 
         $this->emit('alertSave');
         $this->limpiarCampos();
@@ -122,7 +134,8 @@ class Movimientos extends Component
                 }
 
                 Sku::updateOrCreate(
-                    ['producto_id' => $this->movimientos[$i]['producto_id'],
+                    [
+                        'producto_id' => $this->movimientos[$i]['producto_id'],
                         'talle_id' => $this->movimientos[$i]['talle_id'],
                         'color_id' => $this->movimientos[$i]['color_id'],
                     ],
@@ -137,7 +150,8 @@ class Movimientos extends Component
                     ->where('talle_id', $this->movimientos[$i]['talle_id'])
                     ->where('color_id', $this->movimientos[$i]['color_id'])
                     ->value('id');
-                Movimiento::Create([
+                Movimiento::Create(
+                    [
                         'tipoMovimiento_id' => $this->tipomove_id,
                         'sku_id' => $sku_id,
                         'cantidad' => $cantidad,
@@ -159,7 +173,6 @@ class Movimientos extends Component
             $this->limpiarCampos();
             $this->movimientos = [];
         }
-
     }
 
     public function limpiarCampos()
@@ -169,7 +182,6 @@ class Movimientos extends Component
         $this->color_id = 0;
         $this->cantidad = '';
         $this->cantidad = '';
-
     }
 
     public function delete($id)
@@ -179,6 +191,4 @@ class Movimientos extends Component
         //re acomoda el vector para que noque posiciones null
         $this->movimientos = array_values($this->movimientos);
     }
-
-
 }

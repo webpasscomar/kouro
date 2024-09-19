@@ -17,13 +17,11 @@ class CreateProductoCategoriaTable extends Migration
             $table->id();
 
             $table->foreignId('producto_id')
-                ->nullable()
                 ->constrained('productos')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
 
             $table->foreignId('categoria_id')
-                ->nullable()
                 ->constrained('categorias')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
