@@ -40,28 +40,39 @@ class Avisostock extends Component
         ];
     }
 
+    // public function render()
+    // {
+    //         $this->stockpendientes = Stock_pendiente::select(
+    //         ['stocks_pend.id',
+    //          'stocks_pend.fechaSolicitud',
+    //          'stocks_pend.fechaRespuesta',
+    //          'stocks_pend.respuesta',
+    //          'stocks_pend.cantidad',
+    //          'stocks_pend.email',
+    //          'productos.nombre',
+    //          'colores.color',
+    //          'talles.talle'])
+    //          ->leftJoin('sku','stocks_pend.sku_id','=', 'sku.id')
+    //          ->leftJoin('productos', 'sku.producto_id', '=', 'productos.id')
+    //          ->leftJoin('talles', 'sku.talle_id', '=', 'talles.id')
+    //          ->leftJoin('colores', 'sku.color_id', '=', 'colores.id')
+    //          ->where('stocks_pend.email', 'like', '%' . $this->search . '%')
+    //          ->orderBy($this->sort, $this->order)
+    //          ->paginate(5);
+    //     return view('livewire.backend.stockspendientes', ['stockspendientes' => $this->stockpendientes]);
+    // }
+
     public function render()
     {
-            $this->stockpendientes = Stock_pendiente::select(
-            ['stocks_pend.id',
-             'stocks_pend.fechaSolicitud',
-             'stocks_pend.fechaRespuesta',
-             'stocks_pend.respuesta',
-             'stocks_pend.cantidad',
-             'stocks_pend.email',
-             'productos.nombre',
-             'colores.color',
-             'talles.talle'])
-             ->leftJoin('sku','stocks_pend.sku_id','=', 'sku.id')
-             ->leftJoin('productos', 'sku.producto_id', '=', 'productos.id')
-             ->leftJoin('talles', 'sku.talle_id', '=', 'talles.id')
-             ->leftJoin('colores', 'sku.color_id', '=', 'colores.id')
-             ->where('stocks_pend.email', 'like', '%' . $this->search . '%')
-             ->orderBy($this->sort, $this->order)
-             ->paginate(5);
+        // Carga los datos usando Eloquent y las relaciones
+        $this->stockpendientes = Stock_pendiente::with(['producto:id,nombre', 'talle:id,talle', 'color:id,color'])
+            ->where('email', 'like', '%' . $this->search . '%')
+            ->orderBy($this->sort, $this->order)
+            ->paginate(10);
 
-
-        return view('livewire.backend.stockspendientes', ['stockspendientes' => $this->stockpendientes]);
+        return view('livewire.backend.stockspendientes', [
+            'stockspendientes' => $this->stockpendientes,
+        ]);
     }
 
     public function crear()
@@ -111,8 +122,6 @@ class Avisostock extends Component
         $this->cerrarModal();
         $this->limpiarCampos();
         $this->emit('mensajePositivo', ['mensaje' => 'Respuesta registrada, no olvides enviarla!!!']);
-
-
     }
 
 
@@ -130,21 +139,24 @@ class Avisostock extends Component
         );
 
         $this->pendiente = Stock_pendiente::select(
-            ['stocks_pend.id',
-             'stocks_pend.fechaSolicitud',
-             'stocks_pend.fechaRespuesta',
-             'stocks_pend.respuesta',
-             'stocks_pend.cantidad',
-             'stocks_pend.email',
-             'productos.nombre',
-             'colores.color',
-             'talles.talle'])
-             ->leftJoin('sku','stocks_pend.sku_id','=', 'sku.id')
-             ->leftJoin('productos', 'sku.producto_id', '=', 'productos.id')
-             ->leftJoin('talles', 'sku.talle_id', '=', 'talles.id')
-             ->leftJoin('colores', 'sku.color_id', '=', 'colores.id')
-             ->where('stocks_pend.id', '=', $id )
-             ->First();
+            [
+                'stocks_pend.id',
+                'stocks_pend.fechaSolicitud',
+                'stocks_pend.fechaRespuesta',
+                'stocks_pend.respuesta',
+                // 'stocks_pend.cantidad',
+                'stocks_pend.email',
+                'productos.nombre',
+                'colores.color',
+                'talles.talle'
+            ]
+        )
+            // ->leftJoin('sku', 'stocks_pend.sku_id', '=', 'sku.id')
+            ->leftJoin('productos', 'sku.producto_id', '=', 'productos.id')
+            ->leftJoin('talles', 'sku.talle_id', '=', 'talles.id')
+            ->leftJoin('colores', 'sku.color_id', '=', 'colores.id')
+            ->where('stocks_pend.id', '=', $id)
+            ->First();
 
 
         $correo = new StockPendienteMail($this->pendiente);
@@ -153,7 +165,6 @@ class Avisostock extends Component
         Mail::to('rrufino71@gmail.com')->send($correo);
 
         $this->emit('mensajePositivo', ['mensaje' => 'La respuesta ha sido enviada!!!']);
-
     }
 
 

@@ -44,7 +44,7 @@ class ProductoFront extends Component
         $this->oferta = 0;
         $this->producto = Producto::where('id', $id)->firstOrFail();
         $this->fechahoy = date('Y-m-d H:i:s');
-        
+
         $this->colores = Sku::select(['sku.color_id', 'colores.color', 'colores.pcolor'])
             ->join('colores', 'sku.color_id', '=', 'colores.id')
             ->where('sku.producto_id', '=', $id)
@@ -208,19 +208,30 @@ class ProductoFront extends Component
             $this->emit('mensajeNegativo', ['mensaje' => 'Debe ingresar una direccion de correo']);
         } else {
 
-            $sku_id = Sku::where('producto_id', $this->producto_id)
-                ->where('talle_id', $this->talle_id)
-                ->where('color_id', $this->color_id)
-                ->value('id');
+            // $sku_id = Sku::where('producto_id', $this->producto_id)
+            //     ->where('talle_id', $this->talle_id)
+            //     ->where('color_id', $this->color_id)
+            //     ->value('id');
+
+            // Stock_pendiente::Create(
+            //     [
+            //         'sku_id' => $sku_id,
+            //         'fechaSolicitud' => date('Y-m-d H:i:s'),
+            //         'cantidad' => $this->cantidad,
+            //         'email' => $this->mailaviso
+            //     ]
+            // );
 
             Stock_pendiente::Create(
                 [
-                    'sku_id' => $sku_id,
+                    'producto_id' => $this->producto_id,
+                    'talle_id' => $this->talle_id,
+                    'color_id' => $this->color_id,
                     'fechaSolicitud' => date('Y-m-d H:i:s'),
-                    'cantidad' => $this->cantidad,
                     'email' => $this->mailaviso
                 ]
             );
+
             $this->emit('mensajePositivo', ['mensaje' => 'Te avisamos cuando el producto ingrese']);
         }
     }

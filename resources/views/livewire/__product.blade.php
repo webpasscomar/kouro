@@ -1,27 +1,27 @@
 <div>
 
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Detalle del producto
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h1>Sirve esta View?</h1>
+    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      Detalle del producto
+    </h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
+      <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
 
 
 
-                {{-- The Master doesn't talk, he acts. --}}
-                <div class="bg-white">
-                    <div class="pt-6">
+        {{-- The Master doesn't talk, he acts. --}}
+        <div class="bg-white">
+          <div class="pt-6">
 
-                        {{-- Breadcrumb --}}
-                        <nav aria-label="Breadcrumb">
-                            <ol role="list"
-                                class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                                {{-- @foreach ($categorias as $categoria)
+            {{-- Breadcrumb --}}
+            <nav aria-label="Breadcrumb">
+              <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                {{-- @foreach ($categorias as $categoria)
                                     <li>
                                         <div class="flex items-center">
                                             <a href="{{ route('productos.categoria', $categoria) }}"
@@ -35,20 +35,20 @@
                                     </li>
                                 @endforeach --}}
 
-                                <li class="text-sm">
-                                    <a href="#" aria-current="page"
-                                        class="font-medium text-gray-500 hover:text-gray-600">{{ $producto->nombre }}</a>
-                                </li>
-                            </ol>
-                        </nav>
+                <li class="text-sm">
+                  <a href="#" aria-current="page"
+                    class="font-medium text-gray-500 hover:text-gray-600">{{ $producto->nombre }}</a>
+                </li>
+              </ol>
+            </nav>
 
 
-                        <div class="grid grid-cols-1 sm:grid-cols-4">
-                            <div class="grid col-span-3">
+            <div class="grid grid-cols-1 sm:grid-cols-4">
+              <div class="grid col-span-3">
 
 
-                                <!-- Image gallery -->
-                                {{-- <div
+                <!-- Image gallery -->
+                {{-- <div
                                     class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
                                     <div class="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
                                         <img src="https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg"
@@ -76,32 +76,31 @@
                                 </div> --}}
 
 
-                                <!-- Product info -->
-                                <div
-                                    class="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
-                                    <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                                        <picture>
-                                            <source srcset="{{ asset('storage/productos/' . $producto->id . '.webp') }}"
-                                                type="image/webp">
-                                            <img alt="{{ $producto->nombre }}"
-                                                src="{{ asset('storage/productos/' . $producto->id . '.jpg') }}"
-                                                class="object-cover object-center group-hover:opacity-75">
-                                        </picture>
-                                        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                                            {{ $producto->nombre }}
-                                        </h1>
-                                    </div>
+                <!-- Product info -->
+                <div
+                  class="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
+                  <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+                    <picture>
+                      <source srcset="{{ asset('storage/productos/' . $producto->id . '.webp') }}" type="image/webp">
+                      <img alt="{{ $producto->nombre }}"
+                        src="{{ asset('storage/productos/' . $producto->id . '.jpg') }}"
+                        class="object-cover object-center group-hover:opacity-75">
+                    </picture>
+                    <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                      {{ $producto->nombre }}
+                    </h1>
+                  </div>
 
-                                    <!-- Options -->
-                                    <div class="mt-4 lg:row-span-3 lg:mt-0">
-                                        <h2 class="sr-only">Product information</h2>
+                  <!-- Options -->
+                  <div class="mt-4 lg:row-span-3 lg:mt-0">
+                    <h2 class="sr-only">Product information</h2>
 
-                                        <p class="text-3xl tracking-tight text-gray-900">$ {{ $producto->precioLista }}
-                                        </p>
+                    <p class="text-3xl tracking-tight text-gray-900">$ {{ $producto->precioLista }}
+                    </p>
 
 
-                                        <!-- Reviews -->
-                                        {{-- <div class="mt-6">
+                    <!-- Reviews -->
+                    {{-- <div class="mt-6">
                                             <h3 class="sr-only">Reviews</h3>
                                             <div class="flex items-center">
                                                 <div class="flex items-center">
@@ -161,31 +160,29 @@
                                             </div>
                                         </div> --}}
 
-                                        <form class="mt-10">
+                    <form class="mt-10">
 
 
-                                            <!-- Talles -->
-                                            @if ($talles->count() > 0)
-                                                <div class="mt-10">
-                                                    <div class="flex items-center justify-between">
-                                                        <h3 class="text-sm font-medium text-gray-900">Talles</h3>
-                                                        <a href="#"
-                                                            class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Guia
-                                                            de talles</a>
-                                                    </div>
+                      <!-- Talles -->
+                      @if ($talles->count() > 0)
+                        <div class="mt-10">
+                          <div class="flex items-center justify-between">
+                            <h3 class="text-sm font-medium text-gray-900">Talles</h3>
+                            <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Guia
+                              de talles</a>
+                          </div>
 
-                                                    <label for="talle"
-                                                        class="block text-sm font-medium text-gray-700">talle</label>
-                                                    <select id="talle" name="talle" wire:model="talle"
-                                                        class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                        <option value="0">Elija el talle</option>
-                                                        @foreach ($talles as $talle)
-                                                            <option value="{{ $talle->id }}">{{ $talle->talle }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                          <label for="talle" class="block text-sm font-medium text-gray-700">talle</label>
+                          <select id="talle" name="talle" wire:model="talle"
+                            class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <option value="0">Elija el talle</option>
+                            @foreach ($talles as $talle)
+                              <option value="{{ $talle->id }}">{{ $talle->talle }}
+                              </option>
+                            @endforeach
+                          </select>
 
-                                                    {{-- <fieldset class="mt-4">
+                          {{-- <fieldset class="mt-4">
                                                         <legend class="sr-only">Choose a size</legend>
                                                         <div
                                                             class="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
@@ -329,33 +326,32 @@
                                                             </label>
                                                         </div>
                                                     </fieldset> --}}
-                                                </div>
-                                            @else
-                                                <input type="hidden" name="talle" value="null" wire:model="talle">
-                                            @endif
+                        </div>
+                      @else
+                        <input type="hidden" name="talle" value="null" wire:model="talle">
+                      @endif
 
 
 
 
-                                            <!-- Colors -->
-                                            @if ($colores->count() > 0)
-                                                <div class="mt-10">
+                      <!-- Colors -->
+                      @if ($colores->count() > 0)
+                        <div class="mt-10">
 
-                                                    <h3 class="text-sm font-medium text-gray-900">Color</h3>
+                          <h3 class="text-sm font-medium text-gray-900">Color</h3>
 
-                                                    <label for="color"
-                                                        class="block text-sm font-medium text-gray-700">color</label>
-                                                    <select id="color" name="color" wire:model="color"
-                                                        class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                        <option value="0">Elija el color</option>
-                                                        @foreach ($colores as $color)
-                                                            <option value="{{ $color->id }}">{{ $color->color }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                          <label for="color" class="block text-sm font-medium text-gray-700">color</label>
+                          <select id="color" name="color" wire:model="color"
+                            class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <option value="0">Elija el color</option>
+                            @foreach ($colores as $color)
+                              <option value="{{ $color->id }}">{{ $color->color }}
+                              </option>
+                            @endforeach
+                          </select>
 
 
-                                                    {{-- <fieldset class="mt-4">
+                          {{-- <fieldset class="mt-4">
                                                         <legend class="sr-only">Seleccione un color</legend>
                                                         <div class="flex items-center space-x-3">
                                                             <!--
@@ -404,33 +400,33 @@
                                                             </label>
                                                         </div>
                                                     </fieldset> --}}
-                                                </div>
-                                            @else
-                                                <input type="hidden" name="color" value="null" wire:model="color">
-                                            @endif
+                        </div>
+                      @else
+                        <input type="hidden" name="color" value="null" wire:model="color">
+                      @endif
 
 
 
-                                            <!-- Boton Agregar al carrito -->
-                                            <button type="submit" wire:click.prevent="agregarAlCarrito()"
-                                                class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Agregar
-                                                al carrito</button>
+                      <!-- Boton Agregar al carrito -->
+                      <button type="submit" wire:click.prevent="agregarAlCarrito()"
+                        class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Agregar
+                        al carrito</button>
 
-                                        </form>
-                                    </div>
+                    </form>
+                  </div>
 
-                                    <div
-                                        class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-                                        <!-- Description and details -->
-                                        <div>
-                                            <h3 class="sr-only">Descripción</h3>
+                  <div
+                    class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+                    <!-- Description and details -->
+                    <div>
+                      <h3 class="sr-only">Descripción</h3>
 
-                                            <div class="space-y-6">
-                                                <p class="text-base text-gray-900">{{ $producto->desCorta }}</p>
-                                            </div>
-                                        </div>
+                      <div class="space-y-6">
+                        <p class="text-base text-gray-900">{{ $producto->desCorta }}</p>
+                      </div>
+                    </div>
 
-                                        {{-- <div class="mt-10">
+                    {{-- <div class="mt-10">
                                             <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
 
                                             <div class="mt-4">
@@ -458,55 +454,55 @@
                                             </div>
                                         </div> --}}
 
-                                        <div class="mt-10">
-                                            <h2 class="text-sm font-medium text-gray-900">Detalles</h2>
+                    <div class="mt-10">
+                      <h2 class="text-sm font-medium text-gray-900">Detalles</h2>
 
-                                            <div class="mt-4 space-y-6">
-                                                <p class="text-sm text-gray-600">{{ $producto->descLarga }}
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-
-
-                            <div class="grid grid-cols-1">
-                                <h3 class="block px-2 py-3 bg-gray-300">Otras categorias</h3>
-                                <ul role="list" class="px-2 py-3 font-medium text-gray-900">
-
-                                    @foreach ($categorias as $categoria)
-                                        <li class="block px-2 py-3 border-b">
-                                            <a href="{{ route('productos.categoria', $categoria) }}">
-                                                {{ $categoria->categoria }}</a>
-                                        </li>
-                                    @endforeach
-
-                                </ul>
-                            </div>
-
-
-                        </div>
-
+                      <div class="mt-4 space-y-6">
+                        <p class="text-sm text-gray-600">{{ $producto->descLarga }}
+                        </p>
+                      </div>
                     </div>
+
+                  </div>
                 </div>
 
 
 
 
+              </div>
 
 
+              <div class="grid grid-cols-1">
+                <h3 class="block px-2 py-3 bg-gray-300">Otras categorias</h3>
+                <ul role="list" class="px-2 py-3 font-medium text-gray-900">
 
+                  @foreach ($categorias as $categoria)
+                    <li class="block px-2 py-3 border-b">
+                      <a href="{{ route('productos.categoria', $categoria) }}">
+                        {{ $categoria->categoria }}</a>
+                    </li>
+                  @endforeach
+
+                </ul>
+              </div>
 
 
             </div>
+
+          </div>
         </div>
+
+
+
+
+
+
+
+
+
+      </div>
     </div>
+  </div>
 
 
 </div>
