@@ -30,7 +30,7 @@ class Talles extends Component
             ->orderBy($this->sort, $this->order)
             ->paginate(10);
 
-        return view('livewire.backend.talles', ['talles' => $this->talles]);
+        return view('livewire.backend.talles-bs', ['talles' => $this->talles])->layout('layouts.adminlte');
     }
 
     public function crear()

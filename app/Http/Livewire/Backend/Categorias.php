@@ -57,7 +57,7 @@ class Categorias extends Component
         )
             ->orderBy($this->sort, $this->order)
             ->paginate(10);
-        return view('livewire.backend.categorias', ['categorias' => $this->categorias, 'categoriasAnt' => $this->categoriasAnt]);
+        return view('livewire.backend.categorias-bs', ['categorias' => $this->categorias, 'categoriasAnt' => $this->categoriasAnt])->layout('layouts.adminlte');
     }
 
     public function crear()

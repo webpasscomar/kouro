@@ -54,6 +54,6 @@ class Dashboard extends Component
 
     $this->galeria_imagenes = Galeria::count();
 
-    return view('livewire.dashboard');
+    return view('livewire.dashboard-bs')->layout('layouts.adminlte');
   }
 }

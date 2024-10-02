@@ -13,6 +13,7 @@
         "fruitcake/laravel-cors": "dev-develop",
         "guzzlehttp/guzzle": "^7.0.1",
         "illuminate/support": "^10.0",
+        "jeroennoten/laravel-adminlte": "^3.13",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^2.9",
         "laravel/sanctum": "^3.3",
