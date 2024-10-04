@@ -7,6 +7,28 @@
   </x-slot>
 
 
+
+
+  <div class="container">
+    <div class="row">
+      {{-- Sección principal --}}
+      <div class="col-md-9">
+        <h2>Cuerpo principal</h2>
+      </div>
+
+      {{-- Sidebar derecha --}}
+      <div class="col-md-3">
+        <h2>Sidebar</h2>
+        @include('productos.sidebar')
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -16,7 +38,8 @@
 
 
             <nav aria-label="Breadcrumb">
-              <ol role="list" class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+              <ol role="list"
+                class="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <li>
                   <div class="flex items-center">
                     <a href="#" class="mr-2 text-sm font-medium text-gray-900">Men</a>

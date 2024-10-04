@@ -98,4 +98,6 @@ class ProductoController extends Controller
         $categorias = Categoria::obtenerArbolCategoriasActivas();
         return view('productos.show', compact('producto', 'categorias', 'categoria'));
     }
+
+
 }
