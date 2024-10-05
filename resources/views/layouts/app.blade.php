@@ -47,26 +47,14 @@
     </div>
 
     <!-- Go To Top
-       ============================================= -->
+           ============================================= -->
     <div id="gotoTop" class="uil uil-angle-up"></div>
 
     <!-- JavaScripts
-        ============================================= -->
-    <script src="{{ asset('js/functions.js') }}"></script>
-    
-    <script>
-      if (typeof $ === 'undefined') {
-        console.log('jQuery no está cargado');
-      } else {
-        console.log('jQuery está cargado correctamente');
-      }
+            ============================================= -->
+    {{-- <script src="{{ asset('./js/functions.js') }}"></script> --}}
 
-      if (typeof Popper === 'undefined') {
-        console.log('Popper.js no está cargado');
-      } else {
-        console.log('Popper.js está cargado correctamente');
-      }
-    </script>
+
   </body>
 
   </html>

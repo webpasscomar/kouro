@@ -11,7 +11,42 @@
             formulario de contacto y enviarnos tu consulta.</p>
         </div>
 
-        <div class="accordion" id="accordionFaq">
+
+
+
+
+
+        <div class="col-12">
+          <div class="row justify-content-between col-mb-50">
+
+            @foreach ($faqs as $item)
+              <div class="toggle toggle-bg">
+                <div class="toggle-header">
+                  <div class="toggle-icon">
+                    <i class="toggle-closed bi-check-circle-fill"></i>
+                    <i class="toggle-open bi-x-circle"></i>
+                  </div>
+                  <div class="toggle-title">
+                    {{ $item->pregunta }}
+                  </div>
+                </div>
+                <div class="toggle-content">{{ $item->respuesta }}</div>
+              </div>
+            @endforeach
+
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        {{-- <div class="accordion" id="accordionFaq">
           @foreach ($faqs as $item)
             <div class="accordion-item">
               <h2 class="accordion-header" id="heading-{{ $item->id }}">
@@ -33,22 +68,10 @@
               </div>
             </div>
           @endforeach
-        </div>
+        </div> --}}
 
       </div>
     </div>
   </div>
+  
 </x-app-layout>
-
-<script>
-  const cambiarPosicionArrow = (id) => {
-    const arrow = document.getElementById(`arrow-${id}`);
-    const arrows = document.getElementsByClassName('arrow');
-    for (let i = 0; i < arrows.length; i++) {
-      if (arrows[i].id !== `arrow-${id}`) {
-        arrows[i].classList.remove('rotate-180');
-      }
-    }
-    arrow.classList.toggle('rotate-180');
-  }
-</script>

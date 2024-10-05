@@ -1,46 +1,44 @@
-<div class="grid grid-cols-5 bg-white overflow-hidden shadow-xl sm:rounded-lg mb-7 px-4 max-w-4xl py-4 items-center">
+<div class="row bg-white shadow-sm rounded-lg mb-7 px-4 py-4 align-items-center">
+  <div class="col">
+    {{-- TODO: Reemplazar por imágen dinámica --}}
+    @if ($imagen_producto)
+      <img src="{{ asset('storage/productos/' . $imagen_producto) }}" alt="imagen producto" class="img-fluid rounded-md"
+        style="width: 7rem;">
+    @else
+      <img src="" alt="imagen producto" class="img-fluid rounded-md" style="width: 7rem;">
+    @endif
+  </div>
+  <div class="col">
     <div>
-        {{-- TODO: Reemplazar por imágen dinámica --}}
-        @if ($imagen_producto)
-                <img src="{{ asset('storage/productos/' . $imagen_producto) }}" alt="imagen producto" class="w-28 rounded-md">
-            @else
-            <img src="" alt="imagen producto" class="w-28 rounded-md">
-        @endif
+      <p class="fw-semibold">{{ $producto_nombre }}</p>
     </div>
-    <div>
-        <div>
-            <p class="font-semibold">{{ $producto_nombre }}</p>
-        </div>
-    </div>
-    <div class="text-center">
-        <p class="font-semibold">Cantidad: {{ $cantidad }}</p>
-    </div>
-    <div class="text-center">
-        <p class="font-semibold">$ {{ number_format($cantidad * $producto_precio, 2, ',', '.') }}</p>
+  </div>
+  <div class="col text-center">
+    <p class="fw-semibold">Cantidad: {{ $cantidad }}</p>
+  </div>
+  <div class="col text-center">
+    <p class="fw-semibold">$ {{ number_format($cantidad * $producto_precio, 2, ',', '.') }}</p>
+  </div>
+  <div class="col d-flex justify-content-around">
+    <button class="btn btn-xs" title="Detalle Producto" wire:click="toogleDetalles({{ $index }})">
+      <img src="{{ asset('./img/arrow.svg') }}" alt=""
+        class="{{ $mostrarDetalle ? 'rotate-90' : '' }} w-5 transition-all">
+      {{-- <span class="fw-semibold ms-2">Detalle</span> --}}
+    </button>
+    @if ($apagar == 0)
+      <button class="btn btn-xs" title="Eliminar producto"
+        wire:click.prevent="$emit('alertCarritoDelete','{{ $producto_id }}','{{ $talle_id }}','{{ $color_id }}')">
+        <img src="{{ asset('./img/trash.svg') }}" alt="Eliminar item">
+      </button>
+    @endif
+  </div>
 
+  {{-- Detalle del producto --}}
+  <div class="col-12 mt-3 {{ $mostrarDetalle ? 'd-flex' : 'd-none' }} transition-all">
+    <div class="d-flex gap-4 mx-auto justify-content-center">
+      <p><span class="fw-semibold">Color: </span>{{ $color_nombre }}</p>
+      <p><span class="fw-semibold">Talle: </span>{{ $talle_nombre }}</p>
+      <p><span class="fw-semibold">Precio x Unidad: </span><span>$ {{ number_format($producto_precio) }}</span></p>
     </div>
-    <div class="flex justify-around">
-        <button class="flex items-center" title="Detalle Producto" wire:click="toogleDetalles({{ $index }})">
-            <img src="{{ asset('./img/arrow.svg') }}" alt=""
-                class="{{ $mostrarDetalle ? 'w-5 rotate-90 transition-all ease-in-out duration-300' : 'w-5 transition-all ease-in-out duration-300' }}">
-            <span class="font-semibold">Detalle</span>
-        </button>
-        @if ($apagar == 0)
-            <button title="Eliminar producto"
-                wire:click.prevent="$emit('alertCarritoDelete','{{ $producto_id }}','{{ $talle_id }}','{{ $color_id }}')">
-                <img src="{{ asset('./img/trash.svg') }}" alt="eliminar item" class="w-6">
-            </button>
-        @endif
-    </div>
-
-    {{-- Detalle del producto --}}
-    <div
-        class="{{ $mostrarDetalle ? 'visible transition-all ease-in-out duration-1000' : 'hidden transition-all ease-in-out duration-1000' }} col-span-5 flex items-center mt-3">
-        <div class="flex max-w-3xl gap-x-10 m-auto justify-center">
-            <p><span class="font-semibold">Color: </span>{{ $color_nombre }}</p>
-            <p><span class="font-semibold">Talle: </span>{{ $talle_nombre }}</p>
-            <p><span class="font-semibold">Precio x Unidad: </span><span>$ {{ number_format($producto_precio) }}</span>
-            </p>
-        </div>
-    </div>
+  </div>
 </div>

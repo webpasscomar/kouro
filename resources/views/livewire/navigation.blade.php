@@ -1,3 +1,4 @@
+<div>
   <!-- Top Bar
   ============================================= -->
   <div id="top-bar">
@@ -140,20 +141,37 @@
               <li class="menu-item"><a
                   class="menu-link @if (request()->is('contacto')) text-danger fw-bold @else text-dark @endif"
                   href="{{ route('contacto') }}">
-                  <div>Contact</div>
+                  <div>Contacto</div>
                 </a></li>
+              <li class="menu-item">
+                <div>
 
+                  <a href="{{ route('carrito') }}" class="relative" role="button">
+                    <img src="{{ asset('img/carrito.svg') }}" alt="Carrito" class="w-8">
+                    @if ($carrito > 0)
+                      <span class="">
+                        <span class="">
+                          {{ $carrito }}
+                        </span>
+                      </span>
+                    @endif
+                  </a>....
+                </div>
+              </li>
             </ul>
 
           </nav><!-- #primary-menu end -->
 
-          <form class="top-search-form" action="search.html" method="get">
+          {{-- <form class="top-search-form" action="search.html" method="get">
             <input type="text" name="q" class="form-control" value=""
               placeholder="Type &amp; Hit Enter.." autocomplete="off">
-          </form>
+          </form> --}}
+
 
         </div>
       </div>
     </div>
     <div class="header-wrap-clone"></div>
   </header><!-- #header end -->
+
+</div>
