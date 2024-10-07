@@ -23,11 +23,13 @@
  ============================================= -->
   <div id="wrapper">
 
-
     @livewire('navigation')
     {{-- @include('layouts.partials.header') --}}
 
+  </div>
 
+
+  <div class="container mt-5 mb-5">
 
     @isset($slot)
       {{ $slot }}
@@ -35,23 +37,24 @@
       @yield('content')
       @endif
 
+    </div>
 
 
-      {{-- @include('layouts.partials.footer') --}}
-      <footer>
-        <x-footer />
-      </footer>
+    {{-- @include('layouts.partials.footer') --}}
 
-      @livewireScripts
+    <x-footer />
+
+
+    @livewireScripts
 
     </div>
 
     <!-- Go To Top
-           ============================================= -->
+                   ============================================= -->
     <div id="gotoTop" class="uil uil-angle-up"></div>
 
     <!-- JavaScripts
-            ============================================= -->
+                    ============================================= -->
     {{-- <script src="{{ asset('./js/functions.js') }}"></script> --}}
 
 

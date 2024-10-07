@@ -14,8 +14,8 @@
               <img src="{{ asset('img/logo.png') }}" alt="Kouro" class="alignleft"
                 style="margin-top: 8px; padding-right: 18px; border-right: 1px solid #4A4A4A;">
 
-              <p>We believe in <strong>Simple</strong>, <strong>Creative</strong> &amp; <strong>Flexible</strong> Design
-                Standards with a Retina &amp; Responsive Approach. Browse the amazing Features this template offers.</p>
+              <p><strong>Kouro</strong> 'Línea fina', más de 30 años brindando atención personalizada y especializada.
+              </p>
 
               <div class="line" style="margin: 30px 0;"></div>
 
@@ -69,21 +69,22 @@
 
               <div class="row col-mb-30">
                 <div class="col-12">
-                  <div class="footer-big-contacts">
-                    <span>Llamanos al:</span>
+                  <div class="footer-contacts">
+                    <span>Llamanos al:</span><br>
                     (11) 4627-5723
                   </div>
                 </div>
 
                 <div class="col-12">
-                  <div class="footer-big-contacts">
-                    <span>Escribinos:</span>
+                  <div class="footer-contacts">
+                    <span>Escribinos:</span><br>
                     kouroarg@gmail.com
                   </div>
                 </div>
               </div>
 
             </div>
+
 
             <div class="widget subscribe-widget">
 
@@ -93,14 +94,14 @@
                     <i class="fa-brands fa-facebook-f"></i>
                     <i class="fa-brands fa-facebook-f"></i>
                   </a>
-                  <a href="#"><small class="d-block"><strong>Like us</strong><br>on Facebook</small></a>
+                  <a href="#"><small class="d-block"><strong>Síguenos</strong><br>en Facebook</small></a>
                 </div>
                 <div class="col-12 col-sm-6">
                   <a href="#" class="social-icon bg-dark h-bg-rss mb-0 me-3">
                     <i class="fa-solid fa-rss"></i>
                     <i class="fa-solid fa-rss"></i>
                   </a>
-                  <a href="#"><small class="d-block"><strong>Subscribe</strong><br>to RSS Feeds</small></a>
+                  <a href="#"><small class="d-block"><strong>Síguenos</strong><br>en Instagram</small></a>
                 </div>
               </div>
 
@@ -118,14 +119,16 @@
 
         <div class="row justify-content-between col-mb-30">
           <div class="col-12 col-md-auto text-center text-md-start">
-            Copyrights &copy; 2023 All Rights Reserved by Canvas Inc.<br>
-            <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+            Copyrights &copy; {{ date('Y') }} - Todos los derechos reservados.<br>
+            <div class="copyright-links"><a href="#">Terminos de uso</a> / <a href="#">Política de
+                privacidad</a></div>
           </div>
 
           <div class="col-12 col-md-auto text-center text-md-end">
             <div class="copyrights-menu copyright-links">
-              <a href="#">Home</a>/<a href="#">About Us</a>/<a href="#">Team</a>/<a
-                href="#">Clients</a>/<a href="#">FAQs</a>/<a href="#">Contact</a>
+              <a href="{{ route('home') }}">Home</a>/<a href="{{ route('productos.destacados') }}">Destacados</a>/<a
+                href="{{ route('nosotros') }}">Nosotros</a>/<a href="{{ route('sucursales') }}">Sucursales</a>/<a
+                href="{{ route('faqs.index') }}">FAQs</a>/<a href="{{ route('contacto') }}">Contacto</a>
             </div>
           </div>
         </div>

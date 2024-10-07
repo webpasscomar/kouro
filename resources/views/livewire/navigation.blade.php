@@ -46,7 +46,7 @@
   <!-- Header
   ============================================= -->
   <header id="header" class="header-size-sm" data-sticky-shrink="false">
-    <div class="container">
+    <div class="container mb-2">
       <div class="header-row">
 
         <!-- Logo
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div id="header-wrap">
+    <div id="header-wrap" class="bg-black">
       <div class="container">
         <div class="header-row justify-content-between flex-row-reverse flex-lg-row justify-content-lg-center">
 
@@ -91,9 +91,22 @@
 
             <!-- Top Search
        ============================================= -->
-            <div id="top-search" class="header-misc-icon">
+            {{-- <div id="top-search" class="header-misc-icon">
               <a href="#" id="top-search-trigger"><i class="uil uil-search"></i><i class="bi-x-lg"></i></a>
-            </div><!-- #top-search end -->
+            </div><!-- #top-search end --> --}}
+
+            <div id="top-search" class="header-misc-icon">
+              <a href="{{ route('carrito') }}" class="relative" role="button">
+                <img src="{{ asset('img/carrito.svg') }}" alt="Carrito" class="w-10" title="Carrito">
+                @if ($carrito > 0)
+                  <span class="">
+                    <span class="">
+                      {{ $carrito }}
+                    </span>
+                  </span>
+                @endif
+              </a>
+            </div>
 
           </div>
 
@@ -108,7 +121,7 @@
           <nav class="primary-menu with-arrows">
 
             <ul class="menu-container">
-              <li class="menu-item current"><a
+              <li class="menu-item"><a
                   class="menu-link @if (request()->is('/')) text-danger fw-bold @else text-dark @endif"
                   href="{{ route('home') }}">
                   <div>Home</div>
@@ -143,7 +156,7 @@
                   href="{{ route('contacto') }}">
                   <div>Contacto</div>
                 </a></li>
-              <li class="menu-item">
+              {{-- <li class="menu-item">
                 <div>
 
                   <a href="{{ route('carrito') }}" class="relative" role="button">
@@ -157,7 +170,7 @@
                     @endif
                   </a>....
                 </div>
-              </li>
+              </li> --}}
             </ul>
 
           </nav><!-- #primary-menu end -->

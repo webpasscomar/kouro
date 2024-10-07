@@ -41,7 +41,7 @@
             <!-- Mostrar los productos aquí -->
             @foreach ($productos as $producto)
               <?php $primeraCategoria = $producto->categorias->first(); ?>
-              <div class="col-md-4">
+              <div class="col-md-4 mb-4">
                 <a href="{{ route('productos.show', [$primeraCategoria->slug, $producto]) }}" class="group">
                   <x-producto :producto="$producto" :fechahoy="$fechahoy" />
                 </a>
