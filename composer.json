@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.5",
         "mercadopago/dx-php": "^2.5",
+        "realrashid/sweet-alert": "^7.2",
         "spatie/laravel-ignition": "^2.8"
     },
     "require-dev": {
