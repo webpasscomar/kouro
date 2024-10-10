@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div id="header-wrap" class="bg-black">
+    <div id="header-wrap">
       <div class="container">
         <div class="header-row justify-content-between flex-row-reverse flex-lg-row justify-content-lg-center">
 

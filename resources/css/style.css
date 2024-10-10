@@ -14363,7 +14363,7 @@ fieldset:disabled .btn {
 
 :root,
 .not-dark {
-  --cnvs-contrast-0: #fff;
+  --cnvs-contrast-0: #F6F6F6;
   --cnvs-contrast-100: #f8f9fa;
   --cnvs-contrast-200: #e9ecef;
   --cnvs-contrast-300: #dee2e6;
