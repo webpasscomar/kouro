@@ -11,6 +11,11 @@ class DeliveryMethodController extends Controller
     public function index()
     {
         $methods = DeliveryMethod::all();
+
+        $title = 'Está seguro?';
+        $text = 'Está acción no se podrá revertir';
+        confirmDelete($title, $text);
+
         return view('backend.delivery_methods.index', compact('methods'));
     }
 
@@ -25,6 +30,13 @@ class DeliveryMethodController extends Controller
             'name' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'status' => 'boolean',
+        ], [
+            'name.required' => 'Ingrese un nombre',
+            'name.string' => 'Ingrese un nombre válido',
+            'name.max' => 'Máximo permitido 255 carácteres',
+            'status.boolean' => 'Ingrese un estado válido',
+            'cost.required' => 'Ingrese un costo',
+            'cost.numeric' => 'Ingrese un costo válido'
         ]);
 
         DeliveryMethod::create($validated);
@@ -44,19 +56,26 @@ class DeliveryMethodController extends Controller
             'name' => 'required|string|max:255',
             'cost' => 'required|numeric',
             'status' => 'boolean',
+        ], [
+            'name.required' => 'Ingrese un nombre',
+            'name.string' => 'Ingrese un nombre válido',
+            'name.max' => 'Máximo permitido 255 carácteres',
+            'status.boolean' => 'Ingrese un estado válido',
+            'cost.required' => 'Ingrese un costo',
+            'cost.numeric' => 'Ingrese un costo válido'
         ]);
 
         $deliveryMethod->update($validated);
         // Toast::success('Método de entrega actualizado con éxito.');
-        toast('Método de entrega creado con éxito', 'success');
+        toast('Método de entrega modificado con éxito', 'success');
         return redirect()->route('delivery_methods.index');
     }
 
     public function destroy(DeliveryMethod $deliveryMethod)
     {
+        // dd('aca');
         $deliveryMethod->delete();
-        // Toast::success('Método de entrega eliminado con éxito.');
-        toast('Método de entrega creado con éxito', 'success');
-        return back();
+        toast('Método de entrega eliminado con éxito', 'success');
+        return redirect()->route('delivery_methods.index');;
     }
 }

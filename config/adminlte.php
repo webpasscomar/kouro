@@ -15,7 +15,7 @@ return [
     */
 
     'title' => 'AdminLTE 3',
-    'title_prefix' => '',
+    'title_prefix' => 'Kouro - ',
     'title_postfix' => '',
 
     /*
@@ -535,5 +535,5 @@ return [
     |
     */
 
-    'livewire' => true,
+    'livewire' => false,
 ];
