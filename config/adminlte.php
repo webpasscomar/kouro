@@ -310,27 +310,27 @@ return [
         ['header' => 'ADMINISTRACION'],
         [
             'text' => 'Categorias',
-            'route' => 'categorias',
+            'route' => 'categories.index',
             'icon'  => 'fas fa-list', // Icono de categorías
         ],
         [
             'text' => 'Colores',
-            'route' => 'colores',
+            'route' => 'colors.index',
             'icon'  => 'fas fa-palette', // Icono de colores
         ],
         [
             'text' => 'Formas de entrega',
-            'route' => 'formasdeentrega',
+            'route' => 'delivery_methods.index',
             'icon'  => 'fas fa-shipping-fast', // Icono de formas de entrega
         ],
         [
             'text' => 'Presentaciones',
-            'route' => 'presentaciones',
+            'route' => 'presentations.index',
             'icon'  => 'fas fa-box-open', // Icono de presentaciones
         ],
         [
             'text' => 'Talles',
-            'route' => 'talles',
+            'route' => 'sizes.index',
             'icon'  => 'fas fa-ruler', // Icono de talles
         ],
 
@@ -338,27 +338,27 @@ return [
         ['header' => 'VENTAS'],
         [
             'text' => 'Productos',
-            'route' => 'productos',
+            'route' => 'products.index',
             'icon'  => 'fas fa-cube', // Icono de productos
         ],
         [
             'text' => 'Pedidos',
-            'route' => 'pedidos',
+            'route' => 'orders.index',
             'icon'  => 'fas fa-shopping-cart', // Icono de pedidos
         ],
         [
             'text' => 'Movimientos (Stock)',
-            'route' => 'movimientos',
+            'route' => 'stock-movements.index',
             'icon'  => 'fas fa-exchange-alt', // Icono de movimientos de stock
         ],
         [
             'text' => 'Pendientes (Stock)',
-            'route' => 'pendientes',
+            'route' => 'pending-stock.index',
             'icon'  => 'fas fa-clipboard-list', // Icono de pendientes de stock
         ],
         [
             'text' => 'Historias (Movimientos)',
-            'route' => 'historias',
+            'route' => 'movement-history.index',
             'icon'  => 'fas fa-history', // Icono de historia de movimientos
         ],
 
@@ -366,97 +366,20 @@ return [
         ['header' => 'WEB'],
         [
             'text' => 'Galería',
-            'route' => 'galerias',
+            'route' => 'gallery.index',
             'icon'  => 'fas fa-images', // Icono de galería
         ],
         [
             'text' => 'FAQs',
-            'route' => 'faqs',
+            'route' => 'faqs.index',
             'icon'  => 'fas fa-question-circle', // Icono de FAQs
         ],
         [
             'text' => 'Testimonios',
-            'route' => 'testimonios',
+            'route' => 'testimonials.index',
             'icon'  => 'fas fa-comment-dots', // Icono de testimonios
         ],
 
-
-
-
-
-
-
-
-
-
-
-
-        // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
-        // [
-        //     'text' => 'blog',
-        //     'url' => 'admin/blog',
-        //     'can' => 'manage-blog',
-        // ],
-        // [
-        //     'text' => 'pages',
-        //     'url' => 'admin/pages',
-        //     'icon' => 'far fa-fw fa-file',
-        //     'label' => 4,
-        //     'label_color' => 'success',
-        // ],
-        // ['header' => 'account_settings'],
-        // [
-        //     'text' => 'profile',
-        //     'url' => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-user',
-        // ],
-        // [
-        //     'text' => 'change_password',
-        //     'url' => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-lock',
-        // ],
-        // [
-        //     'text' => 'multilevel',
-        //     'icon' => 'fas fa-fw fa-share',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //             'submenu' => [
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                 ],
-        //                 [
-        //                     'text' => 'level_two',
-        //                     'url' => '#',
-        //                     'submenu' => [
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                         [
-        //                             'text' => 'level_three',
-        //                             'url' => '#',
-        //                         ],
-        //                     ],
-        //                 ],
-        //             ],
-        //         ],
-        //         [
-        //             'text' => 'level_one',
-        //             'url' => '#',
-        //         ],
-        //     ],
-        // ],
 
     ],
 
