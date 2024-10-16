@@ -61,15 +61,17 @@ Route::middleware([
 
 
     Route::resource('presentaciones', PresentationsController::class)->names([
-        'index' => 'presentaciones.index',
-        'create' => 'presentaciones.create',
-        'store' => 'presentaciones.store',
-        'show' => 'presentaciones.show',
-        'edit' => 'presentaciones.edit',
-        'update' => 'presentaciones.update',
-        'destroy' => 'presentaciones.destroy',
-    ]);
-
+        'index' => 'presentations.index',
+        'create' => 'presentations.create',
+        'store' => 'presentations.store',
+        'show' => 'presentations.show',
+        'edit' => 'presentations.edit',
+        'update' => 'presentations.update',
+        'destroy' => 'presentations.destroy',
+    ])
+        ->parameters([
+            'presentaciones' => 'presentation'
+        ]);
 
     Route::resource('talles', SizesController::class)->names([
         'index' => 'talles.index',
