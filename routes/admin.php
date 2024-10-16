@@ -32,7 +32,10 @@ Route::middleware([
         'edit' => 'formas.edit',
         'update' => 'formas.update',
         'destroy' => 'formas.destroy',
-    ]);
+    ])
+        ->parameters([
+            'formas-de-entrega' => 'deliveryMethod'
+        ]);
 
 
     Route::resource('categorias', CategoriesController::class)->names([

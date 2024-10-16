@@ -53,7 +53,6 @@ class DeliveryMethodController extends Controller
 
     public function update(Request $request, DeliveryMethod $deliveryMethod)
     {
-        dd($deliveryMethod);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'cost' => 'required|numeric',
@@ -74,7 +73,6 @@ class DeliveryMethodController extends Controller
 
     public function destroy(DeliveryMethod $deliveryMethod)
     {
-        dd($deliveryMethod);
         $deliveryMethod->delete();
         toast('Forma de entrega eliminada con éxito', 'success');
         return redirect()->route('formas.index');;
