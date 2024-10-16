@@ -40,18 +40,20 @@ class DeliveryMethodController extends Controller
         ]);
 
         DeliveryMethod::create($validated);
-        // Toast::success('Método de entrega creado con éxito.');
-        toast('Método de entrega creado con éxito', 'success');
-        return redirect()->route('delivery_methods.index');
+        toast('Forma de entrega creada con éxito', 'success');
+        return redirect()->route('formas.index');
     }
 
     public function edit(DeliveryMethod $deliveryMethod)
     {
-        return view('backend.delivery_methods.form', compact('deliveryMethod'));
+        return view('backend.delivery_methods.form', [
+            'deliveryMethod' => $deliveryMethod,
+        ]);
     }
 
     public function update(Request $request, DeliveryMethod $deliveryMethod)
     {
+        dd($deliveryMethod);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'cost' => 'required|numeric',
@@ -66,16 +68,15 @@ class DeliveryMethodController extends Controller
         ]);
 
         $deliveryMethod->update($validated);
-        // Toast::success('Método de entrega actualizado con éxito.');
-        toast('Método de entrega modificado con éxito', 'success');
-        return redirect()->route('delivery_methods.index');
+        toast('Forma de entrega modificada con éxito', 'success');
+        return redirect()->route('formas.index');
     }
 
     public function destroy(DeliveryMethod $deliveryMethod)
     {
-        // dd('aca');
+        dd($deliveryMethod);
         $deliveryMethod->delete();
-        toast('Método de entrega eliminado con éxito', 'success');
-        return redirect()->route('delivery_methods.index');;
+        toast('Forma de entrega eliminada con éxito', 'success');
+        return redirect()->route('formas.index');;
     }
 }

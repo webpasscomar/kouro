@@ -310,27 +310,27 @@ return [
         ['header' => 'ADMINISTRACION'],
         [
             'text' => 'Categorias',
-            'route' => 'categories.index',
+            'route' => 'categorias.index',
             'icon'  => 'fas fa-list', // Icono de categorías
         ],
         [
             'text' => 'Colores',
-            'route' => 'colors.index',
+            'route' => 'colores.index',
             'icon'  => 'fas fa-palette', // Icono de colores
         ],
         [
             'text' => 'Formas de entrega',
-            'route' => 'delivery_methods.index',
+            'route' => 'formas.index',
             'icon'  => 'fas fa-shipping-fast', // Icono de formas de entrega
         ],
         [
             'text' => 'Presentaciones',
-            'route' => 'presentations.index',
+            'route' => 'presentaciones.index',
             'icon'  => 'fas fa-box-open', // Icono de presentaciones
         ],
         [
             'text' => 'Talles',
-            'route' => 'sizes.index',
+            'route' => 'talles.index',
             'icon'  => 'fas fa-ruler', // Icono de talles
         ],
 
@@ -338,27 +338,27 @@ return [
         ['header' => 'VENTAS'],
         [
             'text' => 'Productos',
-            'route' => 'products.index',
+            'route' => 'productos.index',
             'icon'  => 'fas fa-cube', // Icono de productos
         ],
         [
             'text' => 'Pedidos',
-            'route' => 'orders.index',
+            'route' => 'pedidos.index',
             'icon'  => 'fas fa-shopping-cart', // Icono de pedidos
         ],
         [
             'text' => 'Movimientos (Stock)',
-            'route' => 'stock-movements.index',
+            'route' => 'movimientos.index',
             'icon'  => 'fas fa-exchange-alt', // Icono de movimientos de stock
         ],
         [
             'text' => 'Pendientes (Stock)',
-            'route' => 'pending-stock.index',
+            'route' => 'pendientes.index',
             'icon'  => 'fas fa-clipboard-list', // Icono de pendientes de stock
         ],
         [
             'text' => 'Historias (Movimientos)',
-            'route' => 'movement-history.index',
+            'route' => 'historico.index',
             'icon'  => 'fas fa-history', // Icono de historia de movimientos
         ],
 
@@ -366,7 +366,7 @@ return [
         ['header' => 'WEB'],
         [
             'text' => 'Galería',
-            'route' => 'gallery.index',
+            'route' => 'galeria.index',
             'icon'  => 'fas fa-images', // Icono de galería
         ],
         [
@@ -376,7 +376,7 @@ return [
         ],
         [
             'text' => 'Testimonios',
-            'route' => 'testimonials.index',
+            'route' => 'testimonios.index',
             'icon'  => 'fas fa-comment-dots', // Icono de testimonios
         ],
 
