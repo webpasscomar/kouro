@@ -3,63 +3,68 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class SizesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $sizes = Size::all();
+
+        $title = 'Está seguro?';
+        $text = 'Está acción no se podrá revertir';
+        confirmDelete($title, $text);
+
+        return view('backend.sizes.index', compact('sizes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('backend.sizes.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $this->validateSize($request);
+
+        Size::create($validated);
+
+        toast('Talle creado con éxito', 'success');
+        return redirect()->route('sizes.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Size $size)
     {
-        //
+        return view('backend.sizes.form', compact('size'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Size $size)
     {
-        //
+        $validated = $this->validateSize($request);
+
+        $size->update($validated);
+
+        toast('Talle modificado con éxito', 'success');
+        return redirect()->route('sizes.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Size $size)
     {
-        //
+        $size->delete();
+
+        toast('Talle eliminado con éxito', 'success');
+        return redirect()->route('sizes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    private function validateSize(Request $request)
     {
-        //
+        return $request->validate([
+            'talle' => 'required',
+            'estado' => 'required|boolean',
+        ], [
+            'talle.required' => 'Ingrese un talle',
+            'estado.required' => 'Ingrese un estado',
+        ]);
     }
 }

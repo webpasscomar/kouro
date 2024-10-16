@@ -330,7 +330,7 @@ return [
         ],
         [
             'text' => 'Talles',
-            'route' => 'talles.index',
+            'route' => 'sizes.index',
             'icon'  => 'fas fa-ruler', // Icono de talles
         ],
 

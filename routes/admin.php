@@ -75,14 +75,17 @@ Route::middleware([
         ]);
 
     Route::resource('talles', SizesController::class)->names([
-        'index' => 'talles.index',
-        'create' => 'talles.create',
-        'store' => 'talles.store',
-        'show' => 'talles.show',
-        'edit' => 'talles.edit',
-        'update' => 'talles.update',
-        'destroy' => 'talles.destroy',
-    ]);
+        'index' => 'sizes.index',
+        'create' => 'sizes.create',
+        'store' => 'sizes.store',
+        'show' => 'sizes.show',
+        'edit' => 'sizes.edit',
+        'update' => 'sizes.update',
+        'destroy' => 'sizes.destroy',
+    ])
+        ->parameters([
+            'talles' => 'size'
+        ]);
 
 
     Route::resource('productos', ProductsController::class)->names([
