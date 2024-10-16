@@ -5,4 +5,11 @@
 	Overwriting Default Theme Styles for Better Handling Updates
 -----------------------------------------------------------------*/
 
+.field_required{
+	font-size: 14px;
+	color: rgba(158, 157, 157,0.9);
+}
 
+.field_required-icon{
+	font-size: 18px;
+}

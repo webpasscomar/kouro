@@ -27,13 +27,14 @@ class DeliveryMethodController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:delivery_methods,name',
             'cost' => 'required|numeric',
             'status' => 'boolean',
         ], [
             'name.required' => 'Ingrese un nombre',
             'name.string' => 'Ingrese un nombre válido',
             'name.max' => 'Máximo permitido 255 carácteres',
+            'name.unique' => 'El nombre ya existe',
             'status.boolean' => 'Ingrese un estado válido',
             'cost.required' => 'Ingrese un costo',
             'cost.numeric' => 'Ingrese un costo válido'
@@ -54,13 +55,14 @@ class DeliveryMethodController extends Controller
     public function update(Request $request, DeliveryMethod $deliveryMethod)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:delivery_methods,name,' . $deliveryMethod->id,
             'cost' => 'required|numeric',
             'status' => 'boolean',
         ], [
             'name.required' => 'Ingrese un nombre',
             'name.string' => 'Ingrese un nombre válido',
             'name.max' => 'Máximo permitido 255 carácteres',
+            'name.unique' => 'El nombre ya existe',
             'status.boolean' => 'Ingrese un estado válido',
             'cost.required' => 'Ingrese un costo',
             'cost.numeric' => 'Ingrese un costo válido'

@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Dashboard;
+// use App\Http\Livewire\Dashboard;
 
 use App\Http\Controllers\backend\DeliveryMethodController;
 use App\Http\Controllers\backend\CategoriesController;
 use App\Http\Controllers\backend\ColorsController;
+use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\PresentationsController;
 use App\Http\Controllers\backend\SizesController;
 use App\Http\Controllers\backend\ProductsController;
@@ -170,10 +171,10 @@ Route::middleware([
     ]);
 
 
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
     Route::get('/', function () {
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard.index');
     });
 });

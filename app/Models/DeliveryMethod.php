@@ -9,6 +9,7 @@ class DeliveryMethod extends Model
 {
     use HasFactory;
 
+    protected $table = 'delivery_methods';
     protected $fillable = [
         'name',
         'cost',

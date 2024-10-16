@@ -17,10 +17,10 @@
             @yield('content_header_title')
 
             @hasSection('content_header_subtitle')
-                <small class="text-dark">
-                    <i class="fas fa-xs fa-angle-right text-muted"></i>
+                <i class="fas fa-xs fa-angle-right text-muted fs-5 align-middle"></i>
+                <span class="text-secondary fs-4">
                     @yield('content_header_subtitle')
-                </small>
+                </span>
             @endif
         </h1>
     @endif
@@ -50,7 +50,7 @@
 {{-- Add common Javascript/Jquery code --}}
 
 @push('js')
-    {{-- <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable({
@@ -79,4 +79,7 @@
 @push('css')
     <style type="text/css">
     </style>
+    {{-- Icono de pestaña --}}
+    <link rel="shortcut icon" href="{{ asset('img/logo_ico.ico') }}" type="image/x-icon">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 @endpush
