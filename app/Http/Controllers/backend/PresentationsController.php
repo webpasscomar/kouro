@@ -3,63 +3,67 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Presentation;
 use Illuminate\Http\Request;
 
 class PresentationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+
+        $presentations = Presentation::all();
+
+        $title = 'Está seguro?';
+        $text = 'Está acción no se podrá revertir';
+        confirmDelete($title, $text);
+
+        return view('backend.presentations.index', compact('presentations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('backend.presentations.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'presentacion' => 'required',
+            'sigla' => 'required',
+            'estado' => 'required|boolean',
+        ], [
+            'presentacion.required' => 'Ingrese una presentacion',
+            'sigla.required' => 'Ingrese una sigla',
+        ]);
+
+        Presentation::create($validated);
+
+        toast('Presentación creada con éxito', 'success');
+        return redirect()->route('presentations.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Presentation $presentation)
     {
-        //
+        return view('backend.presentations.form', compact('presentation'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Presentation $presentation)
     {
-        //
+        $validated = $request->validate([
+            'presentacion' => 'required',
+            'sigla' => 'required',
+            'estado' => 'required|boolean',
+        ]);
+
+        $presentation->update($validated);
+        toast('Presentación modificada con éxito', 'success');
+        return redirect()->route('presentations.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Presentation $presentation)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $presentation->delete();
+        toast('Presentación eliminada con éxito', 'success');
+        return redirect()->route('presentations.index');
     }
 }

@@ -325,7 +325,7 @@ return [
         ],
         [
             'text' => 'Presentaciones',
-            'route' => 'presentaciones.index',
+            'route' => 'presentations.index',
             'icon'  => 'fas fa-box-open', // Icono de presentaciones
         ],
         [
