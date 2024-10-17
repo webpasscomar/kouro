@@ -15,26 +15,59 @@
 
 
         <div class="row">
-          <div class="col">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="nombre">Nombre</label><span class="ml-1 text-danger">*</span>
+                  <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
+                    value="{{ old('nombre', $product->nombre ?? '') }}">
+                  @error('nombre')
+                    <span class="text-danger ml-1">{{ $message }}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="desCorta">Descripción Corta</label><span class="ml-1 text-danger">*</span>
+                  <input type="text" name="desCorta" class="form-control @error('desCorta') is-invalid @enderror"
+                    value="{{ old('desCorta', $product->desCorta ?? '') }}">
+                  @error('desCorta')
+                    <span class="text-danger ml-1">{{ $message }}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="descLarga">Descripción Larga</label><span class="ml-1 text-danger">*</span>
+                  <textarea name="descLarga" class="form-control @error('descLarga') is-invalid @enderror">{{ old('descLarga', $product->descLarga ?? '') }}</textarea>
+                  @error('descLarga')
+                    <span class="text-danger ml-1">{{ $message }}</span>
+                  @enderror
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
             <div class="form-group">
-              <label for="nombre">Nombre</label><span class="ml-1 text-danger">*</span>
-              <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror"
-                value="{{ old('nombre', $product->nombre ?? '') }}">
-              @error('nombre')
+              <label for="categorias">Categorías</label>
+              <select name="categorias[]" id="categorias" class="form-control select2" multiple>
+                @foreach ($categorias as $categoria)
+                  <option value="{{ $categoria->id }}"
+                    {{ isset($product) && $product->categorias->contains($categoria->id) ? 'selected' : '' }}>
+                    {{ $categoria->categoria }}
+                  </option>
+                @endforeach
+              </select>
+              @error('categorias')
                 <span class="text-danger ml-1">{{ $message }}</span>
               @enderror
             </div>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="desCorta">Descripción Corta</label><span class="ml-1 text-danger">*</span>
-              <input type="text" name="desCorta" class="form-control @error('desCorta') is-invalid @enderror"
-                value="{{ old('desCorta', $product->desCorta ?? '') }}">
-              @error('desCorta')
-                <span class="text-danger ml-1">{{ $message }}</span>
-              @enderror
-            </div>
-          </div>
+
+
+
         </div>
 
 
@@ -42,15 +75,7 @@
           <div class="col">
 
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="descLarga">Descripción Larga</label><span class="ml-1 text-danger">*</span>
-              <textarea name="descLarga" class="form-control @error('descLarga') is-invalid @enderror">{{ old('descLarga', $product->descLarga ?? '') }}</textarea>
-              @error('descLarga')
-                <span class="text-danger ml-1">{{ $message }}</span>
-              @enderror
-            </div>
-          </div>
+
         </div>
 
 
@@ -72,7 +97,7 @@
                 <option value="">Seleccione una presentación</option>
                 @foreach ($presentations as $presentation)
                   <option value="{{ $presentation->id }}"
-                    {{ isset($product) && $product->presentacion_id == $presentacion->id ? 'selected' : '' }}>
+                    {{ isset($product) && $product->presentacion_id == $presentation->id ? 'selected' : '' }}>
                     {{ $presentation->presentacion }}
                   </option>
                 @endforeach
@@ -189,14 +214,6 @@
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
 
 
 

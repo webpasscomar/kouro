@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Categoria;
 use App\Models\Presentation;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,9 @@ class ProductsController extends Controller
     public function create()
     {
         $presentations = Presentation::all(); // Traemos las presentations
-        return view('backend.products.form', compact('presentations'));
+        $categorias = Categoria::all(); // Traer todas las categorías
+
+        return view('backend.products.form', compact('presentations', 'categorias'));
     }
 
     public function store(Request $request)
@@ -48,7 +51,10 @@ class ProductsController extends Controller
             'estado.required' => 'Seleccione un estado',
         ]);
 
-        Product::create($validated);
+        $product = Product::create($validated);
+
+        // Sincronizar categorías
+        $product->categorias()->sync($validated['categorias']);
 
         toast('Producto creado con éxito', 'success');
         return redirect()->route('products.index');
@@ -57,7 +63,9 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
         $presentations = Presentation::all(); // Traemos las presentations
-        return view('backend.products.form', compact('product', 'presentations'));
+        $categorias = Categoria::all(); // Traer todas las categorías
+
+        return view('backend.products.form', compact('product', 'presentations', 'categorias'));
     }
 
     public function update(Request $request, Product $product)
@@ -82,6 +90,9 @@ class ProductsController extends Controller
         ]);
 
         $product->update($validated);
+
+        // Sincronizar categorías
+        $product->categorias()->sync($validated['categorias']);
 
         toast('Producto modificado con éxito', 'success');
         return redirect()->route('products.index');

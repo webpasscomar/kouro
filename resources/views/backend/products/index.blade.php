@@ -14,7 +14,7 @@
             <tr>
               <th>Nombre</th>
               <th>Descripción Corta</th>
-              <th>Precio Lista</th>
+              <th>Precio</th>
               <th>Estado</th>
               <th class="text-right">Acciones</th>
             </tr>
@@ -29,18 +29,41 @@
                   <i class="{{ $product->estado ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }}"
                     style="font-size: 25px;"></i>
                 </td>
-                <td class="text-right align-middle">
+                <td class="d-flex text-right align-middle">
+
+                  <!-- Botón para abrir el modal de imágenes -->
+                  <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#imagesModal-{{ $product->id }}">
+                    <i class="fas fa-camera"></i>
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="imagesModal-{{ $product->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="imagesModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="imagesModalLabel">Fotos de {{ $product->codigo }} -
+                            {{ $product->nombre }}</h3>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          @livewire('backend.productosimagenes', ['productId' => $product->id])
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning">
                     <i class="fas fa-edit"></i>
                   </a>
+
                   <a href="{{ route('products.destroy', $product) }}" class="btn btn-sm btn-danger"
                     data-confirm-delete="true">
                     <i class="fas fa-trash"></i>
                   </a>
-                  {{-- <a href="{{ route('products.photos', $product) }}" class="btn btn-sm btn-info" data-toggle="modal"
-                    data-target="#photoModal">
-                    <i class="fas fa-camera"></i>
-                  </a> --}}
+
                 </td>
               </tr>
             @endforeach
