@@ -338,7 +338,7 @@ return [
         ['header' => 'VENTAS'],
         [
             'text' => 'Productos',
-            'route' => 'productos.index',
+            'route' => 'products.index',
             'icon'  => 'fas fa-cube', // Icono de productos
         ],
         [

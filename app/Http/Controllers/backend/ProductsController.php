@@ -3,63 +3,95 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Presentation;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('backend.products.index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $presentations = Presentation::all(); // Traemos las presentations
+        return view('backend.products.form', compact('presentations'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'desCorta' => 'required|string|max:255',
+            // 'descLarga' => 'required|string',
+            'codigo' => 'nullable|string|max:255',
+            'presentacion_id' => 'nullable|exists:presentaciones,id',
+            'precioLista' => 'required|string|max:255',
+            'precioOferta' => 'nullable|string|max:255',
+            'ofertaDesde' => 'nullable|date',
+            'ofertaHasta' => 'nullable|date',
+            'peso' => 'nullable|string|max:255',
+            'tamano' => 'nullable|string|max:255',
+            'link' => 'nullable|url|max:255',
+            'orden' => 'nullable|integer',
+            'unidadVenta' => 'nullable|string|max:255',
+            'destacar' => 'nullable|boolean',
+            'estado' => 'required|boolean',
+        ], [
+            'nombre.required' => 'Ingrese un nombre',
+            'desCorta.required' => 'Ingrese una descripción corta',
+            'descLarga.required' => 'Ingrese una descripción larga',
+            'precioLista.required' => 'Ingrese un precio de lista',
+            'estado.required' => 'Seleccione un estado',
+        ]);
+
+        Product::create($validated);
+
+        toast('Producto creado con éxito', 'success');
+        return redirect()->route('products.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Product $product)
     {
-        //
+        $presentations = Presentation::all(); // Traemos las presentations
+        return view('backend.products.form', compact('product', 'presentations'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'desCorta' => 'required|string|max:255',
+            // 'descLarga' => 'required|string',
+            'codigo' => 'nullable|string|max:255',
+            'presentacion_id' => 'nullable|exists:presentaciones,id',
+            'precioLista' => 'required|string|max:255',
+            'precioOferta' => 'nullable|string|max:255',
+            'ofertaDesde' => 'nullable|date',
+            'ofertaHasta' => 'nullable|date',
+            'peso' => 'nullable|string|max:255',
+            'tamano' => 'nullable|string|max:255',
+            'link' => 'nullable|url|max:255',
+            'orden' => 'nullable|integer',
+            'unidadVenta' => 'nullable|string|max:255',
+            'destacar' => 'nullable|boolean',
+            'estado' => 'required|boolean',
+        ]);
+
+        $product->update($validated);
+
+        toast('Producto modificado con éxito', 'success');
+        return redirect()->route('products.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Product $product)
     {
-        //
-    }
+        $product->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        toast('Producto eliminado con éxito', 'success');
+        return redirect()->route('products.index');
     }
 }

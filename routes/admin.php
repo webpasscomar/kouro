@@ -89,14 +89,17 @@ Route::middleware([
 
 
     Route::resource('productos', ProductsController::class)->names([
-        'index' => 'productos.index',
-        'create' => 'productos.create',
-        'store' => 'productos.store',
-        'show' => 'productos.show',
-        'edit' => 'productos.edit',
-        'update' => 'productos.update',
-        'destroy' => 'productos.destroy',
-    ]);
+        'index' => 'products.index',
+        'create' => 'products.create',
+        'store' => 'products.store',
+        'show' => 'products.show',
+        'edit' => 'products.edit',
+        'update' => 'products.update',
+        'destroy' => 'products.destroy',
+    ])
+        ->parameters([
+            'productos' => 'product'
+        ]);
 
 
     Route::resource('pedidos', OrdersController::class)->names([
