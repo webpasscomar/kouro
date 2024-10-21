@@ -33,7 +33,7 @@ Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.st
 
 Route::get('nosotros', Nosotros::class)->name('nosotros');
 Route::get('sucursales', Sucursales::class)->name('sucursales');
-Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs.index');
+Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs.front.index');
 
 // Pagos y métodos de pago
 Route::get('/mercadopago', MercadoPago::class)->name('mercadopago');

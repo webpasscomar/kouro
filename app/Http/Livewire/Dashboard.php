@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Sku;
 use App\Models\Stock_pendiente;
 use App\Models\Producto;
-use App\Models\Categoria;
+use App\Models\Category;
 use App\Models\Talle;
 use App\Models\Color;
 use App\Models\Pedido;
@@ -37,7 +37,7 @@ class Dashboard extends Component
     $this->stock_pend        = Stock_pendiente::count();
     $this->products_count    = Producto::count();
 
-    $this->categories_count  = Categoria::count();
+    $this->categories_count  = Category::count();
     $this->sizes_count       = Talle::count();
     $this->colors_count      = Color::count();
     $this->orders_count      = Pedido::count();

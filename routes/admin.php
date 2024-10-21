@@ -40,14 +40,17 @@ Route::middleware([
 
 
     Route::resource('categorias', CategoriesController::class)->names([
-        'index' => 'categorias.index',
-        'create' => 'categorias.create',
-        'store' => 'categorias.store',
-        'show' => 'categorias.show',
-        'edit' => 'categorias.edit',
-        'update' => 'categorias.update',
-        'destroy' => 'categorias.destroy',
-    ]);
+        'index' => 'categories.index',
+        'create' => 'categories.create',
+        'store' => 'categories.store',
+        'show' => 'categories.show',
+        'edit' => 'categories.edit',
+        'update' => 'categories.update',
+        'destroy' => 'categories.destroy',
+    ])
+        ->parameters([
+            'categorias' => 'category'
+        ]);
 
 
     Route::resource('colores', ColorsController::class)->names([

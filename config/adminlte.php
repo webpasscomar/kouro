@@ -310,7 +310,7 @@ return [
         ['header' => 'ADMINISTRACION'],
         [
             'text' => 'Categorias',
-            'route' => 'categorias.index',
+            'route' => 'categories.index',
             'icon'  => 'fas fa-list', // Icono de categorías
         ],
         [

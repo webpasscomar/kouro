@@ -5,6 +5,7 @@
 	Overwriting Default Theme Styles for Better Handling Updates
 -----------------------------------------------------------------*/
 
+/* Texto e icono de campos obligatorios - formularios */
 .field_required{
 	font-size: 14px;
 	color: rgba(158, 157, 157,0.9);
@@ -12,4 +13,10 @@
 
 .field_required-icon{
 	font-size: 18px;
+}
+
+/* Texto requisitos de imágen */
+.image-requisite{
+	color:rgb(136, 136, 136);
+	font-size: 12px;
 }
