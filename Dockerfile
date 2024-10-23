@@ -20,7 +20,7 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 # COPY .docker/php.ini /usr/local/etc/php/
 
 # Instalar Composer
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.5 /usr/bin/composer /usr/local/bin/composer
 
 # Directorio de trabajo
 WORKDIR /var/www/html
@@ -30,6 +30,9 @@ COPY . /var/www/html
 
 # Instalar dependencias de Composer
 RUN cd /var/www/html && composer install --ignore-platform-reqs --optimize-autoloader --no-dev
+
+# Instalar npm
+RUN apt-get install nodejs -y
 
 # Generar key de Laravel
 RUN php artisan key:generate
@@ -44,9 +47,8 @@ RUN chown -R www-data:www-data \
   /var/www/html/bootstrap/cache
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-  && apt-get install -y nodejs\
+  && apt-get install nodejs -y \
   npm
-
 # Puerto expuesto
 EXPOSE 80 443 5173
 

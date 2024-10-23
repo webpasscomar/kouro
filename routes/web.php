@@ -21,8 +21,9 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/destacados', [ProductoController::class, 'destacados'])->name('productos.destacados');
+Route::get('/productos', [ProductoController::class, 'productos'])->name('productos.index');
 
+Route::get('/destacados', [ProductoController::class, 'destacados'])->name('productos.destacados');
 Route::get('/shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
 
 Route::get('/shop/{categoria}/{id}', ProductoFront::class)->name('productos.show');
