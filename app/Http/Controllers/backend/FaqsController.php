@@ -35,17 +35,17 @@ class FaqsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'question' => 'required|string|max:255',
-            'answer' => 'required|string|max:255',
-            'status' => 'boolean',
+            'pregunta' => 'required|string|max:255',
+            'respuesta' => 'required|string|max:255',
+            'estado' => 'boolean',
         ], [
-            'question.required' => 'Ingrese una pregunta',
-            'question.string' => 'Ingrese una pregunta válida',
-            'question.max' => 'Máximo permitido 255 carácteres',
-            'status.boolean' => 'Ingrese un estado válido',
-            'answer.required' => 'Ingrese una pregunta',
-            'answer.string' => 'Ingrese una pregunta válida',
-            'answer.max' => 'Máximo permitido 255 carácteres',
+            'pregunta.required' => 'Ingrese una pregunta',
+            'pregunta.string' => 'Ingrese una pregunta válida',
+            'pregunta.max' => 'Máximo permitido 255 carácteres',
+            'estado.boolean' => 'Ingrese un estado válido',
+            'respuesta.required' => 'Ingrese una pregunta',
+            'respuesta.string' => 'Ingrese una pregunta válida',
+            'respuesta.max' => 'Máximo permitido 255 carácteres',
         ]);
         Faq::create($validated);
         toast('Pregunta frecuente creada con éxito', 'success');
@@ -76,17 +76,17 @@ class FaqsController extends Controller
     public function update(Request $request, Faq $faq)
     {
         $validated = $request->validate([
-            'question' => 'required|string|max:255' . $faq->id,
-            'answer' => 'required|string|max:255' ,
-            'status' => 'boolean',
+            'pregunta' => 'required|string|max:255' . $faq->id,
+            'respuesta' => 'required|string|max:255' ,
+            'estado' => 'boolean',
         ], [
-            'question.required' => 'Ingrese una pregunta',
-            'question.string' => 'Ingrese una pregunta válida',
-            'question.max' => 'Máximo permitido 255 carácteres',
-            'status.boolean' => 'Ingrese un estado válido',
-            'answer.required' => 'Ingrese una pregunta',
-            'answer.string' => 'Ingrese una pregunta válida',
-            'answer.max' => 'Máximo permitido 255 carácteres',
+            'pregunta.required' => 'Ingrese una pregunta',
+            'pregunta.string' => 'Ingrese una pregunta válida',
+            'pregunta.max' => 'Máximo permitido 255 carácteres',
+            'estado.boolean' => 'Ingrese un estado válido',
+            'respuesta.required' => 'Ingrese una pregunta',
+            'respuesta.string' => 'Ingrese una pregunta válida',
+            'respuesta.max' => 'Máximo permitido 255 carácteres',
         ]);
         $faq->update($validated);
         toast('Pregunta frecuente modificada con éxito', 'success');

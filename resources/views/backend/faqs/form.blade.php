@@ -21,30 +21,30 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="question">Pregunta</label><span class="ml-1 text-danger">*</span>
-                    <input type="text" name="question" class="form-control @error('question') is-invalid @enderror"
-                        value="{{ isset($Faq) ? $Faq->question : old('question') }}">
-                    @error('question')
+                    <label for="pregunta">Pregunta</label><span class="ml-1 text-danger">*</span>
+                    <input type="text" name="pregunta" class="form-control @error('pregunta') is-invalid @enderror"
+                        value="{{ isset($Faq) ? $Faq->pregunta : old('pregunta') }}">
+                    @error('pregunta')
                         <span class="text-danger ml-1">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="answer">Respuesta</label><span class="ml-1 text-danger">*</span>
-                    <input type="text" name="answer" class="form-control @error('answer') is-invalid @enderror"
-                        value="{{ isset($Faq) ? $Faq->answer : old('answer') }}">
-                    @error('answer')
+                    <label for="respuesta">Respuesta</label><span class="ml-1 text-danger">*</span>
+                    <input type="text" name="respuesta" class="form-control @error('respuesta') is-invalid @enderror"
+                        value="{{ isset($Faq) ? $Faq->respuesta : old('respuesta') }}">
+                    @error('respuesta')
                         <span class="text-danger ml-1">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="status">Estado</label>
-                    <select name="status" class="form-select">
-                        <option value="1" {{ isset($Faq) && $Faq->status ? 'selected' : '' }}>
+                    <label for="estado">Estado</label>
+                    <select name="estado" class="form-select">
+                        <option value="1" {{ isset($Faq) && $Faq->estado ? 'selected' : '' }}>
                             Activo
                         </option>
-                        <option value="0" {{ isset($Faq) && !$Faq->status ? 'selected' : '' }}>
+                        <option value="0" {{ isset($Faq) && !$Faq->estado ? 'selected' : '' }}>
                             Inactivo
                         </option>
                     </select>

@@ -29,10 +29,10 @@
                     <tbody>
                         @foreach ($faqs as $faq)
                             <tr>
-                                <td class="align-middle">{{ $faq->question }}</td>
-                                <td class="align-middle">{{ $faq->answer }}</td>
-                                <td class="{{ $faq->status ? 'text-success' : 'text-secondary' }}">
-                                    <i class="{{ $faq->status ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }}"
+                                <td class="align-middle">{{ $faq->pregunta }}</td>
+                                <td class="align-middle">{{ $faq->respuesta }}</td>
+                                <td class="{{ $faq->estado ? 'text-success' : 'text-secondary' }}">
+                                    <i class="{{ $faq->estado ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }}"
                                         style="font-size: 25px;"></i>
                                 </td>
                                 <td class="text-right align-middle">
