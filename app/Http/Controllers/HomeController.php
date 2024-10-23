@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Galeria;
 use App\Models\Producto_imagen;
 use App\Models\Producto;
-use App\Models\Categoria;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -29,7 +29,7 @@ class HomeController extends Controller
             }
         }
 
-        $categorias = Categoria::where('estado', 1)
+        $categorias = Category::where('estado', 1)
             ->where('categoriaPadre_id', 0)
             ->where('id', '>', 1)
             ->orderBy('categoria', 'asc')

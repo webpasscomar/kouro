@@ -3,20 +3,20 @@
 namespace App\Http\Livewire;
 
 use App\Models\Producto;
-use App\Models\Categoria;
+use App\Models\Category;
 use App\Models\Sku;
 use Livewire\Component;
 
 class Product extends Component
 {
     public Producto $producto;
-    public Categoria $categoria;
+    public Category $categoria;
 
     public $categorias, $talles, $colores;
     public $cantColores, $cantTalles;
     public $talle, $color, $sku;
 
-    public function mount(Categoria $categoria, Producto $producto)
+    public function mount(Category $categoria, Producto $producto)
     {
         $this->producto = $producto;
         $this->categoria = $categoria;
@@ -26,7 +26,7 @@ class Product extends Component
     {
         $producto = $this->producto;
 
-        $this->categorias = Categoria::all();
+        $this->categorias = Category::all();
         $this->talles = $producto->talles()->distinct()->get();
         $this->colores = $producto->colores()->distinct()->get();
 

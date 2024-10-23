@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
-use App\Models\Categoria;
+use App\Models\Category;
 use App\Models\Producto_imagen;
 
 class ProductoController extends Controller
@@ -12,7 +12,7 @@ class ProductoController extends Controller
 
     public function index()
     {
-        $categorias = Categoria::obtenerArbolCategoriasActivas();
+        $categorias = Category::obtenerArbolCategoriasActivas();
 
         return view('productos.index', compact('categorias'));
     }
@@ -42,13 +42,13 @@ class ProductoController extends Controller
             }
         }
 
-        $categorias = Categoria::obtenerArbolCategoriasActivas();
+        $categorias = Category::obtenerArbolCategoriasActivas();
 
         // $fechahoy  = date('Y-m-d H:i:s');
         $fechahoy  = date('Y-m-d');
         // $fechahoy  = Carbon::now()->toDateString();
 
-        $categoria = new Categoria();
+        $categoria = new Category();
         $categoria->categoria = 'Destacados';
         $categoria->slug = 'destacados';
         $categoria->categoriaPadre_id = 0;
@@ -62,13 +62,13 @@ class ProductoController extends Controller
     {
 
         $fechahoy  = date('Y-m-d H:i:s');
-        $categoria = Categoria::where('slug', $slugCategoria)->first();
+        $categoria = Category::where('slug', $slugCategoria)->first();
         $hijas = $categoria->hijas;
 
         if ($categoria) {
             $productos = $categoria->productos()->where('estado', '=', 1)->get();
         } else {
-            $categoria = Categoria::first();
+            $categoria = Category::first();
             $categoria->categoria = 'Busqueda';
             $productos = Producto::where('nombre', 'LIKE', '%' . $slugCategoria . '%')->where('estado', '=', 1)->get();
         }
@@ -85,7 +85,7 @@ class ProductoController extends Controller
             }
         }
 
-        $categorias = Categoria::obtenerArbolCategoriasActivas();
+        $categorias = Category::obtenerArbolCategoriasActivas();
         return view('productos.categoria', compact('productos', 'categorias', 'hijas', 'categoria', 'fechahoy'));
     }
 
@@ -93,11 +93,9 @@ class ProductoController extends Controller
     public function show($slugCategoria, Producto $producto)
     {
         $producto = $producto;
-        $categoria = Categoria::where('slug', $slugCategoria)->firstOrFail();
+        $categoria = Category::where('slug', $slugCategoria)->firstOrFail();
 
-        $categorias = Categoria::obtenerArbolCategoriasActivas();
+        $categorias = Category::obtenerArbolCategoriasActivas();
         return view('productos.show', compact('producto', 'categorias', 'categoria'));
     }
-
-
 }

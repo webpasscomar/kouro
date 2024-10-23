@@ -38,7 +38,7 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('productos.index') }}" class="small-box-footer">Más info <i
+                        <a href="{{ route('products.index') }}" class="small-box-footer">Más info <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>

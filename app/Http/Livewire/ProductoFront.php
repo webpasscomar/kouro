@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Categoria;
+use App\Models\Category;
 use App\Models\Producto;
 use App\Models\Sku;
 use App\Models\Color;
@@ -64,7 +64,7 @@ class ProductoFront extends Component
         //     ->orderBy('categoria')
         //     ->get()
         //     ->toArray();
-        $this->categorias = Categoria::obtenerArbolCategoriasActivas();
+        $this->categorias = Category::obtenerArbolCategoriasActivas();
 
         $datos_imagenes = Producto_imagen::select(['productos_imagenes.file_path'])
             ->where('productos_imagenes.producto_id', '=', $id)

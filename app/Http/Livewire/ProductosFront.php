@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Producto;
-use App\Models\Categoria;
+use App\Models\Category;
 use Livewire\WithPagination;
 
 class ProductosFront extends Component
@@ -22,7 +22,7 @@ class ProductosFront extends Component
     {
 
         if ($this->categoriaSlug) {
-            $categoria = Categoria::where('slug', $this->categoriaSlug)->firstOrFail();
+            $categoria = Category::where('slug', $this->categoriaSlug)->firstOrFail();
             $productos = $categoria
                 ->productos()
                 ->where('estado', 1)
@@ -34,7 +34,7 @@ class ProductosFront extends Component
                 ->paginate(12);
         }
 
-        $categorias = Categoria::all();
+        $categorias = Category::all();
         return view('livewire.productos-front', compact('productos', 'categorias'))
             ->extends('layouts.app');
     }
@@ -56,6 +56,6 @@ class ProductosFront extends Component
 
     public function getCategoriaProperty()
     {
-        return Categoria::where('slug', $this->categoriaSlug)->first();
+        return Category::where('slug', $this->categoriaSlug)->first();
     }
 }
