@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Color;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ColorsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('backend.colors.index', [
+            'colors' => Color::all(),
+        ]);
     }
 
     /**
@@ -34,7 +38,7 @@ class ColorsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Color $color)
     {
         //
     }
@@ -42,7 +46,7 @@ class ColorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Color $color)
     {
         //
     }
@@ -50,7 +54,7 @@ class ColorsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Color $color)
     {
         //
     }
@@ -58,7 +62,7 @@ class ColorsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Color $color)
     {
         //
     }

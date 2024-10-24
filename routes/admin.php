@@ -54,13 +54,13 @@ Route::middleware([
 
 
     Route::resource('colores', ColorsController::class)->names([
-        'index' => 'colores.index',
-        'create' => 'colores.create',
-        'store' => 'colores.store',
-        'show' => 'colores.show',
-        'edit' => 'colores.edit',
-        'update' => 'colores.update',
-        'destroy' => 'colores.destroy',
+        'index' => 'colors.index',
+        'create' => 'colors.create',
+        'store' => 'colors.store',
+        'show' => 'colors.show',
+        'edit' => 'colors.edit',
+        'update' => 'colors.update',
+        'destroy' => 'colors.destroy',
     ]);
 
 

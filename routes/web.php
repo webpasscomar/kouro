@@ -23,9 +23,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/destacados', [ProductoController::class, 'destacados'])->name('productos.destacados');
 
-Route::get('/shop/{categoria}', [ProductoController::class, 'categoria'])->name('productos.categoria');
+Route::get('/shop/{category}', [ProductoController::class, 'categoria'])->name('productos.categoria');
 
-Route::get('/shop/{categoria}/{id}', ProductoFront::class)->name('productos.show');
+Route::get('/shop/{category}/{id}', ProductoFront::class)->name('productos.show');
 Route::get('/carrito', Carrito::class)->name('carrito');
 
 Route::get('/contacto', [ContactController::class, 'index'])->name('contacto');
