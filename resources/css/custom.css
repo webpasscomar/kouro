@@ -20,3 +20,13 @@
 	color:rgb(136, 136, 136);
 	font-size: 12px;
 }
+
+/* tamaño de imágen de la tabla de colores - backend */
+.img_color{
+	width: 48px;
+	height: 48px;
+	max-width: 48px;
+	max-width: 48px;
+	min-width: 48px;
+	min-height: 48px;
+}

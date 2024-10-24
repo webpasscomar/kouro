@@ -61,6 +61,9 @@ Route::middleware([
         'edit' => 'colors.edit',
         'update' => 'colors.update',
         'destroy' => 'colors.destroy',
+    ])
+    ->parameters([
+        'colores'=>'color'
     ]);
 
 

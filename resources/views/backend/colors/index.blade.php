@@ -28,7 +28,8 @@
                             <tr>
                                 <td class="align-middle text-left">{{ $color->id }}</td>
                                 <td class="align-middle">
-                                    <div class="p-3" style="background-color: {{ $color->pcolor }}"></div>
+                                    <img src="{{ isset($color->imagen) && file_exists(public_path('storage/colores/' . $color->imagen)) ? asset('storage/colores/' . $color->imagen) : asset('img/Imagen-no-disponible.png') }}"
+                                        alt="{{ $color->color }}" class="img_color img-thumbnail">
                                 </td>
                                 <td class="align-middle">{{ $color->color }}</td>
                                 <td
@@ -37,10 +38,10 @@
                                         style="font-size: 25px;"></i>
                                 </td>
                                 <td class="text-right align-middle">
-                                    <a href="{{ route('categories.edit', $color) }}" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('colors.edit', $color) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a href="{{ route('categories.destroy', $color) }}" class="btn btn-sm btn-danger"
+                                    <a href="{{ route('colors.destroy', $color) }}" class="btn btn-sm btn-danger"
                                         data-confirm-delete="true">
                                         <i class="fas fa-trash"></i>
                                     </a>
