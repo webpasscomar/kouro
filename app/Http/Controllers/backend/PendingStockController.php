@@ -12,7 +12,7 @@ class PendingStockController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.pending_stock.index');
     }
 
     /**
