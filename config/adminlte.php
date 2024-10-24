@@ -315,7 +315,7 @@ return [
         ],
         [
             'text' => 'Colores',
-            'route' => 'colores.index',
+            'route' => 'colors.index',
             'icon'  => 'fas fa-palette', // Icono de colores
         ],
         [

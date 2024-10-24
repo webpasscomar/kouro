@@ -5,7 +5,7 @@
   @endif
 
   <div class="table-responsive">
-    <table id="myTable" class="table table-bordered">
+    <table id="myTable" class="table my-4 table-bordered table-striped">
       <thead>
         <tr class="bg-gray-200 text-gray-700">
           <th>Código </th>

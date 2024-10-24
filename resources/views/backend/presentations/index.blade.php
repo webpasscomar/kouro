@@ -1,5 +1,5 @@
 @extends('layouts.adminlte')
-@section('title', 'Métodos de Entrega')
+@section('subtitle', 'Presentaciones')
 @section('content_header_title', 'Admin')
 @section('content_header_subtitle', 'Presentaciones')
 @section('content_body')
@@ -37,18 +37,18 @@
                   <a href="{{ route('presentations.edit', $presentation) }}" class="btn btn-sm btn-warning"><i
                       class="fas fa-edit"></i></a>
 
-                  <a href="{{ route('presentations.destroy', $presentation) }}" class="btn btn-sm btn-danger"
-                    data-confirm-delete="true">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+                                    <a href="{{ route('presentations.destroy', $presentation) }}"
+                                        class="btn btn-sm btn-danger" data-confirm-delete="true">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 
 
 @endsection

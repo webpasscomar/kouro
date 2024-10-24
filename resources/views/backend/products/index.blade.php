@@ -1,5 +1,5 @@
 @extends('layouts.adminlte')
-@section('title', 'Productos')
+@section('subtitle', 'Productos')
 @section('content_header_title', 'Admin')
 @section('content_header_subtitle', 'Productos')
 @section('content_body')

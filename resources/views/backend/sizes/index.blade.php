@@ -1,5 +1,5 @@
 @extends('layouts.adminlte')
-@section('title', 'Talles')
+@section('subtitle', 'Talles')
 @section('content_header_title', 'Admin')
 @section('content_header_subtitle', 'Talles')
 @section('content_body')
@@ -35,32 +35,33 @@
                 </td>
                 <td class="text-right align-middle">
 
-                  <a href="{{ route('sizes.edit', $size) }}" class="btn btn-sm btn-warning">
-                    <i class="fas fa-edit"></i>
-                  </a>
+                                    <a href="{{ route('sizes.edit', $size) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
 
-                  <a href="{{ route('sizes.destroy', $size) }}" class="btn btn-sm btn-danger" data-confirm-delete="true">
-                    <i class="fas fa-trash"></i>
-                  </a>
+                                    <a href="{{ route('sizes.destroy', $size) }}" class="btn btn-sm btn-danger"
+                                        data-confirm-delete="true">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
 
-                </td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
 
 @section('js')
-  <script>
-    $(document).ready(function() {
-      $('#sizes-table').DataTable();
+    <script>
+        $(document).ready(function() {
+            $('#sizes-table').DataTable();
 
-      @if (session('success'))
-        toast("{{ session('success') }}", 'success');
-      @endif
-    });
-  </script>
+            @if (session('success'))
+                toast("{{ session('success') }}", 'success');
+            @endif
+        });
+    </script>
 @endsection
 @endsection
