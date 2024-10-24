@@ -63,7 +63,7 @@
     <div class="card-body">
 
 
-      <table class="table table-striped">
+      <table class="table table-bordered table-striped">
         <thead>
           <tr class="bg-light text-dark">
             <th class="cursor-pointer py-2 w-16">Id</th>
