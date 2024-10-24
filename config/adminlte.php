@@ -343,12 +343,12 @@ return [
         ],
         [
             'text' => 'Pedidos',
-            'route' => 'pedidos.index',
+            'route' => 'orders.index',
             'icon'  => 'fas fa-shopping-cart', // Icono de pedidos
         ],
         [
             'text' => 'Movimientos (Stock)',
-            'route' => 'movimientos.index',
+            'route' => 'movements.index',
             'icon'  => 'fas fa-exchange-alt', // Icono de movimientos de stock
         ],
         [

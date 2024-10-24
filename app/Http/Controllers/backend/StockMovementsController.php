@@ -12,7 +12,7 @@ class StockMovementsController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.stock_movements.index');
     }
 
     /**

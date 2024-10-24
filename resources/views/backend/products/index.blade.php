@@ -25,9 +25,15 @@
                 <td class="align-middle">{{ $product->nombre }}</td>
                 <td class="align-middle">{{ $product->desCorta }}</td>
                 <td class="align-middle">{{ $product->precioLista }}</td>
-                <td class="{{ $product->estado ? 'text-success' : 'text-secondary' }} text-center">
-                  <i class="{{ $product->estado ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }}"
-                    style="font-size: 25px;"></i>
+                <td class="text-center">
+                  @livewire(
+                      'toggle-button',
+                      [
+                          'model' => $product,
+                          'field' => 'estado',
+                      ],
+                      key($product->id)
+                  )
                 </td>
                 <td class="d-flex text-right align-middle">
 

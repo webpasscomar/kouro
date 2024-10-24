@@ -23,8 +23,15 @@
               <tr>
                 <td class="align-middle">{{ $size->id }}</td>
                 <td class="align-middle">{{ $size->talle }}</td>
-                <td class="{{ $size->estado ? 'text-success' : 'text-secondary' }} text-center">
-                  <i class="{{ $size->estado ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }}" style="font-size: 25px;"></i>
+                <td class="text-center">
+                  @livewire(
+                      'toggle-button',
+                      [
+                          'model' => $size,
+                          'field' => 'estado',
+                      ],
+                      key($size->id)
+                  )
                 </td>
                 <td class="text-right align-middle">
 

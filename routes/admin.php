@@ -18,12 +18,15 @@ use App\Http\Controllers\backend\GalleryController;
 use App\Http\Controllers\backend\TestimonialsController;
 use App\Http\Controllers\backend\FaqsController;
 
+use App\Http\Livewire\Backend\Movimientos;
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
 
+    // Route::get('movimientos-de-stock', [Movimientos::class])->name('movimientos');
 
     Route::resource('formas-de-entrega', DeliveryMethodController::class)->names([
         'index' => 'formas.index',
@@ -106,25 +109,31 @@ Route::middleware([
 
 
     Route::resource('pedidos', OrdersController::class)->names([
-        'index' => 'pedidos.index',
-        'create' => 'pedidos.create',
-        'store' => 'pedidos.store',
-        'show' => 'pedidos.show',
-        'edit' => 'pedidos.edit',
-        'update' => 'pedidos.update',
-        'destroy' => 'pedidos.destroy',
-    ]);
+        'index' => 'orders.index',
+        'create' => 'orders.create',
+        'store' => 'orders.store',
+        'show' => 'orders.show',
+        'edit' => 'orders.edit',
+        'update' => 'orders.update',
+        'destroy' => 'orders.destroy',
+    ])
+        ->parameters([
+            'pedidos' => 'order'
+        ]);
 
 
     Route::resource('movimientos-de-stock', StockMovementsController::class)->names([
-        'index' => 'movimientos.index',
-        'create' => 'movimientos.create',
-        'store' => 'movimientos.store',
-        'show' => 'movimientos.show',
-        'edit' => 'movimientos.edit',
-        'update' => 'movimientos.update',
-        'destroy' => 'movimientos.destroy',
-    ]);
+        'index' => 'movements.index',
+        'create' => 'movements.create',
+        'store' => 'movements.store',
+        'show' => 'movements.show',
+        'edit' => 'movements.edit',
+        'update' => 'movements.update',
+        'destroy' => 'movements.destroy',
+    ])
+        ->parameters([
+            'movimientos' => 'movements'
+        ]);
 
 
     Route::resource('pendientes-de-stock', PendingStockController::class)->names([

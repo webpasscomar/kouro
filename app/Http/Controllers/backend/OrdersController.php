@@ -1,65 +1,73 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $orders = Pedido::all();
+        return view('backend.orders.index', compact('orders'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('backend.orders.form', ['order' => null]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'correo' => 'required|email',
+            'telefono' => 'required|string',
+            'cantidadItems' => 'required|integer',
+            'subTotal' => 'required|numeric',
+            'total' => 'required|numeric',
+            'del_costo' => 'required|numeric',
+        ]);
+
+        Pedido::create($validated);
+
+        // Toast message and redirect
+        toast('Pedido creado con éxito', 'success');
+        return redirect()->route('orders.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Pedido $order)
     {
-        //
+        return view('backend.orders.form', compact('order'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Pedido $order)
     {
-        //
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'correo' => 'required|email',
+            'telefono' => 'required|string',
+            'cantidadItems' => 'required|integer',
+            'subTotal' => 'required|numeric',
+            'total' => 'required|numeric',
+            'del_costo' => 'required|numeric',
+        ]);
+
+        $order->update($validated);
+
+        toast('Pedido actualizado con éxito', 'success');
+        return redirect()->route('orders.index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Pedido $order)
     {
-        //
-    }
+        $order->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        toast('Pedido eliminado con éxito', 'success');
+        return redirect()->route('orders.index');
     }
 }

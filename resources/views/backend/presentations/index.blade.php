@@ -23,9 +23,15 @@
               <tr>
                 <td>{{ $presentation->presentacion }}</td>
                 <td>{{ $presentation->sigla }}</td>
-                <td class="{{ $presentation->estado ? 'text-success' : 'text-secondary' }} text-center">
-                  <i class="{{ $presentation->estado ? 'fas fa-toggle-on' : 'fas fa-toggle-off' }}"
-                    style="font-size: 25px;"></i>
+                <td class="text-center">
+                  @livewire(
+                      'toggle-button',
+                      [
+                          'model' => $presentation,
+                          'field' => 'estado',
+                      ],
+                      key($presentation->id)
+                  )
                 </td>
                 <td class="text-right align-middle">
                   <a href="{{ route('presentations.edit', $presentation) }}" class="btn btn-sm btn-warning"><i
