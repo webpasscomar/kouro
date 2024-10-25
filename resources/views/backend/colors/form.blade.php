@@ -37,12 +37,12 @@
                         <div class="form-group">
                             <label for="estado">Estado</label>
                             <select name="estado" class="form-select @error('estado') is-invalid @enderror" id="estado">
-                                <option value="1"
-                                    {{ old('estado', isset($category) ? $category->estado : '') == '1' ? 'selected' : '' }}>
+                                <option value='1'
+                                    {{ old('estado', isset($color) ? $color->estado : '') == '1' ? 'selected' : '' }}>
                                     Activo
                                 </option>
-                                <option value="0"
-                                    {{ old('estado', isset($category) ? $category->estado : '') == '0' ? 'selected' : '' }}>
+                                <option value='0'
+                                    {{ old('estado', isset($color) ? $color->estado : '') == '0' ? 'selected' : '' }}>
                                     Inactivo
                                 </option>
                             </select>

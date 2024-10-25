@@ -15,6 +15,7 @@ class Color extends Model
         'color',
         'pcolor',
         'imagen',
+        'estado'
     ];
 
 
