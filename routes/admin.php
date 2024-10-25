@@ -169,7 +169,10 @@ Route::middleware([
         'edit' => 'galeria.edit',
         'update' => 'galeria.update',
         'destroy' => 'galeria.destroy',
-    ]);
+    ])
+        ->parameters([
+            'galeria'=> 'galeria',
+        ]);
 
 
     Route::resource('testimonios', TestimonialsController::class)->names([
