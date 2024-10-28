@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Galeria;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -12,6 +15,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
+        $title = 'Está seguro?';
+        $text = 'Está acción no se podrá revertir';
+        confirmDelete($title, $text);
+
         return view('backend.gallery.index');
     }
 
@@ -34,7 +41,7 @@ class GalleryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Galeria $galeria)
     {
         //
     }
@@ -42,7 +49,7 @@ class GalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Galeria $galeria)
     {
         //
     }
@@ -50,7 +57,7 @@ class GalleryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Galeria $galeria)
     {
         //
     }
@@ -58,8 +65,22 @@ class GalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Galeria $galeria): RedirectResponse
     {
-        //
+        try {
+            // Eliminamos la imágen
+            if (Storage::disk('public')->exists('galeria/' . $galeria->imagen)) {
+                Storage::disk('public')->delete('galeria/' . $galeria->imagen);
+            }
+            // Eliminamos el Slide
+            $galeria->delete();
+            // Mensaje de eliminación correcta
+            toast('El slide se eliminó correctamente', 'success');
+            return redirect()->route('galeria.index');
+        } catch (\Throwable $th) {
+            //dd($th);
+            toast('No se pudo eliminar el slide', 'error');
+            return redirect()->route('galeria.index');
+        }
     }
 }

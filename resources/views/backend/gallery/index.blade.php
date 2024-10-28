@@ -1,14 +1,14 @@
 @extends('layouts.adminlte')
 
-@section('subtitle', 'Movimientos de Stock')
+@section('subtitle', 'Galeria')
 
 @section('content_header_title', 'Admin')
 
-@section('content_header_subtitle', 'Movimientos de Stock')
+@section('content_header_subtitle', 'Galería')
 
 @section('content_body')
 
-  @livewire('backend.galerias')
+    @livewire('backend.galerias')
 
 @endsection
 

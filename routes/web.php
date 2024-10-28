@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\backend\FaqsController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\MpController;
@@ -30,8 +30,7 @@ Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.st
 
 Route::get('nosotros', Nosotros::class)->name('nosotros');
 Route::get('sucursales', Sucursales::class)->name('sucursales');
-
-Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs');
+Route::get('preguntas-frecuentes', [FaqsController::class, 'index'])->name('faqs.front.index');
 
 // Pagos y métodos de pago
 Route::get('/mercadopago', MercadoPago::class)->name('mercadopago');

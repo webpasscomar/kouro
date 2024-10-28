@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 use App\Models\Galeria;
-
+use Illuminate\Support\Facades\Storage;
 
 class Galerias extends Component
 {
@@ -43,14 +43,34 @@ class Galerias extends Component
             $this->accion === 'crear'
         ) {
             return [
-                'nombre' => 'required|max:20',
-                'imagen' => 'required|mimes:jpg,png|max:1024',
+                'nombre' => 'required|max:20|min:1',
+                'imagen' => 'required|mimes:jpg,png,jpeg|max:2048',
+                'descripcion' => 'nullable|string|max:255',
+                'orden' => 'nullable|integer|min:0',
             ];
         } else {
             return [
-                'nombre' => 'required|max:20',
+                'nombre' => 'required|max:20|min:1',
+                'descripcion' => 'nullable|string|max:255',
+                'orden' => 'nullable|integer|min:0',
             ];
         }
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'Ingrese un nombre',
+            'nombre.max' => 'No puede ser mayor a 20 caracteres',
+            'nombre.min' => 'Debe contener al menos 1 caracter',
+            'imagen.required' => 'La imágen es requerida',
+            'imagen.mimes' => 'El formato no es correcto',
+            'imagen.max' => 'El peso es mayor a 2mb',
+            'descripcion.string' => 'Ingrese una descripción válida',
+            'descripcion.max' => 'Máximo permitido 255 caracteres',
+            'orden.integer' => 'Ingrese un número válido',
+            'orden.min' => 'Valor mínimo 0'
+        ];
     }
 
     public function render()
@@ -87,6 +107,7 @@ class Galerias extends Component
     {
         $this->modal = false;
         $this->cambioImg = false;
+        return redirect()->route('galeria.index');
     }
 
     public function limpiarCampos()
@@ -98,6 +119,7 @@ class Galerias extends Component
         $this->orden = 0;
         $this->estado = 0;
         $this->id_galeria = 0;
+        $this->resetErrorBag();
     }
 
     public function editar($id)
@@ -113,48 +135,68 @@ class Galerias extends Component
         $this->abrirModal();
     }
 
-    public function borrar($id)
-    {
-        Galeria::find($id)->delete();
-        session()->flash('message', 'Registro eliminado correctamente');
-    }
+    // public function borrar($id)
+    // {
+    //     Galeria::find($id)->delete();
+    //     session()->flash('message', 'Registro eliminado correctamente');
+    // }
 
-    public function delete($id)
-    {
-        Galeria::find($id)->delete();
-    }
+    // public function delete($id)
+    // {
+    //     Galeria::find($id)->delete();
+    // }
 
     public function guardar()
     {
         $this->validate();
 
-        if ($this->cambioImg) {
-            ////
-            //// borrar imagen anterior storage
-            ////
-            $imagen_name = $this->imagen->getClientOriginalName();
-            $upload_imagen = $this->imagen->storeAs('galeria', $imagen_name);
-            $this->cambioImg = false;
-        } else {
-            $imagen_name = $this->imagen;
+        try {
+            if ($this->cambioImg) {
+                // Si estamos editando y cambiamos la imágen, eliminamos la anterior
+
+                if ($this->accion == 'editar') {
+                    $slide = Galeria::findOrFail($this->id_galeria);
+                    if (Storage::disk('public')->exists('galeria/' . $slide->imagen)) {
+                        Storage::disk('public')->delete('galeria/' . $slide->imagen);
+                    }
+                }
+
+                $imagen_name = $this->imagen->getClientOriginalName();
+                $upload_imagen = $this->imagen->storeAs('galeria', $imagen_name);
+                $this->cambioImg = false;
+            } else {
+                $slide = Galeria::findOrFail($this->id_galeria);
+                $imagen_name = $slide->imagen;
+            }
+
+            Galeria::updateOrCreate(
+                ['id' => $this->id_galeria],
+                [
+                    'nombre' => $this->nombre,
+                    'descripcion' => $this->descripcion,
+                    'imagen' => $imagen_name,
+                    'orden' => $this->orden,
+                    'estado' => 1,
+                    'usuario' => $this->user->name,
+                ]
+            );
+
+            $this->limpiarCampos();
+            $this->cerrarModal();
+
+            // Mensaje de eliminación ó actualización correcta según la ocasión
+            if ($this->accion == 'editar') {
+                toast('El slide se actualizó correctamente', 'success');
+                return redirect()->route('galeria.index');
+            } else if ($this->accion == 'crear') {
+                toast('El slide se agregó correctamente', 'success');
+                return redirect()->route('galeria.index');
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+            toast('No se pudo realizar la operación correctamente', 'error');
+            return redirect()->route('galeria.index');
         }
-
-        Galeria::updateOrCreate(
-            ['id' => $this->id_galeria],
-            [
-                'nombre' => $this->nombre,
-                'descripcion' => $this->descripcion,
-                'imagen' => $imagen_name,
-                'orden' => $this->orden,
-                'estado' => 1,
-                'usuario' => $this->user->name,
-            ]
-        );
-
-        $this->emit('alertSave');
-
-        $this->cerrarModal();
-        $this->limpiarCampos();
     }
 
     public function order($sort)
