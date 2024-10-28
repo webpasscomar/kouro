@@ -20,12 +20,7 @@
               <div class="line" style="margin: 30px 0;"></div>
 
               <div class="row col-mb-30">
-
-                <div class="col widget_links">
-                  <livewire:footer-categories />
-                </div>
-
-                {{-- <div class="col-lg-3 col-6 widget_links">
+                <div class="col-lg-3 col-6 widget_links">
                   <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">About</a></li>
@@ -33,9 +28,9 @@
                     <li><a href="#">Support</a></li>
                     <li><a href="#">Contact</a></li>
                   </ul>
-                </div> --}}
+                </div>
 
-                {{-- <div class="col-lg-3 col-6 widget_links">
+                <div class="col-lg-3 col-6 widget_links">
                   <ul>
                     <li><a href="#">Shop</a></li>
                     <li><a href="#">Portfolio</a></li>
@@ -43,9 +38,9 @@
                     <li><a href="#">Events</a></li>
                     <li><a href="#">Forums</a></li>
                   </ul>
-                </div> --}}
+                </div>
 
-                {{-- <div class="col-lg-3 col-6 widget_links">
+                <div class="col-lg-3 col-6 widget_links">
                   <ul>
                     <li><a href="#">Corporate</a></li>
                     <li><a href="#">Agency</a></li>
@@ -53,9 +48,9 @@
                     <li><a href="#">Personal</a></li>
                     <li><a href="#">One Page</a></li>
                   </ul>
-                </div> --}}
+                </div>
 
-                {{-- <div class="col-lg-3 col-6 widget_links">
+                <div class="col-lg-3 col-6 widget_links">
                   <ul>
                     <li><a href="#">Restaurant</a></li>
                     <li><a href="#">Wedding</a></li>
@@ -63,8 +58,7 @@
                     <li><a href="#">Magazine</a></li>
                     <li><a href="#">Landing Page</a></li>
                   </ul>
-                </div> --}}
-
+                </div>
               </div>
 
             </div>
