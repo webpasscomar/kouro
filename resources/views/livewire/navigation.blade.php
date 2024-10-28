@@ -10,18 +10,16 @@
           <!-- Top Social
       ============================================= -->
           <ul id="top-social">
-            <li><a href="#" class="h-bg-facebook"><span class="ts-icon"><i
-                    class="fa-brands fa-facebook-f"></i></span><span class="ts-text">Facebook</span></a></li>
+            <li><a href="https://es-es.facebook.com/lineafinacueros/" class="h-bg-facebook" target="_blank"><span
+                  class="ts-icon"><i class="fa-brands fa-facebook-f"></i></span><span class="ts-text">Facebook</span></a>
+            </li>
+            <li><a href="https://www.instagram.com/kouro_leather" class="h-bg-instagram"><span class="ts-icon"><i
+                    class="fa-brands fa-instagram" target="_blank"></i></span><span class="ts-text">Instagram</span></a>
+            </li>
             {{-- <li><a href="#" class="h-bg-twitter"><span class="ts-icon"><i
                     class="fa-brands fa-twitter"></i></span><span class="ts-text">Twitter</span></a></li> --}}
-            {{-- <li><a href="#" class="h-bg-dribbble"><span class="ts-icon"><i
-                    class="fa-brands fa-dribbble"></i></span><span class="ts-text">Dribbble</span></a></li> --}}
-            {{-- <li><a href="#" class="h-bg-github"><span class="ts-icon"><i
-                    class="fa-brands fa-github"></i></span><span class="ts-text">Github</span></a></li> --}}
             {{-- <li><a href="#" class="h-bg-pinterest"><span class="ts-icon"><i
                     class="fa-brands fa-pinterest-p"></i></span><span class="ts-text">Pinterest</span></a></li> --}}
-            <li><a href="#" class="h-bg-instagram"><span class="ts-icon"><i
-                    class="fa-brands fa-instagram"></i></span><span class="ts-text">Instagram</span></a></li>
           </ul><!-- #top-social end -->
 
         </div>
@@ -32,8 +30,8 @@
       ============================================= -->
           <div class="top-links">
             <ul class="top-links-container">
-              <li class="top-links-item"><a href="faqs.html">FAQs</a></li>
-              <li class="top-links-item"><a href="contact.html">Contact</a></li>
+              <li class="top-links-item"><a href="{{ route('faqs') }}">FAQs</a></li>
+              <li class="top-links-item"><a href="{{ route('contacto') }}">Contacto</a></li>
             </ul>
           </div><!-- .top-links end -->
 
@@ -147,7 +145,7 @@
 
               <li class="menu-item"><a
                   class="menu-link @if (request()->is('preguntas-frecuentes')) text-danger fw-bold @else text-dark @endif"
-                  href="{{ route('faqs.index') }}">
+                  href="{{ route('faqs') }}">
                   <div>Preguntas frecuentes</div>
                 </a></li>
 

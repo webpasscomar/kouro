@@ -6,28 +6,23 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
-use App\Http\Livewire\Carrito;
-use App\Http\Livewire\MercadoPago;
-use App\Http\Livewire\Nosotros;
-use App\Http\Livewire\ProductosFront;
-use App\Http\Livewire\ProductoFront;
-use App\Http\Livewire\Sucursales;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\MpController;
 
-use Illuminate\Support\Facades\DB;
-
+use App\Http\Livewire\Carrito;
+use App\Http\Livewire\MercadoPago;
+use App\Http\Livewire\Nosotros;
+use App\Http\Livewire\ProductoFront;
+use App\Http\Livewire\Sucursales;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/productos', [ProductoController::class, 'productos'])->name('productos.index');
-
 Route::get('/destacados', [ProductoController::class, 'destacados'])->name('productos.destacados');
-
 Route::get('/shop/{category}', [ProductoController::class, 'categoria'])->name('productos.categoria');
-
 Route::get('/shop/{category}/{id}', ProductoFront::class)->name('productos.show');
+
 Route::get('/carrito', Carrito::class)->name('carrito');
 
 Route::get('/contacto', [ContactController::class, 'index'])->name('contacto');
@@ -35,7 +30,8 @@ Route::post('/contacto', [ContactController::class, 'store'])->name('contacto.st
 
 Route::get('nosotros', Nosotros::class)->name('nosotros');
 Route::get('sucursales', Sucursales::class)->name('sucursales');
-Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs.front.index');
+
+Route::get('preguntas-frecuentes', [FaqController::class, 'index'])->name('faqs');
 
 // Pagos y métodos de pago
 Route::get('/mercadopago', MercadoPago::class)->name('mercadopago');
