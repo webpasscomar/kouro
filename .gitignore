@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/default.php
+/public/build/
 /storage/*.key
 /vendor
 /database_local
