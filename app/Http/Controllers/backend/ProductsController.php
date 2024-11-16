@@ -4,7 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\Categoria;
+use App\Models\Category;
 use App\Models\Presentation;
 use Illuminate\Http\Request;
 
@@ -19,7 +19,7 @@ class ProductsController extends Controller
     public function create()
     {
         $presentations = Presentation::all(); // Traemos las presentations
-        $categorias = Categoria::all(); // Traer todas las categorías
+        $categorias = Category::all(); // Traer todas las categorías
 
         return view('backend.products.form', compact('presentations', 'categorias'));
     }
@@ -63,7 +63,7 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
         $presentations = Presentation::all(); // Traemos las presentations
-        $categorias = Categoria::all(); // Traer todas las categorías
+        $categorias = Category::all(); // Traer todas las categorías
 
         return view('backend.products.form', compact('product', 'presentations', 'categorias'));
     }

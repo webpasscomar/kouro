@@ -52,7 +52,7 @@ class CategoriesController extends Controller
             'slug' => 'required|string|max:255|unique:categorias,slug|regex:/^[a-z0-9-]+$/|alpha_dash',
             'descripcion' => 'nullable|string',
             'categoriaPadre_id' => 'integer|in:0,' . implode(',', $categories->pluck('id')->toArray()),
-            'imagen' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:1024',
+            'imagen' => 'required|image|mimes:jpg,png,jpeg,svg|max:1024',
             'estado' => 'integer|in:0,1',
             'menu' => 'integer|in:0,1'
         ], [
@@ -69,6 +69,7 @@ class CategoriesController extends Controller
             'descripcion.string' => 'Ingrese una descripción válida',
             'categoriaPadre_id.integer' => 'Seleccione una categoría válida',
             'categoria_padre_id.in' => 'Seleccione una categoría válida',
+            'imagen.required' => 'La imágen es requerida',
             'imagen.image' => 'Seleccione una imágen válida',
             'imagen.mimes' => 'Seleccione una imágen válida',
             'imagen.max' => 'El tamaño máximo es de 1mb',
@@ -138,7 +139,7 @@ class CategoriesController extends Controller
             'slug' => 'required|string|max:255|unique:categorias,slug,' . $category->id . '|regex:/^[a-z0-9-]+$/|alpha_dash',
             'descripcion' => 'nullable|string',
             'categoriaPadre_id' => 'integer|in:0,' . implode(',', $categories->pluck('id')->toArray()),
-            'imagen' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:1024',
+            'imagen' => 'image|mimes:jpg,png,jpeg,svg|max:1024',
             'estado' => ['integer', 'in:0,1', new ValidatedCategoryStatus($category)],
             'menu' => 'integer|in:0,1'
         ], [
