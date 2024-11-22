@@ -26,38 +26,54 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'desCorta' => 'required|string|max:255',
-            // 'descLarga' => 'required|string',
-            'codigo' => 'nullable|string|max:255',
-            'presentacion_id' => 'nullable|exists:presentaciones,id',
-            'precioLista' => 'required|string|max:255',
-            'precioOferta' => 'nullable|string|max:255',
-            'ofertaDesde' => 'nullable|date',
-            'ofertaHasta' => 'nullable|date',
-            'peso' => 'nullable|string|max:255',
-            'tamano' => 'nullable|string|max:255',
-            'link' => 'nullable|url|max:255',
-            'orden' => 'nullable|integer',
-            'unidadVenta' => 'nullable|string|max:255',
-            'destacar' => 'nullable|boolean',
-            'estado' => 'required|boolean',
-        ], [
-            'nombre.required' => 'Ingrese un nombre',
-            'desCorta.required' => 'Ingrese una descripción corta',
-            'descLarga.required' => 'Ingrese una descripción larga',
-            'precioLista.required' => 'Ingrese un precio de lista',
-            'estado.required' => 'Seleccione un estado',
-        ]);
+        try {
+            // Traemos el nombre de las categorias activas para comprobar que exista al momento de seleccionar una
+            $categoriasActivas = Category::where('estado', 1)->pluck('id')->toArray();
 
-        $product = Product::create($validated);
+            $validated = $request->validate([
+                'nombre' => 'required|string|max:255',
+                'desCorta' => 'required|string|max:255',
+                'categorias' => 'nullable',
+                'categorias.*' => 'in:' . implode(',', $categoriasActivas),
+                // 'descLarga' => 'required|string',
+                'codigo' => 'nullable|string|max:255',
+                'presentacion_id' => 'nullable|exists:presentaciones,id',
+                'precioLista' => 'required|string|max:255',
+                'precioOferta' => 'nullable|string|max:255',
+                'ofertaDesde' => 'nullable|date',
+                'ofertaHasta' => 'nullable|date',
+                'peso' => 'nullable|string|max:255',
+                'tamano' => 'nullable|string|max:255',
+                'link' => 'nullable|url|max:255',
+                'orden' => 'nullable|integer',
+                'unidadVenta' => 'nullable|string|max:255',
+                'destacar' => 'nullable|boolean',
+                'estado' => 'required|boolean',
+            ], [
+                'nombre.required' => 'Ingrese un nombre',
+                'desCorta.required' => 'Ingrese una descripción corta',
+                'descLarga.required' => 'Ingrese una descripción larga',
+                'precioLista.required' => 'Ingrese un precio de lista',
+                'estado.required' => 'Seleccione un estado',
+                'categorias' => 'Seleccione una categoria correcta',
+                'categorias.*' => 'Seleccione una categoria correcta'
+            ]);
 
-        // Sincronizar categorías
-        $product->categorias()->sync($validated['categorias']);
+            $product = Product::create($validated);
 
-        toast('Producto creado con éxito', 'success');
-        return redirect()->route('products.index');
+            // Sincronizar categorías si se selecciona una
+            if (isset($validated['categorias'])) {
+                $product->categorias()->sync($validated['categorias']);
+            }
+
+            toast('Producto creado con éxito', 'success');
+            return redirect()->route('products.index');
+        } catch (\Throwable $th) {
+            // dd($nombresCategoriasActivas);
+            dd($th);
+            toast('No se pudo crear el producto', 'error');
+            return redirect()->route('products.index');
+        }
     }
 
     public function edit(Product $product)
@@ -70,9 +86,14 @@ class ProductsController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        // Traemos el nombre de las categorias activas para comprobar que exista al momento de seleccionar una
+        $categoriasActivas = Category::where('estado', 1)->pluck('id')->toArray();
+
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'desCorta' => 'required|string|max:255',
+            'categorias' => 'nullable',
+            'categorias.*' => 'in:' . implode(',', $categoriasActivas),
             // 'descLarga' => 'required|string',
             'codigo' => 'nullable|string|max:255',
             'presentacion_id' => 'nullable|exists:presentaciones,id',
@@ -91,8 +112,10 @@ class ProductsController extends Controller
 
         $product->update($validated);
 
-        // Sincronizar categorías
-        $product->categorias()->sync($validated['categorias']);
+        // Sincronizar categorías si se selecciona una
+        if (isset($validated['categorias'])) {
+            $product->categorias()->sync($validated['categorias']);
+        }
 
         toast('Producto modificado con éxito', 'success');
         return redirect()->route('products.index');
