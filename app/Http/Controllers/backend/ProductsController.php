@@ -12,6 +12,11 @@ class ProductsController extends Controller
 {
     public function index()
     {
+        // modal de confirmación de eliminación de productos
+        $title = 'Está seguro?';
+        $text = 'Está acción no se podrá revertir';
+        confirmDelete($title, $text);
+
         $products = Product::all();
         return view('backend.products.index', compact('products'));
     }
@@ -123,6 +128,7 @@ class ProductsController extends Controller
 
     public function destroy(Product $product)
     {
+        dd($product->imagenes);
         $product->delete();
 
         toast('Producto eliminado con éxito', 'success');

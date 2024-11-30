@@ -35,19 +35,21 @@
                                         key($product->id)
                                     )
                                 </td>
-                                <td class="d-flex text-right align-middle">
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center justify-content-around gap-2">
 
-                                    {{-- Botón para abrir la tabla de imágenes de cada producto --}}
-                                    <a href="{{ route('products_image.index', $product->id) }}" class="btn btn-info btn-sm">
-                                        <i class="fas fa-camera"></i>
-                                    </a>
+                                        {{-- Botón para abrir la tabla de imágenes de cada producto --}}
+                                        <a href="{{ route('products_image.index', $product->id) }}"
+                                            class="btn btn-info btn-sm" title="Imágenes">
+                                            <i class="fas fa-camera"></i>
+                                        </a>
 
-                                    <!-- Botón para abrir el modal de imágenes -->
-                                    {{-- <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#imagesModal-{{ $product->id }}">
+                                        <!-- Botón para abrir el modal de imágenes -->
+                                        {{-- <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#imagesModal-{{ $product->id }}">
                     <i class="fas fa-camera"></i>
                   </button> --}}
 
-                                    {{-- <!-- Modal -->
+                                        {{-- <!-- Modal -->
                   <div class="modal fade" id="imagesModal-{{ $product->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="imagesModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
@@ -66,14 +68,17 @@
                     </div>
                   </div> --}}
 
-                                    <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                        <a href="{{ route('products.edit', $product) }}" class="btn btn-sm btn-warning"
+                                            title="Editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
-                                    <a href="{{ route('products.destroy', $product) }}" class="btn btn-sm btn-danger"
-                                        data-confirm-delete="true">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
+                                        <a href="{{ route('products.destroy', $product) }}" class="btn btn-sm btn-danger"
+                                            data-confirm-delete="true" title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+
 
                                 </td>
                             </tr>
