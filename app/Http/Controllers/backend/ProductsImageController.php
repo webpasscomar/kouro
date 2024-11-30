@@ -47,35 +47,33 @@ class ProductsImageController extends Controller
      */
     public function store(Request $request)
     {
+        $colors = Color::where('estado', 1)->get();
+        $colorAccepted = $colors->pluck('id')->toArray();
+        $productId = $request->route('product');
+        $request->validate([
+            'color_id' => ['required', Rule::in($colorAccepted)],
+            'image' => 'required|image|mimes:png,jpg,jpeg,svg|max:1024',
+        ], [
+            'color_id.required' => 'Seleccione un color',
+            'color_id.in' => 'Seleccione un color válido',
+            'image.required' => 'La imágen es obligatoria',
+            'image.image' => 'El tipo de imágen no es válido',
+            'image.mimes' => 'El tipo de imágen no es válido',
+            'image.max' => 'El tamaño máximo es de 1mb'
+        ]);
+
+        if ($request->hasFile('image')) {
+            // nombre y extension de la imágen
+            $file_name = $request->image->getClientOriginalName();
+            // extensión de la imágen
+            $file_extension = $request->image->extension();
+            // path ruta de la imágen
+            $file_path = 'storage/productos/' . $file_name;
+            // guardamos la imágen en storage/productos
+            $request->image->storeAs('productos', $file_name);
+        }
 
         try {
-            $colors = Color::where('estado', 1)->get();
-            $colorAccepted = $colors->pluck('id')->toArray();
-            $productId = $request->route('product');
-
-            $request->validate([
-                'color_id' => ['required', Rule::in($colorAccepted)],
-                'image' => 'required|image|mimes:png,jpg,jpeg,svg|max:1024',
-            ], [
-                'color_id.required' => 'Seleccione un color',
-                'color_id.in' => 'Seleccione un color válido',
-                'image.required' => 'La imágen es obligatoria',
-                'image.image' => 'El tipo de imágen no es válido',
-                'image.mimes' => 'El tipo de imágen no es válido',
-                'image.max' => 'El tamaño máximo es de 1mb'
-            ]);
-
-            if ($request->hasFile('image')) {
-                // nombre y extension de la imágen
-                $file_name = $request->image->getClientOriginalName();
-                // extensión de la imágen
-                $file_extension = $request->image->extension();
-                // path ruta de la imágen
-                $file_path = 'storage/productos/' . $file_name;
-                // guardamos la imágen en storage/productos
-                $request->image->storeAs('productos', $file_name);
-            }
-
             Producto_imagen::create([
                 'file_name' => $file_name,
                 'file_extension' => $file_extension,

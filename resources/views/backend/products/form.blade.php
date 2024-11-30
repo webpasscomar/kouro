@@ -245,6 +245,11 @@
                     @enderror
                 </div>
 
+                <p class="my-3 text-right field_required"><span
+                        class="text-danger field_required-icon align-middle">*</span>Campos
+                    obligatorios
+                </p>
+
                 <button type="submit" class="btn btn-success">{{ isset($product) ? 'Actualizar' : 'Guardar' }}</button>
                 <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
