@@ -49,7 +49,7 @@
                                         class="img-fluid object-cover" style="width: 50px; height: 50px;">
                                 </td>
                                 <td class="align-middle text-right">
-                                    <a href="{{ route('products_image.delete', $img->id) }}" class="btn btn-sm btn-danger"
+                                    <a href="{{ route('products_image.destroy', $img->id) }}" class="btn btn-sm btn-danger"
                                         title="Eliminar" data-confirm-delete>
                                         <i class="fas fa-trash"></i>
                                     </a>

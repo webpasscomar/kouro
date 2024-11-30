@@ -121,7 +121,7 @@ Route::middleware([
     // Ruta imagenes de productos - agregar imagenes
     Route::post('productos/{product}/imagenes', [ProductsImageController::class, 'store'])->name('products_image.store');
     // Ruta imagenes de productos - eliminar imagenes
-    Route::delete('productos/{product}/imagenes', [ProductsImageController::class, 'destroy'])->name('products_image.delete');
+    Route::delete('productos/{product}/imagenes', [ProductsImageController::class, 'destroy'])->name('products_image.destroy');
 
 
     //   *******************************************************************************************************************
