@@ -32,7 +32,7 @@ class Product extends Model
 
     public function categorias()
     {
-        return $this->belongsToMany(Category::class, 'producto_categoria','producto_id','categoria_id');
+        return $this->belongsToMany(Category::class, 'producto_categoria', 'producto_id', 'categoria_id');
     }
 
 
@@ -44,6 +44,6 @@ class Product extends Model
 
     public function imagenes()
     {
-        return $this->belongsToMany(Producto_imagen::class, 'producto_id');
+        return $this->hasMany(Producto_imagen::class, 'producto_id');
     }
 }

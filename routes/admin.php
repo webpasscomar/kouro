@@ -17,7 +17,7 @@ use App\Http\Controllers\backend\MovementHistoryController;
 use App\Http\Controllers\backend\GalleryController;
 use App\Http\Controllers\backend\TestimonialsController;
 use App\Http\Controllers\backend\FaqsController;
-
+use App\Http\Controllers\backend\ProductsImageController;
 use App\Http\Livewire\Backend\Movimientos;
 
 Route::middleware([
@@ -65,9 +65,9 @@ Route::middleware([
         'update' => 'colors.update',
         'destroy' => 'colors.destroy',
     ])
-    ->parameters([
-        'colores'=>'color'
-    ]);
+        ->parameters([
+            'colores' => 'color'
+        ]);
 
 
     Route::resource('presentaciones', PresentationsController::class)->names([
@@ -110,6 +110,21 @@ Route::middleware([
             'productos' => 'product'
         ]);
 
+    //  *******************************************************************************************************************
+
+    // PRODUCTOS - IMAGENES
+
+    // Ruta imagenes de productos - listado
+    Route::get('productos/{product}/imagenes', [ProductsImageController::class, 'index'])->name('products_image.index');
+    // Ruta imagenes de productos - formulario agregar
+    Route::get('productos/{product}/imagenes/create', [ProductsImageController::class, 'create'])->name('products_image.create');
+    // Ruta imagenes de productos - agregar imagenes
+    Route::post('productos/{product}/imagenes', [ProductsImageController::class, 'store'])->name('products_image.store');
+    // Ruta imagenes de productos - eliminar imagenes
+    Route::delete('productos/{product}/imagenes', [ProductsImageController::class, 'destroy'])->name('products_image.delete');
+
+
+    //   *******************************************************************************************************************
 
     Route::resource('pedidos', OrdersController::class)->names([
         'index' => 'orders.index',
@@ -171,7 +186,7 @@ Route::middleware([
         'destroy' => 'galeria.destroy',
     ])
         ->parameters([
-            'galeria'=> 'galeria',
+            'galeria' => 'galeria',
         ]);
 
 
