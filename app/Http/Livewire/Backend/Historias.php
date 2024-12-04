@@ -32,25 +32,34 @@ class Historias extends Component
     public function render()
     {
 
-        $this->sku = Sku::select(['sku.id',
+        $this->sku = Sku::select([
+            'sku.id',
             'sku.stock',
             'sku.producto_id',
+            'sku.created_at',
             'productos.nombre',
             'productos.codigo',
             'colores.color',
-            'talles.talle'])
+            'talles.talle',
+            'tipomovimientos.descripcion',
+        ])
             ->join('productos', 'sku.producto_id', '=', 'productos.id')
             ->join('talles', 'sku.talle_id', '=', 'talles.id')
             ->join('colores', 'sku.color_id', '=', 'colores.id')
-            ->where('productos.nombre', 'like', '%' . $this->search . '%')
-            ->orderBy($this->sort, $this->order)
-            ->paginate(10);
+            ->join('movimientos', 'movimientos.sku_id', '=', 'sku.id')
+            ->join('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
+            ->get();
+        // ->orderBy($this->sort, $this->order)
+        // ->paginate(10);
 
 
-        return view('livewire.backend.historias',
-            ['sku' => $this->sku,
+        return view(
+            'livewire.backend.historias',
+            [
+                'sku' => $this->sku,
                 'detalle' => $this->detalle,
-            ]);
+            ]
+        );
     }
 
 
@@ -63,7 +72,8 @@ class Historias extends Component
             'movimientos.fecha',
             'movimientos.pedido_id',
             'tipomovimientos.descripcion',
-            'users.name'])
+            'users.name'
+        ])
             ->leftJoin('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
             ->leftJoin('users', 'movimientos.user_id', '=', 'users.id')
             ->where('movimientos.sku_id', '=', $id)
@@ -81,7 +91,6 @@ class Historias extends Component
     public function cerrarModal()
     {
         $this->modal = false;
-
     }
 
 

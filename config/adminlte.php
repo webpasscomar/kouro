@@ -357,7 +357,7 @@ return [
             'icon'  => 'fas fa-clipboard-list', // Icono de pendientes de stock
         ],
         [
-            'text' => 'Historias (Movimientos)',
+            'text' => 'Historial de movimientos',
             'route' => 'historico.index',
             'icon'  => 'fas fa-history', // Icono de historia de movimientos
         ],
