@@ -347,6 +347,11 @@ return [
             'icon'  => 'fas fa-shopping-cart', // Icono de pedidos
         ],
         [
+            'text' => 'Stock',
+            'route' => 'stock.index',
+            'icon'  => 'fas fa-list', // Icono de stock
+        ],
+        [
             'text' => 'Movimientos (Stock)',
             'route' => 'movements.index',
             'icon'  => 'fas fa-exchange-alt', // Icono de movimientos de stock
@@ -464,12 +469,12 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

@@ -18,6 +18,7 @@ use App\Http\Controllers\backend\GalleryController;
 use App\Http\Controllers\backend\TestimonialsController;
 use App\Http\Controllers\backend\FaqsController;
 use App\Http\Controllers\backend\ProductsImageController;
+use App\Http\Controllers\backend\StocksController;
 use App\Http\Livewire\Backend\Movimientos;
 
 Route::middleware([
@@ -211,6 +212,8 @@ Route::middleware([
         'destroy' => 'faqs.destroy',
     ]);
 
+    // Ruta Stock General de productos con talles y colores
+    Route::get('/stock', [StocksController::class, 'index'])->name('stock.index');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 

@@ -32,23 +32,43 @@ class Historias extends Component
     public function render()
     {
 
-        $this->sku = Sku::select([
+        $this->sku = Movimiento::select([
             'sku.id',
-            'sku.stock',
-            'sku.producto_id',
-            'sku.created_at',
-            'productos.nombre',
             'productos.codigo',
+            'productos.nombre',
             'colores.color',
             'talles.talle',
+            'movimientos.cantidad',
             'tipomovimientos.descripcion',
+            'movimientos.created_at'
         ])
+            ->join('sku', 'movimientos.sku_id', '=', 'sku.id')
             ->join('productos', 'sku.producto_id', '=', 'productos.id')
             ->join('talles', 'sku.talle_id', '=', 'talles.id')
             ->join('colores', 'sku.color_id', '=', 'colores.id')
-            ->join('movimientos', 'movimientos.sku_id', '=', 'sku.id')
+            // ->join('movimientos', 'sku.id', '=', 'movimientos.sku_id')
             ->join('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
             ->get();
+
+
+
+        // $this->sku = Sku::select([
+        //     'sku.id',
+        //     'sku.producto_id',
+        //     'sku.created_at',
+        //     'productos.nombre',
+        //     'productos.codigo',
+        //     'colores.color',
+        //     'talles.talle',
+        //     'movimientos.cantidad',
+        //     'tipomovimientos.descripcion',
+        // ])
+        //     ->join('productos', 'sku.producto_id', '=', 'productos.id')
+        //     ->join('talles', 'sku.talle_id', '=', 'talles.id')
+        //     ->join('colores', 'sku.color_id', '=', 'colores.id')
+        //     ->join('movimientos', 'movimientos.sku_id', '=', 'sku.id')
+        //     ->join('tipomovimientos', 'movimientos.tipoMovimiento_id', '=', 'tipomovimientos.id')
+        //     ->get();
         // ->orderBy($this->sort, $this->order)
         // ->paginate(10);
 
