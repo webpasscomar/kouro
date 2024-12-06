@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Movimiento;
 use App\Models\Pedido;
 use App\Models\Producto;
+use App\Models\Sku;
 use App\Models\Stock_pendiente;
 // use Illuminate\Http\Request;
 
@@ -19,6 +20,7 @@ class DashboardController extends Controller
             'orders' => Pedido::all(),
             'products' => Producto::all(),
             'stock' => Movimiento::all(),
+            'totalStock' => Sku::all(),
         ]);
     }
 }
