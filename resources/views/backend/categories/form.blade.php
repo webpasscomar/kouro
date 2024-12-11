@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="imagen" class="form-label">Imágen</label>
+                            <label for="imagen" class="form-label">Imágen</label><span class="ml-1 text-danger">*</span>
                             <input type="file" name="imagen" id="imagen"
                                 class="form-control @error('imagen') is-invalid @enderror" onchange="imagePreview(event)">
 

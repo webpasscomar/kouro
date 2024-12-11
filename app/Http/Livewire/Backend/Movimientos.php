@@ -49,7 +49,7 @@ class Movimientos extends Component
         //dd(auth()->user());
 
         $this->tipomovimientos = Tipomovimiento::all();
-        $this->productos = Producto::where('estado', 1)->orderBy('nombre')->get();
+        $this->productos = Product::where('estado', 1)->orderBy('nombre')->get();
         $this->colores = Color::where('estado', 1)->orderBy('color')->get();
         $this->talles = Talle::where('estado', 1)->orderBy('talle')->get();;
 

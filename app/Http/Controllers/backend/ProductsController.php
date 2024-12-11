@@ -25,7 +25,7 @@ class ProductsController extends Controller
     public function create()
     {
         $presentations = Presentation::all(); // Traemos las presentations
-        $categorias = Category::all(); // Traer todas las categorías
+        $categorias = Category::orderBy('categoria','asc')->get(); // Traer todas las categorías
 
         return view('backend.products.form', compact('presentations', 'categorias'));
     }

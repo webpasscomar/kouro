@@ -13,7 +13,6 @@
                     @method('PUT')
                 @endif
 
-
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
@@ -53,13 +52,13 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="categorias">Categorías</label>
+                            <label for="categorias">Categorías</label><span class="ml-1 text-danger">*</span>
                             <select name="categorias[]" id="categorias"
                                 class="form-control select2 @error('categorias') is-invalid @enderror" multiple>
                                 @foreach ($categorias as $categoria)
                                     <option value="{{ $categoria->id }}"
                                         {{ isset($product) && $product->categorias->contains($categoria->id) ? 'selected' : '' }}>
-                                        {{ $categoria->categoria }}
+                                        {{ Str::title($categoria->categoria) }}
                                     </option>
                                 @endforeach
                             </select>
@@ -101,7 +100,7 @@
                                 <option value="">Seleccione una presentación</option>
                                 @foreach ($presentations as $presentation)
                                     <option value="{{ $presentation->id }}"
-                                        {{ isset($product) && $product->presentacion_id == $presentation->id ? 'selected' : '' }}>
+                                        {{ (isset($product) && $product->presentacion_id == $presentation->id) || (!isset($product) && $presentation->id == 2) ? 'selected' : '' }}>
                                         {{ $presentation->presentacion }}
                                     </option>
                                 @endforeach
@@ -207,7 +206,7 @@
                             <label for="unidadVenta">Unidad de Venta</label>
                             <input type="text" name="unidadVenta"
                                 class="form-control @error('unidadVenta') is-invalid @enderror"
-                                value="{{ old('unidadVenta', $product->unidadVenta ?? 0) }}">
+                                value="{{ old('unidadVenta', $product->unidadVenta ?? 1) }}">
                             @error('unidadVenta')
                                 <span class="text-danger ml-1">{{ $message }}</span>
                             @enderror

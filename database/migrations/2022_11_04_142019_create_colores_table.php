@@ -20,6 +20,7 @@ class CreateColoresTable extends Migration
             $table->tinyInteger('estado')->default(1);
             $table->text('pcolor')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

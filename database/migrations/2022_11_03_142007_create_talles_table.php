@@ -18,6 +18,7 @@ class CreateTallesTable extends Migration
             $table->string('talle');
             $table->tinyInteger('estado')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -24,6 +24,7 @@ class CreateCategoriasTable extends Migration
             $table->integer('orden')->default(0);
             $table->tinyInteger('estado')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

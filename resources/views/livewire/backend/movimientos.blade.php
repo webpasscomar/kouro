@@ -31,7 +31,7 @@
                             wire:model="producto_id">
                             <option value="0">Seleccione un producto</option>
                             @foreach ($productos as $p)
-                                <option value="{{ $p->id }}">{{ $p->nombre }}</option>
+                                <option value="{{ $p->id }}">{{ Str::title($p->nombre) }}</option>
                             @endforeach
                         </select>
                         {{-- <x-jet-input-error for="producto_id" /> --}}
@@ -49,7 +49,7 @@
                             wire:model="color_id">
                             <option value="0">Seleccione un color</option>
                             @foreach ($colores as $c)
-                                <option value="{{ $c->id }}">{{ $c->color }}</option>
+                                <option value="{{ $c->id }}">{{ Str::title($c->color) }}</option>
                             @endforeach
                         </select>
                         {{-- <x-jet-input-error for="color_id" /> --}}
@@ -82,7 +82,7 @@
                         <label for="cantidad" class="form-label fw-normal mb-0">Cantidad</label><span
                             class="ml-1 text-danger">*</span>
                         <input type="text"
-                            class="form-control @error('cantidad') is-invalid                
+                            class="form-control @error('cantidad') is-invalid
                         @enderror"
                             id="cantidad" wire:model="cantidad" placeholder="Ingrese cantidad">
                         {{-- <x-jet-input-error for="cantidad" /> --}}

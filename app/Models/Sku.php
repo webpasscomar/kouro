@@ -18,17 +18,17 @@ class Sku extends Model
 
     public function talle()
     {
-        return $this->belongsTo(Talle::class);
+        return $this->belongsTo(Talle::class)->withTrashed();
     }
 
     public function color()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(Color::class)->withTrashed();
     }
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsTo(Product::class)->withTrashed();
     }
 
 
@@ -36,7 +36,5 @@ class Sku extends Model
     {
         return $this->belongsToMany(Pedido_item::class);
     }
-
-
 }
 
