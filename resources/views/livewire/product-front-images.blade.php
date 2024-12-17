@@ -1,138 +1,50 @@
-{{-- <div class="grid gap-4"> --}}
-{{-- Imágen seleccionada del producto  --}}
-{{-- <div class="max-w-full max-h-96 rounded-lg shadow-md shadow-gray-400 overflow-hidden">
-    <img class="w-full h-full object-cover" src="{{ asset('storage/productos/' . $selectedImages) }}" alt="imagen1">
-  </div> --}}
-{{-- Imágenes alternativas   --}}
-{{-- <div class="grid grid-cols-5 gap-4">
-    @foreach ($images as $image)
-      <label class="relative rounded-lg shadow-md shadow-gray-400 hover:ring-4 hover:ring-red-400"
-        wire:click="selectImage('{{ $image }}')">
-        <input type="radio" wire:model="selectedImages" value="{{ asset('storage/productos/' . $image) }}"
-          class="h-full w-full rounded-lg absolute left-0 opacity-0 cursor-pointer peer">
-        <img src="{{ asset('storage/productos/' . $image) }}" alt="imagen"
-          class="h-full max-w-full rounded-lg peer-checked:ring-4 peer-checked:ring-red-500 peer-focus:ring-4 peer-focus:ring-red-500"alt="image">
-      </label>
-    @endforeach
-
+<div class="row g-4">
+  {{-- Imagen seleccionada del producto --}}
+  <div class="col-12">
+    <div class="card shadow-sm">
+      <div class="position-relative w-100" style="aspect-ratio: 3 / 2; overflow: hidden; background-color: #f8f9fa;">
+        <img src="{{ asset('storage/productos/' . $selectedImages) }}" alt="imagen1"
+          class="position-absolute top-50 start-50 translate-middle"
+          style="min-width: 100%; min-height: 100%; object-fit: cover;">
+      </div>
+    </div>
   </div>
-</div> --}}
-
-
-
-
-
-<div class="fslider flex-thumb-grid grid-6" data-pagi="false" data-arrows="false" data-thumbs="true">
-  <div class="flexslider">
-    <div class="slider-wrap">
-      @foreach ($images as $image)
-        <div class="slide" data-thumb="{{ asset('storage/productos/' . $image) }}">
-          <img src="{{ asset('storage/productos/' . $image) }}" alt="Image">
-          {{-- <div class="bg-overlay">
-            <div class="bg-overlay-content justify-content-start align-items-end">
-              <div class="h4 fw-light bg-light text-dark px-3 py-2">Government Contraction</div>
-            </div>
-          </div> --}}
-        </div>
-      @endforeach
-
-      {{-- <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/1.jpg">
-        <img src="demos/construction/images/gallery/1.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Government Contraction</div>
+  {{-- Imágenes alternativas con slider --}}
+  <div class="col-12">
+    <div class="d-flex align-items-center position-relative">
+      <button class="btn btn-outline-secondary me-2" onclick="scrollThumbnails(-1)" style="flex-shrink: 0;">
+        ‹
+      </button>
+      <div class="d-flex overflow-hidden flex-grow-1" id="thumbnails-container" style="scroll-behavior: smooth;">
+        @foreach ($images as $index => $image)
+          <div class="flex-shrink-0" style="width: calc(100% / 5); padding: 0 0.5rem;">
+            <label class="position-relative d-block rounded border shadow-sm hover-overlay"
+              style="cursor: pointer; overflow: hidden; background-color: #f8f9fa; aspect-ratio: 3 / 2;"
+              wire:click="selectImage('{{ $image }}')">
+              <input type="radio" wire:model="selectedImages" value="{{ asset('storage/productos/' . $image) }}"
+                class="position-absolute top-0 start-0 w-100 h-100 opacity-0">
+              <img src="{{ asset('storage/productos/' . $image) }}" alt="imagen"
+                class="position-absolute top-50 start-50 translate-middle"
+                style="min-width: 100%; min-height: 100%; object-fit: cover;">
+            </label>
           </div>
-        </div>
-      </div> 
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/2.jpg">
-        <img src="demos/construction/images/gallery/2.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Home Renovation</div>
-          </div>
-        </div>
-      </div>    
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/3.jpg">
-        <img src="demos/construction/images/gallery/3.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Residential Construction</div>
-          </div>
-        </div>
+        @endforeach
       </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/4.jpg">
-        <img src="demos/construction/images/gallery/4.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Wooden Floor</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/5.jpg">
-        <img src="demos/construction/images/gallery/5.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Repairing of Houses</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/6.jpg">
-        <img src="demos/construction/images/gallery/6.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Building Renovaion</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/7.jpg">
-        <img src="demos/construction/images/gallery/7.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Hightech Construction</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/8.jpg">
-        <img src="demos/construction/images/gallery/8.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Hardwood Flooring</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/9.jpg">
-        <img src="demos/construction/images/gallery/9.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Commercial Construction</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/10.jpg">
-        <img src="demos/construction/images/gallery/10.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Repairing Of Roof</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/11.jpg">
-        <img src="demos/construction/images/gallery/11.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Home Renovation</div>
-          </div>
-        </div>
-      </div>
-      <div class="slide" data-thumb="demos/construction/images/gallery/thumbs/12.jpg">
-        <img src="demos/construction/images/gallery/12.jpg" alt="Image">
-        <div class="bg-overlay">
-          <div class="bg-overlay-content justify-content-start align-items-end">
-            <div class="h4 fw-light bg-light text-dark px-3 py-2">Office Renovation</div>
-          </div>
-        </div>
-      </div> --}}
-
+      <button class="btn btn-outline-secondary ms-2" onclick="scrollThumbnails(1)" style="flex-shrink: 0;">
+        ›
+      </button>
     </div>
   </div>
 </div>
+
+<script>
+  // Función para desplazar los thumbnails
+  function scrollThumbnails(direction) {
+    const container = document.getElementById('thumbnails-container');
+    const scrollAmount = container.offsetWidth / 5; // Anchura de un thumbnail
+    container.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth',
+    });
+  }
+</script>

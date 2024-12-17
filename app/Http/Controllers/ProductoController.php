@@ -21,13 +21,23 @@ class ProductoController extends Controller
     public function destacados()
     {
 
-        // $productos = Producto::where('estado', 1)
+        // $productos = Producto::with(['categorias']) // Usamos Eager Loading
+        //     ->where('estado', 1)
         //     ->where('destacar', 1)
         //     ->get();
 
-        $productos = Producto::with(['categorias']) // Usamos Eager Loading
-            ->where('estado', 1)
-            ->where('destacar', 1)
+        // $productos = Producto::with(['categorias']) // Eager loading de la relación 'categorias'
+        //     ->where('estado', 1)                  // Filtra productos activos
+        //     ->where('destacar', 1)                // Filtra productos destacados
+        //     ->whereHas('skus', function ($query) {
+        //         $query->where('stock', '>', 0); // Verifica que haya stock en la tabla SKU
+        //     })
+        //     ->get();
+
+        $productos = Producto::with(['categorias']) // Eager loading de la relación 'categorias'
+            ->where('estado', 1)                  // Filtra productos activos
+            ->where('destacar', 1)                // Filtra productos destacados
+            ->whereHas('skus')                    // Verifica que existan registros en la tabla SKU
             ->get();
 
         for ($i = 0; $i < count($productos); $i++) {
@@ -66,7 +76,10 @@ class ProductoController extends Controller
         $hijas = $categoria->hijas;
 
         if ($categoria) {
-            $productos = $categoria->productos()->where('estado', '=', 1)->get();
+            $productos = $categoria->productos()
+                ->where('estado', '=', 1)
+                ->whereHas('skus')
+                ->get();
         } else {
             $categoria = Category::first();
             $categoria->categoria = 'Busqueda';

@@ -31,7 +31,7 @@ class Producto extends Model
 
     public function categorias()
     {
-        return $this->belongsToMany(Category::class, 'producto_categoria', 'producto_id','categoria_id');
+        return $this->belongsToMany(Category::class, 'producto_categoria', 'producto_id', 'categoria_id');
     }
 
 
@@ -44,5 +44,10 @@ class Producto extends Model
     public function imagenes()
     {
         return $this->belongsToMany(Producto_imagen::class, 'producto_id');
+    }
+
+    public function skus()
+    {
+        return $this->hasMany(Sku::class, 'producto_id');
     }
 }

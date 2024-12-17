@@ -52,7 +52,6 @@ class Carrito extends Component
 
         // $this->tomarvalores();
 
-
         if ($this->cli_prov_id != 0) {
             $this->localidades = Localidad::where('estado', 1)
                 ->where('provincia_id', $this->cli_prov_id)
@@ -66,7 +65,6 @@ class Carrito extends Component
         if ($this->forma_pago_id != 0) {
             $this->cobra = Formasdepagos::where('id', $this->forma_pago_id)->value('cobra');
         }
-
 
         return view('livewire.carrito', [
             'formasdeentregas' => $this->formasdeentregas,
@@ -406,4 +404,5 @@ class Carrito extends Component
 
         return  $lastid;
     }
+
 }

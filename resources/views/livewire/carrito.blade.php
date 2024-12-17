@@ -5,19 +5,12 @@
     <div class="container">
 
       @if (session('items'))
+
         <section class="row gx-4 mt-4">
-          {{-- Sección items del carrito --}}
-          <div class="col-lg-9">
-            @foreach (session('items') as $index => $item)
-              {{-- Pasar imágen dinámica al componente --}}
-              <livewire:item-carrito :key="$index" :producto_nombre="$item['producto_nombre']" :cantidad="$item['cantidad']" :producto_precio="$item['producto_precio']"
-                :index="$index" :apagar="$apagar" :producto_id="$item['producto_id']" :talle_id="$item['talle_id']" :color_id="$item['color_id']"
-                :color_nombre="$item['color_nombre']" :talle_nombre="$item['talle_nombre']">
-            @endforeach
-          </div>
 
           <div class="row">
-            <div class="col-xl-8">
+
+            <div class="col-xl-9">
               <table class="table cart mb-5">
                 <thead>
                   <tr>
@@ -26,130 +19,25 @@
                     <th class="cart-product-name">Productos</th>
                     <th class="cart-product-price">P. Unitario</th>
                     <th class="cart-product-quantity">Cantidad</th>
-                    <th class="cart-product-subtotal">Total</th>
+                    <th class="cart-product-subtotal">SubTotal</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach (session('items') as $index => $item)
-                    <tr class="cart_item">
-                      <td class="cart-product-remove">
-                        <a href="#" class="remove" title="Remove this item"><i class="fa-solid fa-trash"></i></a>
-                      </td>
-
-                      <td class="cart-product-thumbnail">
-                        <a href="#"><img width="64" height="64" src="images/shop/thumbs/small/dress-3.jpg"
-                            alt="Pink Printed Dress"></a>
-                      </td>
-
-                      <td class="cart-product-name">
-                        <a href="#">{{ $item['producto_nombre'] }}</a>
-                      </td>
-
-                      <td class="cart-product-price">
-                        <span class="amount">$19.99</span>
-                      </td>
-
-                      <td class="cart-product-quantity">
-                        <div class="quantity">
-                          <input type="button" value="-" class="minus">
-                          <input type="text" name="quantity" value="2" class="qty">
-                          <input type="button" value="+" class="plus">
-                        </div>
-                      </td>
-
-                      <td class="cart-product-subtotal">
-                        <span class="amount">$39.98</span>
-                      </td>
-                    </tr>
+                    <livewire:item-carrito :key="$index" :producto_nombre="$item['producto_nombre']" :cantidad="$item['cantidad']" :producto_precio="$item['producto_precio']"
+                      :index="$index" :apagar="$apagar" :producto_id="$item['producto_id']" :talle_id="$item['talle_id']" :color_id="$item['color_id']"
+                      :color_nombre="$item['color_nombre']" :talle_nombre="$item['talle_nombre']">
                   @endforeach
-                  {{-- <tr class="cart_item">
-                      <td class="cart-product-remove">
-                        <a href="#" class="remove" title="Remove this item"><i class="fa-solid fa-trash"></i></a>
-                      </td>
-
-                      <td class="cart-product-thumbnail">
-                        <a href="#"><img width="64" height="64" src="images/shop/thumbs/small/shoes-2.jpg"
-                            alt="Checked Canvas Shoes"></a>
-                      </td>
-
-                      <td class="cart-product-name">
-                        <a href="#">Checked Canvas Shoes</a>
-                      </td>
-
-                      <td class="cart-product-price">
-                        <span class="amount">$24.99</span>
-                      </td>
-
-                      <td class="cart-product-quantity">
-                        <div class="quantity">
-                          <input type="button" value="-" class="minus">
-                          <input type="text" name="quantity" value="1" class="qty">
-                          <input type="button" value="+" class="plus">
-                        </div>
-                      </td>
-
-                      <td class="cart-product-subtotal">
-                        <span class="amount">$24.99</span>
-                      </td>
-                    </tr> --}}
-                  {{-- <tr class="cart_item">
-                      <td class="cart-product-remove">
-                        <a href="#" class="remove" title="Remove this item"><i class="fa-solid fa-trash"></i></a>
-                      </td>
-
-                      <td class="cart-product-thumbnail">
-                        <a href="#"><img width="64" height="64" src="images/shop/thumbs/small/tshirt-2.jpg"
-                            alt="Pink Printed Dress"></a>
-                      </td>
-
-                      <td class="cart-product-name">
-                        <a href="#">Blue Men Tshirt</a>
-                      </td>
-
-                      <td class="cart-product-price">
-                        <span class="amount">$13.99</span>
-                      </td>
-
-                      <td class="cart-product-quantity">
-                        <div class="quantity">
-                          <input type="button" value="-" class="minus">
-                          <input type="text" name="quantity" value="3" class="qty">
-                          <input type="button" value="+" class="plus">
-                        </div>
-                      </td>
-
-                      <td class="cart-product-subtotal">
-                        <span class="amount">$41.97</span>
-                      </td>
-                    </tr> --}}
-                  {{-- <tr class="cart_item">
-                      <td colspan="6">
-                        <div class="row justify-content-between align-items-center py-2 col-mb-30">
-                          <div class="col-lg-auto ps-lg-0">
-                            <div class="row align-items-center">
-                              <div class="col-md-8">
-                                <input type="text" value="" class="form-control text-center text-md-start"
-                                  placeholder="Enter Coupon Code..">
-                              </div>
-                              <div class="col-md-4 mt-3 mt-md-0">
-                                <a href="#" class="button button-small button-3d button-black m-0"
-                                  style="--cnvs-btn-padding-y:7px;line-height:22px;">Apply Coupon</a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-lg-auto pe-lg-0">
-                            <a href="#" class="button button-small button-3d m-0">Update Cart</a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr> --}}
                 </tbody>
 
               </table>
             </div>
 
-            <div class="col-xl-4">
-              <div class="grid-inner bg-light p-5 rounded">
+
+
+
+            <div class="col-xl-3">
+              <div class="grid-inner bg-light p-2 rounded">
                 <div class="row col-mb-30">
                   <div class="col-12">
                     <h4>Total del pedido</h4>
@@ -291,8 +179,7 @@
 
           <div class="col-md-4">
             <label for="entrega_id" class="form-label fw-bold text-secondary">Forma de Entrega</label>
-            <select class="form-select shadow-sm" id="entrega_id" wire:model="entrega_id"
-              wire:change="tipoentrega()">
+            <select class="form-select shadow-sm" id="entrega_id" wire:model="entrega_id" wire:change="tipoentrega()">
               <option value="0">Seleccione una opción</option>
               @foreach ($formasdeentregas as $forma)
                 <option value="{{ $forma['id'] }}">{{ $forma['nombre'] }}</option>
