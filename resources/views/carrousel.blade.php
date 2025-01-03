@@ -1,8 +1,5 @@
 
 
-
-
-
             <!-- Lista elegi productos  -->
 
     <section id="seccion-slice" class="flex relative items-center mt-10 mb-10">

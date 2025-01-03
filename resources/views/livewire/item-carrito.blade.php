@@ -1,22 +1,26 @@
                       <tr class="cart_item">
-                        <td class="cart-product-remove">
-                          <a href="#" class="remove" title="Remove this item"><i class="fa-solid fa-trash"></i></a>
-                        </td>
+                          <td class="cart-product-remove">
+                              <button
+                                  wire:click="$emit('message-remove-cart', {{ $producto_id }}, {{ $talle_id }}, {{ $color_id }})"
+                                  class="remove-item" title="Remove this item"><i class="fa-solid fa-trash"></i></button>
+                          </td>
 
-                        <td class="cart-product-thumbnail">
-                          <a href="#"><img width="64" height="64"
-                              src="{{ asset('storage/productos/' . $imagen_producto) }}" alt="Pink Printed Dress"></a>
-                        </td>
 
-                        <td class="cart-product-name">
-                          <a href="#">{{ $producto_nombre }}</a>
-                        </td>
+                          <td class="cart-product-thumbnail">
+                              <a href="#"><img width="64" height="64"
+                                      src="{{ asset('storage/productos/' . $imagen_producto) }}"
+                                      alt="Pink Printed Dress"></a>
+                          </td>
 
-                        <td class="cart-product-price">
-                          <span class="amount">$ {{ number_format($producto_precio, 0, ',', '.') }}</span>
-                        </td>
+                          <td class="cart-product-name">
+                              <a href="#">{{ $producto_nombre }}</a>
+                          </td>
 
-                        {{-- <td class="cart-product-quantity">
+                          <td class="cart-product-price">
+                              <span class="amount">$ {{ number_format($producto_precio, 0, ',', '.') }}</span>
+                          </td>
+
+                          {{-- <td class="cart-product-quantity">
                           <div class="quantity">
                             <input type="button" value="-" class="minus">
                             <input type="text" name="quantity" value="{{ $cantidad }}" class="qty">
@@ -24,18 +28,19 @@
                           </div>
                         </td> --}}
 
-                        <td class="cart-product-quantity">
-                          <div class="input-group">
+                          <td class="cart-product-quantity">
+                              <div class="input-group">
 
-                            {{-- <input type="number" name="quantity" value="{{ $cantidad }}"
+                                  {{-- <input type="number" name="quantity" value="{{ $cantidad }}"
                               class="form-control text-center" min="1"> --}}
-                            {{ $cantidad }}
-                          </div>
-                        </td>
+                                  {{ $cantidad }}
+                              </div>
+                          </td>
 
-                        <td class="cart-product-subtotal">
-                          <span class="amount">$ {{ number_format($cantidad * $producto_precio, 0, ',', '.') }}</span>
-                        </td>
+                          <td class="cart-product-subtotal">
+                              <span class="amount">$
+                                  {{ number_format($cantidad * $producto_precio, 0, ',', '.') }}</span>
+                          </td>
                       </tr>
 
 

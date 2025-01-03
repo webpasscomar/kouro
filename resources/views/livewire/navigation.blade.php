@@ -93,14 +93,14 @@
               <a href="#" id="top-search-trigger"><i class="uil uil-search"></i><i class="bi-x-lg"></i></a>
             </div><!-- #top-search end --> --}}
 
-            <div id="top-search" class="header-misc-icon">
+            <div id="top-search" class="header-misc-icon position-relative">
               <a href="{{ route('carrito') }}" class="relative" role="button">
                 <img src="{{ asset('img/carrito.svg') }}" alt="Carrito" class="w-10" title="Carrito">
                 @if ($carrito > 0)
-                  <span class="">
-                    <span class="">
+{{--                  <span class="">--}}
+                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle badge_cart">
                       {{ $carrito }}
-                    </span>
+{{--                    </span>--}}
                   </span>
                 @endif
               </a>

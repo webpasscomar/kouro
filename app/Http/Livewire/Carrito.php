@@ -18,7 +18,7 @@ use App\Models\Pedido_item;
 class Carrito extends Component
 {
 
-    protected $listeners = ['delete'];
+    protected $listeners = ['remove-item-cart' => 'delete'];
     protected $formasdeentregas, $provincias, $localidades, $formasdepagos;
 
     public $entrega_id;
@@ -110,18 +110,19 @@ class Carrito extends Component
     protected function messages()
     {
         return [
-            'cli_nombre.required'    => 'Debe ingresar el nombre.',
-            'cli_nombre.string'      => 'El nombre no puede ser numerico.',
+            'cli_nombre.required'    => 'Debe ingresar el nombre',
+            'cli_nombre.string'      => 'El nombre no puede ser numerico',
             'cli_apellido.required'  => 'Debe ingresar el apellido',
-            'cli_apellido.string'    => 'El apellido no puede ser numerico.',
+            'cli_apellido.string'    => 'El apellido no puede ser numerico',
             'cli_email.required'     => 'Debe ingresar un E-mail',
             'cli_email.email'        => 'El E-mail no es valido',
             'cli_telefono.required'   => 'Debe ingresar un telefono',
-            'entrega_id.not_in'  => 'Debe seleccionar una forma de entrega.',
+            'entrega_id.not_in'  => 'Seleccione una forma de entrega válida',
+            'entrega_id.required'  => 'Seleccione una forma de entrega',
             'cli_calle.required' => 'Debe ingresar una calle',
             'cli_nro.required'   => 'Debe ingresar el numero',
-            'cli_nro.numeric'    => 'Debe ingresar un valor numerico.',
-            'cli_piso.numeric'    => 'Debe ingresar un valor numerico.',
+            'cli_nro.numeric'    => 'Debe ingresar un valor numerico',
+            'cli_piso.numeric'    => 'Debe ingresar un valor numerico',
             'cli_prov_id.not_in' => 'Debe seleccionar una provincia',
             'cli_prov_id.required' => 'Debe seleccionar una provincia',
             'cli_loc_id.not_in' => 'Debe seleccionar una localidad',
@@ -166,21 +167,23 @@ class Carrito extends Component
                 //grabar pedido
                 $this->numero_pedido = null;
                 $this->numero_pedido = $this->grabarPedido();
+
                 if ($this->numero_pedido) {
                     $this->articulos = session('items');
                     $this->importe = session('sub_total');
                     $this->delivery = session('costoentrega');
                     $this->cant_art = count(session('items'));
-                    session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
-                    $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
+                    // session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
                     $this->apagar = 1;
+
+                    // $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
 
 
                     //si la forma de entrega requiere cobro
                     //$this->cobra = Formadeentrega::where('id', $this->entrega_id)->value('cobra');
                     //if ($this->cobra  == '1') {
 
-                    $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $this->numero_pedido->id]);
+                    // $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $this->numero_pedido->id]);
                     // }else{
                     //     $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, pedido ' . $this->numero_pedido->id]);
                     // return redirect()->route('productos.index');
@@ -209,6 +212,7 @@ class Carrito extends Component
             case 1: //efectivo contra entrega
                 break;
             case 2:  //mercado pago
+                session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
                 redirect()->to('/mercadopago')->with([
                     'opciones' => $opciones,
                 ]);
@@ -216,7 +220,8 @@ class Carrito extends Component
             case 3: //modo
                 break;
             default:
-        }
+                redirect()->to('/carrito'); //vuelve al carrito
+        };
     }
 
 
@@ -401,8 +406,6 @@ class Carrito extends Component
                 'vacio' => 0
             ]);
         }
-
         return  $lastid;
     }
-
 }

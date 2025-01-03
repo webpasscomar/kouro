@@ -199,6 +199,7 @@ class ProductoFront extends Component
 
         //envio al icono de cart
         $this->emit('carrito', ['mensaje' => 'Se agrego el producto al carrito', 'cantidad' => session('cantidad')]);
+        $this->emit('message-add-cart');
     }
 
     public function avisostock()
