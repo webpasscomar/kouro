@@ -13,13 +13,13 @@
   </div>
 </div>
 <div class="mt-3">
-  <span class="">
-    @if ($forma_pago_id != 0)
-      @if ($cobra == 1)
-        <button wire:click="pagar()" type="button" class="btn btn-danger btn-large">Pagar</button>
-      @else
-        <a href="/destacados" class="btn btn-danger btn-large">Finalizar</a>
-      @endif
-    @endif
-  </span>
+    <span class="">
+        @if ($forma_pago_id != 0)
+            {{-- @if ($cobra == 1) --}}
+                <button wire:click="pagar()" type="button" class="btn btn-danger btn-large">Pagar</button>
+            {{-- @else --}}
+                {{-- <a href="/destacados" class="btn btn-danger btn-large">Finalizar</a> --}}
+            {{-- @endif --}}
+        @endif
+    </span>
 </div>

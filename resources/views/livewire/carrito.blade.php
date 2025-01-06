@@ -86,23 +86,24 @@
                                 </div>
                             </div>
                         </div>
-
+                    </section>
+                @else
+                    {{-- Si no hay productos en el carrito, mostrar mensaje --}}
+                    <div class="text-center d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="fs-4">No hay productos en el carrito</h2>
+                        <div
+                            class="gap-2 p-3 mt-3 border-2 rounded shadow-sm d-flex align-items-center fw-bold border-secondary">
+                            <img src="{{ asset('img/hand.svg') }}" alt="Elegir productos" class="img-fluid"
+                                style="width: 40px;">
+                            <a href="{{ route('productos.destacados') }}" class="text-decoration-none">
+                                <em>Mira nuestros productos</em>
+                            </a>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
-@else
-    {{-- Si no hay productos en el carrito, mostrar mensaje --}}
-    <div class="text-center d-flex flex-column align-items-center justify-content-center">
-        <h2 class="fs-4">No hay productos en el carrito</h2>
-        <div class="gap-2 p-3 mt-3 border-2 rounded shadow-sm d-flex align-items-center fw-bold border-secondary">
-            <img src="{{ asset('img/hand.svg') }}" alt="Elegir productos" class="img-fluid" style="width: 40px;">
-            <a href="{{ route('productos.destacados') }}" class="text-decoration-none">
-                <em>Mira nuestros productos</em>
-            </a>
-        </div>
-    </div>
-
-    @endif
 
     @include('livewire.carrito-form')
 </div>

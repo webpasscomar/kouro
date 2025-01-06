@@ -176,11 +176,12 @@ class Carrito extends Component
                     // session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
                     $this->apagar = 1;
 
+
                     // $this->emit('cantidad_carrito', ['cantidad' => session('cantidad')]);
 
 
                     //si la forma de entrega requiere cobro
-                    //$this->cobra = Formadeentrega::where('id', $this->entrega_id)->value('cobra');
+                    // $this->cobra = Formadeentrega::where('id', $this->entrega_id)->value('cobra');
                     //if ($this->cobra  == '1') {
 
                     // $this->emit('mensajePositivo', ['mensaje' => 'Ya finalizaste tu compra, vamos a pagar el pedido ' . $this->numero_pedido->id]);
@@ -190,8 +191,7 @@ class Carrito extends Component
                     //   redirect()->to('/shop');
 
                     //}
-                    //$this->pagar($articulos, $importe, $delivery, $this->forma_pago_id);
-
+                    // $this->pagar($this->articulos, $this->importe, $this->delivery, $this->forma_pago_id);
                 }
             }
         }
@@ -210,6 +210,8 @@ class Carrito extends Component
 
         switch ($this->forma_pago_id) {
             case 1: //efectivo contra entrega
+                session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
+                redirect()->to('destacados');
                 break;
             case 2:  //mercado pago
                 session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
@@ -218,13 +220,12 @@ class Carrito extends Component
                 ]);
                 break;
             case 3: //modo
+                session(['items' => null, 'cantidad' => 0, 'sub_total' => 0, 'costoentrega' => 0]);
+                redirect()->to('destacados');
                 break;
             default:
-                redirect()->to('/carrito'); //vuelve al carrito
         };
     }
-
-
 
 
 

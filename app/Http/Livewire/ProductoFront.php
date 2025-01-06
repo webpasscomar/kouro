@@ -45,10 +45,10 @@ class ProductoFront extends Component
         $this->producto = Producto::where('id', $id)->firstOrFail();
         $this->fechahoy = date('Y-m-d H:i:s');
 
-        $this->colores = Sku::select(['sku.color_id', 'colores.color', 'colores.pcolor'])
+        $this->colores = Sku::select(['sku.color_id', 'colores.color', 'colores.pcolor', 'colores.imagen'])
             ->join('colores', 'sku.color_id', '=', 'colores.id')
             ->where('sku.producto_id', '=', $id)
-            ->groupBy('sku.color_id', 'colores.color', 'colores.pcolor')
+            ->groupBy('sku.color_id', 'colores.color', 'colores.pcolor', 'colores.imagen')
             ->get()
             ->toArray();
 

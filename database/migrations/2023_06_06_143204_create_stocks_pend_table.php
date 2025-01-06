@@ -16,11 +16,12 @@ class CreateStocksPendTable extends Migration
         Schema::create('stocks_pend', function (Blueprint $table) {
             $table->id();
             // Clave foránea a productos (producto_id)
-            $table->foreignId('producto_id')->constrained('productos')->cascadeOnDelete();
+            // $table->foreignId('producto_id')->constrained('productos')->cascadeOnDelete();
             // Clave foránea a talles (talle_id)
-            $table->foreignId('talle_id')->constrained('talles')->cascadeOnDelete();
+            // $table->foreignId('talle_id')->constrained('talles')->cascadeOnDelete();
             // Clave foránea a colores (color_id)
-            $table->foreignId('color_id')->constrained('colores')->cascadeOnDelete();
+            // $table->foreignId('color_id')->constrained('colores')->cascadeOnDelete();
+            $table->foreignId('sku_id')->nullable()->constrained('sku', 'id')->nullOnDelete();
             $table->timestamp('fechaSolicitud')->nullable();
             $table->timestamp('fechaRespuesta')->nullable();
             $table->text('respuesta')->nullable();
