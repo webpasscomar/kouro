@@ -6,10 +6,10 @@
                           </td>
 
 
-                          <td class="cart-product-thumbnail">
-                              <a href="#"><img width="64" height="64"
-                                      src="{{ asset('storage/productos/' . $imagen_producto) }}"
-                                      alt="Pink Printed Dress"></a>
+                          <td>
+                              <img width="64" height="64"
+                                  src="{{ $imagen_producto && file_exists(public_path('storage/productos/' . $imagen_producto)) ? asset('storage/productos/' . $imagen_producto) : asset('img/Imagen-no-disponible.png') }}"
+                                  alt="{{ $producto_nombre }}">
                           </td>
 
                           <td class="cart-product-name">
