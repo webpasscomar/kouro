@@ -29,35 +29,34 @@
 
 <!-- resources/views/components/producto.blade.php -->
 <div class="card border rounded shadow-md mb-4 hover-shadow-lg transition" style="height: 100%;">
-  <div class="card-img-top" style="height: 250px; overflow: hidden;">
-    @if (Storage::disk('public')->exists('productos/' . $producto->imagen))
-      <img src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
-        class="img-fluid w-100 h-100 object-fit-cover">
-    @else
-      <img src="{{ asset('storage/productos/no_disponible.jpg') }}" alt="Imagen no disponible"
-        class="img-fluid w-100 h-100 object-fit-cover">
-    @endif
-  </div>
+    <div class="card-img-top" style="height: 250px; overflow: hidden;">
+        @if (Storage::disk('public')->exists('productos/' . $producto->imagen))
+            <img src="{{ asset('storage/productos/' . $producto->imagen) }}" alt="{{ $producto->nombre }}"
+                class="img-fluid w-100 h-100 object-fit-cover">
+        @else
+            <img src="{{ asset('storage/productos/no_disponible.jpg') }}" alt="Imagen no disponible"
+                class="img-fluid w-100 h-100 object-fit-cover">
+        @endif
+    </div>
 
-  <div class="card-body">
-    <h5 class="card-title">{{ $producto->nombre }}</h5>
-    @if ($fechahoy >= $producto->ofertaDesde && $fechahoy <= $producto->ofertaHasta)
-      <p class="card-text text-muted text-decoration-line-through">$ {{ $producto->precioLista }}</p>
-      <span class="badge bg-danger position-absolute top-0 start-0 m-2">Oferta</span>
-      <p class="card-text font-weight-bold text-danger">$ {{ $producto->precioOferta }}</p>
-    @else
-      <p class="card-text font-weight-bold">$ {{ $producto->precioLista }}</p>
-    @endif
-  </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ $producto->nombre }}</h5>
+        @if ($fechahoy >= $producto->ofertaDesde && $fechahoy <= $producto->ofertaHasta)
+            <p class="card-text text-muted text-decoration-line-through">$ {{ $producto->precioLista }}</p>
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Oferta</span>
+            <p class="card-text font-weight-bold text-danger">$ {{ $producto->precioOferta }}</p>
+        @else
+            <p class="card-text font-weight-bold">$ {{ $producto->precioLista }}</p>
+        @endif
+    </div>
+    <!-- CSS personalizado para el efecto hover -->
+    <style>
+        .hover-shadow-lg:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .transition {
+            transition: box-shadow 0.3s ease;
+        }
+    </style>
 </div>
-
-<!-- CSS personalizado para el efecto hover -->
-<style>
-  .hover-shadow-lg:hover {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .transition {
-    transition: box-shadow 0.3s ease;
-  }
-</style>

@@ -1,4 +1,5 @@
 // import $ from 'jquery';
+// import './functions';
 import 'bootstrap';
 // import Popper from 'popper.js';
 
@@ -6,10 +7,9 @@ import 'bootstrap';
 // import "./bootstrap";
 // // import "flowbite";
 
-import './functions';
 
 
-// Mostrar Toast de productos agregados al carrito
+    // Mostrar Toast de productos agregados al carrito
 Livewire.on('message-add-cart', () => {
 
   const Toast = Swal.mixin({
@@ -50,6 +50,7 @@ Livewire.on('message-remove-cart', (idProducto, idTalle, idColor) => {
     }
   });
 });
+
 
 
 

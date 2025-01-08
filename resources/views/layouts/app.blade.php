@@ -53,6 +53,7 @@
                    ============================================= -->
     <div id="gotoTop" class="uil uil-angle-up"></div>
 
+    <script src="../../js/functions.js"></script>
     {{-- Sweet Alert 2 - Mensajes --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- JavaScripts
